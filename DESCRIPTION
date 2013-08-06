@@ -1,0 +1,29 @@
+Package: metricTester
+Title: 
+Description: 
+Version: 0.1
+Authors@R: 'Eliot Miller <eliot.isaac@gmail.com> [aut, cre]'
+Depends:
+    R (>= 3.0.1),
+    phylobase,
+    ecoPDcorr,
+    geiger
+License: GPL-3
+LazyData: true
+Collate:
+    'allMetrics.R'
+    'locationSampler.R'
+    'modified.mpd.R'
+    'phyloNtraits.R'
+    'psc.corr.R'
+    'scaler.R'
+    'sig.test.R'
+    'simulateComm.R'
+    'simulator.R'
+    'summaries.R'
+    'typeI.R'
+    'lengthNonZeros.R'
+    'quadratPlacer.R'
+    'quadratContents.R'
+    'quadratPlotter.R'
+    'allMetricsNull.csv.R'

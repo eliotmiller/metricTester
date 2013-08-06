@@ -1,0 +1,50 @@
+\name{summaries}
+\alias{summaries}
+\title{Return average and CIs of input vector}
+\usage{
+  summaries(null.output)
+}
+\arguments{
+  \item{null.output}{Vector of numbers}
+}
+\value{
+  temp
+}
+\description{
+  Given a vector of numbers, such as a column from a data
+  frame of null expectations, returns the average and 95%
+  CIs of that vector
+}
+\details{
+  Took out the call to iterations, but if you want that
+  back it's just the length of v. Note that it's very
+  important when you run this to have your null output be a
+  file that has one column called richness, and all others
+  be various metrics you want confidence intervals returned
+  for. Note also that this function must be used from
+  within a ddply statement in order to work as desired, see
+  example.
+}
+\examples{
+library(plyr)
+library(geiger)
+library(picante)
+
+#simulate tree with birth-death process
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+
+system.time(allMetricsNull.csv(tree, cdm, "richness", 10, "output.csv"))
+
+possibilities <- read.csv("output.csv")
+
+#call the summaries function from within a ddply statement
+expectations <- ddply(possibilities, .(richness), summaries)
+}
+\references{
+  Miller, Trisos and Farine.
+}
+

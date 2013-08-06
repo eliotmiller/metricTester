@@ -1,0 +1,45 @@
+\name{simulateComm}
+\alias{simulateComm}
+\title{Generate a simulated community data matrix}
+\usage{
+  simulateComm(tree, min.rich, max.rich, abundances)
+}
+\arguments{
+  \item{tree}{Phylo object}
+
+  \item{min.rich}{Minimum richness of the resulting cdm}
+
+  \item{max.rich}{Maximum richness of the resulting cdm}
+
+  \item{abundances}{A vector of potential abundances, e.g.
+  a log-normal distribution}
+}
+\value{
+  A community data matrix (a data frame) with species as
+  columns and sites as rows.
+}
+\description{
+  Given a phylo object, desired min and max species
+  richnesses, and a vector of potential species abundances,
+  will generate a community data matrix with these
+  characteristics.
+}
+\details{
+  There is currently no implementation to control the
+  frequency with which a given species is selected.
+}
+\examples{
+library(geiger)
+library(picante)
+
+#simulate tree with birth-death process
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+}
+\references{
+  Miller, Trisos and Farine.
+}
+

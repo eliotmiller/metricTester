@@ -1,0 +1,47 @@
+\name{modified.mpd}
+\alias{modified.mpd}
+\title{Calculate different versions of abundance-weighted MPD}
+\usage{
+  modified.mpd(samp, dis, abundance.weighted = FALSE)
+}
+\arguments{
+  \item{samp}{A picante-style community data matrix with
+  sites as rows, and species as columns}
+
+  \item{dis}{Phylogenetic distance matrix}
+
+  \item{abundance.weighted}{One of either "FALSE",
+  "interspecific", "intraspecific", or "complete"}
+}
+\value{
+  A vector of MPD values, calculated according to the
+  abudance-weighted method specified
+}
+\description{
+  Given a picante-style community data matrix (sites are
+  rows, species are columns), a phylogenetic distance
+  matrix, and a desired method of abundance-weighting, will
+  calculate MPD.
+}
+\details{
+  To be explained in forthcoming publication
+}
+\examples{
+library(geiger)
+library(picante)
+
+#simulate tree with birth-death process
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+
+dists <- cophenetic(tree)
+
+results <- modified.mpd(cdm, dists, abundance.weighted = "interspecific")
+}
+\references{
+  Miller, Trisos and Farine.
+}
+

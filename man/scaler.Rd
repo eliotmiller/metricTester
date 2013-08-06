@@ -1,0 +1,39 @@
+\name{scaler}
+\alias{scaler}
+\title{Scale output of phyloNtraits to arena size}
+\usage{
+  scaler(input.traits, min.arena, max.arena)
+}
+\arguments{
+  \item{input.traits}{Second element of the results of a
+  call to phyloNtraits()}
+
+  \item{min.arena}{Minimum size of arena, e.g. 0}
+
+  \item{max.arena}{Maximum size of arena}
+}
+\value{
+  A scaled and named dataframe of species traits
+}
+\description{
+  Given a matrix of two traits, and the minimum and maximum
+  extent of the desired arena, will return a data frame of
+  species' traits scaled to the new arena size.
+}
+\details{
+  Scales a matrix of species' traits to a desired
+  mininimum-maximum range. intended for use in a spatially
+  explicity scenario with two traits, but could easily be
+  co-opted.
+}
+\examples{
+library(geiger)
+
+results <- phyloNtraits(50)
+
+scaled <- scaler(results[[2]], min.arena=0, max.arena=300)
+}
+\references{
+  Miller, Trisos and Farine.
+}
+

@@ -1,0 +1,63 @@
+\name{locationSampler}
+\alias{locationSampler}
+\title{Simulate spatially explicity community}
+\usage{
+  locationSampler(phyloNtraits.results, scaled.results,
+    mean.log.individuals, length.parameter, sd.parameter)
+}
+\arguments{
+  \item{phyloNtraits.results}{Results of a call to
+  phyloNtraits()}
+
+  \item{scaled.results}{Results of a call to scaler(). This
+  is theoretically optional, but if not used, one probably
+  has to provide just the data frame of the results from
+  the phyloNtraits call}
+
+  \item{mean.log.individuals}{Mean log of abundance vector
+  from which species abundances will be drawn}
+
+  \item{length.parameter}{Length of vector from which
+  species' locations are drawn. Large values of this
+  parameter dramatically decrease the speed of the function
+  but result in nicer looking communities}
+
+  \item{sd.parameter}{Standard deviation of vector from
+  which species' locations are drawn}
+}
+\value{
+  A data frame with X & Y coordinates for all individuals
+  and their species identity
+}
+\description{
+  Given the results of a call to phyloNtraits(), will
+  generate a data frame with the spatial locations of
+  individuals and their species' identity.
+}
+\details{
+  Should be sped up by removing for loops and inserting new
+  mini-functions then applying them with e.g. mapply().
+  Regardless, it works somewhat quickly. It takes results
+  of calls to phyloNtraits() and, if desired, scaler(), and
+  given the input parameters mean log of individuals in the
+  resulting community, the length of the vector from which
+  a species' X & Y coordinates will drawn, and the sd of
+  that vector, it returns a dataframe of species and their
+  X Y coordinates. The distribution of abundances among
+  species follows a log-normal distribution. The
+  distribution of individuals within species follows a
+  normal distribution.
+}
+\examples{
+library(geiger)
+
+results <- phyloNtraits(50)
+
+scaled <- scaler(results[[2]], min.arena=0, max.arena=300)
+
+positions <- locationSampler(phyloNtraits.results=results, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
+}
+\references{
+  Miller, Trisos and Farine.
+}
+
