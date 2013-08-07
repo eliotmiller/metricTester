@@ -1,36 +1,3 @@
-plot(0:1, type="n", axes=FALSE)#
-#
-##define a gradient from blue to cyan to green to yellow to red. the more slices the smoother#
-#
-gradient.colors <- color.gradient(c(1,0.8,0.6,0.4,0.2,0),c(0,0,0,0,0,0),c(0,0,0,0,0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-gradient.colors <- color.gradient(c(1,1,0,0,0,1),c(0,1,1,1,0,0),c(0,0,0,1,1,1), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-gradient.colors <- color.gradient(c(1,0),c(0,1),c(0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-gradient.colors <- color.gradient(c(1,1,0),c(0,1,1),c(0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-gradient.colors <- color.gradient(c(1,0),c(0,1),c(0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-quartz()
-gradient.colors <- color.gradient(c(1,0),c(0,1),c(0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-gradient.colors <- color.gradient(c(1,1,0),c(0,1,1),c(0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
-plot(0:1, type="n", axes=FALSE)#
-#
-##define a gradient from blue to cyan to green to yellow to red. the more slices the smoother#
-#
-gradient.colors <- color.gradient(c(1,1,0),c(0,1,1),c(0,0), nslices=1000)#
-#
-gradient.rect(0,0,1.1,1, col=gradient.colors, border=NA, gradient="y")
 quartz()
 gradient.colors <- color.gradient(c(1,1,0),c(0,1,1),c(0,0), nslices=1000)#
 #
@@ -5846,14 +5813,115 @@ points(completeMPD~richness, pch=20, cex=2)
 library(devtools)#
 install_github("ecoPDcorr", username="eliotmiller")#
 library(ecoPDcorr)
-library(devtools)#
-library(roxygen3)#
+library(devtools)
+install_github("ecoPDcorr", username="eliotmiller")#
 #
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+repulsing <- FALSE # Change this to FALSE for clustering#
+#
+if (repulsing) {#
+	max_dist <- 30 # maximum distance at which an individual is affected by neighbouring individuals.#
+	nl <- 3 #non-linearity#
+	max_travel <- 5 # maximum distance an individual will move in a single iteration of the model. This is what is called repulsion and reported for the y-axis of the plot. Change this to a smaller value if I want the individuals to make smaller distance moves in each run, and so be more influenced by the composition of their neighbourhodd through time. With a high number an individual can make a large distance move, and when doing this it does not take into consideration the neighbourhood where it will end up. The only decision in this model is how far and in what direction to move away from the individual's current neighbourhood, i.e. only consider current and not potential neighbours.#
+	steepness <- 1#
+	proportion_replaced <- 0#
+	offset <- 2  ## moves left or right in reverse direction#
+#
+	x <- seq(0,max_dist,0.2)#
+	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
+	for (gd in seq(0,1,0.1)) {#
+		y <- max_travel*(1-(steepness/(steepness+exp(-x-offset+((gd)^nl*max_dist)+1))))#
+		lines(x,y)#
+		text(1.2+((gd)^nl*max_dist)-offset,0.5*max_travel,gd,srt=-74)#
+	}#
+} else {#
+	min_dist <- 0#
+	max_dist <- 10#
+	nl <- 0.1 #non-linearity#
+	max_travel <- 5#
+	steepness <- 0.8#
+	proportion_replaced <- 0#
+	offset <- 0  ## moves left or right in reverse direction#
+#
+	x <- seq(0,max_dist,0.2)#
+	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Attraction",xaxs="i",yaxs="i")#
+	for (gd in seq(0,1,0.1)) {#
+		y <- max_travel*((steepness/(steepness+exp(-x-offset+min_dist+(gd^nl*(max_dist-min_dist))+1))))#
+		lines(x,y)#
+		text(1.2+(gd^nl*(max_dist-min_dist))-offset+min_dist,0.5*max_travel,gd,srt=-74)#
+	}#
+}
+repulsing <- FALSE # Change this to FALSE for clustering#
+#
+if (repulsing) {#
+	max_dist <- 30 # maximum distance at which an individual is affected by neighbouring individuals.#
+	nl <- 3 #non-linearity#
+	max_travel <- 5 # maximum distance an individual will move in a single iteration of the model. This is what is called repulsion and reported for the y-axis of the plot. Change this to a smaller value if I want the individuals to make smaller distance moves in each run, and so be more influenced by the composition of their neighbourhodd through time. With a high number an individual can make a large distance move, and when doing this it does not take into consideration the neighbourhood where it will end up. The only decision in this model is how far and in what direction to move away from the individual's current neighbourhood, i.e. only consider current and not potential neighbours.#
+	steepness <- 1#
+	proportion_replaced <- 0#
+	offset <- 2  ## moves left or right in reverse direction#
+#
+	x <- seq(0,max_dist,0.2)#
+	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
+	for (gd in seq(0,1,0.1)) {#
+		y <- max_travel*(1-(steepness/(steepness+exp(-x-offset+((gd)^nl*max_dist)+1))))#
+		lines(x,y)#
+		text(1.2+((gd)^nl*max_dist)-offset,0.5*max_travel,gd,srt=-74)#
+	}#
+} else {#
+	min_dist <- 0#
+	max_dist <- 10#
+	nl <- 0.5 #non-linearity#
+	max_travel <- 5#
+	steepness <- 0.8#
+	proportion_replaced <- 0#
+	offset <- 0  ## moves left or right in reverse direction#
+#
+	x <- seq(0,max_dist,0.2)#
+	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Attraction",xaxs="i",yaxs="i")#
+	for (gd in seq(0,1,0.1)) {#
+		y <- max_travel*((steepness/(steepness+exp(-x-offset+min_dist+(gd^nl*(max_dist-min_dist))+1))))#
+		lines(x,y)#
+		text(1.2+(gd^nl*(max_dist-min_dist))-offset+min_dist,0.5*max_travel,gd,srt=-74)#
+	}#
+}
+max_travel_rep <- 8#
+	max_travel_att <- 4#
+#
+	max_dist_rep <- 30#
+	nl_rep <- 2 #non-linearity#
+	steepness <- 1#
+	proportion_replaced <- 0#
+	offset_rep <- 2  ## moves left or right in reverse direction#
+#
+	x <- seq(0,50,0.2)#
+	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
+	for (gd in seq(0,1,0.1)) {#
+		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
+		lines(x,y)#
+		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
+	}#
+	min_dist_att <- 10#
+	max_dist_att <- 60#
+	nl_att <- 0.5 #non-linearity#
+	steepness <- 1#
+	proportion_replaced <- 0#
+	offset_att <- 0  ## moves left or right in reverse direction#
+#
+	for (gd in seq(0,1,0.1)) {#
+		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
+		lines(x,y)#
+		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
+	}
+library(metricTester)
+?simulator
+proc_time()
+proc.time()
+?proc.time
+3905/10
+390/60
+library(devtools)
+library(roxygen3)
 load_all()
 document()
-check()
-document()
-check()
-document()
-?dev_help("allMetricsNull.csv")
-dev_help("allMetricsNull.csv")

@@ -61,7 +61,7 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 	for(i in 1:iterations)
 	{
-		print(i)
+		print(paste("iteration",i))
 
 		temp <- phyloNtraits(no.species)
 
@@ -89,6 +89,11 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 		quadratPlotter(bounds)
 
 		com.results <- quadratContents(positions, bounds)
+		
+		if(com.results[1]==FALSE)
+		{
+			next
+		}
 
 		cdm <- t(com.results)
 
