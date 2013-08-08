@@ -2,7 +2,7 @@
 #'
 #' Given a phylo object, a picante-style community data matrix (sites are rows,
 #' species are columns), a desired null method (sensu picante), a desired number of
-#' iterations, and an output file name, will shuffle matrix according to null method, then
+#' no.randomizations, and an output file name, will shuffle matrix according to null method, then
 #' calculate all phylogenetic community structure metrics as defined in the allMetrics()
 #' function, then save each iteration's worth of shufffled values to a csv file for later
 #' import. Also calculates the richness of the corresponding community.
@@ -11,9 +11,9 @@
 #' @param orig.matrix A picante-style community data matrix with sites as rows, and
 #' species as columns
 #' @param null.method A picante-style null, e.g. "richness" or "frequency"
-#' @param iterations The desired number of iterations the function will run, i.e. the
+#' @param no.randomizations The desired number of no.randomizations the function will run, i.e. the
 #' number of times the orig.matrix will be shuffled and the metrics calculated on it
-#' @param file.name The desired name of the output csv file
+#' @param temp.file The desired name of the output csv file
 #' 
 #' @details This runs much faster than trying to do this in memory in R. I will upload
 #' some of those type of functions in the near future anyhow. 
@@ -38,29 +38,30 @@
 #'
 #' system.time(allMetricsNull.csv(tree, cdm, "richness", 10, "output.csv"))
 
-allMetricsNull.csv <- function(tree, orig.matrix, null.method, iterations, file.name)
+allMetricsNull.csv <- function(tree, orig.matrix, null.method, no.randomizations, temp.file)
 {
-	for (i in 1:iterations)
+	for (j in 1:no.randomizations)
 	{
+		print(paste("randomization",j))
 		new.matrix <- randomizeMatrix(orig.matrix, null.method)
 		temp.results <- allMetrics(tree, new.matrix)
-		if(i == 1)
+		if(j == 1)
 		{
-			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")
+			write.table(temp.results, file=temp.file, append=FALSE, row.names=FALSE, sep=",")
 		}
-		else if(i/iterations == 0.2)
+		else if(j/no.randomizations == 0.2)
 		{
 			print("20% complete")
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")
+			write.table(temp.results, file=temp.file, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")
 		}
-		else if(i/iterations == 0.5)
+		else if(j/no.randomizations == 0.5)
 		{
 			print("50% complete")
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")
+			write.table(temp.results, file=temp.file, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")
 		}
 		else
 		{
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")
+			write.table(temp.results, file=temp.file, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")
 		}
 	}
 	print("File saved to working directory")

@@ -80,7 +80,7 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		cols <- blue2green2red(nrow(phydistmatrix))
 
-		##plot the arena. don't close the window. currently hashed out
+		##plot the arena. don't close the window. 
 
 		plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[positions$individuals])
 
@@ -90,7 +90,7 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		com.results <- quadratContents(positions, bounds)
 		
-		if(com.results[1]==FALSE)
+		if(length(com.results)==1)
 		{
 			next
 		}
@@ -102,14 +102,14 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 		quadratNames <- paste("quadrat",1:no.quadrats, sep="")
 
 		dimnames(cdm)[[1]] <- quadratNames
-
+		
 		##call the allMetricsNull.csv() function
 
-		allMetricsNull.csv(orig.matrix=cdm, tree=tree, null.method=null.method, iterations=no.randomizations, file.name=temp.file)
+		allMetricsNull.csv(orig.matrix=cdm, tree=tree, null.method=null.method, no.randomizations=no.randomizations, temp.file=temp.file)
 
 		##read the simulations in 
 
-		simulations <- read.csv("deleteme.csv")
+		simulations <- read.csv(temp.file)
 
 		##call the summaries function from within a ddply statement
 
@@ -135,6 +135,8 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 		names(sig.results) <- metric.names
 
 		output <- output + typeI(sig.results, expectation=expectation, wrong=wrong)
+		
+		print(output)
 
 		write.csv(output, file=output.file)
 	}
