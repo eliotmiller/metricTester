@@ -27,3 +27,4 @@ Collate:
     'quadratContents.R'
     'quadratPlotter.R'
     'allMetricsNull.csv.R'
+    'readIn.R'
