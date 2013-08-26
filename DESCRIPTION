@@ -17,7 +17,6 @@ Collate:
     'phyloNtraits.R'
     'psc.corr.R'
     'scaler.R'
-    'sig.test.R'
     'simulateComm.R'
     'simulator.R'
     'summaries.R'
@@ -28,3 +27,4 @@ Collate:
     'quadratPlotter.R'
     'allMetricsNull.csv.R'
     'readIn.R'
+    'sigTest.R'

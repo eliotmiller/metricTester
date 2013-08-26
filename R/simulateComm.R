@@ -49,5 +49,9 @@ simulateComm <- function(tree, min.rich, max.rich, abundances)
 		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions
 		cdm <- cdm[tree$tip.label]
 
+		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")
+
+		dimnames(cdm)[[1]] <- quadratNames
+
 		return(cdm)
 }

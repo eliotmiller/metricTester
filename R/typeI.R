@@ -83,7 +83,7 @@ typeI <- function(significance.results, expectation, wrong)
 		{
 			typeI.results[i,2] <- 1
 		}
-		if(sum(normal[,i]==expectation)/dim(normal)[1] > 0.5)
+		if(sum(normal[,i]==expectation)/dim(normal)[1] >= 0.5)
 		{
 			typeI.results[i,3] <- 1
 		}

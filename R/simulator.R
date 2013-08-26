@@ -20,6 +20,8 @@
 #' @param sd.parameter Standard deviation of vector from which species' locations are 
 #' drawn
 #' @param null.method A picante-style null, e.g. "richness" or "frequency"
+#' @param concatBYrichness Whether to concatenate null results by the richness of the
+#' randomized quadrat (the default), or by the quadrat ID (traditional method)
 #' @param no.randomizations Number of iterations the function should run, i.e. the
 #' number of times the orig.matrix will be shuffled and the metrics calculated on it
 #' @param expectation Expected value: 0=not significant, 1=clustered, 2=overdispersed
@@ -52,10 +54,11 @@
 #'
 #' simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, 
 #' quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50, 
-#' null.method="richness", no.randomizations=2, expectation=1, wrong=2, no.metrics=19, 
-#' iterations=3, temp.file="deleteme.csv", output.file="confused.csv")
+#' null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1, 
+#' wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv", 
+#' output.file="confused.csv")
 
-simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadrat_size, mean.log.individuals, length.parameter, sd.parameter, null.method, no.randomizations, expectation, wrong, no.metrics, iterations, temp.file, output.file)
+simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadrat_size, mean.log.individuals, length.parameter, sd.parameter, null.method, concatBYrichness=TRUE, no.randomizations, expectation, wrong, no.metrics, iterations, temp.file, output.file)
 {
 	output <- matrix(0, nrow=no.metrics, ncol=3)
 
@@ -97,12 +100,10 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		cdm <- t(com.results)
 
-		##the ecoPD functions shit the bed if there isn't a name for each quadrat
-
-		quadratNames <- paste("quadrat",1:no.quadrats, sep="")
+		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")
 
 		dimnames(cdm)[[1]] <- quadratNames
-		
+
 		##call the allMetricsNull.csv() function
 
 		allMetricsNull.csv(orig.matrix=cdm, tree=tree, null.method=null.method, no.randomizations=no.randomizations, temp.file=temp.file)
@@ -113,21 +114,30 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		##call the summaries function from within a ddply statement
 
-		summ.results <- ddply(simulations, .(richness), summaries)
+		if(concatBYrichness==TRUE)
+		{
+			summ.results <- ddply(simulations, .(richness), summaries)
+		}
+		else if(concatBYrichness==FALSE)
+		{
+			summ.results <- ddply(simulations, .(quadratNames), summaries)
+		}
 
 		##calculate the observed metrics
 
 		observed <- allMetrics(tree, cdm)
 
 		results <- merge(observed, summ.results, sort=FALSE)
+		
+		print(dim(results))
 
-		metric.names <- names(observed)[2:20]
+		metric.names <- names(observed)[3:(2+no.metrics)]
 
 		sig.results <- list()
 
 		for(j in 1:length(metric.names))
 		{
-			sig.results[[j]] <- sig.test(results, metric.names[j])
+			sig.results[[j]] <- sigTest(results, metric.names[j])
 		}
 
 		sig.results <- as.data.frame(sig.results)

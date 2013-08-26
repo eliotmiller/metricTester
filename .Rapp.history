@@ -1,2798 +1,342 @@
+dists <- cophenetic(tree)
+head(dists)
+test <- apply(dists, 1, mean)
+test
+hist(test)
+plot(tree)
+plot(tree, cex=0/7)
+plot(tree, cex=0.7)
+tree <- sim.bdtree(stop="taxa", n=20)
+dists <- cophenetic(tree)
+plot(tree)
+test <- apply(dists, 1, mean)
+test
+min(test)
+distances
+?ses.mpd
+tree2 <- compute.brlen(tree, 1)
+plot(tree2)
+dists2 <- cophenetic(tree2)
+dists2
+apply(dists2, 1, mean)
+hist(dists2)
+hist(dists)
+dists <- 1:50
+sample(dists, 5)
+ups <- -5:5
+usp
+ups
+sample(ups, 5)
+x
+x <- c(3,12,14,23,28,34,43,46)
+y <- c(5,1,-4,2,-3,-2,0,5)
+coords <- cbind(x,y)
+coords
+plot(coords)
+x1 <- x
+y1 <- y+50
+y1
+coords <- data.frame(x,y,x1,y1)
+coords
+plot(coords)
+plot(coords[,1:2])
+plot(coords[,1:2], xlim=c(0,50))
+plot(coords[,1:2], xlim=c(0,50), ylim=c(-4,55))
+plot(coords[,1:2], xlim=c(0,50), ylim=c(-4,55), pch=20)
+plot(coords[,1:2], xlim=c(0,50), ylim=c(-4,55), pch=20, cex=2)
+segments(x0=0, x1=50, y0=0, y1=0)
+points(x=coords[,3], y=coords[,4])
+plot(coords[,1:2], xlim=c(0,50), ylim=c(-4,55), pch=20, cex=2)
+segments(x0=0, x1=50, y0=0, y1=0)
+points(x=coords[,3], y=coords[,4], pch=20, cex=3)
+plot(coords[,1:2], xlim=c(0,50), ylim=c(-4,55), pch=20, cex=2)
+segments(x0=0, x1=50, y0=0, y1=0)
+points(x=coords[,3], y=coords[,4], pch=20, cex=2)
+segments(x0=coords[1,1], y0=coords[1,2], x1=coords[1,3], y1=coords[1,4], lty=2)
+segments(x0=coords[2,1], y0=coords[2,2], x1=coords[2,3], y1=coords[2,4], lty=2)
+segments(x0=coords[3,1], y0=coords[3,2], x1=coords[3,3], y1=coords[3,4], lty=2)
+segments(x0=coords[4,1], y0=coords[4,2], x1=coords[4,3], y1=coords[4,4], lty=2)
+segments(x0=coords[5,1], y0=coords[5,2], x1=coords[5,3], y1=coords[5,4], lty=2)
+segments(x0=coords[6,1], y0=coords[6,2], x1=coords[6,3], y1=coords[6,4], lty=2)
+segments(x0=coords[7,1], y0=coords[7,2], x1=coords[7,3], y1=coords[7,4], lty=2)
+segments(x0=coords[8,1], y0=coords[8,2], x1=coords[8,3], y1=coords[8,4], lty=2)
+3>=3
 library(devtools)
-load_all("ggplot2")dev_example("ggplot")
-load_all(ggplot2)dev_example("ggplot")
-library("ggplot2")
-example("ggplot")
-load_all("ggplot2")
-load_all(ggplot2)
-load_all("ggplot2")
-package.skeleton(path=path)
-path <- "/Users/eliotmiller/Desktop/phylospace"#
-#
-set_path(path)#
-#
-options(devtools.name="Eliot Miller")#
-#
-options(devtools.author="Eliot Miller <eliot.isaac@gmail.com> [aut, cre]")#
-#
-options(devtools.license="GPL-3")#
-#
-target_path <- "/Users/eliotmiller/Desktop/phylospace/phylospace"
-package.skeleton(path=path)
-?package.skeleton
-package.skeleton(path=path, list="phylospace_1_2.R")
-package.skeleton(name="anRpackage", code_files="phylospace_1_2.R")
-package.skeleton(path=path, name="anRpackage", code_files="phylospace_1_2.R")
-path
-THE APPROPRIATE CITATION FOR THIS FUNCTION IS: Miller, E.T., A.E. Zanne, & R.E. #
-##Ricklefs. 2013. Phylogenetic niche conservatism constrains Australian honeyeater#
-##assemblages in stressful environments. Ecology Letters. doi: 10.1111/ele.12156#
-#
-#This function is very much still in beta version, please report bugs to me. Also let us know and <b> please cite our paper if you use this function </b>. The appropriate citation is at the top of the R script. The figures look best if the input tree is ultrametric, so consider using chronopl() in ape simply for visualization purposes if your tree is not ultrametric. Ancestral node states are not reconstructed within the function, and must be passed automatically. This can be done with the ace() function in ape, the fastAnc() function in phytools, fitContinuousMCMC() from Graham Slater, etc. The function can take a dataframe of available climate space, which it plots as dark gray points behind the phyloclimatespace. This might offer some interesting options for users to plot available morphological space, e.g., corresponding to some modeled physiological/mechanical limits. Because species' may have similar trait values, a quick and dirty jitter option is available, though this has the effect of shifting all
-points, internal nodes included. Thus, for final figures, users may choose to slightly shift the points in question manually. X & Y limits can be modified, though they do not have to be. X & Y labels do need to be specified. Additional details in the script.#
-#
-##the function requires an ape phylogeny and two prepared data frames. one with #
-##col 1 as trait 1, col 2 as trait 2, row names as species names, same order as phylogeny.#
-##other as same, except that row names are node names, and node values need to be #
-##calculated beforehand with any of a variety of functions, e.g. fastAnc() in phytools#
-##or ace() in ape. columns have to be in same order in species.niches and node.niches #
-##files. the ability to plot available climate space (BEFORE plotting the #
-##phylospace, so the latter is plotted on top of that) is offered. for that,#
-##a simple dataframe with the first column the values of climate available along the #
-##x-axis, and the second column those along the y. jitter is available, x.label and #
-##y.label are necessary to specify. x.limits and y.limits can#
-##be manipulated but do not have to be. this version of the function now depends on a #
-##short function, quadrant(), that is in this file and also needs to be defined.#
-##the cool new feature in this version of the function is the ability to plot subclades.#
-##for that, you need to know what the node number is (from the entire phylogeny) to which#
-##you want to plot down to. there are a variety of ways you could do this, including#
-##simply plotting the whole tree with node labels set to true. alternatively, consider#
-##the findMRCA function in phytools. you will get an ignorable error if you specify a #
-##node to prune at that leaves only tips, with no subsequent internal nodes. also can now #
-##plot the edges between the subset node and the root if so desired#
-#
-##version 1.2. This version will become the first package for distribution -- ELIOT MILLER#
-#
-##define quadrant function#
-#
-quadrant <- function(x0, x1, y0, y1)#
-{#
-	if(x0 < x1 & y0 < y1)#
-	{#
-		quad <- "quadrant1"#
-	}#
-	else if(x0 < x1 & y0 > y1)#
-	{#
-		quad <- "quadrant2"#
-	}#
-	else if(x0 > x1 & y0 > y1)#
-	{#
-		quad <- "quadrant3"#
-	}#
-	else if(x0 > x1 & y0 < y1)#
-	{#
-		quad <- "quadrant4"#
-	}#
-	else if(x0 == x1 & y0 < y1)#
-	{#
-		quad <- "straightUp"#
-	}#
-	else if(x0 == x1 & y0 > y1)#
-	{#
-		quad <- "straightDown"#
-	}#
-	else if(x0 < x1 & y0 == y1)#
-	{#
-		quad <- "straightRight"#
-	}#
-	else if(x0 > x1 & y0 == y1)#
-	{#
-		quad <- "straightLeft"#
-	}#
-	else if(x0 == x1 & y0 == y1)#
-	{#
-		quad <- "stationary"#
-	}#
-	return(quad)#
-}#
-#
-phylospace <- function(ape.phylo, species.niches, node.niches, subset.node, subset.to.root=FALSE, jitter.level=0)#
-{#
-	require(ape)#
-	require(phylobase)#
-	require(plotrix)#
-	##convert to phylobase phylo. the suppress warnings command is because if one makes a tree ultrametric it can come with some unexpected parameters that phylobase doesn't know how to deal with. just ignores them and all is fine, but no reason to print warnings.	#
-	phylobase.phylo <- suppressWarnings(as(ape.phylo,"phylo4"))#
-#
-	##derive a vector of species' names to subset later#
-	keep.species <- ape.phylo$tip.label#
-#
-	##allow people to jitter the final results so if species have the exact same traits the tips can be distinguished. jitter will be normally set to zero#
-	species.niches <- cbind(jitter(species.niches[,1], factor=jitter.level), jitter(species.niches[,2], factor=jitter.level))#
-	node.niches <- cbind(jitter(node.niches[,1], factor=jitter.level), jitter(node.niches[,2], factor=jitter.level))#
-	##add the internal node values onto the end of a vector of the species values for each trait#
-	temp.trait1 <- c(species.niches[,1], node.niches[,1])#
-	temp.trait2 <- c(species.niches[,2], node.niches[,2])#
-#
-	##combine those two vectors alonge with a column for the node names#
-	lookup.table <- data.frame(1:length(temp.trait1), temp.trait1, temp.trait2)#
-	row.names(lookup.table) <- NULL#
-	names(lookup.table) <- c("node","col1","col2")#
-#
-	##make a new data frame that details the node to node connections. do not use the label, edge length or the node type columns#
-	segments.to.plot <- data.frame(phylobase.phylo@edge)#
-	##the root edge connects to node "0", which isn't in either species or node niches. however, we still want to plot the root on there#
-	##we would lose it on the merge command later because we merge on ancestor (i.e. 0) and lose the whole row#
-	##so, basically make a fake little branch that just goes from root to root (remember there will always be one branch less than number of nodes in a fully dichotomous tree)#
-	segments.to.plot$ancestor[segments.to.plot$ancestor==0] <- length(ape.phylo$tip.label)+1#
-#
-	##merge segments.to.plot with the lookup table. note that the by.x & by.y arguments refer not to columns and row but to first dataframe (x) and second (y)#
-	##add in four new columns: x0, y0, x1, y1; to be used with drawing segments to connect the nodes. x = col1, y = col2. we will fill these new columns using the lookup table created above#
-	##first add in the x,y coordinates for the ancestor#
-	segments.to.plot <- merge(segments.to.plot, lookup.table, by.x="ancestor", by.y="node")#
-	names(segments.to.plot)[3:4] = c("x0","y0")#
-#
-	##now add in the x,y coordinates for the descendant#
-	segments.to.plot <- merge(segments.to.plot, lookup.table, by.x="descendant", by.y="node")#
-	names(segments.to.plot)[5:6] = c("x1","y1")#
-	##color the branches by how deep they are in the phylogeny. for every node, will derive its distance from the root. will look at the distribution of these distances and break into 5 categories (blue, cyan, green, yellow, red). whether or not one uses an ultrametric tree here has a big influence on results#
-#
-	all.dist <- dist.nodes(ape.phylo)#
-#
-	##get the distances between the interior nodes and the root AND the tips and the root#
-	root.dist <- all.dist[length(ape.phylo$tip.label)+1, ]#
-#
-	##use quantile to determine where breaks are. call tips "red" and divide the internal nodes four categories#
-#
-	to.break <- root.dist[(length(ape.phylo$tip.label)+1):length(root.dist)]#
-#
-	one <- quantile(to.break, 0.25)#
-	two <- quantile(to.break, 0.50)#
-	three <- quantile(to.break, 0.75)#
-	four <- quantile(to.break, 1)#
-#
-	##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-	node.color <- character(length(root.dist))#
-	names(node.color) <- names(root.dist)#
-	node.color[root.dist >= 0 & root.dist < one] <- "blue"#
-	node.color[root.dist >= one & root.dist < two] <- "cyan"#
-	node.color[root.dist >= two & root.dist < three] <- "green"#
-	node.color[root.dist >= three & root.dist <= four] <- "yellow"#
-	node.color[root.dist > four] <- "red"#
-#
-	##bind the character vector colors back into the segments to plot dataframe, first by ancestor, then by descendent#
-	temp <- as.data.frame(node.color)#
-	temp <- cbind(temp, 1:length(root.dist))#
-	names(temp)[2]="num"#
-	segments.to.plot <- merge(segments.to.plot, temp, by.x="ancestor", by.y="num")#
-	names(segments.to.plot)[7]="from"#
-	segments.to.plot <- merge(segments.to.plot, temp, by.x="descendant", by.y="num")#
-	names(segments.to.plot)[8]="to"#
-#
-	##need to coerce these to characters for it to plot right#
-	segments.to.plot$from <- as.character(segments.to.plot$from)#
-	segments.to.plot$to <- as.character(segments.to.plot$to)#
-#
-	##add six new columns here. The first three will specify in R,G,B space the color from the "from" column, the second are for the "to" column#
-#
-	for(i in 1:dim(segments.to.plot)[1])#
-	{#
-		if(segments.to.plot$from[i] == "blue")#
-		{#
-			segments.to.plot$from.r[i] = 0#
-			segments.to.plot$from.g[i] = 0#
-			segments.to.plot$from.b[i] = 1#
-		}#
-		else if(segments.to.plot$from[i] == "cyan")#
-		{#
-			segments.to.plot$from.r[i] = 0#
-			segments.to.plot$from.g[i] = 1#
-			segments.to.plot$from.b[i] = 1#
-		}#
-		else if(segments.to.plot$from[i] == "green")#
-		{#
-			segments.to.plot$from.r[i] = 0#
-			segments.to.plot$from.g[i] = 1#
-			segments.to.plot$from.b[i] = 0#
-		}#
-		else if(segments.to.plot$from[i] == "yellow")#
-		{#
-			segments.to.plot$from.r[i] = 1#
-			segments.to.plot$from.g[i] = 1#
-			segments.to.plot$from.b[i] = 0#
-		}#
-		else if(segments.to.plot$from[i] == "red")#
-		{#
-			segments.to.plot$from.r[i] = 1#
-			segments.to.plot$from.g[i] = 0#
-			segments.to.plot$from.b[i] = 0#
-		}#
-	}#
-#
-	for(i in 1:dim(segments.to.plot)[1])#
-	{#
-		if(segments.to.plot$to[i] == "blue")#
-		{#
-			segments.to.plot$to.r[i] = 0#
-			segments.to.plot$to.g[i] = 0#
-			segments.to.plot$to.b[i] = 1#
-		}#
-		else if(segments.to.plot$to[i] == "cyan")#
-		{#
-			segments.to.plot$to.r[i] = 0#
-			segments.to.plot$to.g[i] = 1#
-			segments.to.plot$to.b[i] = 1#
-		}#
-		else if(segments.to.plot$to[i] == "green")#
-		{#
-			segments.to.plot$to.r[i] = 0#
-			segments.to.plot$to.g[i] = 1#
-			segments.to.plot$to.b[i] = 0#
-		}#
-		else if(segments.to.plot$to[i] == "yellow")#
-		{#
-			segments.to.plot$to.r[i] = 1#
-			segments.to.plot$to.g[i] = 1#
-			segments.to.plot$to.b[i] = 0#
-		}#
-		else if(segments.to.plot$to[i] == "red")#
-		{#
-			segments.to.plot$to.r[i] = 1#
-			segments.to.plot$to.g[i] = 0#
-			segments.to.plot$to.b[i] = 0#
-		}#
-	}#
-#
-	##if only a specific clade within the whole phylogeny is to be plotted, subset segments to plot accordingly#
-	if(missing(subset.node))#
-	{#
-		subset.node <- "none"#
-		print("Retaining entire phylogeny")#
-	}#
-	else if(!missing(subset.node) & subset.to.root==FALSE)#
-	{#
-		keep.branches <- descendants(phylobase.phylo, subset.node, type="all")#
-		keep.species <- descendants(phylobase.phylo, subset.node, type="tips")#
-		segments.to.plot <- segments.to.plot[segments.to.plot$descendant %in% keep.branches, ]#
-	}#
-	else#
-	{#
-		keep.branches <- descendants(phylobase.phylo, subset.node, type="all")#
-		to.root <- ancestors(phylobase.phylo, subset.node, "ALL") ##calling it like this includes also the subset node#
-		keep.branches <- c(rev(to.root), keep.branches)#
-		keep.species <- descendants(phylobase.phylo, subset.node, type="tips")#
-		segments.to.plot <- segments.to.plot[segments.to.plot$descendant %in% keep.branches, ]#
-	}#
-#
-	##switch the order ancestor and descendant appear in data frame for ease of reading#
-	segments.to.plot <- segments.to.plot[ , c("ancestor","descendant","x0","y0","x1","y1","from","to","from.r","from.g","from.b","to.r","to.g","to.b")]#
-#
-	##derive a vector of species' names based on whatever taxa are left to be plotted#
-	name.vector <- phylobase.phylo@label[segments.to.plot$descendant][!is.na(phylobase.phylo@label[segments.to.plot$descendant])]#
-#
-	##derive a vector of node names based on whatever nodes are left to be plotted#
-	node.vector <- segments.to.plot$descendant[segments.to.plot$descendant > length(ape.phylo$tip.label)]#
-#
-	output <- list(ape.phylo=ape.phylo, segments.to.plot=segments.to.plot, name.vector=name.vector, subset.node=subset.node, node.vector=node.vector)#
-#
-	class(output) <- "phylospace"#
-#
-	return(output)#
-}#
-#
-plot.phylospace <- function(phylospace.object, climate.points, species.labels=FALSE, node.labels=FALSE, label.adjust=0, x.label, y.label, x.limits, y.limits)#
-{#
-	##derive the x,y locations of all points and nodes and their respective labels#
-	slopes <- (phylospace.object$segments.to.plot[,6]-phylospace.object$segments.to.plot[,4])/(phylospace.object$segments.to.plot[,5]-phylospace.object$segments.to.plot[,3])#
-	x.name.location <- numeric(length=dim(phylospace.object$segments.to.plot)[1])#
-	y.name.location <- numeric(length=dim(phylospace.object$segments.to.plot)[1])#
-	phylospace.object$segments.to.plot$quadrant <- mapply(quadrant, x0=phylospace.object$segments.to.plot$x0, x1=phylospace.object$segments.to.plot$x1, y0=phylospace.object$segments.to.plot$y0, y1=phylospace.object$segments.to.plot$y1)#
-#
-	##the general form of these logical statements follows x.location[quadrant in question] <- orig.x.location[quadrant in question] +/- (depending on quadrant) label.adjust/sqrt(1 + slope[quadrant in question]^2)#
-	##and y.location[quadrant in question] <- orig.x.location[quadrant] +/- slope[quadrant]*label.adjust/sqrt(1+slope[quadrant]^2)#
-	##quadrant 1#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant1"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "quadrant1"] + #
-		label.adjust/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant1"]^2)#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant1"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "quadrant1"] + #
-		(slopes[phylospace.object$segments.to.plot$quadrant == "quadrant1"]*label.adjust)/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant1"]^2)#
-	##quadrant 2. slope is negative, hence the addition sign for the y-values#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant2"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "quadrant2"] + #
-		label.adjust/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant2"]^2)#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant2"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "quadrant2"] + #
-		(slopes[phylospace.object$segments.to.plot$quadrant == "quadrant2"]*label.adjust)/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant2"]^2)#
-	##quadrant 3#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant3"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "quadrant3"] - #
-		label.adjust/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant3"]^2)#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant3"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "quadrant3"] - #
-		(slopes[phylospace.object$segments.to.plot$quadrant == "quadrant3"]*label.adjust)/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant3"]^2)#
-	##quadrant 4. slope is negative, hence the subtraction sign for the y-values#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant4"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "quadrant4"] - #
-		label.adjust/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant4"]^2)#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "quadrant4"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "quadrant4"] - #
-		(slopes[phylospace.object$segments.to.plot$quadrant == "quadrant4"]*label.adjust)/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "quadrant4"]^2)#
-#
-	#straight up line#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "straightUp"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "straightUp"]#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "straightUp"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "straightUp"] + #
-		(slopes[phylospace.object$segments.to.plot$quadrant == "straightUp"]*label.adjust)/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "straightUp"]^2)#
-	#straight down line#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "straightDown"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "straightDown"]#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "straightDown"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "straightDown"] - #
-		(slopes[phylospace.object$segments.to.plot$quadrant == "straightDown"]*label.adjust)/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "straightDown"]^2)#
-#
-	#straight right line#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "straightRight"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "straightRight"] + #
-		label.adjust/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "straightRight"]^2)#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "straightRight"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "straightRight"]#
-	#straight left line#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "straightRight"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "straightRight"] - #
-		label.adjust/sqrt(1 + slopes[phylospace.object$segments.to.plot$quadrant == "straightRight"]^2)#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "straightRight"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "straightRight"]#
-#
-	##for the root edge#
-	x.name.location[phylospace.object$segments.to.plot$quadrant == "stationary"] <- #
-		phylospace.object$segments.to.plot[,5][phylospace.object$segments.to.plot$quadrant == "stationary"]#
-	y.name.location[phylospace.object$segments.to.plot$quadrant == "stationary"] <- #
-		phylospace.object$segments.to.plot[,6][phylospace.object$segments.to.plot$quadrant == "stationary"]#
-#
-	##set up an empty plot. if x and y limits aren't given, just let it figure out the appropriate limits#
-	if(missing(x.limits) & missing(y.limits))#
-	{#
-		plot(lookup.table$col2~lookup.table$col1, xlab=x.label, ylab=y.label, type="n")#
-	}#
-#
-	else if(missing(x.limits) | missing(y.limits))#
-	{#
-		warning("Need to specify either both x & y limits or no limits at all")#
-	}#
-	else#
-	{#
-		plot(lookup.table$col2~lookup.table$col1, xlab=x.label, ylab=y.label, type="n", xlim=x.limits, ylim=y.limits)#
-	}#
-#
-	if(missing(climate.points))#
-	{#
-		print("No climate points supplied")#
-	}#
-	else#
-	{#
-		points(climate.points, pch=20, cex=0.6, col="gray80")#
-	}#
-#
-	##this nested for loop breaks considers an imaginary line segment between either x0 and x1 or y0 and y1, #
-	##breaks it into 99 new points, adds the initial x or y point to the start of that vector of #
-	##new points, and does this for each row of the segments to plot. this is just to get the appropriate#
-	##color scale between nodes. then it plots each line segment according to that color scale#
-	##because we added in the fake branch that just goes from blue to blue, this seems to cause this to crash#
-	##need to take that line out for this part#
-#
-	temp.segments.to.plot <- phylospace.object$segments.to.plot[phylospace.object$segments.to.plot$descendant!=length(phylospace.object$ape.phylo$tip.label)+1, ]#
-#
-	for(i in 1:dim(temp.segments.to.plot)[1])#
-	{#
-		breaks = 99#
-		x <- c()#
-		y <- c()#
-		temp.x <- c()#
-		temp.y <- c()#
-		for(j in 1:breaks)#
-		{#
-			temp.x[j] <- (temp.segments.to.plot[i,5]-temp.segments.to.plot[i,3])/breaks*j+temp.segments.to.plot[i,3]#
-			x <- c(temp.segments.to.plot[i,3],temp.x)#
-			temp.y[j] <- (temp.segments.to.plot[i,6]-temp.segments.to.plot[i,4])/breaks*j+temp.segments.to.plot[i,4]#
-			y <- c(temp.segments.to.plot[i,4],temp.y)#
-		}#
-		##calculate the euclidean distance between each successive x,y point#
-		xydist <- sqrt(x^2+y^2)#
-		##this is necessary because the color.scale lines has no way that i know of to tell it which direction the segment is "going"#
-		##thus, when the segments are "going" towards quadrants III or IV, it flips the scale away from what you want#
-		if(xydist[1] > xydist[breaks+1])#
-		{#
-			xydist <- (-1)*xydist#
-		}#
-		##the way this works is if you want it to go from just blue (0,0,1) to cyan (0,1,1) you code it c(0,0),c(0,1),c(1,1) and if you wanted it to go from cyan to blue to cyan it would be c(0,0,0),c(1,0,1),c(1,1,1), etc. the first place in each argument refers to color 1, the second place color 2, etc.#
-#
-		color.scale.lines(x,y,c(temp.segments.to.plot$from.r[i],temp.segments.to.plot$to.r[i]),c(temp.segments.to.plot$from.g[i],temp.segments.to.plot$to.g[i]),c(temp.segments.to.plot$from.b[i],temp.segments.to.plot$to.b[i]),colvar=xydist,lwd=2)#
-	}#
-#
-	##add the species' points#
-	if(phylospace.object$subset.node=="none")#
-	{#
-		points(lookup.table[1:length(phylospace.object$ape.phylo$tip.label), ]$col2~lookup.table[1:length(phylospace.object$ape.phylo$tip.label), ]$col1, pch=20, col="red")#
-	}#
-	else#
-	{#
-		points(lookup.table[lookup.table$node %in% keep.species, ]$col2~lookup.table[lookup.table$node %in% keep.species, ]$col1, pch=20, col="red")#
-	}#
-#
-	##add text to the points, with offset equal to label.adjust argument. IMPORTANTLY, this will work best if x & y are on similar scales. need to revise this script so that it doesn'matter. to query graphical parameters after calling the blank plot: par("usr")#
-	if(species.labels == TRUE & node.labels == FALSE)#
-	{#
-		text(x=x.name.location[1:length(phylospace.object$name.vector)], y=y.name.location[1:length(phylospace.object$name.vector)], labels=phylospace.object$name.vector, cex=0.7)#
-	}#
-#
-	else if(species.labels == TRUE & node.labels == TRUE)#
-	{#
-		text(x=x.name.location[1:length(phylospace.object$name.vector)], y=y.name.location[1:length(phylospace.object$name.vector)], labels=phylospace.object$name.vector, cex=0.7)#
-		text(x=x.name.location[(length(phylospace.object$name.vector)+1):(length(phylospace.object$name.vector)+length(phylospace.object$node.vector))], y=y.name.location[(length(phylospace.object$name.vector)+1):(length(phylospace.object$name.vector)+length(phylospace.object$node.vector))], labels=phylospace.object$node.vector, cex=0.7)#
-	}#
-	else if(species.labels == FALSE & node.labels == TRUE)#
-	{#
-		text(x=x.name.location[(length(phylospace.object$name.vector)+1):(length(phylospace.object$name.vector)+length(phylospace.object$node.vector))], y=y.name.location[(length(phylospace.object$name.vector)+1):(length(phylospace.object$name.vector)+length(phylospace.object$node.vector))], labels=phylospace.object$node.vector, cex=0.7)#
-	}	#
-}
-package.skeleton()
-dev_example(phylospace)
-phylospace
-dev_example("phylospace")
-load_all("ggplot2")
-library(devtools)#
-has_devel()
-library(devtools)#
-#
-library(roxygen2)#
-#
-##doing the above notes with xcode allowed the following to run successfully#
-#
-has_devel()#
-#
-##paste whatever you want to work with onto the desktop, into a folder called phylospace#
-#
-##define your path, BUT ALSO SET IT MANUALLY IN CASE#
-path <- "/Users/eliotmiller/Desktop/phylospacer"#
-#
-set_path(path)#
-#
-##set some options#
-#
-options(devtools.desc.name="Eliot Miller")#
-#
-options(devtools.desc.author="Eliot Miller <eliot.isaac@gmail.com> [aut, cre]")#
-#
-options(devtools.desc.license="GPL-3")#
-#
-target_path <- "/Users/eliotmiller/Desktop/phylospacer/phylospacer"
 load_all()
-?load_all
-load_all(target_path)
-build(target_path)
-build(target_path, vignettes=FALSE)
-Sys.which("pdflatex")
-data(iris)
-dput(iris$Petal.Width)
-?dput
-library(devtools)#
-#
-install_github("phylospacer", username="eliotmiller")#
-#
-library(phylospacer)
-?phylospace
-library(ape)#
+dev_help("simulateComm")
+library(geiger)#
+library(picante)#
 #
 #simulate tree with birth-death process#
-tree <- rbdtree(birth=0.1, death=0, Tmax=40)#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-#prune the phylogeny down to 50 species#
-tree <- drop.tip(tree, tip=51:length(tree$tip.label))#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
 #
-#simulate trait evolution up tree with Brownian motion process#
-trait1 <- rTraitCont(tree, model="BM")#
-trait2 <- rTraitCont(tree, model="BM")#
-#
-#bind the traits together into a matrix#
-species.niches <- cbind(trait1, trait2)#
-#
-#reconstruct ancestral states#
-nodes.trait1 <- ace(trait1, tree, type="continuous", method="REML")#
-nodes.trait2 <- ace(trait2, tree, type="continuous", method="REML")#
-#
-node.niches <- cbind(nodes.trait1$ace, nodes.trait2$ace)#
-#
-#simulate available climate space#
-climate.points <- cbind(rnorm(500, mean=0, sd=1), rnorm(100, mean=0, sd=1))#
-#
-#calculate a phylospace object for the entire phylogeny#
-entire <- phylospace(tree, species.niches=species.niches, node.niches=node.niches)#
-#
-#plot the entire phylospace, with species labels plotted and slightly offset from tips, and with available climate space in background#
-plot(entire, species.labels=TRUE, climate.points=climate.points, label.adjust=0.05, lwd=2)
-check()
-colors
-ca
-1:100
-rep(1, 50)
-seq(from=0, to=1)
-seq(from=0, to=1, by=0.5)
-?seq
-seq(from=0.01, to=0.99, length.out=49)
-root.dist <- c(rep(1, 50), seq(from=0.01, to=0.99, length.out=49))
-root.dist
-to.break <- root.dist[51:99]
-to.break
-names(root.dist)
-as.character(1:99)
-names(root.dist) <- as.character(1:99)
-root.dist
-ca <- function(colors)#
-{#
-#
-	root.dist <- c(rep(1, 50), seq(from=0.01, to=0.99, length.out=49))#
-	names(root.dist) <- as.character(1:99)#
-#
-	to.break <- root.dist[51:99]#
-#
-	one <- quantile(to.break, 0.25)#
-	two <- quantile(to.break, 0.50)#
-	three <- quantile(to.break, 0.75)#
-	four <- quantile(to.break, 1)#
-#
-	node.color <- character(length(root.dist))#
-	names(node.color) <- names(root.dist)#
-#
-	if(missing(colors))#
-	{#
-		##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-		node.color[root.dist >= 0 & root.dist < one] <- "blue"#
-		node.color[root.dist >= one & root.dist < two] <- "cyan"#
-		node.color[root.dist >= two & root.dist < three] <- "green"#
-		node.color[root.dist >= three & root.dist <= four] <- "yellow"#
-		node.color[root.dist > four] <- "red"#
-	}#
-	else#
-	{#
-		print("something")#
-	}#
-}
-ca()
-colors
-missing(colors)
-node.color
-ca <- function(desired.colors)#
-{#
-#
-	root.dist <- c(rep(1, 50), seq(from=0.01, to=0.99, length.out=49))#
-	names(root.dist) <- as.character(1:99)#
-#
-	to.break <- root.dist[51:99]#
-#
-	one <- quantile(to.break, 0.25)#
-	two <- quantile(to.break, 0.50)#
-	three <- quantile(to.break, 0.75)#
-	four <- quantile(to.break, 1)#
-#
-	node.color <- character(length(root.dist))#
-	names(node.color) <- names(root.dist)#
-#
-	if(missing(desired.colors))#
-	{#
-		##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-		node.color[root.dist >= 0 & root.dist < one] <- "blue"#
-		node.color[root.dist >= one & root.dist < two] <- "cyan"#
-		node.color[root.dist >= two & root.dist < three] <- "green"#
-		node.color[root.dist >= three & root.dist <= four] <- "yellow"#
-		node.color[root.dist > four] <- "red"#
-	}#
-	else#
-	{#
-		print("something")#
-	}#
-	return(node.color)#
-}
-ca()
-ca <- function(desired.colors)#
-{#
-#
-	root.dist <- c(rep(1, 50), seq(from=0.01, to=0.99, length.out=49))#
-	names(root.dist) <- as.character(1:99)#
-#
-	to.break <- root.dist[51:99]#
-#
-	one <- quantile(to.break, 0.25)#
-	two <- quantile(to.break, 0.50)#
-	three <- quantile(to.break, 0.75)#
-	four <- quantile(to.break, 1)#
-#
-	node.color <- character(length(root.dist))#
-	names(node.color) <- names(root.dist)#
-#
-	if(missing(desired.colors))#
-	{#
-		##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-		node.color[root.dist >= 0 & root.dist < one] <- "blue"#
-		node.color[root.dist >= one & root.dist < two] <- "cyan"#
-		node.color[root.dist >= two & root.dist < three] <- "green"#
-		node.color[root.dist >= three & root.dist <= four] <- "yellow"#
-		node.color[root.dist > four] <- "red"#
-	}#
-	else#
-	{#
-		node.color[root.dist >= 0 & root.dist < one] <- "color1"#
-		node.color[root.dist >= one & root.dist < two] <- "color2"#
-		node.color[root.dist >= two & root.dist < three] <- "color3"#
-		node.color[root.dist >= three & root.dist <= four] <- "color4"#
-		node.color[root.dist > four] <- "red"#
-	}#
-	return(node.color)#
-}
-ca()
-ca(desired.colors=1)
-ca <- function(desired.colors)#
-{#
-#
-	root.dist <- c(rep(1, 50), seq(from=0.01, to=0.99, length.out=49))#
-	names(root.dist) <- as.character(1:99)#
-#
-	to.break <- root.dist[51:99]#
-#
-	one <- quantile(to.break, 0.25)#
-	two <- quantile(to.break, 0.50)#
-	three <- quantile(to.break, 0.75)#
-	four <- quantile(to.break, 1)#
-#
-	node.color <- character(length(root.dist))#
-	names(node.color) <- names(root.dist)#
-#
-	if(missing(desired.colors))#
-	{#
-		##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-		node.color[root.dist >= 0 & root.dist < one] <- "blue"#
-		node.color[root.dist >= one & root.dist < two] <- "cyan"#
-		node.color[root.dist >= two & root.dist < three] <- "green"#
-		node.color[root.dist >= three & root.dist <= four] <- "yellow"#
-		node.color[root.dist > four] <- "red"#
-	}#
-	else#
-	{#
-		node.color[root.dist >= 0 & root.dist < one] <- "color1"#
-		node.color[root.dist >= one & root.dist < two] <- "color2"#
-		node.color[root.dist >= two & root.dist < three] <- "color3"#
-		node.color[root.dist >= three & root.dist <= four] <- "color4"#
-		node.color[root.dist > four] <- "color5"#
-	}#
-	return(node.color)#
-}
-ca(desired.colors=1)
-color
-Colors
-replacement.colors
-test
-test <- c((1,2,3),(4,5,6))
-1,2,4
-test <- c(c(1,2,3),c(4,5,6))
-test
-' Create a phylospace object.#
-#'#
-#' Given a phylo object, a data frame of species trait values, and another of#
-#' reconstructed node values, returns a phylospace object.#
-#'#
-#' @param ape.phylo Phylo object#
-#' @param species.niches Two column data frame (or matrix) with species names as row names  #
-#' and exactly matching phylogeny. Columns as traits of interest.#
-#' @param node.niches Two column data frame (or matrix) with node names as row names  #
-#' and exactly matching phylogeny. Columns as traits of interest.#
-#' @param subset.node Optional numeric value (possible character vector if nodes are so#
-#' named?) specifying a node at which to subset the phylospace object.#
-#' @param subset.to.root Logical argument used for when subset.node is specified. If TRUE,#
-#' then all edges between the subset node and the root of the entire phylogeny will also#
-#' be retained in the resulting phylospace object.#
-#' @param jitter.level Optional numeric value to jitter both species and node values. #
-#' Useful for when species' and/or nodes have very similar trait values.#
-#' #
-#' @details This function does not currently reconstruct ancestral states. These need to#
-#' be calculated beforehand with any of a variety of functions, e.g. fastAnc() in phytools#
-#' or ace() in ape. It is intended to take two data frames, with the species names of the#
-#' species.niches frame exactly matching the phylogeny. Importantly, these need to be#
-#' specified as the row names of the data frame, not as a separate column. Similarly, the#
-#' reconstructed node names need to be the row names of the node.niches data frame. The#
-#' subset.node must be a single number (or object) corresponding to a unique node in the  #
-#' tree. There are a variety of ways you could find this, including simply plotting the #
-#' node labels onto a tree. Alternatively, consider the findMRCA function in phytools. #
-#' Because species may have similar trait values, a quick and dirty jitter option is #
-#' available, though this has the effect of shifting all points, internal nodes included. #
-#' Thus, users may choose to slightly shift the points in question manually.#
-#' The function is still in development version, please report bugs to me. #
-#'#
-#' @return Returns a phylospace object, which is a list with five elements: the original#
-#' phylo object; a data frame with 14 columns describing the colors and bounds of all line#
-#' segments; a character vector of all species retained; the identity of the subset#
-#' node, if there is one; a vector of all descendant nodes from the subset node, and#
-#' including also all ancestors of the subset node if subset.to.root = TRUE#
-#'#
-#' @export#
-#'#
-#' @import ape phylobase plotrix#
-#'#
-#' @references Miller, E.T., A.E. Zanne, & R. E. Ricklefs. In press. Niche conservatism #
-#' constrains Australian honeyeater assemblages in stressful environments. Ecology Letters. #
-#'#
-#' @examples#
-#' library(ape)#
-#'#
-#' #simulate tree with birth-death process#
-#' tree <- rbdtree(birth=0.1, death=0, Tmax=40)#
-#'#
-#' #prune the phylogeny down to 50 species#
-#' tree <- drop.tip(tree, tip=51:length(tree$tip.label))#
-#'#
-#' #simulate trait evolution up tree with Brownian motion process#
-#' trait1 <- rTraitCont(tree, model="BM")#
-#' trait2 <- rTraitCont(tree, model="BM")#
-#'#
-#' #bind the traits together into a matrix#
-#' species.niches <- cbind(trait1, trait2)#
-#'#
-#' #reconstruct ancestral states#
-#' nodes.trait1 <- ace(trait1, tree, type="continuous", method="REML")#
-#' nodes.trait2 <- ace(trait2, tree, type="continuous", method="REML")#
-#'#
-#' node.niches <- cbind(nodes.trait1$ace, nodes.trait2$ace)#
-#'#
-#' #simulate available climate space#
-#' climate.points <- cbind(rnorm(500, mean=0, sd=1), rnorm(100, mean=0, sd=1))#
-#'#
-#' #calculate a phylospace object for the entire phylogeny#
-#' entire <- phylospace(tree, species.niches=species.niches, node.niches=node.niches)#
-#'#
-#' #plot the entire phylospace, with species labels plotted and slightly offset from tips, and with available climate space in background#
-#' plot(entire, species.labels=TRUE, climate.points=climate.points, label.adjust=0.05, lwd=2)#
-#'#
-#' #Example of how one could create a series of panels for an animation. Here we are retaining all branches from each subset node to the root#
-#' cladeA <- phylospace(tree, species.niches=species.niches, node.niches=node.niches, subset.node=63, subset.to.root=TRUE)#
-#' cladeB <- phylospace(tree, species.niches=species.niches, node.niches=node.niches, subset.node=75, subset.to.root=TRUE)#
-#' cladeC <- phylospace(tree, species.niches=species.niches, node.niches=node.niches, subset.node=90, subset.to.root=TRUE)#
-#'#
-#' #These x & y limits can most likely be made more restrictive, depending on the simulated trait data. Keeping broad here, but modify if desired.#
-#' #Save each plot before calling next.#
-#' plot(phylospace.object=cladeA, species.labels=TRUE, label.adjust=0.1, x.label="Trait 1", y.label="Trait 2", x.limits=c(-2,2), y.limits=c(-2,2), lwd=2)#
-#' plot(phylospace.object=cladeB, species.labels=TRUE, label.adjust=0.1, x.label="Trait 1", y.label="Trait 2", x.limits=c(-2,2), y.limits=c(-2,2), lwd=2)#
-#' plot(phylospace.object=cladeC, species.labels=TRUE, label.adjust=0.1, x.label="Trait 1", y.label="Trait 2", x.limits=c(-2,2), y.limits=c(-2,2), lwd=2)#
-#'#
-#' #Example of how to quickly plot phylospace for a small clade without the edges to the root.#
-#' plot(phylospace(tree, species.niches, node.niches, subset.node=85), lwd=2)#
-#
-phylospace <- function(ape.phylo, species.niches, node.niches, subset.node, subset.to.root=FALSE, jitter.level=0, replacement.colors)#
-{	#
-	##convert to phylobase phylo. the suppress warnings command is because if one makes a tree ultrametric it can come with some unexpected parameters that phylobase doesn't know how to deal with. just ignores them and all is fine, but no reason to print warnings.	#
-	phylobase.phylo <- suppressWarnings(as(ape.phylo,"phylo4"))#
-#
-	##derive a vector of species' names to subset later#
-	keep.species <- ape.phylo$tip.label#
-#
-	##allow people to jitter the final results so if species have the exact same traits the tips can be distinguished. jitter will be normally set to zero#
-	species.niches <- cbind(jitter(species.niches[,1], factor=jitter.level), jitter(species.niches[,2], factor=jitter.level))#
-	node.niches <- cbind(jitter(node.niches[,1], factor=jitter.level), jitter(node.niches[,2], factor=jitter.level))#
-	##add the internal node values onto the end of a vector of the species values for each trait#
-	temp.trait1 <- c(species.niches[,1], node.niches[,1])#
-	temp.trait2 <- c(species.niches[,2], node.niches[,2])#
-#
-	##combine those two vectors alonge with a column for the node names#
-	lookup.table <- data.frame(1:length(temp.trait1), temp.trait1, temp.trait2)#
-	row.names(lookup.table) <- NULL#
-	names(lookup.table) <- c("node","col1","col2")#
-#
-	##make a new data frame that details the node to node connections. do not use the label, edge length or the node type columns#
-	segments.to.plot <- data.frame(phylobase.phylo@edge)#
-	##the root edge connects to node "0", which isn't in either species or node niches. however, we still want to plot the root on there#
-	##we would lose it on the merge command later because we merge on ancestor (i.e. 0) and lose the whole row#
-	##so, basically make a fake little branch that just goes from root to root (remember there will always be one branch less than number of nodes in a fully dichotomous tree)#
-	segments.to.plot$ancestor[segments.to.plot$ancestor==0] <- length(ape.phylo$tip.label)+1#
-#
-	##merge segments.to.plot with the lookup table. note that the by.x & by.y arguments refer not to columns and row but to first dataframe (x) and second (y)#
-	##add in four new columns: x0, y0, x1, y1; to be used with drawing segments to connect the nodes. x = col1, y = col2. we will fill these new columns using the lookup table created above#
-	##first add in the x,y coordinates for the ancestor#
-	segments.to.plot <- merge(segments.to.plot, lookup.table, by.x="ancestor", by.y="node")#
-	names(segments.to.plot)[3:4] = c("x0","y0")#
-#
-	##now add in the x,y coordinates for the descendant#
-	segments.to.plot <- merge(segments.to.plot, lookup.table, by.x="descendant", by.y="node")#
-	names(segments.to.plot)[5:6] = c("x1","y1")#
-	##color the branches by how deep they are in the phylogeny. for every node, will derive its distance from the root. will look at the distribution of these distances and break into 5 categories (blue, cyan, green, yellow, red). whether or not one uses an ultrametric tree here has a big influence on results#
-#
-	all.dist <- dist.nodes(ape.phylo)#
-#
-	##get the distances between the interior nodes and the root AND the tips and the root#
-	root.dist <- all.dist[length(ape.phylo$tip.label)+1, ]#
-#
-	##use quantile to determine where breaks are. call tips "red" and divide the internal nodes four categories#
-#
-	to.break <- root.dist[(length(ape.phylo$tip.label)+1):length(root.dist)]#
-#
-	one <- quantile(to.break, 0.25)#
-	two <- quantile(to.break, 0.50)#
-	three <- quantile(to.break, 0.75)#
-	four <- quantile(to.break, 1)#
-#
-	##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-	node.color <- character(length(root.dist))#
-	names(node.color) <- names(root.dist)#
-#
-	if(missing(replacement.colors))#
-	{#
-		##make an empty character vector for use in coloring branches and fill based on distance of respective node to root. #
-		node.color[root.dist >= 0 & root.dist < one] <- "blue"#
-		node.color[root.dist >= one & root.dist < two] <- "cyan"#
-		node.color[root.dist >= two & root.dist < three] <- "green"#
-		node.color[root.dist >= three & root.dist <= four] <- "yellow"#
-		node.color[root.dist > four] <- "red"#
-	}#
-	else#
-	{#
-		node.color[root.dist >= 0 & root.dist < one] <- "color1"#
-		node.color[root.dist >= one & root.dist < two] <- "color2"#
-		node.color[root.dist >= two & root.dist < three] <- "color3"#
-		node.color[root.dist >= three & root.dist <= four] <- "color4"#
-		node.color[root.dist > four] <- "color5"#
-	}#
-	##bind the character vector colors back into the segments to plot dataframe, first by ancestor, then by descendent#
-	temp <- as.data.frame(node.color)#
-	temp <- cbind(temp, 1:length(root.dist))#
-	names(temp)[2]="num"#
-	segments.to.plot <- merge(segments.to.plot, temp, by.x="ancestor", by.y="num")#
-	names(segments.to.plot)[7]="from"#
-	segments.to.plot <- merge(segments.to.plot, temp, by.x="descendant", by.y="num")#
-	names(segments.to.plot)[8]="to"#
-#
-	##need to coerce these to characters for it to plot right#
-	segments.to.plot$from <- as.character(segments.to.plot$from)#
-	segments.to.plot$to <- as.character(segments.to.plot$to)#
-#
-	##add six new columns here. The first three will specify in R,G,B space the color from the "from" column, the second are for the "to" column#
-#
-	if(missing(replacement.colors))#
-	{#
-		for(i in 1:dim(segments.to.plot)[1])#
-		{#
-			if(segments.to.plot$from[i] == "blue")#
-			{#
-				segments.to.plot$from.r[i] = 0#
-				segments.to.plot$from.g[i] = 0#
-				segments.to.plot$from.b[i] = 1#
-			}#
-			else if(segments.to.plot$from[i] == "cyan")#
-			{#
-				segments.to.plot$from.r[i] = 0#
-				segments.to.plot$from.g[i] = 1#
-				segments.to.plot$from.b[i] = 1#
-			}#
-			else if(segments.to.plot$from[i] == "green")#
-			{#
-				segments.to.plot$from.r[i] = 0#
-				segments.to.plot$from.g[i] = 1#
-				segments.to.plot$from.b[i] = 0#
-			}#
-			else if(segments.to.plot$from[i] == "yellow")#
-			{#
-				segments.to.plot$from.r[i] = 1#
-				segments.to.plot$from.g[i] = 1#
-				segments.to.plot$from.b[i] = 0#
-			}#
-			else if(segments.to.plot$from[i] == "red")#
-			{#
-				segments.to.plot$from.r[i] = 1#
-				segments.to.plot$from.g[i] = 0#
-				segments.to.plot$from.b[i] = 0#
-			}#
-		}#
-#
-		for(i in 1:dim(segments.to.plot)[1])#
-		{#
-			if(segments.to.plot$to[i] == "blue")#
-			{#
-				segments.to.plot$to.r[i] = 0#
-				segments.to.plot$to.g[i] = 0#
-				segments.to.plot$to.b[i] = 1#
-			}#
-			else if(segments.to.plot$to[i] == "cyan")#
-			{#
-				segments.to.plot$to.r[i] = 0#
-				segments.to.plot$to.g[i] = 1#
-				segments.to.plot$to.b[i] = 1#
-			}#
-			else if(segments.to.plot$to[i] == "green")#
-			{#
-				segments.to.plot$to.r[i] = 0#
-				segments.to.plot$to.g[i] = 1#
-				segments.to.plot$to.b[i] = 0#
-			}#
-			else if(segments.to.plot$to[i] == "yellow")#
-			{#
-				segments.to.plot$to.r[i] = 1#
-				segments.to.plot$to.g[i] = 1#
-				segments.to.plot$to.b[i] = 0#
-			}#
-			else if(segments.to.plot$to[i] == "red")#
-			{#
-				segments.to.plot$to.r[i] = 1#
-				segments.to.plot$to.g[i] = 0#
-				segments.to.plot$to.b[i] = 0#
-			}#
-		}#
-	}#
-	else#
-	{#
-		for(i in 1:dim(segments.to.plot)[1])#
-		{#
-			if(segments.to.plot$from[i] == "color1")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[1]#
-				segments.to.plot$from.g[i] = replacement.colors[2]#
-				segments.to.plot$from.b[i] = replacement.colors[3]#
-			}#
-			else if(segments.to.plot$from[i] == "color2")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[4]#
-				segments.to.plot$from.g[i] = replacement.colors[5]#
-				segments.to.plot$from.b[i] = replacement.colors[6]#
-			}#
-			else if(segments.to.plot$from[i] == "color3")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[7]#
-				segments.to.plot$from.g[i] = replacement.colors[8]#
-				segments.to.plot$from.b[i] = replacement.colors[9]#
-			}#
-			else if(segments.to.plot$from[i] == "color4")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[10]#
-				segments.to.plot$from.g[i] = replacement.colors[11]#
-				segments.to.plot$from.b[i] = replacement.colors[12]#
-			}#
-			else if(segments.to.plot$from[i] == "color5")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[13]#
-				segments.to.plot$from.g[i] = replacement.colors[14]#
-				segments.to.plot$from.b[i] = replacement.colors[15]#
-			}#
-		}#
-#
-		for(i in 1:dim(segments.to.plot)[1])#
-		{#
-			if(segments.to.plot$from[i] == "color1")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[1]#
-				segments.to.plot$from.g[i] = replacement.colors[2]#
-				segments.to.plot$from.b[i] = replacement.colors[3]#
-			}#
-			else if(segments.to.plot$from[i] == "color2")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[4]#
-				segments.to.plot$from.g[i] = replacement.colors[5]#
-				segments.to.plot$from.b[i] = replacement.colors[6]#
-			}#
-			else if(segments.to.plot$from[i] == "color3")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[7]#
-				segments.to.plot$from.g[i] = replacement.colors[8]#
-				segments.to.plot$from.b[i] = replacement.colors[9]#
-			}#
-			else if(segments.to.plot$from[i] == "color4")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[10]#
-				segments.to.plot$from.g[i] = replacement.colors[11]#
-				segments.to.plot$from.b[i] = replacement.colors[12]#
-			}#
-			else if(segments.to.plot$from[i] == "color5")#
-			{#
-				segments.to.plot$from.r[i] = replacement.colors[13]#
-				segments.to.plot$from.g[i] = replacement.colors[14]#
-				segments.to.plot$from.b[i] = replacement.colors[15]#
-			}#
-		}#
-	}#
-#
-	##if only a specific clade within the whole phylogeny is to be plotted, subset segments to plot accordingly#
-	if(missing(subset.node))#
-	{#
-		subset.node <- "none"#
-		print("Retaining entire phylogeny")#
-	}#
-	else if(!missing(subset.node) & subset.to.root==FALSE)#
-	{#
-		keep.branches <- descendants(phylobase.phylo, subset.node, type="all")#
-		keep.species <- descendants(phylobase.phylo, subset.node, type="tips")#
-		segments.to.plot <- segments.to.plot[segments.to.plot$descendant %in% keep.branches, ]#
-	}#
-	else#
-	{#
-		keep.branches <- descendants(phylobase.phylo, subset.node, type="all")#
-		to.root <- ancestors(phylobase.phylo, subset.node, "ALL") ##calling it like this includes also the subset node#
-		keep.branches <- c(rev(to.root), keep.branches)#
-		keep.species <- descendants(phylobase.phylo, subset.node, type="tips")#
-		segments.to.plot <- segments.to.plot[segments.to.plot$descendant %in% keep.branches, ]#
-	}#
-#
-	##switch the order ancestor and descendant appear in data frame for ease of reading#
-	segments.to.plot <- segments.to.plot[ , c("ancestor","descendant","x0","y0","x1","y1","from","to","from.r","from.g","from.b","to.r","to.g","to.b")]#
-#
-	##derive a vector of species' names based on whatever taxa are left to be plotted#
-	name.vector <- phylobase.phylo@label[segments.to.plot$descendant][!is.na(phylobase.phylo@label[segments.to.plot$descendant])]#
-#
-	##derive a vector of node names based on whatever nodes are left to be plotted#
-	node.vector <- segments.to.plot$descendant[segments.to.plot$descendant > length(ape.phylo$tip.label)]#
-#
-	output <- list(ape.phylo=ape.phylo, segments.to.plot=segments.to.plot, name.vector=name.vector, subset.node=subset.node, node.vector=node.vector)#
-#
-	class(output) <- "phylospace"#
-#
-	return(output)#
-}
-library(devtools)#
-install_github("phylospacer", username="eliotmiller")#
-library(phylospacer)
-?phylospace
-library(phylospacer)
-?phylospace
-?plot.phylospace
-phylospace
-plot.phylospace
-?plot.phylospace
-plot.phylospace
-plot_phylospace
-library()
-library(phylospacer)
-quadrant
-phylospacer::quadrant
-phylospacer:::quadrant
-phylomorphospace
-library(phytools)
-phylomorphospace
-12*300
-12*100
-library(devtools)
-install_github("phylospacer", username="eliotmiller")
-library(phylospacer)
-?phylospace
-library(ape)
-tree <- rbdtree(birth=0.1, death=0, Tmax=40)
-plot(tree)
-tree <- drop.tip(tree, tip=51:length(tree$tip.label))
-plot(tree)
-trait1 <- rTraitCont(tree, model="BM")#
-trait2 <- rTraitCont(tree, model="BM")
-trait1
-trait2
-species.niches <- cbind(trait1, trait2)
-nodes.trait1 <- ace(trait1, tree, type="continuous", method="REML")#
-nodes.trait2 <- ace(trait2, tree, type="continuous", method="REML")
-node.niches <- cbind(nodes.trait1$ace, nodes.trait2$ace)#
-#
-#simulate available climate space#
-climate.points <- cbind(rnorm(500, mean=0, sd=1), rnorm(100, mean=0, sd=1))#
-#
-#calculate a phylospace object for the entire phylogeny#
-entire <- phylospace(tree, species.niches=species.niches, node.niches=node.niches)#
-#
-#plot the entire phylospace, with species labels plotted and slightly offset from tips, and with available climate space in background#
-plot(entire, species.labels=TRUE, climate.points=climate.points, label.adjust=0.05, lwd=2)
-entire <- phylospace(tree, species.niches=species.niches, node.niches=node.niches, replacement.colors=c(0,0.1,0,0,0.4,0,0,0.6,0,0,0.8,0,0,1,0))#
-plot(entire, species.labels=TRUE, climate.points=climate.points, label.adjust=0.05, lwd=2)
-black <- c(0,0,0)#
-blue <- c(0,0,1)#
-purple <- c(1,0,1)#
-red <- c(1,0,0)#
-orange <- c(1,0.5,0)#
-entire <- phylospace(tree, species.niches=species.niches, node.niches=node.niches, replacement.colors=c(black, blue, purple, red, orange))#
-plot(entire, species.labels=TRUE, climate.points=climate.points, label.adjust=0.05, lwd=2)
-entire <- phylospace(tree, species.niches=species.niches, node.niches=node.niches, replacement.colors=c(0.95,0.95,0.95, 0.75,0.75,0.75, 0.5,0.5,0.5, 0.25,0.25,0.25, 0,0,0))#
-plot(entire, species.labels=TRUE, climate.points=climate.points, label.adjust=0.05, lwd=2)
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 20#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((1-gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((1-gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 30#
-	max_dist_att <- 50#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-quartz()
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 20#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 30#
-	max_dist_att <- 50#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 30#
-	max_dist_att <- 50#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 50#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 100#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,100),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 100#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 50#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 60#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-library(geiger)
-sim.bdtree(stop="taxa", n=17)
-sim.bdtree(stop="taxa", n=17)->tree
-plot(tree)
-nodelabels()
-6*24+2
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 60#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-start libraries#
-#
-library(ape)#
-library(colorRamps)#
-library(geiger)#
-library(plyr)#
-library(picante)#
-#
-##write a function that will derive a phylogeny, and evolve two traits up it according to#
-##Brownian motion#
-#
-phyloNtraits <- function(no.species)#
-{#
-	require(geiger)#
-	require(ape)#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=no.species)#
-	trait1 <- rTraitCont(tree, model="BM")#
-	trait2 <- rTraitCont(tree, model="BM")#
-#
-	traits <- cbind(trait1, trait2)#
-#
-	output <- list(tree, traits)#
-#
-	return(output)#
-}#
-#
-##write a function that will take the second element of the output of the phyloNtraits#
-##function, and the min and max arena arguments, and output a data frame of scaled traits#
-##where min and max traits are min and max of arena#
-#
-scaler <- function(input.traits, min.arena, max.arena)#
-{#
-	std1 <- (input.traits[,1] - min(input.traits[,1]))/(max(input.traits[,1])-min(input.traits[,1]))#
-	std2 <- (input.traits[,2] - min(input.traits[,2]))/(max(input.traits[,2])-min(input.traits[,2]))#
-	output.trait1 <- (max.arena - min.arena) * std1 + min.arena#
-	output.trait2 <- (max.arena - min.arena) * std2 + min.arena#
-	output.traits <- cbind(output.trait1, output.trait2)#
-	return(output.traits)#
-}#
-#
-##this function should be sped up by removing for loops and inserting new mini functions#
-##then applying them with mapply() or something like that. regardless, what it does is it#
-##takes results of a phyloNtraits() and scaled(), and you tell it what you want the mean#
-##log of individuals on the plot to be. you also have to give it two important parameters:#
-##the length of the vector from which a species X & Y coordinates will drawn, and the sd#
-##of that vector. it then returns a dataframe of species and their X Y coordinates#
-#
-locationSampler <- function(phyloNtraits.results, mean.log.individuals, scaled.results, length.parameter, sd.parameter)#
-{#
-	indivs.per.species <- rlnorm(n=length(phyloNtraits.results[[1]]$tip.label), mean.log.individuals, sdlog=1)#
-	indivs.per.species[indivs.per.species < 0] <- 0#
-#
-	indivs.per.species <- round(indivs.per.species)#
-#
-	individuals <- c()#
-#
-	for(i in 1:length(indivs.per.species))#
-	{#
-		individuals <- append(individuals, rep(phyloNtraits.results[[1]]$tip.label[i], times=indivs.per.species[i]))#
-	}#
-	output <- data.frame(individuals)#
-#
-	X <- c()#
-	Y <- c()#
-	for(i in 1:length(individuals))#
-	{#
-		X.options <- rnorm(n=length.parameter, mean=scaled.results[row.names(scaled.results)==individuals[i], 1], sd=sd.parameter)#
-		X[i] <- sample(X.options, size=1)#
-#
-		Y.options <- rnorm(n=length.parameter, mean=scaled.results[row.names(scaled.results)==individuals[i], 2], sd=sd.parameter)#
-		Y[i] <- sample(Y.options, size=1)#
-	}#
-	output$X <- X#
-	output$Y <- Y#
-	return(output)#
-}#
-#
-###########################################################################################
-##########################DEFINE A BUNCH OF NECESSARY FUNCTIONS############################
-###########################################################################################
-#
-##the following is just a modified version of the original picante mpd function.#
-#
-modified.mpd <- function (samp, dis, abundance.weighted = FALSE) #
-{#
-    N <- dim(samp)[1]#
-    mpd <- numeric(N)#
-    for (i in 1:N) {#
-        sppInSample <- names(samp[i, samp[i, ] > 0])#
-        if (length(sppInSample) > 1) {#
-            sample.dis <- dis[sppInSample, sppInSample]#
-            if (abundance.weighted == "interspecific") {#
-                sample.weights <- t(as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])#
-	            diag(sample.weights) <- 0#
-                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
-            }#
-            else if (abundance.weighted == "intraspecific") {#
-                sample.weights <- t(as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])#
-	            diag(sample.weights) <- diag(sample.weights) - sqrt(diag(sample.weights))#
-                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
-            }#
-            else if (abundance.weighted == "complete") {#
-                sample.weights <- t(as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])#
-                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
-            }#
-            else {#
-                mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])#
-            }#
-        }#
-        else {#
-            mpd[i] <- NA#
-        }#
-    }#
-    mpd#
-}#
-#
-##first define a function that will be used to find the species richness of each row #
-##(i.e. community)#
-#
-lengthNonZeros <- function(input.vector)#
-{#
-	nonZeros <- input.vector[input.vector != 0]#
-	return(length(nonZeros))#
-}#
-#
-##then define a function that will use this function and the modified.mpd function to #
-##generate one block (iteration) of the desired data frame#
-#
-oneIteration <- function(orig.matrix, phy.dists, abundance.method)#
-{#
-	oneBlock <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
-	oneBlock[,1] <- apply(orig.matrix, 1, lengthNonZeros)#
-	oneBlock[,2] <- modified.mpd(orig.matrix, phy.dists, abundance.method)#
-	return(oneBlock)#
-}#
-#
-##define a function that uses the function oneIteration and the picante function #
-##randomizeMatrix to generate null expectations after randomization#
-#
-null.exp <- function(orig.matrix, null.method, phy.dists, abundance.method)#
-{#
-	randomMatrix <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
-	randomMatrix <- randomizeMatrix(orig.matrix, null.method)#
-	results <- oneIteration(randomMatrix, phy.dists, abundance.method)#
-	return(results)#
-}#
-#
-##put all of these functions into an iterator function#
-#
-iterator <- function(orig.matrix, null.method, phy.dists, abundance.method, iterations)#
-{#
-	final.results <- matrix(nrow = iterations * dim(orig.matrix)[1], ncol = 2)#
-	for (i in 1:iterations)#
-	{	#
-		final.results[(i * dim(orig.matrix)[1] - dim(orig.matrix)[1] + 1):(i * dim(orig.matrix)[1]), ] <- null.exp(orig.matrix, null.method, phy.dists, abundance.method)#
-	}#
-	final.results <- as.data.frame(final.results)#
-	names(final.results) <- c("richness","metric")#
-	return(final.results)#
-}#
-#
-##discovered that the iterator function bogs down the memory very quickly #
-##(e.g. at > 1000 iterations). write a function that will write the results to a csv file #
-##outside of R at each iteration#
-#
-null.csv <- function(orig.matrix, null.method, phy.dists, abundance.method, iterations, file.name)#
-{#
-	for (i in 1:iterations)#
-	{#
-		temp.results <- null.exp(orig.matrix, null.method, phy.dists, abundance.method)#
-		if(i == 1)#
-		{#
-			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.2)#
-		{#
-			print("20% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.5)#
-		{#
-			print("50% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else#
-		{#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-	}#
-	print("File saved to working directory")#
-}#
-#
-##also, in case you need to run more iterations at a given richness, e.g. a low richness #
-##that isn't being sampled well with the frequency null, write a function that will subset#
-##each randomized matrix to only those richnesses you want#
-#
-null.exp.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses)#
-{#
-	randomMatrix <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
-	randomMatrix <- randomizeMatrix(orig.matrix, null.method)#
-	results <- oneIteration(randomMatrix, phy.dists, abundance.method)#
-	results <- matrix(results[results[,1] %in% accepted.richnesses, ], ncol=2)#
-	return(results)#
-}#
-#
-##and the iterator version of that. can't define the matrix beforehand for memory saving #
-##purposes because you don't know how often the pertinent richnesses will appear#
-#
-iterator.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses, iterations)#
-{#
-	final.results <- c()#
-	for (i in 1:iterations)#
-	{	#
-		final.results <- rbind(final.results, null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses))#
-	}#
-	final.results <- as.data.frame(final.results)#
-	names(final.results) <- c("richness","metric")#
-	return(final.results)#
-}#
-#
-##make a version that will write straight to csv#
-#
-null.csv.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses, iterations, file.name)#
-{#
-	for (i in 1:iterations)#
-	{#
-		temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses)#
-		if(i == 1)#
-		{#
-			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.2)#
-		{#
-			print("20% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.5)#
-		{#
-			print("50% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else#
-		{#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-	}#
-	print("File saved to working directory")#
-}#
-#
-specific.csv <- function(orig.matrix, null.method, phy.dists, abundance.method, desired.iterations, max.iterations, file.name)#
-{#
-	temp <- oneIteration(orig.matrix, phy.dists, abundance.method)#
-	max.rich <- max(temp[,1])#
-	min.rich <- min(temp[,1])#
-	rich.seq <- min.rich:max.rich#
-	details.table <- matrix(nrow=length(rich.seq), ncol=1, dimnames=list(rich.seq))#
-	details.table[,1] <- 0#
-	temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses=rich.seq)#
-	write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, col.names=c("richness","metric"), sep=",")#
-	details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] <- count(temp.results[,1])$freq#
-	for (i in 1:max.iterations)#
-	{#
-		rich.seq <- row.names(details.table)[details.table[,1] < desired.iterations]#
-		temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses=rich.seq)#
-		write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] <- details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] + count(temp.results[,1])$freq#
-		if(length(rich.seq) == 0)#
-		{#
-			break()#
-		}#
-	}#
-	print("File saved to working directory")#
-	return(details.table)#
-}#
-#
-##define a function to calculate the mean and 95% confidence intervals of the results from#
-##the various iterator functions#
-#
-con.intervals <- function(null.output)#
-{#
-	confidence <- ddply(null.output, "richness", summarise, iterations=length(metric), average=mean(metric), upper=quantile(metric, 0.975, na.rm=TRUE), lower=quantile(metric, 0.025, na.rm=TRUE))#
-	return(confidence)#
-}#
-#
-###########################################################################################
-########################################BEGIN EXAMPLES#####################################
-###########################################################################################
-#
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], 0, 300)#
-#
-inds <- locationSampler(temp, mean.log.individuals=4, scaled, length.parameter=5000, sd.parameter=50)#
-#
-##set number of quadrats#
-#
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-run_simulation <- function(n_default_inds, n_species, n_rounds, x_min, x_max, y_min, y_max, min_dist, max_dist_rep, max_dist_att, min_dist_att, nl_rep, nl_att, max_travel_rep, max_travel_att, steepness, proportion_replaced, offset_rep, offset_att, n_nodes, attract_species = FALSE, plotit=FALSE) {#
-#
-	library(ape)#
-	library(geiger)#
-	output <- list()#
-#
-	####  RUN FROM HERE - NOTHING MORE TO DO#
-#
-	#tree<-rcoal(n_species) # make tree with n_species#
-	tree<-sim.bdtree(b=0.1,d=0,stop="taxa",n=n_species)#
-	output[[1]] <- tree#
-	rstree<-transform(tree,"depth",1) # rescale tree to have root to tip distance of 1.#
-#
-	# Assign abundances to species in tree#
-	ab<-rlnorm(n_species,2,1)#
-	# rescale abundances to be out of n_inds individuals in total#
-	abpercent<-ab/sum(ab)*100#
-	abdata<-round(abpercent/100*n_default_inds)#
-	# replace species that have zero abundance with 1.#
-	zeroes<-which(abdata==0)#
-	abdata[zeroes]<-1#
-#
-	regional.community<-data.frame(species=tree$tip.label,abundance=abdata)#
-	output[[2]] <- regional.community#
-	# branch lengths between pairs of species#
-	phydistmatrix<-sqrt(cophenetic(rstree)/2)#
-	#### RANDOMLY PLACE INDS IN THE ARENA#
-#
-	n_inds <- sum(regional.community[,2])#
-#
-	inds <- data.frame(SPECIES=rep("",n_inds),X=rep(0,n_inds),Y=rep(0,n_inds))#
-	inds$SPECIES <- rep(regional.community[,1],regional.community[,2])#
-	inds$X <- sample(c((x_max):(x_max)),n_inds, replace=T)#
-	inds$Y <- sample(c((y_max):(y_max)),n_inds, replace=T)#
-	inds$X2 <- inds$X#
-	inds$Y2 <- inds$Y#
-	inds$REPULSE <- 0#
-	inds$SPECIES_NUM <- rep(c(1:nrow(phydistmatrix)),regional.community[,2])#
-#
-	#### FUNCTION TO DEFINE ANGLE AND DISTANCE#
-#
-	dir_dist <- function(xy2,xy1) {#
-		distance <- sqrt((xy1[1]-xy2[1])^2 + (xy1[2]-xy2[2])^2)#
-#
-		angle <- atan2((c(xy1[2]-xy2[2])),(c(xy1[1]-xy2[1]))) * 180 / pi#
-		if (angle <0) angle <- 360+angle#
-		angle <- angle-180#
-		if (angle <0) angle <- 360+angle#
-		return(c(distance,angle))#
-	}#
-#
-	#### FUNCTION TO CALCULATE REPULSION / ATTRACTION#
-#
-	repulse <- function(gd, distance, max_dist, nl, steepness) {#
-		if (attract_species) {#
-			repulsion <- max_travel_rep*(1-(steepness/(steepness+exp(-distance-offset_rep+((gd)^nl*max_dist)+1))))#
-		} else {	#
-			repulsion <- max_travel_rep*(1-(steepness/(steepness+exp(-distance-offset_rep+((1-gd)^nl*max_dist)+1))))#
-		}#
-		return(repulsion)#
-	}#
-#
-	attract <- function(gd, distance, max_dist, min_dist, nl, steepness) {#
-		if (attract_species) {#
-			attraction <- -max_travel_att*((steepness/(steepness+exp(-distance-offset_att+min_dist+((gd)^nl*(max_dist-min_dist))+1))))#
-		} else {#
-			attraction <- -max_travel_att*((steepness/(steepness+exp(-distance-offset_att+min_dist+((1-gd)^nl*(max_dist-min_dist))+1))))#
-		}#
-		return(attraction)#
-	}#
-#
-	#### FUNCTION TO CALCULATE NEWX AND NEWY#
-#
-	travel <- function(inputs) {  # inputs <- x, y, angle, repulsion#
-		xy <- inputs[c(1,2)]#
-		angle <- inputs[3]#
-		repulsion <- inputs[4]#
-		if (angle < 180) {#
-			angle <- angle * pi / 180#
-			newx <- xy[1]-repulsion*cos(angle)#
-			newy <- xy[2]-repulsion*sin(angle)#
-		} else {#
-			angle <- angle - 180#
-			angle <- angle * pi / 180#
-			newx <- xy[1]+repulsion*cos(angle)#
-			newy <- xy[2]+repulsion*sin(angle)#
-		}#
-		return(c(newx,newy))#
-#
-	}	#
-#
-	#### FUNCTION TO ROUND TO +- MAX TRAVEL#
-#
-	round_travel <- function(distance,max_travel) {#
-		if (distance < 0) #
-			return(max(distance,-max_travel))#
-		else#
-			return(min(distance,max_travel))#
-	}#
-	#####  FUNCTION TO RETURN i TOP VALUES#
-	max_n <- function(i,X) { #
-		n <- length(unique(X))#
-		which(X == sort(unique(X),partial=n-i)[n-i])#
-	}#
-#
-	if (plotit) {#
-		library(colorRamps)#
-		cols <- blue2green2red(nrow(phydistmatrix))#
-	}#
-#
-	#### GIVE EACH INDIVIDUAL A CHANCE TO RELOCATE#
-	if (plotit == TRUE) print(plot(inds$X,inds$Y,pch=20,cex=0.5, xlim=c(0,x_max),ylim=c(0,y_max), col=cols[inds$SPECIES_NUM]))#
-	for (zz in c(1:n_rounds)) {#
-#
-		for (yy in sample(c(1:nrow(inds)),nrow(inds),replace=FALSE)) {#
-			xy2 <- as.matrix(inds[yy,c(2,3)])#
-			# Put point in center of arena to avoid boundary issues#
-			xy <- xy2#
-			xy[1] <- xy2[1]+(0.5*x_max-xy2[1])#
-			xy[2] <- xy2[2]+(0.5*y_max-xy2[2])#
-			inds$X2 <- inds$X+(0.5*x_max-xy2[1])#
-			inds$Y2 <- inds$Y+(0.5*y_max-xy2[2])#
-			inds$X2[inds$X2 > x_max] <- inds$X2[inds$X2 > x_max]-x_max#
-			inds$Y2[inds$Y2 > y_max] <- inds$Y2[inds$Y2 > y_max]-y_max#
-			inds$X2[inds$X2 < 0] <- inds$X2[inds$X2 < 0]+x_max#
-			inds$Y2[inds$Y2 < 0] <- inds$Y2[inds$Y2 < 0]+y_max#
-			# identify individuals within distance#
-			distances <- sqrt((inds$X2[yy]-inds$X2[-yy])^2 + (inds$Y2[yy]-inds$Y2[-yy])^2)#
-#
-			locals <- inds[-yy,][c(1:length(distances)) %in% sapply(c(0:(n_nodes-1)),max_n,-distances) & distances < max(max_dist_att,max_dist_rep) ,]#
-			if (nrow(locals) > 0) {#
-				# calculate angles, distances and repulsions#
-				distances <- t(apply(as.matrix(locals[,c(4,5)]),1,dir_dist,xy))#
-				repulsions <- repulse(phydistmatrix[inds$SPECIES_NUM[yy],locals$SPECIES_NUM],distances[,1],rep(max_dist_rep,nrow(locals)),rep(nl_rep,nrow(locals)),rep(steepness,nrow(locals)))#
-				attractions <- attract(phydistmatrix[inds$SPECIES_NUM[yy],locals$SPECIES_NUM],distances[,1],rep(max_dist_att,nrow(locals)),rep(min_dist_att,nrow(locals)),rep(nl_att,nrow(locals)),rep(steepness,nrow(locals)))#
-				repulsions <- repulsions + attractions#
-				#reps <- sapply(c(0:min(5,nrow(locals))),max_n,repulsions)#
-				reps <- c(1:length(repulsions))#
-				# calculate new xs and ys#
-				inputs <- cbind(rep(xy[1],length(reps)),rep(xy[2],length(reps)),distances[reps,2],repulsions[reps])#
-				travels_rep <- t(apply(inputs,1,travel))#
-				x_travel_rep <- round_travel(sum(travels_rep[,1] - (0.5*x_max)), max_travel_rep)#
-				y_travel_rep <- round_travel(sum(travels_rep[,2] - (0.5*y_max)), max_travel_rep)#
-				inds$X[yy] <- inds$X[yy] + sum(x_travel_rep)#
-				inds$Y[yy] <- inds$Y[yy] + sum(y_travel_rep)#
-				inds$X2[yy] <- inds$X2[yy] + sum(x_travel_rep)#
-				inds$Y2[yy] <- inds$Y2[yy] + sum(y_travel_rep)#
-				if (inds$X[yy] < 0) #
-					inds$X[yy] <- x_max+(sum(x_travel_rep))-xy2[1]#
-				if (inds$X[yy] > x_max)#
-					inds$X[yy] <- inds$X[yy]-x_max#
-				if (inds$Y[yy] < 0) #
-					inds$Y[yy] <- y_max+(sum(y_travel_rep))-xy2[2]#
-				if (inds$Y[yy] > y_max)#
-					inds$Y[yy] <- inds$Y[yy]-y_max#
-			} #
-		}#
-		if (plotit) print(plot(inds$X,inds$Y,pch=20,cex=0.5, xlim=c(0,x_max),ylim=c(0,y_max), col=cols[inds$SPECIES_NUM]))#
-	}#
-	output[[3]] <- inds#
-	return(output)#
-}
-CURVE PARAMETERS & PLOT#
-#
-n_nodes <- 10  ## Number of nodes to use in calculations (pics n strongest influence)#
-#
-max_travel_rep <- 10#
-max_travel_att <- 5#
-#
-max_dist_rep <- 75#
-nl_rep <- 5 #non-linearity#
-steepness <- 1#
-proportion_replaced <- 0#
-offset_rep <- 2  ## moves left or right in reverse direction#
-#
-x <- seq(0,50,0.2)#
-plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-for (gd in seq(0,1,0.1)) {#
-	y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((1-gd)^nl_rep*max_dist_rep)+1))))#
-	lines(x,y)#
-	text(1.2+((1-gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-}#
-min_dist_att <- 20#
-max_dist_att <- 70#
-nl_att <- 5 #non-linearity#
-steepness <- 1#
-proportion_replaced <- 0#
-offset_att <- 2  ## moves left or right in reverse direction#
-#
-for (gd in seq(0,1,0.1)) {#
-	y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+((1-gd)^nl_att*(max_dist_att-min_dist_att))+1))))#
-	lines(x,y)#
-	text(1.2+((1-gd)^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-}#
-# SIMULATION PARAMETERS#
-#
-n_rounds <- 10#
-#
-x_min <- 0#
-x_max <- 400#
-y_min <- 0#
-y_max <- 400#
-#
-n_default_inds <- 500#
-#
-n_species <- 20
-run_simulation(n_default_inds, n_species, n_rounds, x_min, x_max, y_min, y_max, min_dist, max_dist_rep, max_dist_att, min_dist_att, nl_rep, nl_att, max_travel_rep, max_travel_att, steepness, proportion_replaced, offset_rep, offset_att, n_nodes, attract_species = T, plotit=T)
-library(ape)#
-library(colorRamps)#
-library(geiger)#
-library(plyr)#
-library(picante)#
-#
-##write a function that will derive a phylogeny, and evolve two traits up it according to#
-##Brownian motion#
-#
-phyloNtraits <- function(no.species)#
-{#
-	require(geiger)#
-	require(ape)#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=no.species)#
-	trait1 <- rTraitCont(tree, model="BM")#
-	trait2 <- rTraitCont(tree, model="BM")#
-#
-	traits <- cbind(trait1, trait2)#
-#
-	output <- list(tree, traits)#
-#
-	return(output)#
-}
-write a function that will take the second element of the output of the phyloNtraits#
-##function, and the min and max arena arguments, and output a data frame of scaled traits#
-##where min and max traits are min and max of arena#
-#
-scaler <- function(input.traits, min.arena, max.arena)#
-{#
-	std1 <- (input.traits[,1] - min(input.traits[,1]))/(max(input.traits[,1])-min(input.traits[,1]))#
-	std2 <- (input.traits[,2] - min(input.traits[,2]))/(max(input.traits[,2])-min(input.traits[,2]))#
-	output.trait1 <- (max.arena - min.arena) * std1 + min.arena#
-	output.trait2 <- (max.arena - min.arena) * std2 + min.arena#
-	output.traits <- cbind(output.trait1, output.trait2)#
-	return(output.traits)#
-}#
-#
-##this function should be sped up by removing for loops and inserting new mini functions#
-##then applying them with mapply() or something like that. regardless, what it does is it#
-##takes results of a phyloNtraits() and scaled(), and you tell it what you want the mean#
-##log of individuals on the plot to be. you also have to give it two important parameters:#
-##the length of the vector from which a species X & Y coordinates will drawn, and the sd#
-##of that vector. it then returns a dataframe of species and their X Y coordinates#
-#
-locationSampler <- function(phyloNtraits.results, mean.log.individuals, scaled.results, length.parameter, sd.parameter)#
-{#
-	indivs.per.species <- rlnorm(n=length(phyloNtraits.results[[1]]$tip.label), mean.log.individuals, sdlog=1)#
-	indivs.per.species[indivs.per.species < 0] <- 0#
-#
-	indivs.per.species <- round(indivs.per.species)#
-#
-	individuals <- c()#
-#
-	for(i in 1:length(indivs.per.species))#
-	{#
-		individuals <- append(individuals, rep(phyloNtraits.results[[1]]$tip.label[i], times=indivs.per.species[i]))#
-	}#
-	output <- data.frame(individuals)#
-#
-	X <- c()#
-	Y <- c()#
-	for(i in 1:length(individuals))#
-	{#
-		X.options <- rnorm(n=length.parameter, mean=scaled.results[row.names(scaled.results)==individuals[i], 1], sd=sd.parameter)#
-		X[i] <- sample(X.options, size=1)#
-#
-		Y.options <- rnorm(n=length.parameter, mean=scaled.results[row.names(scaled.results)==individuals[i], 2], sd=sd.parameter)#
-		Y[i] <- sample(Y.options, size=1)#
-	}#
-	output$X <- X#
-	output$Y <- Y#
-	return(output)#
-}#
-#
-###########################################################################################
-##########################DEFINE A BUNCH OF NECESSARY FUNCTIONS############################
-###########################################################################################
-#
-##the following is just a modified version of the original picante mpd function.#
-#
-modified.mpd <- function (samp, dis, abundance.weighted = FALSE) #
-{#
-    N <- dim(samp)[1]#
-    mpd <- numeric(N)#
-    for (i in 1:N) {#
-        sppInSample <- names(samp[i, samp[i, ] > 0])#
-        if (length(sppInSample) > 1) {#
-            sample.dis <- dis[sppInSample, sppInSample]#
-            if (abundance.weighted == "interspecific") {#
-                sample.weights <- t(as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])#
-	            diag(sample.weights) <- 0#
-                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
-            }#
-            else if (abundance.weighted == "intraspecific") {#
-                sample.weights <- t(as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])#
-	            diag(sample.weights) <- diag(sample.weights) - sqrt(diag(sample.weights))#
-                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
-            }#
-            else if (abundance.weighted == "complete") {#
-                sample.weights <- t(as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
-                  drop = FALSE])#
-                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
-            }#
-            else {#
-                mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])#
-            }#
-        }#
-        else {#
-            mpd[i] <- NA#
-        }#
-    }#
-    mpd#
-}#
-#
-##first define a function that will be used to find the species richness of each row #
-##(i.e. community)#
-#
-lengthNonZeros <- function(input.vector)#
-{#
-	nonZeros <- input.vector[input.vector != 0]#
-	return(length(nonZeros))#
-}#
-#
-##then define a function that will use this function and the modified.mpd function to #
-##generate one block (iteration) of the desired data frame#
-#
-oneIteration <- function(orig.matrix, phy.dists, abundance.method)#
-{#
-	oneBlock <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
-	oneBlock[,1] <- apply(orig.matrix, 1, lengthNonZeros)#
-	oneBlock[,2] <- modified.mpd(orig.matrix, phy.dists, abundance.method)#
-	return(oneBlock)#
-}#
-#
-##define a function that uses the function oneIteration and the picante function #
-##randomizeMatrix to generate null expectations after randomization#
-#
-null.exp <- function(orig.matrix, null.method, phy.dists, abundance.method)#
-{#
-	randomMatrix <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
-	randomMatrix <- randomizeMatrix(orig.matrix, null.method)#
-	results <- oneIteration(randomMatrix, phy.dists, abundance.method)#
-	return(results)#
-}#
-#
-##put all of these functions into an iterator function#
-#
-iterator <- function(orig.matrix, null.method, phy.dists, abundance.method, iterations)#
-{#
-	final.results <- matrix(nrow = iterations * dim(orig.matrix)[1], ncol = 2)#
-	for (i in 1:iterations)#
-	{	#
-		final.results[(i * dim(orig.matrix)[1] - dim(orig.matrix)[1] + 1):(i * dim(orig.matrix)[1]), ] <- null.exp(orig.matrix, null.method, phy.dists, abundance.method)#
-	}#
-	final.results <- as.data.frame(final.results)#
-	names(final.results) <- c("richness","metric")#
-	return(final.results)#
-}#
-#
-##discovered that the iterator function bogs down the memory very quickly #
-##(e.g. at > 1000 iterations). write a function that will write the results to a csv file #
-##outside of R at each iteration#
-#
-null.csv <- function(orig.matrix, null.method, phy.dists, abundance.method, iterations, file.name)#
-{#
-	for (i in 1:iterations)#
-	{#
-		temp.results <- null.exp(orig.matrix, null.method, phy.dists, abundance.method)#
-		if(i == 1)#
-		{#
-			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.2)#
-		{#
-			print("20% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.5)#
-		{#
-			print("50% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else#
-		{#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-	}#
-	print("File saved to working directory")#
-}#
-#
-##also, in case you need to run more iterations at a given richness, e.g. a low richness #
-##that isn't being sampled well with the frequency null, write a function that will subset#
-##each randomized matrix to only those richnesses you want#
-#
-null.exp.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses)#
-{#
-	randomMatrix <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
-	randomMatrix <- randomizeMatrix(orig.matrix, null.method)#
-	results <- oneIteration(randomMatrix, phy.dists, abundance.method)#
-	results <- matrix(results[results[,1] %in% accepted.richnesses, ], ncol=2)#
-	return(results)#
-}#
-#
-##and the iterator version of that. can't define the matrix beforehand for memory saving #
-##purposes because you don't know how often the pertinent richnesses will appear#
-#
-iterator.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses, iterations)#
-{#
-	final.results <- c()#
-	for (i in 1:iterations)#
-	{	#
-		final.results <- rbind(final.results, null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses))#
-	}#
-	final.results <- as.data.frame(final.results)#
-	names(final.results) <- c("richness","metric")#
-	return(final.results)#
-}#
-#
-##make a version that will write straight to csv#
-#
-null.csv.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses, iterations, file.name)#
-{#
-	for (i in 1:iterations)#
-	{#
-		temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses)#
-		if(i == 1)#
-		{#
-			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.2)#
-		{#
-			print("20% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else if(i/iterations == 0.5)#
-		{#
-			print("50% complete")#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-		else#
-		{#
-			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		}#
-	}#
-	print("File saved to working directory")#
-}#
-#
-specific.csv <- function(orig.matrix, null.method, phy.dists, abundance.method, desired.iterations, max.iterations, file.name)#
-{#
-	temp <- oneIteration(orig.matrix, phy.dists, abundance.method)#
-	max.rich <- max(temp[,1])#
-	min.rich <- min(temp[,1])#
-	rich.seq <- min.rich:max.rich#
-	details.table <- matrix(nrow=length(rich.seq), ncol=1, dimnames=list(rich.seq))#
-	details.table[,1] <- 0#
-	temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses=rich.seq)#
-	write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, col.names=c("richness","metric"), sep=",")#
-	details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] <- count(temp.results[,1])$freq#
-	for (i in 1:max.iterations)#
-	{#
-		rich.seq <- row.names(details.table)[details.table[,1] < desired.iterations]#
-		temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses=rich.seq)#
-		write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
-		details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] <- details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] + count(temp.results[,1])$freq#
-		if(length(rich.seq) == 0)#
-		{#
-			break()#
-		}#
-	}#
-	print("File saved to working directory")#
-	return(details.table)#
-}#
-#
-##define a function to calculate the mean and 95% confidence intervals of the results from#
-##the various iterator functions#
-#
-con.intervals <- function(null.output)#
-{#
-	confidence <- ddply(null.output, "richness", summarise, iterations=length(metric), average=mean(metric), upper=quantile(metric, 0.975, na.rm=TRUE), lower=quantile(metric, 0.025, na.rm=TRUE))#
-	return(confidence)#
-}
-temp <- phyloNtraits(50)
-temp
-scaled <- scaler(temp[[2]], 0, 300)
-scaled
-inds <- locationSampler(temp, mean.log.individuals=4, scaled, length.parameter=5000, sd.parameter=50)
-head(inds)
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-quadrat_bounds <- matrix(0,nrow=n_quadrats,ncol=4)#
-colnames(quadrat_bounds) <- c("X1","X2","Y1","Y2")#
-#
-##run this for loop with the arena plot still active#
-#
-for (i in c(1:n_quadrats)) {#
-#
-	repeat {#
-	OK <- TRUE#
-	quadrat_bounds[i,1] <- sample(c(0:(x_max-quadrat_size)),1)#
-	quadrat_bounds[i,2] <- quadrat_bounds[i,1] + quadrat_size#
-	quadrat_bounds[i,3] <- sample(c(0:(y_max-quadrat_size)),1)#
-	quadrat_bounds[i,4] <- quadrat_bounds[i,3] + quadrat_size#
-	if (i > 1) {#
-	for (j in c(1:(i-1))) {#
-		if (any(#
-			quadrat_bounds[i,1] %in% c(quadrat_bounds[j,1]:quadrat_bounds[j,2]) & quadrat_bounds[i,3] %in% c(quadrat_bounds[j,3]:quadrat_bounds[j,4]),#
-			quadrat_bounds[i,2] %in% c(quadrat_bounds[j,1]:quadrat_bounds[j,2]) & quadrat_bounds[i,3] %in% c(quadrat_bounds[j,3]:quadrat_bounds[j,4]),#
-			quadrat_bounds[i,1] %in% c(quadrat_bounds[j,1]:quadrat_bounds[j,2]) & quadrat_bounds[i,4] %in% c(quadrat_bounds[j,3]:quadrat_bounds[j,4]),#
-			quadrat_bounds[i,2] %in% c(quadrat_bounds[j,1]:quadrat_bounds[j,2]) & quadrat_bounds[i,4] %in% c(quadrat_bounds[j,3]:quadrat_bounds[j,4])#
-			)) {#
-			OK <- FALSE#
-		}#
-	}#
-	}#
-	if (OK == TRUE) {#
-		break;#
-	}#
-	}#
-	# Plot quadrats#
-	polygon(c(quadrat_bounds[i,1],quadrat_bounds[i,2],quadrat_bounds[i,2],quadrat_bounds[i,1]),c(quadrat_bounds[i,3],quadrat_bounds[i,3],quadrat_bounds[i,4],quadrat_bounds[i,4]))#
-#
-}#
-#
-#####  RECORD WHATS IN QUADRATS, RETURNING A DATA FRAME#
-#
-species <- unique(inds$individuals)#
-com.results <- matrix(0, ncol=n_quadrats, nrow=length(species))#
-rownames(com.results) <- species#
-#
-for (i in c(1:n_quadrats)) {#
-#
-	in_quadrat <- inds$individuals[inds$X >= quadrat_bounds[i,1] & inds$X <= quadrat_bounds[i,2] & inds$Y >= quadrat_bounds[i,3] & inds$Y <= quadrat_bounds[i,4]]#
-#
-	for (j in c(1:length(species))) {#
-		com.results[j,i] <- sum(in_quadrat == species[j])#
-	}#
-#
-}#
-#
-##transpose the results into picante format#
-#
-cdm <- t(com.results)
-null.csv(cdm, "richness", phydistmatrix, "FALSE", 100, "cluster_rich_noAbund.csv")#
-#
-null.csv(cdm, "richness", phydistmatrix, "interspecific", 100, "cluster_rich_inter.csv")#
-#
-null.csv(cdm, "richness", phydistmatrix, "intraspecific", 100, "cluster_rich_intra.csv")#
-#
-null.csv(cdm, "richness", phydistmatrix, "complete", 100, "cluster_rich_complete.csv")#
-#
-##read the simulations in #
-#
-noAbund.simulations <- read.csv("cluster_rich_noAbund.csv")#
-#
-inter.simulations <- read.csv("cluster_rich_inter.csv")#
-#
-intra.simulations <- read.csv("cluster_rich_intra.csv")#
-#
-complete.simulations <- read.csv("cluster_rich_complete.csv")#
-#
-##assign names necessary for con.intervals() to work right below#
-#
-names(noAbund.simulations) <- c("richness","metric")#
-#
-names(inter.simulations) <- c("richness","metric")#
-#
-names(intra.simulations) <- c("richness","metric")#
-#
-names(complete.simulations) <- c("richness","metric")#
-#
-##run the con intervals function on it#
-#
-noAbundCIs <- con.intervals(noAbund.simulations)#
-#
-interCIs <- con.intervals(inter.simulations)#
-#
-intraCIs <- con.intervals(intra.simulations)#
-#
-completeCIs <- con.intervals(complete.simulations)#
-#
-##calculate non-abundance weighted, interspecific and complete MPDs#
-#
-noAbundMPD <- modified.mpd(cdm, phydistmatrix, "FALSE")#
-#
-interMPD <- modified.mpd(cdm, phydistmatrix, "interspecific")#
-#
-intraMPD <- modified.mpd(cdm, phydistmatrix, "intraspecific")#
-#
-completeMPD <- modified.mpd(cdm, phydistmatrix, "complete")#
-#
-##calculate richness of each quadrat#
-#
-richness <- apply(cdm, 1, lengthNonZeros)#
-#
-##try plotting on the empirical results. here for noAbund#
-#
-plot(noAbundCIs$upper~noAbundCIs$richness, xlab="Richness", ylab="NAW MPD", ylim=c(min(noAbundCIs$lower, noAbundMPD),max(noAbundCIs$upper, noAbundMPD)))#
-#
-points(noAbundCIs$lower~noAbundCIs$richness)#
-#
-points(noAbundMPD~richness, pch=20, cex=2)
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], 0, 300)#
-#
-inds <- locationSampler(temp, mean.log.individuals=4, scaled, length.parameter=5000, sd.parameter=50)#
-#
-##set number of quadrats#
-#
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], 0, 300)#
-#
-inds <- locationSampler(temp, mean.log.individuals=3, scaled, length.parameter=5000, sd.parameter=50)#
-#
-##set number of quadrats#
-#
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], 0, 300)#
-#
-inds <- locationSampler(temp, mean.log.individuals=3, scaled, length.parameter=10000, sd.parameter=50)#
-#
-##set number of quadrats#
-#
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], 0, 300)#
-#
-inds <- locationSampler(temp, mean.log.individuals=3, scaled, length.parameter=10000, sd.parameter=5)#
-#
-##set number of quadrats#
-#
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], 0, 300)#
-#
-inds <- locationSampler(temp, mean.log.individuals=4, scaled, length.parameter=5000, sd.parameter=50)#
-#
-##set number of quadrats#
-#
-n_quadrats <- 15#
-#
-##set quadrat size#
-#
-quadrat_size <-50 ##note that for the repulsion run we only used size=30 here!#
-#
-# Set the arena size, make sure this matches with the simulation's arena size#
-x_min <- 0#
-x_max <- 300#
-y_min <- 0#
-y_max <- 300#
-#
-##define a genetic distance matrix#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-##define a color for each species#
-#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-##plot the arena. don't close the window#
-#
-plot(inds$X, inds$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[inds$individuals])
-plot(interCIs$upper~interCIs$richness, xlab="Richness", ylab="Inter MPD", ylim=c(min(interCIs$lower, interMPD),max(interCIs$upper, interMPD)))#
-#
-points(interCIs$lower~interCIs$richness)#
-#
-points(interMPD~richness, pch=20, cex=2)#
-#
-##here for intraspecific
-plot(intraCIs$upper~intraCIs$richness, xlab="Richness", ylab="Intra MPD", ylim=c(min(intraCIs$lower, intraMPD),max(intraCIs$upper, intraMPD)))#
-#
-points(intraCIs$lower~intraCIs$richness)#
-#
-points(intraMPD~richness, pch=20, cex=2)
-plot(completeCIs$upper~completeCIs$richness, xlab="Richness", ylab="Complete MPD", ylim=c(min(completeCIs$lower, completeMPD),max(completeCIs$upper, completeMPD)))#
-#
-points(completeCIs$lower~completeCIs$richness)#
-#
-points(completeMPD~richness, pch=20, cex=2)
-library(devtools)#
-install_github("ecoPDcorr", username="eliotmiller")#
-library(ecoPDcorr)
-library(devtools)
-install_github("ecoPDcorr", username="eliotmiller")#
-#
-install_github("metricTester", username="eliotmiller")
-library(metricTester)
-repulsing <- FALSE # Change this to FALSE for clustering#
-#
-if (repulsing) {#
-	max_dist <- 30 # maximum distance at which an individual is affected by neighbouring individuals.#
-	nl <- 3 #non-linearity#
-	max_travel <- 5 # maximum distance an individual will move in a single iteration of the model. This is what is called repulsion and reported for the y-axis of the plot. Change this to a smaller value if I want the individuals to make smaller distance moves in each run, and so be more influenced by the composition of their neighbourhodd through time. With a high number an individual can make a large distance move, and when doing this it does not take into consideration the neighbourhood where it will end up. The only decision in this model is how far and in what direction to move away from the individual's current neighbourhood, i.e. only consider current and not potential neighbours.#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,max_dist,0.2)#
-	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel*(1-(steepness/(steepness+exp(-x-offset+((gd)^nl*max_dist)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl*max_dist)-offset,0.5*max_travel,gd,srt=-74)#
-	}#
-} else {#
-	min_dist <- 0#
-	max_dist <- 10#
-	nl <- 0.1 #non-linearity#
-	max_travel <- 5#
-	steepness <- 0.8#
-	proportion_replaced <- 0#
-	offset <- 0  ## moves left or right in reverse direction#
-#
-	x <- seq(0,max_dist,0.2)#
-	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Attraction",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel*((steepness/(steepness+exp(-x-offset+min_dist+(gd^nl*(max_dist-min_dist))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl*(max_dist-min_dist))-offset+min_dist,0.5*max_travel,gd,srt=-74)#
-	}#
-}
-repulsing <- FALSE # Change this to FALSE for clustering#
-#
-if (repulsing) {#
-	max_dist <- 30 # maximum distance at which an individual is affected by neighbouring individuals.#
-	nl <- 3 #non-linearity#
-	max_travel <- 5 # maximum distance an individual will move in a single iteration of the model. This is what is called repulsion and reported for the y-axis of the plot. Change this to a smaller value if I want the individuals to make smaller distance moves in each run, and so be more influenced by the composition of their neighbourhodd through time. With a high number an individual can make a large distance move, and when doing this it does not take into consideration the neighbourhood where it will end up. The only decision in this model is how far and in what direction to move away from the individual's current neighbourhood, i.e. only consider current and not potential neighbours.#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,max_dist,0.2)#
-	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel*(1-(steepness/(steepness+exp(-x-offset+((gd)^nl*max_dist)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl*max_dist)-offset,0.5*max_travel,gd,srt=-74)#
-	}#
-} else {#
-	min_dist <- 0#
-	max_dist <- 10#
-	nl <- 0.5 #non-linearity#
-	max_travel <- 5#
-	steepness <- 0.8#
-	proportion_replaced <- 0#
-	offset <- 0  ## moves left or right in reverse direction#
-#
-	x <- seq(0,max_dist,0.2)#
-	plot(NULL,ylim=c(0,max_travel),xlim=c(0,max_dist),xlab="Distance",ylab="Attraction",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel*((steepness/(steepness+exp(-x-offset+min_dist+(gd^nl*(max_dist-min_dist))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl*(max_dist-min_dist))-offset+min_dist,0.5*max_travel,gd,srt=-74)#
-	}#
-}
-max_travel_rep <- 8#
-	max_travel_att <- 4#
-#
-	max_dist_rep <- 30#
-	nl_rep <- 2 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_rep <- 2  ## moves left or right in reverse direction#
-#
-	x <- seq(0,50,0.2)#
-	plot(NULL,ylim=c(-max_travel_att,max_travel_rep),xlim=c(0,50),xlab="Distance",ylab="Repulsion",xaxs="i",yaxs="i")#
-	for (gd in seq(0,1,0.1)) {#
-		y <- max_travel_rep*(1-(steepness/(steepness+exp(-x-offset_rep+((gd)^nl_rep*max_dist_rep)+1))))#
-		lines(x,y)#
-		text(1.2+((gd)^nl_rep*max_dist_rep)-offset_rep,0.5*max_travel_rep,gd,srt=-74)#
-	}#
-	min_dist_att <- 10#
-	max_dist_att <- 60#
-	nl_att <- 0.5 #non-linearity#
-	steepness <- 1#
-	proportion_replaced <- 0#
-	offset_att <- 0  ## moves left or right in reverse direction#
-#
-	for (gd in seq(0,1,0.1)) {#
-		y <- -max_travel_att*((steepness/(steepness+exp(-x-offset_att+min_dist_att+(gd^nl_att*(max_dist_att-min_dist_att))+1))))#
-		lines(x,y)#
-		text(1.2+(gd^nl_att*(max_dist_att-min_dist_att))-offset_att+min_dist_att,-0.5*max_travel_att,gd,srt=-74)#
-	}
-library(metricTester)
-?simulator
-proc_time()
-proc.time()
-?proc.time
-3905/10
-390/60
-library(devtools)
-install_github("ecoPDcorr", username="eliotmiller")#
-#
-install_github("metricTester", username="eliotmiller")#
-#
-library(ape)#
-library(colorRamps)#
-library(plyr)#
-library(grid)#
-library(Rcpp)#
-library(picante)#
-#
-library(metricTester)
-system.time(simulator(no.species=100, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, quadrat_size=50, mean.log.individuals=4, length.parameter=10000, sd.parameter=45, null.method="richness", no.randomizations=1, expectation=1, wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv", output.file="results.csv"))
-21*1000
-21000/60
-350/60
-?mclapply
-??mclapply
-library(parallel)
-?mclapply
-simplify2array(mclapply(rep(4, 5), rnorm))
-set.seed(1)
-simplify2array(mclapply(rep(4, 5), rnorm, mc.preschedule = FALSE,#
-                mc.set.seed = FALSE))
-test <- list()
-?quadratContents
-test
-test[[1]]
-test
-test[[1]] <- "hold"
-test
-test[[1]]$other
-test[[1]]$other <- "test"
-test
-library(geiger)#
-library(colorRamps)#
-#
-test <- list()#
-#
-for(i in 1:10)#
-{#
-	temp <- phyloNtraits(50)#
-#
-	test[[i]][1] <- temp[[1]]#
-	scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-	positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-	bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-	temp.cdm <- quadratContents(positions, bounds)#
-#
-	test[[i]][2] <- t(temp.cdm)#
-}
-test <- list()
-for(i in 1:10)#
-{#
-	temp <- phyloNtraits(50)#
-#
-	test[[i]][1] <- temp[[1]]#
-	scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-	positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-	bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-	temp.cdm <- quadratContents(positions, bounds)#
-#
-	test[[i]][2] <- t(temp.cdm)#
-}
-test <- list()#
-#
-for(i in 1:10)#
-{#
-	temp <- phyloNtraits(50)#
-#
-	test[[i]] <- temp[[1]]#
-	scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-	positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-	bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-	temp.cdm <- quadratContents(positions, bounds)#
-#
-	test[[i]] <- t(temp.cdm)#
-}
-test
-test <- list()#
-#
-for(i in 1:2)#
-{#
-	temp <- phyloNtraits(50)#
-#
-	test[i] <- temp[[1]]#
-	scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-	positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-	bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-	temp.cdm <- quadratContents(positions, bounds)#
-#
-	test[i] <- t(temp.cdm)#
-}
-test
-test <- list()#
-#
-for(i in 1:2)#
-{#
-	temp <- phyloNtraits(50)#
-#
-	test[i][[1]] <- temp[[1]]#
-	scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-	positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-	bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-	temp.cdm <- quadratContents(positions, bounds)#
-#
-	test[i][[2]] <- t(temp.cdm)#
-}
-test
-n = c(2, 3, 5) #
-s = c("aa", "bb", "cc", "dd", "ee") #
-b = c(TRUE, FALSE, TRUE, FALSE, FALSE) #
-x = list(n, s, b, 3)   # x contains copies of n, s, b
-x
-test <- list()#
-#
-for(i in 1:2)#
-{#
-	temp <- phyloNtraits(50)#
-#
-	tree <- temp[[1]]#
-	scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-	positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-	bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-	temp.cdm <- quadratContents(positions, bounds)#
-#
-	cdm <- t(temp.cdm)#
-#
-	test[[i]] <- list(tree, cdm)#
-}
-test
-?mclapply
-mclapply(test, allMetrics)
-mclapply(test, allMetrics, tree=[1], picante_cdm=[2])
-test
-test[[1]]
-test[[1]]$tree
-test[[1]][1]
-lapply(test, allMetrics,)
-lapply(test, allMetrics, picante_cdm=test[2])
-newFunction <- function(tree)#
-{#
-	print(tree$tip.label)#
-}
-newFunction(test[[1]])
-newFunction(test[[1]][1])
-test[[1]]
-test[[1]][1]
-test[[1]][1]$tip.label
-test[[1]][1]$tip.labels
-test[[1]][[1]]$tip.label
-newFunction(test[[1]][[1]])
-lapply(test, newFunction, tree=[[1]])
-lapply(test, newFunction, tree=[1])
-lapply(test, newFunction)
-test <- list(tree, tree)
-test
-lapply(test, newFunction)
-newFunction
-lapply(test, newFunction)->test2
-test2
-unlist(lapply(test, newFunction))
-unlist(lapply(test, newFunction))->test2
-test2
-profile(simulator())
-?simulator
-profile(simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", no.randomizations=1, expectation=1, wrong=2, no.metrics=19,#
-iterations=1, temp.file="deleteme.csv", output.file="confused.csv")#
-)
-library(metricTester)
-simulator
-quadratContents
-1600/25
-64*3.
-64*3.5
-877/5
-61*5
-example
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+cdm
+allMetrics(tree, cdm)
+allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
 load_all()
-library("devtools")#
+load_all()
+allMetricsNull.csv
+allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
+allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
+allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
+allMetricsNull.csv(tree, cdm, "richness", concatBYrichness=TRUE, 1, "delete.csv")
+allMetricsNull.csv(tree, cdm, "richness", concatBYrichness=FALSE, 1, "delete.csv")
+cdm
+dim(cdm)
+dim(cdm)[1]
+load_all()
+allMetrics
+dev_help("allMetrics")
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-#install_github("devtools")#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
 #
-#install_github("roxygen3")#
-#
-library("roxygen3")
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+cdm
+results <- allMetrics(tree, cdm)
+results
+load_all()
+simulateComm(tree,10,25,sim.abundances)
+simulateComm(tree,10,25,sim.abundances)
+simulateComm(tree,10,25,sim.abundances)
+simulateComm(tree,10,25,sim.abundances)
+load_all()
+load_all()
+simulateComm(tree,10,25,sim.abundances)
+cdm <- simulateComm(tree,10,25,sim.abundances)
+cdm
+allMetrics(tree,cdm)
+allMetricsNull.csv(tree,cdm,"richness",1,"delete.csv")
+load_all()
+dev_help("summaries")
+possibilities <- read.csv("delete.csv")
+possibilites
+possibilities
+load_all()
+dev_help("summaries")
+expectations <- ddply(possibilities, .(richness), summaries)
+library(plyr)
+expectations <- ddply(possibilities, .(richness), summaries)
+expectations <- ddply(possibilities, .(richness), summaries)
+load_all()
+expectations <- ddply(possibilities, .(richness), summaries)
+expectations
+expectations <- ddply(possibilities, .(metricNames), summaries)
+head(possibilities)
+expectations <- ddply(possibilities, .(quadratNames), summaries)
+expectations
 load_all()
 document()
-check()
+document()
+allMetrics(tree,cdm)
+allMetricsNull.csv(tree,cdm,"frequency",2,"delete.csv")
+simulations
+simulations <- read.csv("delete.csv")
+summ.results <- ddply(simulations, .(richness), summaries)
+summ.results
+head(simulations)
+allMetrics(tree,cdm)
+summ.results <- ddply(simulations, .(quadratNames), summaries)
+summ.results
+summ.results <- ddply(simulations, .(richness), summaries)
+summ.results
+allMetricsNull.csv(tree,cdm,"frequency",5,"delete.csv")
+simulations <- read.csv("delete.csv")
+head(simulations)
+summ.results <- ddply(simulations, .(richness), summaries)
+summ.results
+summ.results <- ddply(simulations, .(quadratNames), summaries)
+summ.results
+observed <- allMetrics(tree, cdm)
+observed
+merge(observed, summ.results, sort=FALSE)
+head(observed)
+head(summ.results)
+dim(observed)
+dim(summ.results)
+merge(observed, summ.results, sort=FALSE)
+ddply(simulations, .(richness), summaries)
+ddply(simulations, .(richness), summaries)->summ.results
+dim(summ.results)
+merge(observed, summ.results, sort=FALSE)
+cdm
+apply(cdm,1,lengthNonZeros)
+simulateComm(tree,10,25,sim.abundances)
+simulateComm(tree,10,25,sim.abundances)->cdm
+apply(cdm,1,lengthNonZeros)
+dev_help("quadratPlacer")
+dev_help("quadratContents")
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)#
+#
+#this community data matrix is not in picante format, use t()#
+temp.cdm <- quadratContents(positions, bounds)
+temp.cdm
+cdm <- t(temp.cdm)
+cdm
+quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
+#
+		dimnames(cdm)[[1]] <- quadratNames
+cdm
+rm(quadratNames)
+cdm
+apply(cdm, 1, lengthNonZeros)
+plot(temp[[2]])
+plot(temp[[1]])
+tree <- temp[[1]]
+allMetricsNull.csv(tree, cdm, "frequency", 5, "delete.csv")
+simulations <- read.csv("delete.csv")
+ddply(simulations, .(richness), summaries)
+ddply(simulations, .(quadratNames), summaries)
+summ.results <- ddply(simulations, .(richness), summaries)
+dim(summ.results)
+observed <- allMetrics(tree, cdm)
+dim(observed)
+dim(summ.results)
+results <- merge(observed, summ.results, sort=FALSE)
+dim(results)
+results
+summ.results <- ddply(simulations, .(quadratNames), summaries)
+results <- merge(observed, summ.results, sort=FALSE)
+dim(results)
+results
+names(observed)
+length(names(observed))
+2+19
+3:2+19
+3:(2+19)
+metric.names <- names(observed)[3:(2+no.metrics)]
+metric.names <- names(observed)[3:(2+19)]
+metric.names
+length(metric.names)
+results
+dim(results)
+metric.names <- names(observed)[3:(2+no.metrics)]#
+#
+		sig.results <- list()#
+#
+		for(j in 1:length(metric.names))#
+		{#
+			sig.results[[j]] <- sigTest(results, metric.names[j])#
+		}
+metric.names <- names(observed)[3:(2+19)]#
+#
+		sig.results <- list()#
+#
+		for(j in 1:length(metric.names))#
+		{#
+			sig.results[[j]] <- sigTest(results, metric.names[j])#
+		}
+sig.results
+sig.results <- as.data.frame(sig.results)
+sig.results
+names(sig.results) <- metric.names
+sig.results
+output <- output + typeI(sig.results, expectation=1, wrong=2)
+output <- matrix(0, nrow=19, ncol=3)
+output
+output <- output + typeI(sig.results, expectation=1, wrong=2)
+output
+summ.results <- ddply(simulations, .(richness), summaries)
+dim(summ.results)
+results <- merge(observed, summ.results, sort=FALSE)
+dim(results)
+length(metric.names)
+sig.results <- list()#
+#
+		for(j in 1:length(metric.names))#
+		{#
+			sig.results[[j]] <- sigTest(results, metric.names[j])#
+		}
+sig.results
+sig.results <- as.data.frame(sig.results)
+dim(sig.results)
+names(sig.results) <- metric.names
+sig.results
+results
+output <- matrix(0, nrow=no.metrics, ncol=3)
+output <- matrix(0, nrow=19, ncol=3)
+sig.results
+output <- output + typeI(sig.results, expectation=expectation, wrong=wrong)
+output <- output + typeI(sig.results, expectation=1, wrong=2)
+output
+load_all()
+document()
+dev_help("simulator")
+document()
+dev_help("simulator")
+document()
+dev_help("simulator")
+library(ape)#
+library(geiger)#
+library(colorRamps)#
+library(plyr)#
+library(picante)#
+#
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+document()
+dev_help("simulator")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+document()
+load_all()
+simulator
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="frequency", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="frequency", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+load_all()
+document()
 check()

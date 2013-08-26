@@ -44,6 +44,8 @@ allMetrics <- function(tree, picante_cdm)
 
 	dists <- cophenetic(tree)
 
+	quadratNames <- dimnames(cdm)[[1]]
+	
 	richness <- apply(picante_cdm, 1, lengthNonZeros)
 
 	NAW_MPD <- modified.mpd(picante_cdm, dists, abundance.weighted=FALSE)
@@ -98,10 +100,9 @@ allMetrics <- function(tree, picante_cdm)
 	
 	QE <- QE$Dkk
 	
-	results <- data.frame(richness, NAW_MPD, inter_MPD, intra_MPD, complete_MPD, NAW_MNTD, AW_MNTD, PSV, PSC, PSE, PAE, IAC, Haed, Eaed, Eed, Hed, SimpsonsPhy, PD, PD_Cadotte, QE)
+	results <- data.frame(quadratNames, richness, NAW_MPD, inter_MPD, intra_MPD, complete_MPD, NAW_MNTD, AW_MNTD, PSV, PSC, PSE, PAE, IAC, Haed, Eaed, Eed, Hed, SimpsonsPhy, PD, PD_Cadotte, QE)
 	
 	row.names(results) <- row.names(picante_cdm) ##there is a very important caveat here in that you have to make sure EVERY AND ALL function returns the communities in the order they were input in
 	
-	return(results)
-	
+	return(results)	
 }

@@ -5,8 +5,9 @@
   simulator(no.species, x_min, x_max, y_min, y_max,
     no.quadrats, quadrat_size, mean.log.individuals,
     length.parameter, sd.parameter, null.method,
-    no.randomizations, expectation, wrong, no.metrics,
-    iterations, temp.file, output.file)
+    concatBYrichness = TRUE, no.randomizations,
+    expectation, wrong, no.metrics, iterations, temp.file,
+    output.file)
 }
 \arguments{
   \item{no.species}{Number of species in each arena}
@@ -36,6 +37,10 @@
 
   \item{null.method}{A picante-style null, e.g. "richness"
   or "frequency"}
+
+  \item{concatBYrichness}{Whether to concatenate null
+  results by the richness of the randomized quadrat (the
+  default), or by the quadrat ID (traditional method)}
 
   \item{no.randomizations}{Number of iterations the
   function should run, i.e. the number of times the
@@ -91,8 +96,9 @@ library(picante)
 
 simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,
 quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,
-null.method="richness", no.randomizations=2, expectation=1, wrong=2, no.metrics=19,
-iterations=3, temp.file="deleteme.csv", output.file="confused.csv")
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",
+output.file="confused.csv")
 }
 \references{
   Miller, Trisos and Farine.

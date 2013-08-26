@@ -39,7 +39,7 @@
 summaries <- function(null.output)
 {
     # Create the output variable names
-	metricNames <- names(null.output)[names(null.output)!="richness"]
+	metricNames <- names(null.output)[names(null.output)!="richness" & names(null.output)!="quadratNames"]
     summary.names <- c("average", "lower", "upper")
 	combo.names <- paste(rep(metricNames, each = length(summary.names)), rep(summary.names, length(metricNames)), sep = ".")
 
