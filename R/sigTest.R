@@ -45,7 +45,7 @@
 #' oneMetric <- sigTest(results, "PSV")
 #'
 #' #example of how to loop it over a table of results
-#' metric.names <- names(observed)[2:20]
+#' metric.names <- names(observed)[3:21]
 #'
 #' sig.results <- list()
 #'

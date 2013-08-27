@@ -3,7 +3,7 @@
 #' Sloppy function that needs work. Intended to test for type I and II errors of results
 #' of testing of various metrics against a single spatial simulations.
 #'
-#' @param significance.results Data frame of significance results from call to sig.test()
+#' @param significance.results Data frame of significance results from call to sigTest()
 #' @param expectation Expected value: 0=not significant, 1=clustered, 2=overdispersed
 #' @param wrong Value of a typeI error rate, e.g. 2 if expecting 1.
 #' 
@@ -47,16 +47,16 @@
 #' #important merge command, confirm it works
 #' results <- merge(observed, expectations, sort=FALSE)
 #'
-#' oneMetric <- sig.test(results, "PSV")
+#' oneMetric <- sigTest(results, "PSV")
 #'
 #' #example of how to loop it over a table of results
-#' metric.names <- names(observed)[2:20]
+#' metric.names <- names(observed)[3:21]
 #'
 #' sig.results <- list()
 #'
 #' for(i in 1:length(metric.names))
 #' {
-#'	sig.results[[i]] <- sig.test(results, metric.names[i])
+#'	sig.results[[i]] <- sigTest(results, metric.names[i])
 #' }
 #'
 #' sig.results <- as.data.frame(sig.results)

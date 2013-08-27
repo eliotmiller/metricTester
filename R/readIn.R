@@ -31,6 +31,10 @@
 #'
 #' #output <- t(output)
 #'
+#' #ordr <- c("IAC","Haed","PD","PD_Cadotte","Hed","Eed","AW_MNTD","NAW_MNTD","PSC","PAE","Eaed","NAW_MPD","PSV","inter_MPD","PSE","intra_MPD","QE","complete_MPD","SimpsonsPhy")
+#'
+#' #output <- output[,ordr]
+#'
 #' #barplot(output, beside=TRUE, las=2, cex.names=0.7, col=c("red","gray","blue"), xlab="Metric", ylab="Count")
 #'
 #' #legend(x=1, y=98, c("Type1","No signal","Good"), fill=c("red","gray","blue"))

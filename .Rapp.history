@@ -1,3 +1,645 @@
+test[[1]][1]$tip.label
+test[[1]][1]$tip.labels
+test[[1]][[1]]$tip.label
+newFunction(test[[1]][[1]])
+lapply(test, newFunction, tree=[[1]])
+lapply(test, newFunction, tree=[1])
+lapply(test, newFunction)
+test <- list(tree, tree)
+test
+lapply(test, newFunction)
+newFunction
+lapply(test, newFunction)->test2
+test2
+unlist(lapply(test, newFunction))
+unlist(lapply(test, newFunction))->test2
+test2
+profile(simulator())
+?simulator
+profile(simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", no.randomizations=1, expectation=1, wrong=2, no.metrics=19,#
+iterations=1, temp.file="deleteme.csv", output.file="confused.csv")#
+)
+library(metricTester)
+simulator
+quadratContents
+1600/25
+64*3.
+64*3.5
+877/5
+61*5
+library(metricTester)
+?phyloNtraits
+phyloNtraits
+rlnorm(1000, meanlog=1)->test
+max(test)
+rlnorm(1000, meanlog=0.001)->test
+max(test)
+1*1/10
+2*1/10
+100*1/10
+rlnorm(1000, meanlog=10)->test
+max(test)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+sample(tree$tip.label, 10)
+?allMetrics
+simulateComm
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+	abunds <- rlnorm(n=1000, mean=i * 1/10)#
+	species <- sample(tree$tip.label, size=50)#
+	species.abunds <- sample(abunds, size=50)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+	abunds <- rlnorm(n=1000, mean=1 * 1/10)#
+	species <- sample(tree$tip.label, size=50)#
+	species.abunds <- sample(abunds, size=50)
+temp.cdm <- rbind(species, species.abunds)
+temp.cdm
+names(species.abunds) <- species
+species.abunds
+species.abunds <- species.abunds[tree$tip.label]
+species.abunds
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+	abunds <- rlnorm(n=1000, mean=1 * 1/10)#
+	species <- sample(tree$tip.label, size=50)#
+	species.abunds <- sample(abunds, size=50)#
+	temp.cdm <- species.abunds#
+	names(species.abunds) <- species
+names(temp.cdm) <- species
+temp.cdm
+temp.cdm <- temp.cdm[tree$tip.label]
+temp.cdm
+row.names(temp.cdm)
+names(temp.cdm)
+names(temp.cdm) <- tree$tip.label
+temp.cdm
+temp.cdm[is.na(temp.cdm)] <- 0
+temp.cdm
+dists <- cophentic(tree)
+library(picante)
+dists <- cophentic(tree)
+dists <- cophenetic(tree)
+modified.mpd(temp.cdm, dists)
+class(temp.cdm)
+as.matrix(temp.cdm)
+t(as.matrix(temp.cdm))
+t(as.matrix(temp.cdm))->test
+modified.mpd(test, dists)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/10)#
+	species <- sample(tree$tip.label, size=50)#
+	species.abunds <- sample(abunds, size=50)#
+	temp.cdm <- species.abunds#
+	names(temp.cdm) <- species#
+	temp.cdm <- temp.cdm[tree$tip.label]#
+	names(temp.cdm) <- tree$tip.label#
+	temp.cdm[is.na(temp.cdm)] <- 0#
+	cdm <- as.matrix(temp.cdm)#
+	cdm <- t(cdm)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=1 * 1/10)#
+	species <- sample(tree$tip.label, size=50)#
+	species.abunds <- sample(abunds, size=50)#
+	temp.cdm <- species.abunds#
+	names(temp.cdm) <- species#
+	temp.cdm <- temp.cdm[tree$tip.label]#
+	names(temp.cdm) <- tree$tip.label#
+	temp.cdm[is.na(temp.cdm)] <- 0#
+	cdm <- as.matrix(temp.cdm)#
+	cdm <- t(cdm)
+cdm
+intra <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+	complete <- modified.mpd(cdm, dists, abundance.weighted="complete")
+intra
+complete
+intra <- c()
+intra[1]
+intra[10]
+intra[10] <- 1
+intra
+test <- c(1,2,3,4,5,6,6)
+test2 <- c(5,6,7,7,4,5,6)
+test
+test2
+cor(test,test2)
+corrs <- c()#
+#
+for(i in 1:10)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/10)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+	corrs[i] <- cor(intra, complete)#
+}
+corrs
+generate tree#
+#
+corrs <- c()#
+#
+for(i in 1:10)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/100)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+	corrs[i] <- cor(intra, complete)#
+}
+corrs
+generate tree#
+#
+corrs <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/10)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+	print(intra)#
+	print(complete)#
+	corrs[i] <- cor(intra, complete)#
+}
+corrs
+generate tree#
+#
+corrs <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/100)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+	corrs[i] <- cor(intra, complete)#
+}
+corrs
+generate tree#
+#
+corrs <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/10)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+	corrs[i] <- cor(intra, complete)#
+}
+corrs
+meanlog
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/10)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/50)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+corrs
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/20)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/20)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:1000)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+plot(corrs~meanlog, pch=20)
+plot(corrs~meanlog, pch=20, cex=2)
+plot(corrs~meanlog, pch=20, cex=2, xlab="Mean log", ylab="Correlation between intraspecific and complete MPD")
+plot(corrs~meanlog, pch=20, cex=2, xlab="Mean log", ylab="Correlation between intraspecific and complete MPD", main="Correlation after 1000 draws")
+max(rlnorm(1000, meanlog=1 * 1/2-))
+max(rlnorm(1000, meanlog=1 * 1/20))
+max(rlnorm(1000, meanlog=1 * 1/1000))
+1* 1/1000
+max(rlnorm(1000, meanlog=1 * 1/1000))
+max(rlnorm(1000, meanlog=1))
+max(rlnorm(1000, meanlog=1 * 1/10000))
+max(rlnorm(1000, meanlog=0))
+max(rlnorm(1000, meanlog=-1))
+max(rlnorm(1000, meanlog=-10))
+log(0)
+log(-1)
+log(-10)
+rlnorm(n=1000, meanlog=1)
+rlnorm(n=1000, meanlog=10)
+rlnorm(n=1000, meanlog=0.1)
+rlnorm(n=1000, meanlog=0000.1)
+rlnorm(n=1000, meanlog=0000000000000.1)
+max(rlnorm(n=1000, meanlog=0000000000000.1))
+max(rlnorm(n=1000, meanlog=00000000000000000000000000000000.1))
+max(rlnorm(n=1000, meanlog=-1))
+max(rlnorm(n=1000, meanlog=-10))
+max(rlnorm(n=1000, meanlog=-4))
+max(rlnorm(n=1000, meanlog=-1))
+max(rlnorm(n=1000, meanlog=-2))
+max(rlnorm(n=1000, meanlog=100))
+max(rlnorm(n=1000, meanlog=-1))
+max(rlnorm(n=1000, meanlog=-1*1/20))
+max(rlnorm(n=1000, meanlog=-2*1/20))
+max(rlnorm(n=1000, meanlog=-100*1/20))
+max(rlnorm(n=1000, meanlog=-100*1/10))
+max(rlnorm(n=1000, meanlog=-90*1/10))
+max(rlnorm(n=1000, meanlog=-90*1/50))
+max(rlnorm(n=1000, meanlog=-90+100*1/50))
+max(rlnorm(n=1000, meanlog=-90+50*1/50))
+max(rlnorm(n=1000, meanlog=(-90+50)*1/50))
+max(rlnorm(n=1000, meanlog=(-90+100)*1/50))
+max(rlnorm(n=1000, meanlog=(-30+100)*1/50))
+max(rlnorm(n=1000, meanlog=(-30+1)*1/50))
+max(rlnorm(n=1000, meanlog=(-40+1)*1/50))
+max(rlnorm(n=1000, meanlog=(-40+100)*1/50))
+max(rlnorm(n=1000, meanlog=(-40+1)*1/50))
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=(-40 + i) * 1/50)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:1000)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+plot(corrs~meanlog, pch=20, cex=2)
+for(i in 1:100)
+test <- c()#
+#
+for(i in 1:100)#
+{#
+	test[i] <- max(rlnorm(1000, meanlog=i * 1/20))#
+}
+test
+plot(test)
+plot(corrs~meanlog, pch=20, cex=2)
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+maxlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=i * 1/20)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+#
+	maxlog[i] <- max(abunds)#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+plot(corrs~maxlog)
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+maxlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=(-40 + i) * 1/50)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:100)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+#
+	maxlog[i] <- max(abunds)#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~maxlog)
+plot(corrs~meanlog)
+plot(corrs~maxlog)
+generate tree#
+#
+corrs <- c()#
+#
+meanlog <- c()#
+#
+maxlog <- c()#
+#
+for(i in 1:100)#
+{#
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+	dists <- cophenetic(tree)#
+	abunds <- rlnorm(n=1000, mean=(-40 + i) * 1/50)#
+#
+	intra <- c()#
+	complete <- c()#
+#
+	for(j in 1:1000)#
+	{#
+		species <- sample(tree$tip.label, size=50)#
+		species.abunds <- sample(abunds, size=50)#
+		temp.cdm <- species.abunds#
+		names(temp.cdm) <- species#
+		temp.cdm <- temp.cdm[tree$tip.label]#
+		names(temp.cdm) <- tree$tip.label#
+		temp.cdm[is.na(temp.cdm)] <- 0#
+		cdm <- as.matrix(temp.cdm)#
+		cdm <- t(cdm)#
+		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
+		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
+	}#
+#
+	meanlog[i] <- i * 1/10#
+#
+	maxlog[i] <- max(abunds)#
+	corrs[i] <- cor(intra, complete)#
+}
+plot(corrs~meanlog)
+plot(corrs~maxlog)
+library(geiger)
+tree <- sim.bdtree(stop="taxa", n=100)
+plot(tree)
+library(picante)
 dists <- cophenetic(tree)
 head(dists)
 test <- apply(dists, 1, mean)
@@ -60,283 +702,15 @@ segments(x0=coords[5,1], y0=coords[5,2], x1=coords[5,3], y1=coords[5,4], lty=2)
 segments(x0=coords[6,1], y0=coords[6,2], x1=coords[6,3], y1=coords[6,4], lty=2)
 segments(x0=coords[7,1], y0=coords[7,2], x1=coords[7,3], y1=coords[7,4], lty=2)
 segments(x0=coords[8,1], y0=coords[8,2], x1=coords[8,3], y1=coords[8,4], lty=2)
-3>=3
 library(devtools)
 load_all()
-dev_help("simulateComm")
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-cdm
-allMetrics(tree, cdm)
-allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
-load_all()
-load_all()
-allMetricsNull.csv
-allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
-allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
-allMetricsNull.csv(tree, cdm, "richness", 1, "delete.csv")
-allMetricsNull.csv(tree, cdm, "richness", concatBYrichness=TRUE, 1, "delete.csv")
-allMetricsNull.csv(tree, cdm, "richness", concatBYrichness=FALSE, 1, "delete.csv")
-cdm
-dim(cdm)
-dim(cdm)[1]
-load_all()
-allMetrics
-dev_help("allMetrics")
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-cdm
-results <- allMetrics(tree, cdm)
-results
-load_all()
-simulateComm(tree,10,25,sim.abundances)
-simulateComm(tree,10,25,sim.abundances)
-simulateComm(tree,10,25,sim.abundances)
-simulateComm(tree,10,25,sim.abundances)
-load_all()
-load_all()
-simulateComm(tree,10,25,sim.abundances)
-cdm <- simulateComm(tree,10,25,sim.abundances)
-cdm
-allMetrics(tree,cdm)
-allMetricsNull.csv(tree,cdm,"richness",1,"delete.csv")
-load_all()
-dev_help("summaries")
-possibilities <- read.csv("delete.csv")
-possibilites
-possibilities
-load_all()
-dev_help("summaries")
-expectations <- ddply(possibilities, .(richness), summaries)
-library(plyr)
-expectations <- ddply(possibilities, .(richness), summaries)
-expectations <- ddply(possibilities, .(richness), summaries)
-load_all()
-expectations <- ddply(possibilities, .(richness), summaries)
-expectations
-expectations <- ddply(possibilities, .(metricNames), summaries)
-head(possibilities)
-expectations <- ddply(possibilities, .(quadratNames), summaries)
-expectations
-load_all()
-document()
-document()
-allMetrics(tree,cdm)
-allMetricsNull.csv(tree,cdm,"frequency",2,"delete.csv")
-simulations
-simulations <- read.csv("delete.csv")
-summ.results <- ddply(simulations, .(richness), summaries)
-summ.results
-head(simulations)
-allMetrics(tree,cdm)
-summ.results <- ddply(simulations, .(quadratNames), summaries)
-summ.results
-summ.results <- ddply(simulations, .(richness), summaries)
-summ.results
-allMetricsNull.csv(tree,cdm,"frequency",5,"delete.csv")
-simulations <- read.csv("delete.csv")
-head(simulations)
-summ.results <- ddply(simulations, .(richness), summaries)
-summ.results
-summ.results <- ddply(simulations, .(quadratNames), summaries)
-summ.results
-observed <- allMetrics(tree, cdm)
-observed
-merge(observed, summ.results, sort=FALSE)
-head(observed)
-head(summ.results)
-dim(observed)
-dim(summ.results)
-merge(observed, summ.results, sort=FALSE)
-ddply(simulations, .(richness), summaries)
-ddply(simulations, .(richness), summaries)->summ.results
-dim(summ.results)
-merge(observed, summ.results, sort=FALSE)
-cdm
-apply(cdm,1,lengthNonZeros)
-simulateComm(tree,10,25,sim.abundances)
-simulateComm(tree,10,25,sim.abundances)->cdm
-apply(cdm,1,lengthNonZeros)
-dev_help("quadratPlacer")
-dev_help("quadratContents")
-library(geiger)#
-library(colorRamps)#
-#
-temp <- phyloNtraits(50)#
-#
-scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
-#
-phydistmatrix <- cophenetic(temp[[1]])#
-#
-#define a color for each species#
-cols <- blue2green2red(nrow(phydistmatrix))#
-#
-positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
-#
-#plot the arena. don't close the window#
-plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-#plot the arena. don't close the window#
-plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
-#
-quadratPlotter(bounds)#
-#
-#this community data matrix is not in picante format, use t()#
-temp.cdm <- quadratContents(positions, bounds)
-temp.cdm
-cdm <- t(temp.cdm)
-cdm
-quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
-#
-		dimnames(cdm)[[1]] <- quadratNames
-cdm
-rm(quadratNames)
-cdm
-apply(cdm, 1, lengthNonZeros)
-plot(temp[[2]])
-plot(temp[[1]])
-tree <- temp[[1]]
-allMetricsNull.csv(tree, cdm, "frequency", 5, "delete.csv")
-simulations <- read.csv("delete.csv")
-ddply(simulations, .(richness), summaries)
-ddply(simulations, .(quadratNames), summaries)
-summ.results <- ddply(simulations, .(richness), summaries)
-dim(summ.results)
-observed <- allMetrics(tree, cdm)
-dim(observed)
-dim(summ.results)
-results <- merge(observed, summ.results, sort=FALSE)
-dim(results)
-results
-summ.results <- ddply(simulations, .(quadratNames), summaries)
-results <- merge(observed, summ.results, sort=FALSE)
-dim(results)
-results
-names(observed)
-length(names(observed))
-2+19
-3:2+19
-3:(2+19)
-metric.names <- names(observed)[3:(2+no.metrics)]
-metric.names <- names(observed)[3:(2+19)]
-metric.names
-length(metric.names)
-results
-dim(results)
-metric.names <- names(observed)[3:(2+no.metrics)]#
-#
-		sig.results <- list()#
-#
-		for(j in 1:length(metric.names))#
-		{#
-			sig.results[[j]] <- sigTest(results, metric.names[j])#
-		}
-metric.names <- names(observed)[3:(2+19)]#
-#
-		sig.results <- list()#
-#
-		for(j in 1:length(metric.names))#
-		{#
-			sig.results[[j]] <- sigTest(results, metric.names[j])#
-		}
-sig.results
-sig.results <- as.data.frame(sig.results)
-sig.results
-names(sig.results) <- metric.names
-sig.results
-output <- output + typeI(sig.results, expectation=1, wrong=2)
-output <- matrix(0, nrow=19, ncol=3)
-output
-output <- output + typeI(sig.results, expectation=1, wrong=2)
-output
-summ.results <- ddply(simulations, .(richness), summaries)
-dim(summ.results)
-results <- merge(observed, summ.results, sort=FALSE)
-dim(results)
-length(metric.names)
-sig.results <- list()#
-#
-		for(j in 1:length(metric.names))#
-		{#
-			sig.results[[j]] <- sigTest(results, metric.names[j])#
-		}
-sig.results
-sig.results <- as.data.frame(sig.results)
-dim(sig.results)
-names(sig.results) <- metric.names
-sig.results
-results
-output <- matrix(0, nrow=no.metrics, ncol=3)
-output <- matrix(0, nrow=19, ncol=3)
-sig.results
-output <- output + typeI(sig.results, expectation=expectation, wrong=wrong)
-output <- output + typeI(sig.results, expectation=1, wrong=2)
-output
-load_all()
-document()
-dev_help("simulator")
-document()
-dev_help("simulator")
-document()
-dev_help("simulator")
-library(ape)#
-library(geiger)#
-library(colorRamps)#
-library(plyr)#
-library(picante)#
-#
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-document()
-dev_help("simulator")
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-document()
-load_all()
-simulator
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="frequency", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="frequency", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-load_all()
+check()
 document()
 check()
+sigTest
+document()
+sigTest
+dev_help("sigTest")
+document()
+check()
+document()

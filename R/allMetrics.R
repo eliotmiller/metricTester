@@ -44,7 +44,7 @@ allMetrics <- function(tree, picante_cdm)
 
 	dists <- cophenetic(tree)
 
-	quadratNames <- dimnames(cdm)[[1]]
+	quadratNames <- dimnames(picante_cdm)[[1]]
 	
 	richness <- apply(picante_cdm, 1, lengthNonZeros)
 
