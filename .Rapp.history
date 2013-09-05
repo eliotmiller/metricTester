@@ -1,684 +1,3 @@
-test[[1]][1]$tip.label
-test[[1]][1]$tip.labels
-test[[1]][[1]]$tip.label
-newFunction(test[[1]][[1]])
-lapply(test, newFunction, tree=[[1]])
-lapply(test, newFunction, tree=[1])
-lapply(test, newFunction)
-test <- list(tree, tree)
-test
-lapply(test, newFunction)
-newFunction
-lapply(test, newFunction)->test2
-test2
-unlist(lapply(test, newFunction))
-unlist(lapply(test, newFunction))->test2
-test2
-profile(simulator())
-?simulator
-profile(simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", no.randomizations=1, expectation=1, wrong=2, no.metrics=19,#
-iterations=1, temp.file="deleteme.csv", output.file="confused.csv")#
-)
-library(metricTester)
-simulator
-quadratContents
-1600/25
-64*3.
-64*3.5
-877/5
-61*5
-library(metricTester)
-?phyloNtraits
-phyloNtraits
-rlnorm(1000, meanlog=1)->test
-max(test)
-rlnorm(1000, meanlog=0.001)->test
-max(test)
-1*1/10
-2*1/10
-100*1/10
-rlnorm(1000, meanlog=10)->test
-max(test)
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
-sample(tree$tip.label, 10)
-?allMetrics
-simulateComm
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-	abunds <- rlnorm(n=1000, mean=i * 1/10)#
-	species <- sample(tree$tip.label, size=50)#
-	species.abunds <- sample(abunds, size=50)
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-	abunds <- rlnorm(n=1000, mean=1 * 1/10)#
-	species <- sample(tree$tip.label, size=50)#
-	species.abunds <- sample(abunds, size=50)
-temp.cdm <- rbind(species, species.abunds)
-temp.cdm
-names(species.abunds) <- species
-species.abunds
-species.abunds <- species.abunds[tree$tip.label]
-species.abunds
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-	abunds <- rlnorm(n=1000, mean=1 * 1/10)#
-	species <- sample(tree$tip.label, size=50)#
-	species.abunds <- sample(abunds, size=50)#
-	temp.cdm <- species.abunds#
-	names(species.abunds) <- species
-names(temp.cdm) <- species
-temp.cdm
-temp.cdm <- temp.cdm[tree$tip.label]
-temp.cdm
-row.names(temp.cdm)
-names(temp.cdm)
-names(temp.cdm) <- tree$tip.label
-temp.cdm
-temp.cdm[is.na(temp.cdm)] <- 0
-temp.cdm
-dists <- cophentic(tree)
-library(picante)
-dists <- cophentic(tree)
-dists <- cophenetic(tree)
-modified.mpd(temp.cdm, dists)
-class(temp.cdm)
-as.matrix(temp.cdm)
-t(as.matrix(temp.cdm))
-t(as.matrix(temp.cdm))->test
-modified.mpd(test, dists)
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/10)#
-	species <- sample(tree$tip.label, size=50)#
-	species.abunds <- sample(abunds, size=50)#
-	temp.cdm <- species.abunds#
-	names(temp.cdm) <- species#
-	temp.cdm <- temp.cdm[tree$tip.label]#
-	names(temp.cdm) <- tree$tip.label#
-	temp.cdm[is.na(temp.cdm)] <- 0#
-	cdm <- as.matrix(temp.cdm)#
-	cdm <- t(cdm)
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=1 * 1/10)#
-	species <- sample(tree$tip.label, size=50)#
-	species.abunds <- sample(abunds, size=50)#
-	temp.cdm <- species.abunds#
-	names(temp.cdm) <- species#
-	temp.cdm <- temp.cdm[tree$tip.label]#
-	names(temp.cdm) <- tree$tip.label#
-	temp.cdm[is.na(temp.cdm)] <- 0#
-	cdm <- as.matrix(temp.cdm)#
-	cdm <- t(cdm)
-cdm
-intra <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-	complete <- modified.mpd(cdm, dists, abundance.weighted="complete")
-intra
-complete
-intra <- c()
-intra[1]
-intra[10]
-intra[10] <- 1
-intra
-test <- c(1,2,3,4,5,6,6)
-test2 <- c(5,6,7,7,4,5,6)
-test
-test2
-cor(test,test2)
-corrs <- c()#
-#
-for(i in 1:10)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/10)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-	corrs[i] <- cor(intra, complete)#
-}
-corrs
-generate tree#
-#
-corrs <- c()#
-#
-for(i in 1:10)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/100)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-	corrs[i] <- cor(intra, complete)#
-}
-corrs
-generate tree#
-#
-corrs <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/10)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-	print(intra)#
-	print(complete)#
-	corrs[i] <- cor(intra, complete)#
-}
-corrs
-generate tree#
-#
-corrs <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/100)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-	corrs[i] <- cor(intra, complete)#
-}
-corrs
-generate tree#
-#
-corrs <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/10)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-	corrs[i] <- cor(intra, complete)#
-}
-corrs
-meanlog
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/10)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/50)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-corrs
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/20)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/20)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:1000)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-plot(corrs~meanlog, pch=20)
-plot(corrs~meanlog, pch=20, cex=2)
-plot(corrs~meanlog, pch=20, cex=2, xlab="Mean log", ylab="Correlation between intraspecific and complete MPD")
-plot(corrs~meanlog, pch=20, cex=2, xlab="Mean log", ylab="Correlation between intraspecific and complete MPD", main="Correlation after 1000 draws")
-max(rlnorm(1000, meanlog=1 * 1/2-))
-max(rlnorm(1000, meanlog=1 * 1/20))
-max(rlnorm(1000, meanlog=1 * 1/1000))
-1* 1/1000
-max(rlnorm(1000, meanlog=1 * 1/1000))
-max(rlnorm(1000, meanlog=1))
-max(rlnorm(1000, meanlog=1 * 1/10000))
-max(rlnorm(1000, meanlog=0))
-max(rlnorm(1000, meanlog=-1))
-max(rlnorm(1000, meanlog=-10))
-log(0)
-log(-1)
-log(-10)
-rlnorm(n=1000, meanlog=1)
-rlnorm(n=1000, meanlog=10)
-rlnorm(n=1000, meanlog=0.1)
-rlnorm(n=1000, meanlog=0000.1)
-rlnorm(n=1000, meanlog=0000000000000.1)
-max(rlnorm(n=1000, meanlog=0000000000000.1))
-max(rlnorm(n=1000, meanlog=00000000000000000000000000000000.1))
-max(rlnorm(n=1000, meanlog=-1))
-max(rlnorm(n=1000, meanlog=-10))
-max(rlnorm(n=1000, meanlog=-4))
-max(rlnorm(n=1000, meanlog=-1))
-max(rlnorm(n=1000, meanlog=-2))
-max(rlnorm(n=1000, meanlog=100))
-max(rlnorm(n=1000, meanlog=-1))
-max(rlnorm(n=1000, meanlog=-1*1/20))
-max(rlnorm(n=1000, meanlog=-2*1/20))
-max(rlnorm(n=1000, meanlog=-100*1/20))
-max(rlnorm(n=1000, meanlog=-100*1/10))
-max(rlnorm(n=1000, meanlog=-90*1/10))
-max(rlnorm(n=1000, meanlog=-90*1/50))
-max(rlnorm(n=1000, meanlog=-90+100*1/50))
-max(rlnorm(n=1000, meanlog=-90+50*1/50))
-max(rlnorm(n=1000, meanlog=(-90+50)*1/50))
-max(rlnorm(n=1000, meanlog=(-90+100)*1/50))
-max(rlnorm(n=1000, meanlog=(-30+100)*1/50))
-max(rlnorm(n=1000, meanlog=(-30+1)*1/50))
-max(rlnorm(n=1000, meanlog=(-40+1)*1/50))
-max(rlnorm(n=1000, meanlog=(-40+100)*1/50))
-max(rlnorm(n=1000, meanlog=(-40+1)*1/50))
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=(-40 + i) * 1/50)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:1000)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-plot(corrs~meanlog, pch=20, cex=2)
-for(i in 1:100)
-test <- c()#
-#
-for(i in 1:100)#
-{#
-	test[i] <- max(rlnorm(1000, meanlog=i * 1/20))#
-}
-test
-plot(test)
-plot(corrs~meanlog, pch=20, cex=2)
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-maxlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=i * 1/20)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-#
-	maxlog[i] <- max(abunds)#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-plot(corrs~maxlog)
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-maxlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=(-40 + i) * 1/50)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:100)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-#
-	maxlog[i] <- max(abunds)#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~maxlog)
-plot(corrs~meanlog)
-plot(corrs~maxlog)
-generate tree#
-#
-corrs <- c()#
-#
-meanlog <- c()#
-#
-maxlog <- c()#
-#
-for(i in 1:100)#
-{#
-	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-	dists <- cophenetic(tree)#
-	abunds <- rlnorm(n=1000, mean=(-40 + i) * 1/50)#
-#
-	intra <- c()#
-	complete <- c()#
-#
-	for(j in 1:1000)#
-	{#
-		species <- sample(tree$tip.label, size=50)#
-		species.abunds <- sample(abunds, size=50)#
-		temp.cdm <- species.abunds#
-		names(temp.cdm) <- species#
-		temp.cdm <- temp.cdm[tree$tip.label]#
-		names(temp.cdm) <- tree$tip.label#
-		temp.cdm[is.na(temp.cdm)] <- 0#
-		cdm <- as.matrix(temp.cdm)#
-		cdm <- t(cdm)#
-		intra[j] <- modified.mpd(cdm, dists, abundance.weighted="intraspecific")#
-		complete[j] <- modified.mpd(cdm, dists, abundance.weighted="complete")#
-	}#
-#
-	meanlog[i] <- i * 1/10#
-#
-	maxlog[i] <- max(abunds)#
-	corrs[i] <- cor(intra, complete)#
-}
-plot(corrs~meanlog)
-plot(corrs~maxlog)
-library(geiger)
-tree <- sim.bdtree(stop="taxa", n=100)
-plot(tree)
-library(picante)
-dists <- cophenetic(tree)
-head(dists)
-test <- apply(dists, 1, mean)
-test
-hist(test)
-plot(tree)
-plot(tree, cex=0/7)
-plot(tree, cex=0.7)
-tree <- sim.bdtree(stop="taxa", n=20)
-dists <- cophenetic(tree)
-plot(tree)
-test <- apply(dists, 1, mean)
-test
-min(test)
-distances
-?ses.mpd
-tree2 <- compute.brlen(tree, 1)
-plot(tree2)
-dists2 <- cophenetic(tree2)
-dists2
-apply(dists2, 1, mean)
-hist(dists2)
-hist(dists)
-dists <- 1:50
-sample(dists, 5)
-ups <- -5:5
-usp
-ups
-sample(ups, 5)
-x
-x <- c(3,12,14,23,28,34,43,46)
-y <- c(5,1,-4,2,-3,-2,0,5)
-coords <- cbind(x,y)
-coords
-plot(coords)
-x1 <- x
-y1 <- y+50
-y1
-coords <- data.frame(x,y,x1,y1)
 coords
 plot(coords)
 plot(coords[,1:2])
@@ -703,14 +22,833 @@ segments(x0=coords[6,1], y0=coords[6,2], x1=coords[6,3], y1=coords[6,4], lty=2)
 segments(x0=coords[7,1], y0=coords[7,2], x1=coords[7,3], y1=coords[7,4], lty=2)
 segments(x0=coords[8,1], y0=coords[8,2], x1=coords[8,3], y1=coords[8,4], lty=2)
 library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+?simulator
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="frequency", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv")
+library(ape)#
+library(geiger)#
+library(colorRamps)#
+library(plyr)#
+library(picante)
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="frequency", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="frequency", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="independentswap", concatBYrichness=FALSE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv")
+simulator(no.species=100, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, quadrat_size=50, mean.log.individuals=4, length.parameter=10000, sd.parameter=45, null.method="independentswap", concatBYrichness=FALSE, no.randomizations=1, expectation=1, wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv", output.file="results.csv")
+library(metricTester)
+?allMetrics
+?typeI
+?quadratContents
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=10000, sd.parameter=45)
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=30)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)#
+#
+#this community data matrix is not in picante format, use t()#
+temp.cdm <- quadratContents(positions, bounds)
+temp.cd
+temp.cdm
+cdm <- t(temp.cdm)
+cdm
+apply(cdm, 1, lengthNonZeroes)
+apply(cdm, 1, lengthNonZeros)
+here are a set of functions to derive null expectations as done in our#
+##forthingcoming paper, "Niche conservatism constrains Australian honeyeater assemblages #
+##in stressful environments". many of the functions rely on previously defined functions,#
+##so I recommend defining all functions in the file, then calling those required by the#
+##situation. see examples at end of file for more details. ALL OF THESE FUNCTIONS USE A#
+##COMMUNITY DATA MATRIX AS DEFINED IN PICANTE. THAT IS A MATRIX WITH SPECIES AS COLUMNS#
+##AND SITES AS ROWS#
+#
+##call your libraries#
+#
+library(plyr)#
+library(picante)#
+#
+##first define a function that will be used to find the species richness of each row #
+##(i.e. community)#
+#
+lengthNonZeros <- function(input.vector)#
+{#
+	nonZeros <- input.vector[input.vector != 0]#
+	return(length(nonZeros))#
+}#
+#
+##then define a function that will use this function and the modified.mpd function to #
+##generate one block (iteration) of the desired data frame#
+#
+oneIteration <- function(orig.matrix, phy.dists, abundance.method)#
+{#
+	oneBlock <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
+	oneBlock[,1] <- apply(orig.matrix, 1, lengthNonZeros)#
+	oneBlock[,2] <- modified.mpd(orig.matrix, phy.dists, abundance.method)#
+	return(oneBlock)#
+}#
+#
+##define a function that uses the function oneIteration and the picante function #
+##randomizeMatrix to generate null expectations after randomization#
+#
+null.exp <- function(orig.matrix, null.method, phy.dists, abundance.method)#
+{#
+	randomMatrix <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
+	randomMatrix <- randomizeMatrix(orig.matrix, null.method)#
+	results <- oneIteration(randomMatrix, phy.dists, abundance.method)#
+	return(results)#
+}#
+#
+##put all of these functions into an iterator function#
+#
+iterator <- function(orig.matrix, null.method, phy.dists, abundance.method, iterations)#
+{#
+	final.results <- matrix(nrow = iterations * dim(orig.matrix)[1], ncol = 2)#
+	for (i in 1:iterations)#
+	{	#
+		final.results[(i * dim(orig.matrix)[1] - dim(orig.matrix)[1] + 1):(i * dim(orig.matrix)[1]), ] <- null.exp(orig.matrix, null.method, phy.dists, abundance.method)#
+	}#
+	final.results <- as.data.frame(final.results)#
+	names(final.results) <- c("richness","metric")#
+	return(final.results)#
+}#
+#
+##discovered that the iterator function bogs down the memory very quickly #
+##(e.g. at > 1000 iterations). write a function that will write the results to a csv file #
+##outside of R at each iteration#
+#
+null.csv <- function(orig.matrix, null.method, phy.dists, abundance.method, iterations, file.name)#
+{#
+	for (i in 1:iterations)#
+	{#
+		temp.results <- null.exp(orig.matrix, null.method, phy.dists, abundance.method)#
+		if(i == 1)#
+		{#
+			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")#
+		}#
+		else if(i/iterations == 0.2)#
+		{#
+			print("20% complete")#
+			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		}#
+		else if(i/iterations == 0.5)#
+		{#
+			print("50% complete")#
+			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		}#
+		else#
+		{#
+			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		}#
+	}#
+	print("File saved to working directory")#
+}#
+#
+##also, in case you need to run more iterations at a given richness, e.g. a low richness #
+##that isn't being sampled well with the frequency null, write a function that will subset#
+##each randomized matrix to only those richnesses you want#
+#
+null.exp.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses)#
+{#
+	randomMatrix <- matrix(nrow = dim(orig.matrix)[1], ncol = 2)#
+	randomMatrix <- randomizeMatrix(orig.matrix, null.method)#
+	results <- oneIteration(randomMatrix, phy.dists, abundance.method)#
+	results <- matrix(results[results[,1] %in% accepted.richnesses, ], ncol=2)#
+	return(results)#
+}#
+#
+##and the iterator version of that. can't define the matrix beforehand for memory saving #
+##purposes because you don't know how often the pertinent richnesses will appear#
+#
+iterator.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses, iterations)#
+{#
+	final.results <- c()#
+	for (i in 1:iterations)#
+	{	#
+		final.results <- rbind(final.results, null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses))#
+	}#
+	final.results <- as.data.frame(final.results)#
+	names(final.results) <- c("richness","metric")#
+	return(final.results)#
+}#
+#
+##make a version that will write straight to csv#
+#
+null.csv.selected <- function(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses, iterations, file.name)#
+{#
+	for (i in 1:iterations)#
+	{#
+		temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses)#
+		if(i == 1)#
+		{#
+			write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, sep=",")#
+		}#
+		else if(i/iterations == 0.2)#
+		{#
+			print("20% complete")#
+			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		}#
+		else if(i/iterations == 0.5)#
+		{#
+			print("50% complete")#
+			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		}#
+		else#
+		{#
+			write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		}#
+	}#
+	print("File saved to working directory")#
+}#
+#
+specific.csv <- function(orig.matrix, null.method, phy.dists, abundance.method, desired.iterations, max.iterations, file.name)#
+{#
+	temp <- oneIteration(orig.matrix, phy.dists, abundance.method)#
+	max.rich <- max(temp[,1])#
+	min.rich <- min(temp[,1])#
+	rich.seq <- min.rich:max.rich#
+	details.table <- matrix(nrow=length(rich.seq), ncol=1, dimnames=list(rich.seq))#
+	details.table[,1] <- 0#
+	temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses=rich.seq)#
+	write.table(temp.results, file=file.name, append=FALSE, row.names=FALSE, col.names=c("richness","metric"), sep=",")#
+	details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] <- count(temp.results[,1])$freq#
+	for (i in 1:max.iterations)#
+	{#
+		rich.seq <- row.names(details.table)[details.table[,1] < desired.iterations]#
+		temp.results <- null.exp.selected(orig.matrix, null.method, phy.dists, abundance.method, accepted.richnesses=rich.seq)#
+		write.table(temp.results, file=file.name, append=TRUE, col.names=FALSE, row.names=FALSE, sep=",")#
+		details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] <- details.table[,1][row.names(details.table) %in% count(temp.results[,1])$x] + count(temp.results[,1])$freq#
+		if(length(rich.seq) == 0)#
+		{#
+			break()#
+		}#
+	}#
+	print("File saved to working directory")#
+	return(details.table)#
+}#
+#
+##define a function to calculate the mean and 95% confidence intervals of the results from#
+##the various iterator functions#
+#
+con.intervals <- function(null.output)#
+{#
+	confidence <- ddply(null.output, "richness", summarise, iterations=length(metric), average=mean(metric), upper=quantile(metric, 0.975, na.rm=TRUE), lower=quantile(metric, 0.025, na.rm=TRUE))#
+	return(confidence)#
+}
+ls()
+?quadratContents
+dists <- cophenetic(temp[[1]])
+temp[[1]]
+phydistmatrix <- dist
+null.csv(cdm, "richness", phydistmatrix, "FALSE", 10000, "cluster25_rich_noAbund.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "interspecific", 10000, "cluster25_rich_inter.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "intraspecific", 10000, "cluster25_rich_intra.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "complete", 10000, "cluster25_rich_complete.csv")#
+#
+##read the simulations in #
+#
+noAbund.simulations <- read.csv("cluster25_rich_noAbund.csv")#
+#
+inter.simulations <- read.csv("cluster25_rich_inter.csv")#
+#
+intra.simulations <- read.csv("cluster25_rich_intra.csv")#
+#
+complete.simulations <- read.csv("cluster25_rich_complete.csv")#
+#
+##assign names necessary for con.intervals() to work right below#
+#
+names(noAbund.simulations) <- c("richness","metric")#
+#
+names(inter.simulations) <- c("richness","metric")#
+#
+names(intra.simulations) <- c("richness","metric")#
+#
+names(complete.simulations) <- c("richness","metric")#
+#
+##run the con intervals function on it#
+#
+noAbundCIs <- con.intervals(noAbund.simulations)#
+#
+interCIs <- con.intervals(inter.simulations)#
+#
+intraCIs <- con.intervals(intra.simulations)#
+#
+completeCIs <- con.intervals(complete.simulations)#
+#
+##calculate non-abundance weighted, interspecific and complete MPDs#
+#
+noAbundMPD <- modified.mpd(cdm, phydistmatrix, "FALSE")#
+#
+interMPD <- modified.mpd(cdm, phydistmatrix, "interspecific")#
+#
+intraMPD <- modified.mpd(cdm, phydistmatrix, "intraspecific")#
+#
+completeMPD <- modified.mpd(cdm, phydistmatrix, "complete")#
+#
+##calculate richness of each quadrat#
+#
+richness <- apply(cdm, 1, lengthNonZeros)#
+#
+##try plotting on the empirical results. here for noAbund#
+#
+plot(noAbundCIs$upper~noAbundCIs$richness, xlab="Richness", ylab="NAW MPD", ylim=c(min(noAbundCIs$lower, noAbundMPD),max(noAbundCIs$upper, noAbundMPD)))#
+#
+points(noAbundCIs$lower~noAbundCIs$richness)#
+#
+points(noAbundMPD~richness, pch=20, cex=2)
+the following is just a modified version of the original picante mpd function.#
+#
+##some of the functions below require plyr#
+#
+library(plyr)#
+#
+library(picante)#
+#
+modified.mpd <- function (samp, dis, abundance.weighted = FALSE) #
+{#
+    N <- dim(samp)[1]#
+    mpd <- numeric(N)#
+    for (i in 1:N) {#
+        sppInSample <- names(samp[i, samp[i, ] > 0])#
+        if (length(sppInSample) > 1) {#
+            sample.dis <- dis[sppInSample, sppInSample]#
+            if (abundance.weighted == "interspecific") {#
+                sample.weights <- t(as.matrix(samp[i, sppInSample, #
+                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
+                  drop = FALSE])#
+	            diag(sample.weights) <- 0#
+                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
+            }#
+            else if (abundance.weighted == "intraspecific") {#
+                sample.weights <- t(as.matrix(samp[i, sppInSample, #
+                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
+                  drop = FALSE])#
+	            diag(sample.weights) <- diag(sample.weights) - sqrt(diag(sample.weights))#
+                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
+            }#
+            else if (abundance.weighted == "complete") {#
+                sample.weights <- t(as.matrix(samp[i, sppInSample, #
+                  drop = FALSE])) %*% as.matrix(samp[i, sppInSample, #
+                  drop = FALSE])#
+                mpd[i] <- weighted.mean(sample.dis, sample.weights)#
+            }#
+            else {#
+                mpd[i] <- mean(sample.dis[lower.tri(sample.dis)])#
+            }#
+        }#
+        else {#
+            mpd[i] <- NA#
+        }#
+    }#
+    mpd#
+}
+null.csv(cdm, "richness", phydistmatrix, "FALSE", 10000, "cluster25_rich_noAbund.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "interspecific", 10000, "cluster25_rich_inter.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "intraspecific", 10000, "cluster25_rich_intra.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "complete", 10000, "cluster25_rich_complete.csv")#
+#
+##read the simulations in #
+#
+noAbund.simulations <- read.csv("cluster25_rich_noAbund.csv")#
+#
+inter.simulations <- read.csv("cluster25_rich_inter.csv")#
+#
+intra.simulations <- read.csv("cluster25_rich_intra.csv")#
+#
+complete.simulations <- read.csv("cluster25_rich_complete.csv")#
+#
+##assign names necessary for con.intervals() to work right below#
+#
+names(noAbund.simulations) <- c("richness","metric")#
+#
+names(inter.simulations) <- c("richness","metric")#
+#
+names(intra.simulations) <- c("richness","metric")#
+#
+names(complete.simulations) <- c("richness","metric")#
+#
+##run the con intervals function on it#
+#
+noAbundCIs <- con.intervals(noAbund.simulations)#
+#
+interCIs <- con.intervals(inter.simulations)#
+#
+intraCIs <- con.intervals(intra.simulations)#
+#
+completeCIs <- con.intervals(complete.simulations)#
+#
+##calculate non-abundance weighted, interspecific and complete MPDs#
+#
+noAbundMPD <- modified.mpd(cdm, phydistmatrix, "FALSE")#
+#
+interMPD <- modified.mpd(cdm, phydistmatrix, "interspecific")#
+#
+intraMPD <- modified.mpd(cdm, phydistmatrix, "intraspecific")#
+#
+completeMPD <- modified.mpd(cdm, phydistmatrix, "complete")#
+#
+##calculate richness of each quadrat#
+#
+richness <- apply(cdm, 1, lengthNonZeros)#
+#
+##try plotting on the empirical results. here for noAbund#
+#
+plot(noAbundCIs$upper~noAbundCIs$richness, xlab="Richness", ylab="NAW MPD", ylim=c(min(noAbundCIs$lower, noAbundMPD),max(noAbundCIs$upper, noAbundMPD)))#
+#
+points(noAbundCIs$lower~noAbundCIs$richness)#
+#
+points(noAbundMPD~richness, pch=20, cex=2)
+head(cdm)
+cdm
+head(phydistmatrix)
+rm(phydistmatrix)
+phydistmatrix
+phydistmatrix <- dists
+head(phydistmatrix)
+null.csv(cdm, "richness", phydistmatrix, "FALSE", 10000, "cluster25_rich_noAbund.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "interspecific", 10000, "cluster25_rich_inter.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "intraspecific", 10000, "cluster25_rich_intra.csv")#
+#
+null.csv(cdm, "richness", phydistmatrix, "complete", 10000, "cluster25_rich_complete.csv")#
+#
+##read the simulations in #
+#
+noAbund.simulations <- read.csv("cluster25_rich_noAbund.csv")#
+#
+inter.simulations <- read.csv("cluster25_rich_inter.csv")#
+#
+intra.simulations <- read.csv("cluster25_rich_intra.csv")#
+#
+complete.simulations <- read.csv("cluster25_rich_complete.csv")#
+#
+##assign names necessary for con.intervals() to work right below#
+#
+names(noAbund.simulations) <- c("richness","metric")#
+#
+names(inter.simulations) <- c("richness","metric")#
+#
+names(intra.simulations) <- c("richness","metric")#
+#
+names(complete.simulations) <- c("richness","metric")#
+#
+##run the con intervals function on it#
+#
+noAbundCIs <- con.intervals(noAbund.simulations)#
+#
+interCIs <- con.intervals(inter.simulations)#
+#
+intraCIs <- con.intervals(intra.simulations)#
+#
+completeCIs <- con.intervals(complete.simulations)#
+#
+##calculate non-abundance weighted, interspecific and complete MPDs#
+#
+noAbundMPD <- modified.mpd(cdm, phydistmatrix, "FALSE")#
+#
+interMPD <- modified.mpd(cdm, phydistmatrix, "interspecific")#
+#
+intraMPD <- modified.mpd(cdm, phydistmatrix, "intraspecific")#
+#
+completeMPD <- modified.mpd(cdm, phydistmatrix, "complete")#
+#
+##calculate richness of each quadrat#
+#
+richness <- apply(cdm, 1, lengthNonZeros)#
+#
+##try plotting on the empirical results. here for noAbund#
+#
+plot(noAbundCIs$upper~noAbundCIs$richness, xlab="Richness", ylab="NAW MPD", ylim=c(min(noAbundCIs$lower, noAbundMPD),max(noAbundCIs$upper, noAbundMPD)))#
+#
+points(noAbundCIs$lower~noAbundCIs$richness)#
+#
+points(noAbundMPD~richness, pch=20, cex=2)
+plot(interCIs$upper~interCIs$richness, xlab="Richness", ylab="Inter MPD", ylim=c(min(interCIs$lower, interMPD),max(interCIs$upper, interMPD)))#
+#
+points(interCIs$lower~interCIs$richness)#
+#
+points(interMPD~richness, pch=20, cex=2)
+plot(intraCIs$upper~intraCIs$richness, xlab="Richness", ylab="Intra MPD", ylim=c(min(intraCIs$lower, intraMPD),max(intraCIs$upper, intraMPD)))#
+#
+points(intraCIs$lower~intraCIs$richness)#
+#
+points(intraMPD~richness, pch=20, cex=2)
+plot(completeCIs$upper~completeCIs$richness, xlab="Richness", ylab="Complete MPD", ylim=c(min(completeCIs$lower, completeMPD),max(completeCIs$upper, completeMPD)))#
+#
+points(completeCIs$lower~completeCIs$richness)#
+#
+points(completeMPD~richness, pch=20, cex=2)
+simulator(no.species=100, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, quadrat_size=30, mean.log.individuals=4, length.parameter=10000, sd.parameter=45, null.method="richness", concatBYrichness=TRUE, no.randomizations=1, expectation=1, wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv", output.file="results.csv")
+simulator(no.species=100, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, quadrat_size=50, mean.log.individuals=5, length.parameter=100, sd.parameter=35, null.method="richness", no.randomizations=1, expectation=1, wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv", output.file="results.csv")
+?simulator
+?quadratContents
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=100, sd.parameter=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=10000, sd.parameter=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=100, sd.parameter=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)
+library(metricTester)
+library(ape)#
+library(colorRamps)#
+library(plyr)#
+library(grid)#
+library(Rcpp)#
+library(picante)
+system.time(simulator(no.species=100, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, quadrat_size=30, mean.log.individuals=4, length.parameter=10000, sd.parameter=45, null.method="richness", concatBYrichness=TRUE, no.randomizations=1, expectation=1, wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv", output.file="results.csv"))
+30*1000
+30000/60
+500/60
+t.test()
+?t.test
+library(geiger)
+library(phytools)
+sim.bdtree(stop="taxa", n=50)->tree
+tree
+plot(tree)
+rnorm(50, mean=10, sd=1)
+rnorm(50, mean=10, sd=2)
+rnorm(50, mean=10, sd=5)
+rnorm(50, mean=10, sd=5)->traits
+traits
+min(traits)
+rnorm(50, mean=10, sd=5)->traits
+min(traits)
+traits[min(traits)]
+traits[traits < 0]
+traits[traits < 0] <- 0.616
+min(traits)
+phylosig(tree, traits)
+phylosig(tree, traits, method="lambda")
+rnorm(50, mean=10, sd=5)->traits
+phylosig(tree, traits, method="lambda")
+traits
+min(traits)
+traits[traits <0]
+traits[traits <0]<-0
+phylosig(tree, traits, method="lambda")
+x <- 1:50
+y <- -5:5
+y
+x
+sample(x, 4)
+sample(y, 4)
+sample(y, 4) -> ys
+xs <- sample(x, 4)
+xs
+coords <- cbind(xs,ys)
+coords
+plot(coords[,1], coords[,2])
+plot(coords[,1], coords[,2], xlab="x", ylab="y", ylim=c(-5,50), xlim=c(0,50))
+plot(coords[,1], coords[,2], xlab="x", ylab="y", ylim=c(-5,50), xlim=c(0,50), pch=20, cex=2)
+plot(coords[,1], coords[,2], xlab="x", ylab="y", ylim=c(-5,50), xlim=c(0,50), pch=20, cex=3)
+abline(h=0)
+segments(x0=coords[1,1], y0=coords[1,2], x1=coords[1,1], y1=coords[1,2+50])
+coords[1,1]
+coords[1,2]
+coords[1,2+50]
+coords[1,2]+50
+segments(x0=coords[1,1], y0=coords[1,2], x1=coords[1,1], y1=coords[1,2]+50)
+segments(x0=coords[2,1], y0=coords[2,2], x1=coords[2,1], y1=coords[2,2]+50)
+segments(x0=coords[3,1], y0=coords[3,2], x1=coords[3,1], y1=coords[3,2]+50)
+segments(x0=coords[4,1], y0=coords[4,2], x1=coords[4,1], y1=coords[4,2]+50)
+plot(coords[,1], coords[,2], xlab="x", ylab="y", ylim=c(-5,55), xlim=c(0,50), pch=20, cex=3)
+segments(x0=coords[1,1], y0=coords[1,2], x1=coords[1,1], y1=coords[1,2]+50)
+segments(x0=coords[2,1], y0=coords[2,2], x1=coords[2,1], y1=coords[2,2]+50)
+segments(x0=coords[3,1], y0=coords[3,2], x1=coords[3,1], y1=coords[3,2]+50)
+segments(x0=coords[4,1], y0=coords[4,2], x1=coords[4,1], y1=coords[4,2]+50)
+points(x=coords[1,1], y=coords[1,2]+50, pch=20, cex=3)
+points(x=coords[2,1], y=coords[2,2]+50, pch=20, cex=3)
+points(x=coords[3,1], y=coords[3,2]+50, pch=20, cex=3)
+points(x=coords[4,1], y=coords[4,2]+50, pch=20, cex=3)
+abline(h=0)
+segments(x0=13, y0=20, x1=14, y1=20, lty=2)
+segments(x0=12, y0=22, x1=13, y1=22, lty=2)
+segments(x0=12, y0=22, x1=13, y1=22, lty=1)
+segments(x0=13, y0=20, x1=14, y1=20, lty=1)
+mtcars()
+load(mtcars)
+iris
+class(iris)
+head(iris)
+iris$Sepal.Length
+data.frame
+library(devtools)
 load_all()
-check()
+load_all()
+load_all()
+load_all()
+readIn
+?readIn
+dev_help("readIn")
+path <- "/Users/eliotmiller/Desktop/delete"#
+#
+test <- readIn(path)
+path <- "/Users/eliotmiller/Desktop/delete"#
+#
+test <- readIn(path, row.names=FALSE)
 document()
-check()
-sigTest
 document()
-sigTest
-dev_help("sigTest")
+path <- "/Users/eliotmiller/Desktop/delete"#
+#
+test <- readIn(path)
+path <- "/Users/eliotmiller/Desktop/delete"#
+#
+test <- readIn(path, row.names=FALSE)
+read.table("group1_bottom.csv")
+read.table("group1_bottom.csv", header=TRUE)
+read.table("group1_bottom.csv", header=TRUE, row.names=FALSE)
+read.table("group1_bottom.csv", header=TRUE, row.names=0)
 document()
-check()
+path <- "/Users/eliotmiller/Desktop/delete"#
+#
+test <- readIn(path)
+path <- "/Users/eliotmiller/Desktop/delete"#
+#
+test <- readIn(path, row.names=FALSE)
+test
+library(plyr)
+count(test[[1]])
+files
+dimnames(test)
+names(test)
+dimnames(test)[[1]]
+names(test)[[1]]
+str(test)
+row.names(test)
 document()
+document()
+install_github
+getwd()
+length(test)
+document()
+ls()
+test
+results <- c()#
+#
+for(i in 1:length(uplands))#
+{#
+	results[i] <- count(uplands[[i]])#
+}
+results <- c()#
+#
+for(i in 1:length(test))#
+{#
+	results[i] <- count(test[[i]])#
+}
+test
+results <- list()#
+#
+for(i in 1:length(test))#
+{#
+	results[i] <- count(test[[i]])#
+}
+results
+results <- list()#
+#
+for(i in 1:length(test))#
+{#
+	results[[i]] <- count(test[[i]])#
+}
+results
+merge(results[[1]], results[[2]])
+merge(results[[1]], results[[2]], keep.all=TRUE)
+?merge
+library(picante)
+test[[1]]
+test2 <- test[[1]]
+test2
+results
+length(test[[1]])
+dim(test[[1]])
+dim(results[[1]])
+1:length(results)
+1:length(results)->quadratID
+quadratID
+dim(results)
+dim(results[[1]])
+repetitions
+dim(results[[1]])
+repetitions <- c()#
+#
+for(i in 1:length(results))#
+{#
+	repetitions[i] <- dim(results[[i]])[1]#
+}
+repetitions
+rep(quadratID, repetitions)
+results[[1]]
+results[[1]][,1]
+rbind(results[[1]][,1],results[[2]][,1])
+c(results[[1]][,1],results[[2]][,1])
+results[[1]][,1]
+results[[2]][,1]
+unlist(results)
+unlist(results[[1]])
+results[[1]]["species"]
+cbind(results[[1]]["species"],results[[2]]["species"])
+rbind(results[[1]]["species"],results[[2]]["species"])
+rbind(results[[1]]["species"],results[[2]]["species"],results[[3]]["species"])
+rbind(results[[1]]["species"],results[[2]]["species"],results[[3]]["species"],results[[3]]["species"])
+comms
+quadrats
+quadrats <- rep(quadratID, repetitions)
+quadrats
+length(quadrats)
+results[[1]]
+rbind(results[[1]]["species"],results[[2]]["species"],results[[3]]["species"],results[[4]]["species"])
+rbind(results[[1]]["species"],results[[2]]["species"],results[[3]]["species"],results[[4]]["species"])
+results[[1]]
+species <- c()#
+#
+for(i in 1:length(results))#
+{#
+	if(i == 1)#
+	{#
+		species <- results[[i]]["species"]#
+	}#
+	else if(i != 1)#
+	{#
+		species <- rbind(species, results[[i]]["species"])#
+	}#
+}
+species
+abundances <- c()#
+#
+for(i in 1:length(results))#
+{#
+	if(i == 1)#
+	{#
+		abundances <- results[[i]]["freq"]#
+	}#
+	else if(i != 1)#
+	{#
+		abundances <- rbind(abundances, results[[i]]["freq"])#
+	}#
+}
+abundances
+initial.cdm <- data.frame(quadrats, abundances, species)
+initial.cdm
+sample2matrix(initial.cdm)

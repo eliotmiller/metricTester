@@ -2,11 +2,15 @@
 \alias{readIn}
 \title{Batch read multiple csv files to list}
 \usage{
-  readIn(path)
+  readIn(path, row.names = TRUE)
 }
 \arguments{
   \item{path}{The path of the directory containing the
   files to be read}
+
+  \item{row.names}{Do the files to be read in have row
+  names? Default is yes. If not, set this argument to
+  FALSE.}
 }
 \value{
   A list with each file stored as a separate element.

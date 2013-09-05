@@ -4,6 +4,9 @@
 #' list.
 #'
 #' @param path The path of the directory containing the files to be read
+#'
+#' @param row.names Do the files to be read in have row names? Default is yes. If not, set
+#' this argument to FALSE.
 #' 
 #' @details This function reads in all the files from a given directory and stores each as
 #' a separate element in a list. The names of the original files do not matter, but the
@@ -39,14 +42,24 @@
 #'
 #' #legend(x=1, y=98, c("Type1","No signal","Good"), fill=c("red","gray","blue"))
 
-readIn <- function(path)
+readIn <- function(path, row.names=TRUE)
 {
 	results <- list()
 	files <- list.files(path)
 	setwd(path)
-	for(i in 1:length(files))
+	if(row.names==TRUE)
 	{
-		results[[i]] <- read.table(files[i], header=TRUE, row.names=1, sep=",")
+		for(i in 1:length(files))
+		{
+			results[[i]] <- read.table(files[i], header=TRUE, row.names=1, sep=",")
+		}
+	}
+	else if(row.names==FALSE)
+	{	
+		for(i in 1:length(files))
+		{
+			results[[i]] <- read.table(files[i], header=TRUE, sep=",")
+		}
 	}
 	return(results)
 }
