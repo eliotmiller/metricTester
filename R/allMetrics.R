@@ -40,7 +40,7 @@ allMetrics <- function(tree, picante_cdm)
 {
 	spacodiR_cdm <- t(picante_cdm) ##species are rows, sites are columns
 	
-	ecoPD_cdm <- suppressWarnings(phylo4com(tree, spacodiR_cdm)) ##this is by far the slowest thing happening in this function so far! who knows why?! we need to fix that probably
+	ecoPD_cdm <- suppressWarnings(phylo4com(tree, spacodiR_cdm))
 
 	dists <- cophenetic(tree)
 

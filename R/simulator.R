@@ -104,9 +104,9 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		dimnames(cdm)[[1]] <- quadratNames
 
-		##call the allMetricsNull.csv() function
+		##call the allMetricsNull() function
 
-		allMetricsNull.csv(orig.matrix=cdm, tree=tree, null.method=null.method, no.randomizations=no.randomizations, temp.file=temp.file)
+		allMetricsNull(orig.matrix=cdm, tree=tree, null.method=null.method, no.randomizations=no.randomizations, temp.file=temp.file)
 
 		##read the simulations in 
 

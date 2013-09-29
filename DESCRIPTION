@@ -7,7 +7,8 @@ Depends:
     R (>= 3.0.1),
     phylobase,
     ecoPDcorr,
-    geiger
+    geiger,
+    spacodiR
 License: GPL-3
 LazyData: true
 Collate:
@@ -25,6 +26,8 @@ Collate:
     'quadratPlacer.R'
     'quadratContents.R'
     'quadratPlotter.R'
-    'allMetricsNull.csv.R'
     'readIn.R'
     'sigTest.R'
+    'allMetricsNull.R'
+    'singleMetric.R'
+    'singleMetricNull.R'
