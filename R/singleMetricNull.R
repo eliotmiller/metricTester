@@ -41,7 +41,7 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' system.time(allMetricsNull(tree, cdm, "richness", 10, "output.csv"))
+#' system.time(singleMetricNull(tree, cdm, "mpd", "richness", 10, "output.csv"))
 
 singleMetricNull <- function(tree, orig.matrix, metric, null.method, no.randomizations, temp.file)
 {
