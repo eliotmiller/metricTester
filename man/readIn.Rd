@@ -46,9 +46,15 @@
 
 #output <- output[,ordr]
 
-#barplot(output, beside=TRUE, las=2, cex.names=0.7, col=c("red","gray","blue"), xlab="Metric", ylab="Count")
+#dimnames(output)[[2]] <- gsub("_", " ", dimnames(output)[[2]])
 
-#legend(x=1, y=98, c("Type1","No signal","Good"), fill=c("red","gray","blue"))
+#quartz(height=6, width=12)
+
+#par(mar=c(6.6,4.1,4.1,2.1))
+
+#barplot(output, beside=TRUE, las=2, cex.names=1, col=c("red","gray","blue"), xlab="Metric", ylab="Count")
+
+#legend(x=65, y=85, c("Type I error","Type II error","Successful"), fill=c("red","gray","blue"))
 }
 \references{
   Miller, Trisos and Farine.

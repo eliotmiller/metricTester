@@ -32,145 +32,27 @@ resamp.1a(obj=spl)
 resamp.1a(obj=spl, abund.class.ratio=2)
 spl
 resamp.1a
-library("devtools")#
-#
-install_github("devtools")#
-#
-install_github("roxygen3")#
-#
-library("roxygen3")#
-#
-##doing the above notes with xcode allowed the following to run successfully#
-#
-has_devel()
+1.25/5
+1.75/2
+0.25+0.9+1+0.75+1+0.75
+5.75+1.75+0.75
+1.5/4
+1.75/4
+1.25*2
+2.5+1.5+1.35+1+0.75+1.1
+1.25+1+0.5+0.4
+1.25+1+0.5+0.4+0.75+1.75+0.75
+1.25/3
+1.25/3*2
+4.8+1.75
+3.5+1.75
+5.25+0.75+1.75+0.75
+?write.csv
+1.25*3+1.75
+5.5+2.5+0.75
+1.75/2
+1.9+0.25+0.25+1
+library(devtools)
+library(roxygen3)
 load_all()
-document()
-document()
-document()
-document()
-dev_help(allMetricsNull)
-dev_help("allMetricsNull")
-library(geiger)#
-library(picante)#
-library(spacodiR)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "richness", 10, "output.csv"))
-cdm
-as.spacodi(cdm)
-as.spacodi(cdm)->test
-as.picante(test)
-document()
-library(geiger)#
-library(picante)#
-library(spacodiR)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "richness", 2, "output.csv"))
-library(geiger)#
-library(picante)#
-library(spacodiR)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "2x", 2, "output.csv"))
-suppressWarnings(as.spacodi(cdm))
-?suppressWarnings
-suppressWarnings(as.spacodi(cdm))->test
-as.spacodi
-?sink
-sink(as.spacodi(cdm))->test
-?invisible
-rm(test)
-test
-test
-test2 <- as.spacodi(cdm)
-rm(test2)
-test2 <- invisible(as.spacodi(cdm))
-?capture.output
-test2 <- capture.output(as.spacodi(cdm))
-suppressMessages(as.spacodi(cdm))
-suppressMessages(as.spacodi(cdm))->test2
-document()
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "richness", 5, "output.csv"))
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "2x", 5, "output.csv"))
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "3x", 5, "output.csv"))
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "independentswap", 5, "output.csv"))
-PSV==TRUE
-psv==TRUE
-psv
-psv==TRUE
-metric <- "psv"
-metric=="psv"
-rm(psv)
-rm(metric)
-metric=="psv"
-spacodi_R
-spacodi_R <- NULL
-document()
-cdm
-tree
-singleMetric(tree, cdm, "mpd")
-document()
-singleMetric(tree, cdm, "mpd")
-singleMetric(tree, cdm, "interspecific")
-singleMetric(tree, cdm, "intraspecific")
-singleMetric(tree, cdm, "complete")
-singleMetric(tree, cdm, "shit")
-singleMetric(tree, cdm, "psc")
-singleMetric(tree, cdm, "psv")
-singleMetric(tree, cdm, "doh")
-singleMetric(tree, cdm, "pae")
-singleMetric(tree, cdm, "iac")
-singleMetric(tree, cdm, "pd")
-singleMetric(tree, cdm, "pd.c")
-singleMetric(tree, cdm, "simpson")
-singleMetric(tree, cdm, "qe")
-singleMetric(tree, cdm, "eed")
-document()
-singleMetricNull(tree, cdm, "mpd", "richness", 3, "deleteme.csv")
-singleMetricNull(tree, cdm, "simpson", "richness", 3, "deleteme.csv")
-singleMetricNull(tree, cdm, "shit", "richness", 3, "deleteme.csv")
-singleMetricNull(tree, cdm, "hed", "richness", 3, "deleteme.csv")
 document()
