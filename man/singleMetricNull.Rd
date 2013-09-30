@@ -15,8 +15,8 @@
   Options are as in singleMetric}
 
   \item{null.method}{A picante-style null, e.g. "richness"
-  or "frequency", or either "2x" or "3x", which will call
-  spacodiR}
+  or "frequency", or "2x", "3x" "1s" or "2s", which will
+  call spacodiR}
 
   \item{no.randomizations}{The desired number of
   no.randomizations the function will run, i.e. the number
@@ -33,7 +33,7 @@
 \description{
   Given a phylo object, a picante-style community data
   matrix (sites are rows, species are columns), a desired
-  null method (any of picante or also 2x or 3x of
+  null method (any of picante or also 2x, 3x, 1s, & 2s of
   spacodiR), a desired number of randomizations, and an
   output file name, will shuffle matrix according to null
   method, then calculate the desired community structure
@@ -45,8 +45,8 @@
 \details{
   This runs much faster than trying to do this in memory in
   R. I will upload some of those type of functions in the
-  near future anyhow. If you call null metrics 2x or 3x, it
-  will call spacodiR for the resampling
+  near future anyhow. If you call null metrics 2x, 3x, 1s
+  or 2s, it will call spacodiR for the resampling
 }
 \examples{
 library(geiger)
@@ -60,7 +60,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
-system.time(allMetricsNull(tree, cdm, "richness", 10, "output.csv"))
+system.time(singleMetricNull(tree, cdm, "mpd", "richness", 10, "output.csv"))
 }
 \references{
   Miller, Trisos and Farine.
