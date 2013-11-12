@@ -1,58 +1,426 @@
-apply(resamp.2s(cdm2), 2, lengthNonZeros)
-apply(resamp.3s(cdm2), 2, lengthNonZeros)
-apply(resamp.3i(cdm2), 2, lengthNonZeros)
-hist(apply(cdm,1,lengthNonZeros))
-hist(apply(resamp.3i(cdm2), 2, lengthNonZeros))
-resamp.2s
-resamp.1s
-resamp.2s(cdm2)
-resamp.1s(cdm2)
-resamp.2x(cdm2)
-resamp.3x(cdm2)
-apply(resamp.3x(cdm2), 2, lengthNonZeros)
-apply(resamp.2x(cdm2), 2, lengthNonZeros)
-apply(resamp.3x(cdm2), 2, lengthNonZeros)
-apply(resamp.3x(cdm2), 1, sum)
-apply(resamp.2x(cdm2), 1, sum)
-?simulateComm
-resamp.2x
-resamp.3x
-68/177
-cdm2
-resamp.1a(cdm2)
-resamp.1a(cdm2, abund.class.ratio=10)
-resamp.1a(cdm2, abund.class.ratio=1)
-resamp.1a(cdm2, abund.class.ratio=2)
-resamp.1a(cdm2, abund.class.ratio=10)
-resamp.1a
-data(sp.example)attach(sp.example)spl# shuffle datasetresamp.1a(obj=spl, abund.class.ratio=3)
-resamp.1a(obj=spl)
-spl
-resamp.1a(obj=spl)
-resamp.1a(obj=spl, abund.class.ratio=2)
-spl
-resamp.1a
-1.25/5
-1.75/2
-0.25+0.9+1+0.75+1+0.75
-5.75+1.75+0.75
-1.5/4
-1.75/4
-1.25*2
-2.5+1.5+1.35+1+0.75+1.1
-1.25+1+0.5+0.4
-1.25+1+0.5+0.4+0.75+1.75+0.75
-1.25/3
-1.25/3*2
-4.8+1.75
-3.5+1.75
-5.25+0.75+1.75+0.75
-?write.csv
-1.25*3+1.75
-5.5+2.5+0.75
-1.75/2
-1.9+0.25+0.25+1
-library(devtools)
-library(roxygen3)
+final.matrix
+final.matrix[final.matrix==FALSE] <- NA
+final.matrix
+closest.table <- which(!is.na(final.matrix), arr.ind=T)
+closest.table
+individuals.considered
+final.table <- closest.table[closest.table[,1] %in% individuals.considered,]
+final.table
+semifinal.matrix
+final.table <- closest.table[closest.table[,2] %in% individuals.considered,]
+final.table
+individuals.considered
 load_all()
-document()
+load_all()
+arena
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+load_all()
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+killSome(tree, arena, 50, 0.5)
+arena
+test <- competitionSimulator(tree, arena, 50, 0.5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 3)
+test
+dim(test$arena)
+dim(arena$arena)
+test <- competitionSimulator(tree, arena, 50, 0.5, 50)
+test <- competitionSimulator(tree, arena, 50, 0.5, 2)
+test <- competitionSimulator(tree, arena, 50, 0.5, 3)
+test <- competitionSimulator(tree, arena, 50, 0.5, 4)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+final.table
+dim(final.table)
+final.table <- final.table[-5,]
+final.table
+final.table <- final.table[-5,]
+final.table <- final.table[-5,]
+final.table <- final.table[-5,]
+final.table <- final.table[-5,]
+final.table
+final.table <- final.table[-1:4,]
+final.table <- final.table[-1,]
+final.table <- final.table[-1,]
+final.table <- final.table[-1,]
+final.table
+final.table <- final.table[-1,]
+test <- competitionSimulator(tree, arena, 50, 0.5, 2)
+competitionSimulator <- function(tree, initialArena, max.distance, percent.killed, iterations)#
+{#
+	for(i in 1:iterations)#
+	{#
+		#take the initialArena and kill off some of the individuals in genetically clustered neighborhoods#
+		killed.arena <- killSome(tree, initialArena, max.distance, percent.killed)#
+#
+		print(killed.arena)#
+		#add individuals back in, but save this as initialArena, so that it gets plugged back#
+		#in next iteration instead of the original random arena#
+		initialArena <- settleSome(killed.arena)#
+		print(initialArena)#
+	}#
+#
+	return(killed.arena)#
+}
+test <- competitionSimulator(tree, arena, 50, 0.5, 2)
+competitionSimulator <- function(tree, initialArena, max.distance, percent.killed, iterations)#
+{#
+	for(i in 1:iterations)#
+	{#
+		#take the initialArena and kill off some of the individuals in genetically clustered neighborhoods#
+		killed.arena <- killSome(tree, initialArena, max.distance, percent.killed)#
+#
+		print(i)#
+		print("Killed")#
+		print(killed.arena)#
+		#add individuals back in, but save this as initialArena, so that it gets plugged back#
+		#in next iteration instead of the original random arena#
+		initialArena <- settleSome(killed.arena)#
+		print("Settled")	#
+		print(initialArena)#
+	}#
+#
+	return(killed.arena)#
+}
+test <- competitionSimulator(tree, arena, 50, 0.5, 2)
+test <- competitionSimulator(tree, arena, 50, 0.5, 4)
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+load_all()
+test <- competitionSimulator(tree, arena, 50, 0.5, 5)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 50, 0.5, 3)
+test
+individual.identities <- test$arena$individuals
+individual.identities
+gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arenaOutput$arena$X, arenaOutput$arena$Y), ncol=2)
+gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(test$arena$X, test$arena$Y), ncol=2)
+for.geo.dist
+geo.dist <- dist(for.geo.dist)
+geo.dist
+geo.dist.matrix <- as.matrix(geo.dist)#
+#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA
+geo.dist.matrix <- as.matrix(geo.dist)#
+#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > 50] <- NA
+geo.dist.matrix
+individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)
+individual.involved
+species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)
+species.involved
+individual.identities
+find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]
+specific.gen.dist
+specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist
+specific.gen.dist.matrix
+average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)
+average.relatedness
+cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)
+cutoff <- quantile(average.relatedness, probs=0.5, na.rm=TRUE)
+cutoff
+individuals.considered <- which(average.relatedness < cutoff)
+individuals.considered
+individuals.considered <- which(average.relatedness <= cutoff)
+individuals.considered
+individuals.considered <- which(average.relatedness < cutoff)
+individuals.considered
+neighbor within the maximum distance), and its nearest genetic neighbor#
+	mins <- suppressWarnings(apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE))
+mins
+make a temporary table where you bind the minimum value onto the bottom of the table#
+	temp.table <- rbind(specific.gen.dist.matrix, mins)
+temp.table
+elements in that column#
+	semifinal.matrix <- apply(temp.table, 2, compareMins)#
+	final.matrix <- semifinal.matrix
+final.matrix
+final.matrix[final.matrix==FALSE] <- NA
+final.matrix
+closest.table <- which(!is.na(final.matrix), arr.ind=T)
+closest.table
+final.table <- closest.table[closest.table[,2] %in% individuals.considered,]
+final.table
+kill.list <- unique(sample(final.table[,1], size=(dim(final.table)[1])/2))
+kill.list
+new.arena <- test$arena[-kill.list,]
+new.arena
+load_all()
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 50, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 10)
+test <- competitionSimulator(tree, arena, 300, 0.5, 100)
+test <- competitionSimulator(tree, arena, 300, 0.5, 100)
+test <- competitionSimulator(tree, arena, 5, 0.5, 100)
+load_all()
+tree <- sim.bdtree(stop="taxa", n=50)#
+#
+arena <- randomArena(tree, 0, 300, 0, 300, 1, 1)#
+#
+library(colorRamps)#
+#
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
+arena
+tree
+competitionSimulator(tree, arena, 30, 0.1, 10)
+competitionSimulator(tree, arena, 30, 0.1, 10)->test
+test
+dim(test$arena)
+dim(arena$arena)
+plot(test$X, test$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
+plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
+quadratPlotter(bounds)
+temp.cdm <- quadratContents(positions, bounds)
+temp.cdm <- quadratContents(test$arena, bounds)
+temp.cdm
+cdm <- t(temp.cdm)
+cdm
+coef <- cor(cdm, method="spearman") # get the correlation coefficients#
+#
+coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
+#
+hist(coef.dist, main="Pairwise Correlation Coefficients")
+summary(coef.dist) # how close is the mean value to zero
+arena <- randomArena(tree, 0, 300, 0, 300, 1, 1)
+library(colorRamps)#
+#
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])#
+#
+new.arena <- killSome(tree, arena, 30, 0.1)
+arena <- randomArena(tree, 0, 300, 0, 300, 2, 1)
+library(colorRamps)#
+#
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])#
+#
+new.arena <- killSome(tree, arena, 30, 0.1)
+arena
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
+test <- competitionSimulator(tree, arena, 30, 0.1, 10)
+test
+dim(test$arena)
+dim(arena$arena)
+plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+#plot the arena. don't close the window#
+plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
+#
+quadratPlotter(bounds)
+plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+quadratPlotter(bounds)
+temp.cdm <- quadratContents(test$arena, bounds)#
+#
+cdm <- t(temp.cdm)
+cdm
+coef <- cor(cdm, method="spearman") # get the correlation coefficients#
+#
+coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
+#
+hist(coef.dist, main="Pairwise Correlation Coefficients")
+summary(coef.dist) # how close is the mean value to zero
+sd(coef.dist)
+t.test(coef.dist, mu=0)
+cdm
+dimnames(cdm)[[1]]
+dimnames(cdm)[[1]] <- paste("quadrat",1:15,sep="")
+cdm
+dists <- cophenetic(tree)
+mpd(cdm, dists)
+mean(dists)
+mean(mpd(cdm, dists))
+ses.mpd(cdm, dists, null.model="richness")
+?ses.mpd
+competitionSimulator <- function(tree, initialArena, max.distance, percent.killed, iterations)#
+{#
+	for(i in 1:iterations)#
+	{#
+		#take the initialArena and kill off some of the individuals in genetically clustered neighborhoods#
+		killed.arena <- killSome(tree, initialArena, max.distance, percent.killed)#
+#
+		#add individuals back in, but save this as initialArena, so that it gets plugged back#
+		#in next iteration instead of the original random arena#
+		initialArena <- settleSome(killed.arena)#
+	}#
+#
+	return(killed.arena)#
+}
+load_all()
+tree <- sim.bdtree(stop="taxa", n=50)#
+#
+arena <- randomArena(tree, 0, 300, 0, 300, 4, 1)#
+#
+library(colorRamps)#
+#
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
+test <- competitionSimulator(tree, arena, 30, 0.1)
+test <- competitionSimulator(tree, arena, 30, 0.1, 1)
+test <- competitionSimulator(tree, arena, 30, 0.1, 100)
+system.time(test <- competitionSimulator(tree, arena, 30, 0.1, 1))
+12*100
+1200/60
+system.time(test <- competitionSimulator(tree, arena, 30, 0.1, 25))
+test
+dim(test$arena)
+dim(arena$arena)
+plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+quadratPlotter(bounds)
+temp.cdm <- quadratContents(test$arena, bounds)#
+#
+cdm <- t(temp.cdm)
+cdm
+apply(cdm,1,lengthNonZeros)
+plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+quadratPlotter(bounds)#
+#
+temp.cdm <- quadratContents(arena$arena, bounds)#
+#
+cdm <- t(temp.cdm)
+apply(cdm,1,lengthNonZeros)
+coef <- cor(cdm, method="spearman") # get the correlation coefficients#
+#
+coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
+#
+hist(coef.dist, main="Pairwise Correlation Coefficients")#
+#
+summary(coef.dist) # how close is the mean value to zero
+dplot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+quadratPlotter(bounds)#
+#
+temp.cdm <- quadratContents(test$arena, bounds)#
+#
+cdm <- t(temp.cdm)
+plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+#
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+#
+quadratPlotter(bounds)#
+#
+temp.cdm <- quadratContents(test$arena, bounds)#
+#
+cdm <- t(temp.cdm)
+cdm
+coef <- cor(cdm, method="spearman") # get the correlation coefficients#
+#
+coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
+#
+hist(coef.dist, main="Pairwise Correlation Coefficients")#
+#
+summary(coef.dist) # how close is the mean value to zero
+dists <- cophenetic(tree)
+mpd(cdm, dists)
+mean(dists)
+ses.mpd(cdm, dists, null.model="richness")
+mpds <- mpd(cdm, dists)
+singleMetricNull(tree, cdm, "mpd", "richness", 10000, "temp.csv")
+?singleMetricNull
+dev_help("singleMetricNull")
+dev_help("singleMetric")
+singleMetricNull(tree, cdm, "mpd", "richness", 10000, "temp.csv")
+cdm
+dimnames(cdm)[[1]]
+dimnames(cdm)[[1]] <- paste("quadrat",1:15)
+cdm
+singleMetricNull(tree, cdm, "mpd", "richness", 10000, "temp.csv")
+?summaries
+dev_help("summaries")
+possibilities <- read.csv("temp.csv")#
+#
+#call the summaries function from within a ddply statement#
+expectations <- ddply(possibilities, .(richness), summaries)
+library(plyr)
+>
+> expectations <- ddply(possibilities, .(richness), summaries)
+expectations <- ddply(possibilities, .(richness), summaries)
+expectations
+apply(cdm, 1, lengthNonZeros)
+plot(expectations$result.upper~expectations$richness)
+plot(expectations$result.upper~expectations$richness, ylim=c(4,5))
+points(expectations$result.lower~expectations$richness)
+rich
+rich <- apply(cdm, 1, lengthNonZeros)
+points(mpds~rich, pch=20, cex=2)
+rbind(mpds,rich)
