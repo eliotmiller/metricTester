@@ -1,5 +1,54 @@
+#' Remove most closely related individuals
+#'
+#' Given a phylogenetic tree, a spatial arena of individuals with species identities,
+#' and arguments for the desired distance and percent removed, removes some of the most
+#' closely related individuals in the arena.
+#'
+#' @param tree Phylo object
+#' @param arenaOutput A spatial arena with three columns: individuals (the species ID), 
+#' X (the x axis location of that individual), and Y (the y axis location). The
+#' arenaOutput actually needs a number of other elements in order for later functions to
+#' work properly, so any modifications to the code should take note of this.
+#' @param max.distance The geographic distance within which geographically neighboring
+#' indivduals should be considered to influence the individual in question.
+#' @param percent.killed The percent of individuals in the total arena that should be
+#' considered (as a proportion, e.g. 0.5 = half).
+#' 
+#' @details This function identifies individuals in the most genetically clustered
+#' geographic neighborhoods, continues on to identify the most closely related individual
+#' to a focal individual, and randomly chooses whether to remove that individual or the
+#' focal individual. It expects a list with a number of additional elements beyond the 
+#' arena (currently, the mean genetic relatedness of geographic neighborhoods, a vector of
+#' regional abundance [where each element is a species name, repeated as many times as is
+#' present in pool], and the dimensions of the arena). 
+#'
+#' @return A list of 5 elements: the average relatedness in the geographic neighbordhood
+#' of consideration (appended to any previous values that were fed into the function), 
+#' the number of individuals killed, the original input regional
+#' abundance vector, the new spatial arena, and the dimensions of that arena.
+#'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' library(geiger)
+#'
+#' #simulate tree with birth-death process
+#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#'
+#' arena <- randomArena(tree, x.min=0, x.max=300, y.min=0, y.max=300, mean.log.individuals=2)
+#'
+#' new.arena <- killSome(tree, arenaOutput=arena, max.distance=50, percent.killed=0.2)
+#'
+#' dim(arena$arena)
+#' dim(arena$new.arena)
+
 killSome <- function(tree, arenaOutput, max.distance, percent.killed)
 {
+	#set up a blank output list to save into
+	output <- list()
+
 	#save the species identities of all individuals
 	individual.identities <- arenaOutput$arena$individuals
 
@@ -44,6 +93,10 @@ killSome <- function(tree, arenaOutput, max.distance, percent.killed)
 	#find the average relatedness of every individual to its closest neighbors
 	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)
 	
+	###DELETE THIS CODE AFTER TESTING. you just want to know mean average relatedness in geographic neighborhoods with iterations
+	
+	output$related <- append(arenaOutput$related, mean(average.relatedness))
+	
 	#define the mean genetic distance below which individuals will be considered to be in genetically clustered geographic neighborhoods
 	cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)
 	
@@ -83,7 +136,10 @@ killSome <- function(tree, arenaOutput, max.distance, percent.killed)
 	
 	#create and return the output
 	
-	output <- list(no.killed=length(kill.list), regional.abundance=arenaOutput[[1]], arena=new.arena, dims=arenaOutput$dims)
+	output$no.killed=length(kill.list)
+	output$regional.abundance=arenaOutput$regional.abundance
+	output$arena=new.arena
+	output$dims=arenaOutput$dims
 	
 	return(output)
 }

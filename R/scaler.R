@@ -24,8 +24,6 @@
 #'
 #' scaled <- scaler(results[[2]], min.arena=0, max.arena=300)
 
-
-
 ##write a function that will take the second element of the output of the phyloNtraits
 ##function, and the min and max arena arguments, and output a data frame of scaled traits
 ##where min and max traits are min and max of arena

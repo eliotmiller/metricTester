@@ -1,15 +1,15 @@
 #' Test metrics across multiple arenas
 #'
-#' Sloppy function that needs work. Intended to be a large function tying many previous
-#' functions together into a single simulator function generating spatial arenas, sampling
-#' quadrats, generating null expectations, testing for significance of observed metrics,
-#' and summarizing results as a matrix of type I and type II error rates.
+#' Large, somewhat sloppy function tying many previous functions together into a single
+#' habitat filtering simulator function that generates spatial arenas, samples
+#' quadrats, generates null expectations, tests for significance of observed metrics,
+#' and summarizes results as a matrix of type I and type II error rates.
 #'
 #' @param no.species Number of species in each arena
-#' @param x_min Minimum X coordinate of arena, e.g. 0
-#' @param x_max Maximum X coordinate of arena
-#' @param y_min Minimum Y coordinate of arena, e.g. 0
-#' @param y_max Maximum Y coordinate of arena
+#' @param x.min Minimum X coordinate of arena, e.g. 0
+#' @param x.max Maximum X coordinate of arena
+#' @param y.min Minimum Y coordinate of arena, e.g. 0
+#' @param y.max Maximum Y coordinate of arena
 #' @param no.quadrats Number of quadrats to sample
 #' @param quadrat_size Size of an individual quadrat
 #' @param mean.log.individuals Mean log of abundance vector from which species abundances
@@ -52,13 +52,13 @@
 #' library(plyr)
 #' library(picante)
 #'
-#' simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15, 
+#' filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15, 
 #' quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50, 
 #' null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1, 
 #' wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv", 
 #' output.file="confused.csv")
 
-simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadrat_size, mean.log.individuals, length.parameter, sd.parameter, null.method, concatBYrichness=TRUE, no.randomizations, expectation, wrong, no.metrics, iterations, temp.file, output.file)
+filteringLooper <- function(no.species, x.min, x.max, y.min, y.max, no.quadrats, quadrat_size, mean.log.individuals, length.parameter, sd.parameter, null.method, concatBYrichness=TRUE, no.randomizations, expectation, wrong, no.metrics, iterations, temp.file, output.file)
 {
 	output <- matrix(0, nrow=no.metrics, ncol=3)
 
@@ -70,7 +70,7 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		tree <- temp[[1]]
 
-		scaled <- scaler(temp[[2]], x_min, x_max)
+		scaled <- scaler(temp[[2]], x.min, x.max)
 
 		##with mean.log.individuals=4, length.parameter=5000, and sd.parameter=50, we're somewhere
 		##near 3800 individuals
@@ -85,9 +85,9 @@ simulator <- function(no.species, x_min, x_max, y_min, y_max, no.quadrats, quadr
 
 		##plot the arena. don't close the window. 
 
-		plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,x_max), ylim=c(0,y_max), col=cols[positions$individuals])
+		plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,x.max), ylim=c(0,y.max), col=cols[positions$individuals])
 
-		bounds <- quadratPlacer(no.quadrats, x_max=x_max, y_max=y_max, quadrat_size=quadrat_size)
+		bounds <- quadratPlacer(no.quadrats, x.max=x.max, y.max=y.max, quadrat_size=quadrat_size)
 
 		quadratPlotter(bounds)
 

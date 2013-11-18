@@ -36,7 +36,7 @@
 #' #plot the arena. don't close the window
 #' plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])
 #'
-#' bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
+#' bounds <- quadratPlacer(no.quadrats=15, x.max=300, y.max=300, quadrat_size=50)
 #'
 #' quadratPlotter(bounds)
 #'

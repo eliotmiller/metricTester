@@ -1,8 +1,8 @@
-\name{simulator}
-\alias{simulator}
+\name{filteringLooper}
+\alias{filteringLooper}
 \title{Test metrics across multiple arenas}
 \usage{
-  simulator(no.species, x_min, x_max, y_min, y_max,
+  filteringLooper(no.species, x.min, x.max, y.min, y.max,
     no.quadrats, quadrat_size, mean.log.individuals,
     length.parameter, sd.parameter, null.method,
     concatBYrichness = TRUE, no.randomizations,
@@ -12,13 +12,13 @@
 \arguments{
   \item{no.species}{Number of species in each arena}
 
-  \item{x_min}{Minimum X coordinate of arena, e.g. 0}
+  \item{x.min}{Minimum X coordinate of arena, e.g. 0}
 
-  \item{x_max}{Maximum X coordinate of arena}
+  \item{x.max}{Maximum X coordinate of arena}
 
-  \item{y_min}{Minimum Y coordinate of arena, e.g. 0}
+  \item{y.min}{Minimum Y coordinate of arena, e.g. 0}
 
-  \item{y_max}{Maximum Y coordinate of arena}
+  \item{y.max}{Maximum Y coordinate of arena}
 
   \item{no.quadrats}{Number of quadrats to sample}
 
@@ -71,12 +71,12 @@
   as the output matrix.
 }
 \description{
-  Sloppy function that needs work. Intended to be a large
-  function tying many previous functions together into a
-  single simulator function generating spatial arenas,
-  sampling quadrats, generating null expectations, testing
-  for significance of observed metrics, and summarizing
-  results as a matrix of type I and type II error rates.
+  Large, somewhat sloppy function tying many previous
+  functions together into a single habitat filtering
+  simulator function that generates spatial arenas, samples
+  quadrats, generates null expectations, tests for
+  significance of observed metrics, and summarizes results
+  as a matrix of type I and type II error rates.
 }
 \details{
   Could easily modify this function to save more
@@ -94,7 +94,7 @@ library(colorRamps)
 library(plyr)
 library(picante)
 
-simulator(no.species=50, x_min=0, x_max=300, y_min=0, y_max=300, no.quadrats=15,
+filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,
 quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,
 null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,
 wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",

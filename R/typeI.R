@@ -67,12 +67,18 @@
 
 typeI <- function(significance.results, expectation, wrong)
 {
+	#define a data frame without IAC
 	normal <- significance.results[,names(significance.results)!="IAC"]
 
+	#set up a blank matrix to save type I and II results into
 	typeI.results <- matrix(nrow=dim(significance.results)[2], ncol=3)
-
+	
+	#name the blank matrix columns
 	dimnames(typeI.results)[[2]] <- c("TypeI","NoSignal","Good")
 
+	#go through each column of the normal style results (each metric) and see if any plots
+	#deviate from expectation (=typeI), if fewer than half of plots show expectation,
+	#or if at least half show the expectation
 	for(i in 1:dim(normal)[2])
 	{
 		if(sum(normal[,i]==wrong) > 0)
@@ -89,6 +95,9 @@ typeI <- function(significance.results, expectation, wrong)
 		}
 	}
 
+	#go through just the IAC column and if the observed equals the expectation of the rest
+	#of the normal metrics, it's at typeI error, and vice versa. save these results into
+	#the bottom row of the typeI.results matrix
 	if(sum(significance.results$IAC==expectation) > 0)
 	{
 		typeI.results[dim(significance.results)[2],1] <- 1
@@ -97,13 +106,15 @@ typeI <- function(significance.results, expectation, wrong)
 	{
 		typeI.results[dim(significance.results)[2],2] <- 1
 	}
-	if(sum(significance.results$IAC==wrong)/dim(significance.results)[1] > 0.5)
+	if(sum(significance.results$IAC==wrong)/dim(significance.results)[1] >= 0.5)
 	{
 		typeI.results[dim(significance.results)[2],3] <- 1
 	}
 
+	#bind the normal names and "IAC"
 	dimnames(typeI.results)[[1]] <- c(names(normal),"IAC")
 
+	#set any comparisons that didn't work to 0
 	typeI.results[is.na(typeI.results)]=0
 	
 	return(typeI.results)

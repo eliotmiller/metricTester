@@ -1,153 +1,10 @@
-final.matrix
-final.matrix[final.matrix==FALSE] <- NA
-final.matrix
-closest.table <- which(!is.na(final.matrix), arr.ind=T)
-closest.table
-individuals.considered
-final.table <- closest.table[closest.table[,1] %in% individuals.considered,]
-final.table
-semifinal.matrix
-final.table <- closest.table[closest.table[,2] %in% individuals.considered,]
-final.table
-individuals.considered
-load_all()
-load_all()
-arena
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-load_all()
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-killSome(tree, arena, 50, 0.5)
-arena
-test <- competitionSimulator(tree, arena, 50, 0.5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 3)
-test
-dim(test$arena)
-dim(arena$arena)
-test <- competitionSimulator(tree, arena, 50, 0.5, 50)
-test <- competitionSimulator(tree, arena, 50, 0.5, 2)
-test <- competitionSimulator(tree, arena, 50, 0.5, 3)
-test <- competitionSimulator(tree, arena, 50, 0.5, 4)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-final.table
-dim(final.table)
-final.table <- final.table[-5,]
-final.table
-final.table <- final.table[-5,]
-final.table <- final.table[-5,]
-final.table <- final.table[-5,]
-final.table <- final.table[-5,]
-final.table
-final.table <- final.table[-1:4,]
-final.table <- final.table[-1,]
-final.table <- final.table[-1,]
-final.table <- final.table[-1,]
-final.table
-final.table <- final.table[-1,]
-test <- competitionSimulator(tree, arena, 50, 0.5, 2)
-competitionSimulator <- function(tree, initialArena, max.distance, percent.killed, iterations)#
-{#
-	for(i in 1:iterations)#
-	{#
-		#take the initialArena and kill off some of the individuals in genetically clustered neighborhoods#
-		killed.arena <- killSome(tree, initialArena, max.distance, percent.killed)#
-#
-		print(killed.arena)#
-		#add individuals back in, but save this as initialArena, so that it gets plugged back#
-		#in next iteration instead of the original random arena#
-		initialArena <- settleSome(killed.arena)#
-		print(initialArena)#
-	}#
-#
-	return(killed.arena)#
-}
-test <- competitionSimulator(tree, arena, 50, 0.5, 2)
-competitionSimulator <- function(tree, initialArena, max.distance, percent.killed, iterations)#
-{#
-	for(i in 1:iterations)#
-	{#
-		#take the initialArena and kill off some of the individuals in genetically clustered neighborhoods#
-		killed.arena <- killSome(tree, initialArena, max.distance, percent.killed)#
-#
-		print(i)#
-		print("Killed")#
-		print(killed.arena)#
-		#add individuals back in, but save this as initialArena, so that it gets plugged back#
-		#in next iteration instead of the original random arena#
-		initialArena <- settleSome(killed.arena)#
-		print("Settled")	#
-		print(initialArena)#
-	}#
-#
-	return(killed.arena)#
-}
-test <- competitionSimulator(tree, arena, 50, 0.5, 2)
-test <- competitionSimulator(tree, arena, 50, 0.5, 4)
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-load_all()
-test <- competitionSimulator(tree, arena, 50, 0.5, 5)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 50, 0.5, 3)
-test
-individual.identities <- test$arena$individuals
-individual.identities
-gen.dist <- cophenetic(tree)#
-	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
-	for.geo.dist <- matrix(cbind(arenaOutput$arena$X, arenaOutput$arena$Y), ncol=2)
-gen.dist <- cophenetic(tree)#
-	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
-	for.geo.dist <- matrix(cbind(test$arena$X, test$arena$Y), ncol=2)
-for.geo.dist
-geo.dist <- dist(for.geo.dist)
-geo.dist
-geo.dist.matrix <- as.matrix(geo.dist)#
-#
-	#set all geographic distances from one individual to itself to NA	#
-	diag(geo.dist.matrix) <- NA#
-	#set all geographic distances greater than the max distance to consider to NA#
-	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA
-geo.dist.matrix <- as.matrix(geo.dist)#
-#
-	#set all geographic distances from one individual to itself to NA	#
-	diag(geo.dist.matrix) <- NA#
-	#set all geographic distances greater than the max distance to consider to NA#
-	geo.dist.matrix[geo.dist.matrix > 50] <- NA
+geo.dist.matrix[geo.dist.matrix > 30] <- NA
 geo.dist.matrix
 individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)
 individual.involved
 species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)
 species.involved
-individual.identities
-find the appropriate genetic distances for all these species combinations#
-	specific.gen.dist <- gen.dist[species.involved]
+specific.gen.dist <- gen.dist[species.involved]
 specific.gen.dist
 specific.gen.dist.matrix <- geo.dist.matrix#
 	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist
@@ -155,167 +12,596 @@ specific.gen.dist.matrix
 average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)
 average.relatedness
 cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)
-cutoff <- quantile(average.relatedness, probs=0.5, na.rm=TRUE)
+cutoff <- quantile(average.relatedness, probs=0.1, na.rm=TRUE)
 cutoff
 individuals.considered <- which(average.relatedness < cutoff)
 individuals.considered
-individuals.considered <- which(average.relatedness <= cutoff)
+indiv.matrix <- specific.gen.dist.matrix[,individuals.considered]
+indiv.matrix
+mins <- apply(indiv.matrix, 2, min, na.rm=TRUE)
+mins
+closest.table <- which(indiv.matrix == test, arr.ind=T)
+closest.table
+closest.table <- which(indiv.matrix == mins, arr.ind=T)
+closest.table
 individuals.considered
+dim(closest.table)
+colnames(closest.table)
+colnames(indiv.matrix)
+closest.table[,2]
+closest.table[,2][individuals.considered]
+individuals.considered[closest.table[,2]]
+individuals.considered
+closest.table[,2] <- individuals.considered[closest.table[,2]]
+closest.table
+kill.list <- sample(closest.table, size=dim(closest.table)[1]/2)
+kill.list
+kill.list <- sample(closest.table, size=dim(closest.table)[1]/2)
+kill.list
+kill.list <- sample(closest.table[,1], size=dim(closest.table)[1]/2)
+kill.list
+new.arena <- arenaOutput[-kill.list,]
+new.arena <- arena[-kill.list,]
+new.arena
+dim(arena)
+dim(new.arena)
+randomArena <- function(tree, x_min, x_max, y_min, y_max, mean.log.individuals, sd.parameter)#
+{#
+	#generate log-normal regional abundance curve, and randomly assign abundances to species#
+	indivs.per.species <- rlnorm(n=length(tree$tip.label), mean.log.individuals, sdlog=1)#
+	#set species with < 0 individuals to 0 abundance#
+	indivs.per.species[indivs.per.species < 0] <- 0#
+#
+	#round abundances to no decimal places#
+	indivs.per.species <- round(indivs.per.species)#
+#
+	#actually generate a vector individuals with species identities (the "regional pool")#
+	individuals <- c()#
+#
+	individuals <- rep(tree$tip.label, times=indivs.per.species)#
+#
+	#start a dataframe to bind X,Y coordinates into	#
+	arena <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	arena$X <- sample(x_min:x_max, size=length(individuals), replace=TRUE)#
+	arena$Y <- sample(y_min:y_max, size=length(individuals), replace=TRUE)#
+	#create and return the output#
+	output <- list(regional.abundance=individuals, arena)#
+	return(output)#
+}
+arena <- randomArena(tree, 0, 300, 0, 300, 0.4, 1)
+arena
+arena[[2]]
+arena[[2]]$individuals
+kill.list
+arena[[2]][-kill.list,]
+killSome <- function(tree, arenaOutput, max.distance, percent.killed)#
+{#
+	#save the species identities of all individuals#
+	individual.identities <- arenaOutput[[2]]$individuals#
+#
+	#create a genetic distance matrix#
+	gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arenaOutput[[2]]$X, arenaOutput[[2]]$Y), ncol=2)#
+	#calculate all pairwise geographic distances#
+	geo.dist <- dist(for.geo.dist)#
+	#convert the distance matrix into a real matrix#
+	geo.dist.matrix <- as.matrix(geo.dist)#
+#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA#
+	#replace these geographic distances with genetic distances, so we can calculate the #
+	#genetic neighborhood of individuals. first figure out who the species involved in#
+	#each pairwise comparison are#
+	#the individuals involved in each comparison#
+	individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)#
+	#replace with species' identities. there is probably a better way of doing this, but#
+	#subsetting in this manner seems to work, and just spins right through the whole data#
+	#frame one column of individual.involved at a time. if i split the results in two and#
+	#stack into two columns it gives the right results#
+	species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)#
+	#find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]#
+	#plug these genetic distances into the geographic distance matrix of just the closest individuals#
+	specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist#
+	#find the average relatedness of every individual to its closest relative#
+	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)#
+	#define the mean genetic distance below which individuals will be considered to be in genetically clustered geographic neighborhoods#
+	cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)#
+	#find the individual IDs of those in the most genetically clustered neighborhoods#
+	individuals.considered <- which(average.relatedness < cutoff)#
+	#define a matrix where the columns are just made up of individuals in the most genetically clustered geographic neighborhoods#
+	indiv.matrix <- specific.gen.dist.matrix[,individuals.considered]#
+	#find the most closely related individual to every individual in that indiv.matrix#
+	#first define the minimum value per column in the indiv.matrix.#
+	####NEED TO INCLUDE AN ARGUMENT HERE TO NOT CONSIDER MIN of ZERO IF YOU WANT TO NOT#
+	####CONSIDER CONSPECIFICS#
+	mins <- apply(indiv.matrix, 2, min, na.rm=TRUE)#
+	#then identify who the most closely related individual is to every other individual#
+	closest.table <- which(indiv.matrix == mins, arr.ind=T)#
+	#a problem here is that it returns the col IDs, which are no longer right because we subset to create the indiv.matrix#
+	closest.table[,2] <- individuals.considered[closest.table[,2]]#
+	#randomly select half of the individuals to kill#
+	kill.list <- sample(closest.table[,1], size=dim(closest.table)[1]/2)#
+	new.arena <- arenaOutput[[2]][-kill.list,]#
+	#create and return the output#
+	output <- list(regional.abundance=arenaOutput[[1]], new.arena)#
+	return(output)#
+}
+killSome(tree, arena, 30, 0.1)
+killSome(tree, arena, 30, 0.1)->test
+dim(test[[2]])
+dim(arena)
+dim(arena[[2]])
+killSome <- function(tree, arenaOutput, max.distance, percent.killed)#
+{#
+	#save the species identities of all individuals#
+	individual.identities <- arenaOutput[[2]]$individuals#
+#
+	#create a genetic distance matrix#
+	gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arenaOutput[[2]]$X, arenaOutput[[2]]$Y), ncol=2)#
+	#calculate all pairwise geographic distances#
+	geo.dist <- dist(for.geo.dist)#
+	#convert the distance matrix into a real matrix#
+	geo.dist.matrix <- as.matrix(geo.dist)#
+#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA#
+	#replace these geographic distances with genetic distances, so we can calculate the #
+	#genetic neighborhood of individuals. first figure out who the species involved in#
+	#each pairwise comparison are#
+	#the individuals involved in each comparison#
+	individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)#
+	#replace with species' identities. there is probably a better way of doing this, but#
+	#subsetting in this manner seems to work, and just spins right through the whole data#
+	#frame one column of individual.involved at a time. if i split the results in two and#
+	#stack into two columns it gives the right results#
+	species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)#
+	#find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]#
+	#plug these genetic distances into the geographic distance matrix of just the closest individuals#
+	specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist#
+	#find the average relatedness of every individual to its closest relative#
+	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)#
+	#define the mean genetic distance below which individuals will be considered to be in genetically clustered geographic neighborhoods#
+	cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)#
+	#find the individual IDs of those in the most genetically clustered neighborhoods#
+	individuals.considered <- which(average.relatedness < cutoff)#
+	#define a matrix where the columns are just made up of individuals in the most genetically clustered geographic neighborhoods#
+	indiv.matrix <- specific.gen.dist.matrix[,individuals.considered]#
+	#find the most closely related individual to every individual in that indiv.matrix#
+	#first define the minimum value per column in the indiv.matrix.#
+	####NEED TO INCLUDE AN ARGUMENT HERE TO NOT CONSIDER MIN of ZERO IF YOU WANT TO NOT#
+	####CONSIDER CONSPECIFICS#
+	mins <- apply(indiv.matrix, 2, min, na.rm=TRUE)#
+	#then identify who the most closely related individual is to every other individual#
+	closest.table <- which(indiv.matrix == mins, arr.ind=T)#
+	#a problem here is that it returns the col IDs, which are no longer right because we subset to create the indiv.matrix#
+	closest.table[,2] <- individuals.considered[closest.table[,2]]#
+	#randomly select half of the individuals to kill#
+	kill.list <- sample(closest.table[,1], size=dim(closest.table)[1]/2)#
+	new.arena <- arenaOutput[[2]][-kill.list,]#
+	#create and return the output#
+	output <- list(no.killed=length(kill.list), regional.abundance=arenaOutput[[1]], new.arena)#
+	return(output)#
+}
+killSome(tree, arena, 30, 0.1)->test
+test
+library(metricTester)#
+#
+randomArena <- function(tree, x_min, x_max, y_min, y_max, mean.log.individuals, sd.parameter)#
+{#
+	#generate log-normal regional abundance curve, and randomly assign abundances to species#
+	indivs.per.species <- rlnorm(n=length(tree$tip.label), mean.log.individuals, sdlog=1)#
+	#set species with < 0 individuals to 0 abundance#
+	indivs.per.species[indivs.per.species < 0] <- 0#
+#
+	#round abundances to no decimal places#
+	indivs.per.species <- round(indivs.per.species)#
+#
+	#actually generate a vector individuals with species identities (the "regional pool")#
+	individuals <- c()#
+#
+	individuals <- rep(tree$tip.label, times=indivs.per.species)#
+#
+	#start a dataframe to bind X,Y coordinates into	#
+	arena <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	arena$X <- sample(x_min:x_max, size=length(individuals), replace=TRUE)#
+	arena$Y <- sample(y_min:y_max, size=length(individuals), replace=TRUE)#
+	#create and return the output#
+	output <- list(regional.abundance=individuals, arena)#
+	return(output)#
+}#
+#
+tree <- sim.bdtree(stop="taxa", n=10)#
+#
+arena <- randomArena(tree, 0, 300, 0, 300, 0.4, 1)#
+#
+library(colorRamps)#
+#
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena$X, arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$individuals])
+arena
+plot(arena$X, arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$individuals])
+plot(arena$X, arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300))
+arena
+plot(arena$X, arena$Y, pch=20, cex=2, xlim=c(0,300), ylim=c(0,300))
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$individuals])
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
+individual.identities <- arena[[2]]$individuals#
+#
+	#create a genetic distance matrix#
+	gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arena[[2]]$X, arena[[2]]$Y), ncol=2)
+for.geo.dist
+geo.dist <- dist(for.geo.dist)#
+	#convert the distance matrix into a real matrix#
+	geo.dist.matrix <- as.matrix(geo.dist)
+geo.dist.matrix
+diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA
+diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > 50] <- NA
+geo.dist.matrx
+geo.dist.matrix
+individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)
+individual.involved
+species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)#
+	#find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]#
+	#plug these genetic distances into the geographic distance matrix of just the closest individuals#
+	specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist#
+	#find the average relatedness of every individual to its closest relative#
+	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)
+average.relatedness
+specific.gen.dist.matrix
+cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)
+cutoff <- quantile(average.relatedness, probs=0.1, na.rm=TRUE)
+cutoff
+cutoff <- quantile(average.relatedness, probs=0.3, na.rm=TRUE)
+cutoff
 individuals.considered <- which(average.relatedness < cutoff)
 individuals.considered
-neighbor within the maximum distance), and its nearest genetic neighbor#
-	mins <- suppressWarnings(apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE))
+indiv.matrix <- specific.gen.dist.matrix[,individuals.considered]
+indiv.matrix
+upper.tri(indiv.matrix)
+mins <- apply(indiv.matrix, 2, min, na.rm=TRUE)
 mins
-make a temporary table where you bind the minimum value onto the bottom of the table#
-	temp.table <- rbind(specific.gen.dist.matrix, mins)
+closest.table <- which(indiv.matrix == mins, arr.ind=T)
+closest.table
+closest.table[,2] <- individuals.considered[closest.table[,2]]
+closest.table
+indiv.matrix
+individuals.considered
+?which
+individuals.considered
+average.relatedness
+cutoff
+specific.gen.dist.matrix
+mins
+which(indiv.matrix == mins, arr.ind=T)
+indiv.matrix
+specific.gen.dist.matrix
+mins <- apply(specific.gen.dist.matrix, 2, min)
+mins
+mins <- apply(specific.gen.dist.matrix, 2, min, na.rm=T)
+mins <- apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE)
+mins
+mins <- suppressWarnings(apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE))
+mins
+individuals.considered
+specific.gen.dist.matrix[,specific.gen.dist.matrix==mins]
+specific.gen.dist.matrix[,1==mins[1]]
+specific.gen.dist.matrix[,1]==mins[1]]
+specific.gen.dist.matrix[,1]
+specific.gen.dist.matrix[,1] %in% mins[1]
+test <- rbind(specific.gen.dist.matrix, mins)
+test
+test[1:25,1] %in% mins[1]
+test[1:25,1]==test[26,1]
+dim(test)
+temp.table <- rbind(specific.gen.dist.matrix, mins)
 temp.table
-elements in that column#
-	semifinal.matrix <- apply(temp.table, 2, compareMins)#
-	final.matrix <- semifinal.matrix
-final.matrix
-final.matrix[final.matrix==FALSE] <- NA
+dim(temp.table)
+mean
+x <- rep(1:26)
+length(x)
+x
+1:length(x)
+1:length(x)-1
+1:(length(x)-1)
+x
+x[1:(length(x)-1)]
+x[length(x)]
+output <- x[1:(length(x)-1)] == x[length(x)]
+output
+rm(x)
+compareMins <- function(x)#
+	{#
+		output <- x[1:(length(x)-1)] == x[length(x)]#
+		return(output)#
+	}
+apply(temp.table, 2, compareMins)
+temp.table
+semifinal.matrix <- apply(temp.table, 2, compareMins)
+semifinal.matrix
+semifinal.matrix[semifinal.matrix =! TRUE]
+semifinal.matrix==TRUE
+semifinal.matrix==FALSE
+semifinal.matrix[semifinal.matrix==FALSE]
+semifinal.matrix[semifinal.matrix==FALSE] <- NA
+semifinal.matrix
+semifinal.matrix <- apply(temp.table, 2, compareMins)#
+	final.matrix <- semifinal.matrix#
+	#set all FALSE elements in the table to NA#
+	final.matrix[final.matrix==FALSE] <- NA
+semifinal.matrix
 final.matrix
 closest.table <- which(!is.na(final.matrix), arr.ind=T)
 closest.table
-final.table <- closest.table[closest.table[,2] %in% individuals.considered,]
-final.table
-kill.list <- unique(sample(final.table[,1], size=(dim(final.table)[1])/2))
+unique(closest.table)
+c(closest.table[,1],closest.table[,2])
+unique(c(closest.table[,1],closest.table[,2]))
+unique(c(closest.table[,1],closest.table[,2]))->test
+length(test)
+dim(closest.table)
+individuals.considered
+closest.table[closest.table[,1] %in% individuals.considered]
+closest.table[closest.table[,1] %in% individuals.considered,]
+kill.list <- sample(final.table[,1], size=dim(closest.table)[1]/2)
+final.table <- closest.table[closest.table[,1] %in% individuals.considered,]#
+	#randomly select half of the individuals to kill#
+	kill.list <- sample(final.table[,1], size=dim(closest.table)[1]/2)
 kill.list
-new.arena <- test$arena[-kill.list,]
+randomly select half of the individuals to kill#
+	kill.list <- sample(final.table[,1], size=dim(final.table)[1]/2)
+kill.list
+new.arena <- arenaOutput[[2]][-kill.list,]
+new.arena <- arena[[2]][-kill.list,]
 new.arena
-load_all()
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 50, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 10)
-test <- competitionSimulator(tree, arena, 300, 0.5, 100)
-test <- competitionSimulator(tree, arena, 300, 0.5, 100)
-test <- competitionSimulator(tree, arena, 5, 0.5, 100)
-load_all()
-tree <- sim.bdtree(stop="taxa", n=50)#
-#
-arena <- randomArena(tree, 0, 300, 0, 300, 1, 1)#
-#
-library(colorRamps)#
-#
-gen.dists <- cophenetic(tree)#
-#
-cols <- blue2green2red(nrow(gen.dists))#
-#
-plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
-arena
-tree
-competitionSimulator(tree, arena, 30, 0.1, 10)
-competitionSimulator(tree, arena, 30, 0.1, 10)->test
-test
-dim(test$arena)
-dim(arena$arena)
-plot(test$X, test$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
-plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
-quadratPlotter(bounds)
-temp.cdm <- quadratContents(positions, bounds)
-temp.cdm <- quadratContents(test$arena, bounds)
-temp.cdm
-cdm <- t(temp.cdm)
-cdm
-coef <- cor(cdm, method="spearman") # get the correlation coefficients#
-#
-coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
-#
-hist(coef.dist, main="Pairwise Correlation Coefficients")
-summary(coef.dist) # how close is the mean value to zero
-arena <- randomArena(tree, 0, 300, 0, 300, 1, 1)
-library(colorRamps)#
-#
-gen.dists <- cophenetic(tree)#
-#
-cols <- blue2green2red(nrow(gen.dists))#
-#
-plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])#
-#
-new.arena <- killSome(tree, arena, 30, 0.1)
-arena <- randomArena(tree, 0, 300, 0, 300, 2, 1)
-library(colorRamps)#
-#
-gen.dists <- cophenetic(tree)#
-#
-cols <- blue2green2red(nrow(gen.dists))#
-#
-plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])#
-#
-new.arena <- killSome(tree, arena, 30, 0.1)
-arena
-gen.dists <- cophenetic(tree)#
-#
-cols <- blue2green2red(nrow(gen.dists))#
-#
-plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
-test <- competitionSimulator(tree, arena, 30, 0.1, 10)
-test
-dim(test$arena)
-dim(arena$arena)
-plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-#plot the arena. don't close the window#
-plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])#
-#
-quadratPlotter(bounds)
-plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-quadratPlotter(bounds)
-temp.cdm <- quadratContents(test$arena, bounds)#
-#
-cdm <- t(temp.cdm)
-cdm
-coef <- cor(cdm, method="spearman") # get the correlation coefficients#
-#
-coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
-#
-hist(coef.dist, main="Pairwise Correlation Coefficients")
-summary(coef.dist) # how close is the mean value to zero
-sd(coef.dist)
-t.test(coef.dist, mu=0)
-cdm
-dimnames(cdm)[[1]]
-dimnames(cdm)[[1]] <- paste("quadrat",1:15,sep="")
-cdm
-dists <- cophenetic(tree)
-mpd(cdm, dists)
-mean(dists)
-mean(mpd(cdm, dists))
-ses.mpd(cdm, dists, null.model="richness")
-?ses.mpd
-competitionSimulator <- function(tree, initialArena, max.distance, percent.killed, iterations)#
+output <- list(no.killed=length(kill.list), regional.abundance=arenaOutput[[1]], new.arena)
+output <- list(no.killed=length(kill.list), regional.abundance=arena[[1]], new.arena)
+output
+output$regional.abundance
+randomArena <- function(tree, x_min, x_max, y_min, y_max, mean.log.individuals, sd.parameter)#
 {#
-	for(i in 1:iterations)#
-	{#
-		#take the initialArena and kill off some of the individuals in genetically clustered neighborhoods#
-		killed.arena <- killSome(tree, initialArena, max.distance, percent.killed)#
+	#generate log-normal regional abundance curve, and randomly assign abundances to species#
+	indivs.per.species <- rlnorm(n=length(tree$tip.label), mean.log.individuals, sdlog=1)#
+	#set species with < 0 individuals to 0 abundance#
+	indivs.per.species[indivs.per.species < 0] <- 0#
 #
-		#add individuals back in, but save this as initialArena, so that it gets plugged back#
-		#in next iteration instead of the original random arena#
-		initialArena <- settleSome(killed.arena)#
+	#round abundances to no decimal places#
+	indivs.per.species <- round(indivs.per.species)#
+#
+	#actually generate a vector individuals with species identities (the "regional pool")#
+	individuals <- c()#
+#
+	individuals <- rep(tree$tip.label, times=indivs.per.species)#
+#
+	#start a dataframe to bind X,Y coordinates into	#
+	arena <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	arena$X <- sample(x_min:x_max, size=length(individuals), replace=TRUE)#
+	arena$Y <- sample(y_min:y_max, size=length(individuals), replace=TRUE)#
+	#create and return the output#
+	output <- list(regional.abundance=individuals, arena, dims=c(x_min, x_max, y_min, y_max))#
+	return(output)#
+}
+randomArena(tree, 0, 300, 0, 300, 0.4, 1)
+randomArena(tree, 0, 300, 0, 300, 0.4, 1)->arena
+library(colorRamps)#
+#
+gen.dists <- cophenetic(tree)#
+#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
+killSome <- function(tree, arenaOutput, max.distance, percent.killed)#
+{#
+	#save the species identities of all individuals#
+	individual.identities <- arenaOutput[[2]]$individuals#
+#
+	#create a genetic distance matrix#
+	gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arenaOutput[[2]]$X, arenaOutput[[2]]$Y), ncol=2)#
+	#calculate all pairwise geographic distances#
+	geo.dist <- dist(for.geo.dist)#
+	#convert the distance matrix into a real matrix#
+	geo.dist.matrix <- as.matrix(geo.dist)#
+#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA#
+	#replace these geographic distances with genetic distances, so we can calculate the #
+	#genetic neighborhood of individuals. first figure out who the species involved in#
+	#each pairwise comparison are#
+	#the individuals involved in each comparison#
+	individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)#
+	#replace with species' identities. there is probably a better way of doing this, but#
+	#subsetting in this manner seems to work, and just spins right through the whole data#
+	#frame one column of individual.involved at a time. if i split the results in two and#
+	#stack into two columns it gives the right results#
+	species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)#
+	#find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]#
+	#plug these genetic distances into the geographic distance matrix of just the closest individuals#
+	specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist#
+	#find the average relatedness of every individual to its closest neighbors#
+	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)#
+	#define the mean genetic distance below which individuals will be considered to be in genetically clustered geographic neighborhoods#
+	cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)#
+	#find the individual IDs of those in the most genetically clustered neighborhoods#
+	individuals.considered <- which(average.relatedness < cutoff)#
+	####NEED TO INCLUDE AN ARGUMENT HERE TO NOT CONSIDER MIN of ZERO IF YOU WANT TO NOT#
+	####CONSIDER CONSPECIFICS#
+#
+	#find the minimum genetic distance between every individual (that has a geographic#
+	#neighbor within the maximum distance), and its nearest genetic neighbor#
+	mins <- suppressWarnings(apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE))#
+	#make a temporary table where you bind the minimum value onto the bottom of the table#
+	temp.table <- rbind(specific.gen.dist.matrix, mins)#
+	#define a utility function that will compare the last element in a column to all other#
+	#elements in that column#
+	compareMins <- function(x)#
+	{#
+		output <- x[1:(length(x)-1)] == x[length(x)]#
+		return(output)#
 	}#
 #
-	return(killed.arena)#
+	#use that function in an apply statement#
+	semifinal.matrix <- apply(temp.table, 2, compareMins)#
+	final.matrix <- semifinal.matrix#
+	#set all FALSE elements in the table to NA#
+	final.matrix[final.matrix==FALSE] <- NA#
+	#then identify who the most closely related individual is to every other individual#
+	closest.table <- which(!is.na(final.matrix), arr.ind=T)#
+	#subset this table to only those individuals that were in genetically clustered geographic neighborhoods#
+	final.table <- closest.table[closest.table[,1] %in% individuals.considered,]#
+	#randomly select half of the individuals to kill#
+	kill.list <- sample(final.table[,1], size=dim(final.table)[1]/2)#
+	new.arena <- arenaOutput[[2]][-kill.list,]#
+	#create and return the output#
+	output <- list(no.killed=length(kill.list), regional.abundance=arenaOutput[[1]], new.arena)#
+	return(output)#
 }
-load_all()
+killSome <- function(tree, arenaOutput, max.distance, percent.killed)#
+{#
+	#save the species identities of all individuals#
+	individual.identities <- arenaOutput[[2]]$individuals#
+#
+	#create a genetic distance matrix#
+	gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arenaOutput[[2]]$X, arenaOutput[[2]]$Y), ncol=2)#
+	#calculate all pairwise geographic distances#
+	geo.dist <- dist(for.geo.dist)#
+	#convert the distance matrix into a real matrix#
+	geo.dist.matrix <- as.matrix(geo.dist)#
+#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA#
+	#replace these geographic distances with genetic distances, so we can calculate the #
+	#genetic neighborhood of individuals. first figure out who the species involved in#
+	#each pairwise comparison are#
+	#the individuals involved in each comparison#
+	individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)#
+	#replace with species' identities. there is probably a better way of doing this, but#
+	#subsetting in this manner seems to work, and just spins right through the whole data#
+	#frame one column of individual.involved at a time. if i split the results in two and#
+	#stack into two columns it gives the right results#
+	species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)#
+	#find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]#
+	#plug these genetic distances into the geographic distance matrix of just the closest individuals#
+	specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist#
+	#find the average relatedness of every individual to its closest neighbors#
+	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)#
+	#define the mean genetic distance below which individuals will be considered to be in genetically clustered geographic neighborhoods#
+	cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)#
+	#find the individual IDs of those in the most genetically clustered neighborhoods#
+	individuals.considered <- which(average.relatedness < cutoff)#
+	####NEED TO INCLUDE AN ARGUMENT HERE TO NOT CONSIDER MIN of ZERO IF YOU WANT TO NOT#
+	####CONSIDER CONSPECIFICS#
+#
+	#find the minimum genetic distance between every individual (that has a geographic#
+	#neighbor within the maximum distance), and its nearest genetic neighbor#
+	mins <- suppressWarnings(apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE))#
+	#make a temporary table where you bind the minimum value onto the bottom of the table#
+	temp.table <- rbind(specific.gen.dist.matrix, mins)#
+	#define a utility function that will compare the last element in a column to all other#
+	#elements in that column#
+	compareMins <- function(x)#
+	{#
+		output <- x[1:(length(x)-1)] == x[length(x)]#
+		return(output)#
+	}#
+#
+	#use that function in an apply statement#
+	semifinal.matrix <- apply(temp.table, 2, compareMins)#
+	final.matrix <- semifinal.matrix#
+	#set all FALSE elements in the table to NA#
+	final.matrix[final.matrix==FALSE] <- NA#
+	#then identify who the most closely related individual is to every other individual#
+	closest.table <- which(!is.na(final.matrix), arr.ind=T)#
+	#subset this table to only those individuals that were in genetically clustered geographic neighborhoods#
+	final.table <- closest.table[closest.table[,1] %in% individuals.considered,]#
+	#randomly select half of the individuals to kill#
+	kill.list <- sample(final.table[,1], size=dim(final.table)[1]/2)#
+	new.arena <- arenaOutput[[2]][-kill.list,]#
+	#create and return the output#
+	output <- list(no.killed=length(kill.list), regional.abundance=arenaOutput[[1]], new.arena, dim=arenaOutput$dims)#
+	return(output)#
+}
+killSome(tree, arena, 50, 0.3)
+killSome(tree, arena, 50, 0.3)->new.arena
+new.arena$dim
+new.arena$dim[1]
+new.arena$dim[2]
+output <- rbind(new.arena[[3]], to.bind)
+individuals <- sample(killSomeOutput$regional.abundance, size=killSomeOutput$no.killed)#
+	#start a dataframe to bind X,Y coordinates into	#
+	to.bind <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	to.bind$X <- sample(killSomeOutput$dim[1]:killSomeOutput$dim[2], size=length(individuals), replace=TRUE)#
+	to.bind$Y <- sample(killSomeOutput$dim[3]:killSomeOutput$dim[4], size=length(individuals), replace=TRUE)
+new.arena
+individuals <- sample(new.arena$regional.abundance, size=new.arena$no.killed)#
+	#start a dataframe to bind X,Y coordinates into	#
+	to.bind <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	to.bind$X <- sample(new.arena$dim[1]:new.arena$dim[2], size=length(individuals), replace=TRUE)#
+	to.bind$Y <- sample(new.arena$dim[3]:new.arena$dim[4], size=length(individuals), replace=TRUE)
+to.bind
+individuals <- sample(new.arena$regional.abundance, size=new.arena$no.killed)#
+	#start a dataframe to bind X,Y coordinates into	#
+	to.bind <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	to.bind$X <- sample(new.arena$dim[1]:new.arena$dim[2], size=length(individuals), replace=TRUE)#
+	to.bind$Y <- sample(new.arena$dim[3]:new.arena$dim[4], size=length(individuals), replace=TRUE)
+to.bind
+individuals <- sample(new.arena$regional.abundance, size=new.arena$no.killed)#
+	#start a dataframe to bind X,Y coordinates into	#
+	to.bind <- data.frame(individuals)#
+#
+	#generate random X,Y coordinates centered around the middle of the arena#
+	to.bind$X <- sample(new.arena$dim[1]:new.arena$dim[2], size=length(individuals), replace=TRUE)#
+	to.bind$Y <- sample(new.arena$dim[3]:new.arena$dim[4], size=length(individuals), replace=TRUE)
+to.bind
+new.arena$dim[1]:new.arena$dim[2]
+output <- rbind(new.arena[[3]], to.bind)
+output
+to.bind
+new.arena[[3]]
+rbind(new.arena[[3]],to.bind)
 tree <- sim.bdtree(stop="taxa", n=50)#
 #
 arena <- randomArena(tree, 0, 300, 0, 300, 4, 1)#
@@ -327,100 +613,118 @@ gen.dists <- cophenetic(tree)#
 cols <- blue2green2red(nrow(gen.dists))#
 #
 plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
-test <- competitionSimulator(tree, arena, 30, 0.1)
-test <- competitionSimulator(tree, arena, 30, 0.1, 1)
-test <- competitionSimulator(tree, arena, 30, 0.1, 100)
-system.time(test <- competitionSimulator(tree, arena, 30, 0.1, 1))
-12*100
-1200/60
-system.time(test <- competitionSimulator(tree, arena, 30, 0.1, 25))
-test
-dim(test$arena)
-dim(arena$arena)
-plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+killSome <- function(tree, arenaOutput, max.distance, percent.killed)#
+{#
+	#save the species identities of all individuals#
+	individual.identities <- arenaOutput[[2]]$individuals#
 #
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+	#create a genetic distance matrix#
+	gen.dist <- cophenetic(tree)#
+	#create a matrix of individuals for use in geographic distance calculations. obviously very similar to the input data frame, but dist doesn't work right with data frames#
+	for.geo.dist <- matrix(cbind(arenaOutput[[2]]$X, arenaOutput[[2]]$Y), ncol=2)#
+	#calculate all pairwise geographic distances#
+	geo.dist <- dist(for.geo.dist)#
+	#convert the distance matrix into a real matrix#
+	geo.dist.matrix <- as.matrix(geo.dist)#
 #
-quadratPlotter(bounds)
-temp.cdm <- quadratContents(test$arena, bounds)#
+	#set all geographic distances from one individual to itself to NA	#
+	diag(geo.dist.matrix) <- NA#
+	#set all geographic distances greater than the max distance to consider to NA#
+	geo.dist.matrix[geo.dist.matrix > max.distance] <- NA#
+	#replace these geographic distances with genetic distances, so we can calculate the #
+	#genetic neighborhood of individuals. first figure out who the species involved in#
+	#each pairwise comparison are#
+	#the individuals involved in each comparison#
+	individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)#
+	#replace with species' identities. there is probably a better way of doing this, but#
+	#subsetting in this manner seems to work, and just spins right through the whole data#
+	#frame one column of individual.involved at a time. if i split the results in two and#
+	#stack into two columns it gives the right results#
+	species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)#
+	#find the appropriate genetic distances for all these species combinations#
+	specific.gen.dist <- gen.dist[species.involved]#
+	#plug these genetic distances into the geographic distance matrix of just the closest individuals#
+	specific.gen.dist.matrix <- geo.dist.matrix#
+	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist#
+	#find the average relatedness of every individual to its closest neighbors#
+	average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)#
+	#define the mean genetic distance below which individuals will be considered to be in genetically clustered geographic neighborhoods#
+	cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)#
+	#find the individual IDs of those in the most genetically clustered neighborhoods#
+	individuals.considered <- which(average.relatedness < cutoff)#
+	####NEED TO INCLUDE AN ARGUMENT HERE TO NOT CONSIDER MIN of ZERO IF YOU WANT TO NOT#
+	####CONSIDER CONSPECIFICS#
 #
+	#find the minimum genetic distance between every individual (that has a geographic#
+	#neighbor within the maximum distance), and its nearest genetic neighbor#
+	mins <- suppressWarnings(apply(specific.gen.dist.matrix, 2, min, na.rm=TRUE))#
+	#make a temporary table where you bind the minimum value onto the bottom of the table#
+	temp.table <- rbind(specific.gen.dist.matrix, mins)#
+	#use the compareMins utility function to compare the last element in a column to all other#
+	#elements in that column#
+	semifinal.matrix <- apply(temp.table, 2, compareMins)#
+	final.matrix <- semifinal.matrix#
+	#set all FALSE elements in the table to NA#
+	final.matrix[final.matrix==FALSE] <- NA#
+	#then identify who the most closely related individual is to every other individual#
+	closest.table <- which(!is.na(final.matrix), arr.ind=T)#
+	#subset this table to only those individuals that were in genetically clustered geographic neighborhoods#
+	final.table <- closest.table[closest.table[,1] %in% individuals.considered,]#
+	#randomly select half of the individuals to kill#
+	kill.list <- sample(final.table[,1], size=dim(final.table)[1]/2)#
+	new.arena <- arenaOutput[[2]][-kill.list,]#
+	#create and return the output#
+	output <- list(no.killed=length(kill.list), regional.abundance=arenaOutput[[1]], new.arena, dim=arenaOutput$dims)#
+	return(output)#
+}
+new.arena <- killSome(tree, arena, 30, 0.1)
+dim(arena)
+arena
+str(arena)
+dim(arena[[3]])
+dim(arena[[2]])
+arena[[2]]
+dim(arena[[2]])
+str(new.arena)
+dim(new.arena[[2]])
+dim(new.arena[[3]])
+6445*0.1
+6445-5803
+head(new.arena[[3]])
+?quadratContents
+temp.cdm <- quadratContents(new.arena[[3]], bounds)
+bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
+bounds
+?quadratPlacer
+quadratPlacer
+temp.cdm <- quadratContents(new.arena[[3]], bounds)
+temp.cdm
+cdm <- t(cdm)
 cdm <- t(temp.cdm)
 cdm
-apply(cdm,1,lengthNonZeros)
-plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$arena$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-quadratPlotter(bounds)#
-#
-temp.cdm <- quadratContents(arena$arena, bounds)#
-#
-cdm <- t(temp.cdm)
-apply(cdm,1,lengthNonZeros)
-coef <- cor(cdm, method="spearman") # get the correlation coefficients#
-#
+coef <- cor(cdm, method="spearman") # get the correlation coefficients
+coef
 coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
 #
 hist(coef.dist, main="Pairwise Correlation Coefficients")#
 #
 summary(coef.dist) # how close is the mean value to zero
-dplot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
+arena <- randomArena(tree, 0, 300, 0, 300, 1, 1)
+dim(arena)
+str(arena)
+dim(arena--2)
+dim(arena[[2]])
+arena
+library(colorRamps)#
 #
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
+gen.dists <- cophenetic(tree)#
 #
-quadratPlotter(bounds)#
+cols <- blue2green2red(nrow(gen.dists))#
 #
-temp.cdm <- quadratContents(test$arena, bounds)#
-#
-cdm <- t(temp.cdm)
-plot(test$arena$X, test$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[test$arena$individuals])#
-#
-bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)#
-#
-quadratPlotter(bounds)#
-#
-temp.cdm <- quadratContents(test$arena, bounds)#
-#
-cdm <- t(temp.cdm)
-cdm
-coef <- cor(cdm, method="spearman") # get the correlation coefficients#
-#
-coef.dist <- as.dist(coef, diag=TRUE, upper=TRUE)#
-#
-hist(coef.dist, main="Pairwise Correlation Coefficients")#
-#
-summary(coef.dist) # how close is the mean value to zero
-dists <- cophenetic(tree)
-mpd(cdm, dists)
-mean(dists)
-ses.mpd(cdm, dists, null.model="richness")
-mpds <- mpd(cdm, dists)
-singleMetricNull(tree, cdm, "mpd", "richness", 10000, "temp.csv")
-?singleMetricNull
-dev_help("singleMetricNull")
-dev_help("singleMetric")
-singleMetricNull(tree, cdm, "mpd", "richness", 10000, "temp.csv")
-cdm
-dimnames(cdm)[[1]]
-dimnames(cdm)[[1]] <- paste("quadrat",1:15)
-cdm
-singleMetricNull(tree, cdm, "mpd", "richness", 10000, "temp.csv")
-?summaries
-dev_help("summaries")
-possibilities <- read.csv("temp.csv")#
-#
-#call the summaries function from within a ddply statement#
-expectations <- ddply(possibilities, .(richness), summaries)
-library(plyr)
->
-> expectations <- ddply(possibilities, .(richness), summaries)
-expectations <- ddply(possibilities, .(richness), summaries)
-expectations
-apply(cdm, 1, lengthNonZeros)
-plot(expectations$result.upper~expectations$richness)
-plot(expectations$result.upper~expectations$richness, ylim=c(4,5))
-points(expectations$result.lower~expectations$richness)
-rich
-rich <- apply(cdm, 1, lengthNonZeros)
-points(mpds~rich, pch=20, cex=2)
-rbind(mpds,rich)
+plot(arena[[2]]$X, arena[[2]]$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena[[2]]$individuals])
+new.arena <- killSome(tree, arena, 30, 0.1)
+new.arena[[3]]
+dim(new.arena[[3]])
+library(devtools)
+library(roxygen3)
+check()

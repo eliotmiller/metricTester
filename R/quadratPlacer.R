@@ -4,8 +4,8 @@
 #' to place quadrats down in a non-overlapping fashion
 #'
 #' @param no.quadrats Number of quadrats to place
-#' @param x_max Maximum x bounds of arena
-#' @param y_max Maximum y bounds of arena
+#' @param x.max Maximum x bounds of arena
+#' @param y.max Maximum y bounds of arena
 #' @param quadrat_size Size of desired quadrat
 #' 
 #' @details Places quadrats down in non-overlapping fashion according to parameters
@@ -20,9 +20,9 @@
 #'
 #' @examples
 #'
-#' bounds <- quadratPlacer(no.quadrats=15, x_max=300, y_max=300, quadrat_size=50)
+#' bounds <- quadratPlacer(no.quadrats=15, x.max=300, y.max=300, quadrat_size=50)
 
-quadratPlacer <- function(no.quadrats, x_max, y_max, quadrat_size)
+quadratPlacer <- function(no.quadrats, x.max, y.max, quadrat_size)
 {
 
 	##define quadrat bounds, etc
@@ -35,9 +35,9 @@ quadratPlacer <- function(no.quadrats, x_max, y_max, quadrat_size)
 		repeat 
 		{
 			OK <- TRUE
-			quadrat_bounds[i,1] <- sample(c(0:(x_max-quadrat_size)),1)
+			quadrat_bounds[i,1] <- sample(c(0:(x.max-quadrat_size)),1)
 			quadrat_bounds[i,2] <- quadrat_bounds[i,1] + quadrat_size
-			quadrat_bounds[i,3] <- sample(c(0:(y_max-quadrat_size)),1)
+			quadrat_bounds[i,3] <- sample(c(0:(y.max-quadrat_size)),1)
 			quadrat_bounds[i,4] <- quadrat_bounds[i,3] + quadrat_size
 			if (i > 1) 
 			{

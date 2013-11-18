@@ -22,7 +22,7 @@
 }
 \details{
   Scales a matrix of species' traits to a desired
-  mininimum-maximum range. intended for use in a spatially
+  mininimum-maximum range. Intended for use in a spatially
   explicity scenario with two traits, but could easily be
   co-opted.
 }
