@@ -1,31 +1,3 @@
-geo.dist.matrix[geo.dist.matrix > 30] <- NA
-geo.dist.matrix
-individual.involved <- which(!is.na(geo.dist.matrix), arr.ind=TRUE)
-individual.involved
-species.involved <- matrix(individual.identities[individual.involved], nrow=length(individual.identities[individual.involved])/2, ncol=2)
-species.involved
-specific.gen.dist <- gen.dist[species.involved]
-specific.gen.dist
-specific.gen.dist.matrix <- geo.dist.matrix#
-	specific.gen.dist.matrix[which(!is.na(specific.gen.dist.matrix))] <- specific.gen.dist
-specific.gen.dist.matrix
-average.relatedness <- apply(specific.gen.dist.matrix, 2, mean, na.rm=TRUE)
-average.relatedness
-cutoff <- quantile(average.relatedness, probs=percent.killed, na.rm=TRUE)
-cutoff <- quantile(average.relatedness, probs=0.1, na.rm=TRUE)
-cutoff
-individuals.considered <- which(average.relatedness < cutoff)
-individuals.considered
-indiv.matrix <- specific.gen.dist.matrix[,individuals.considered]
-indiv.matrix
-mins <- apply(indiv.matrix, 2, min, na.rm=TRUE)
-mins
-closest.table <- which(indiv.matrix == test, arr.ind=T)
-closest.table
-closest.table <- which(indiv.matrix == mins, arr.ind=T)
-closest.table
-individuals.considered
-dim(closest.table)
 colnames(closest.table)
 colnames(indiv.matrix)
 closest.table[,2]
@@ -726,5 +698,88 @@ new.arena <- killSome(tree, arena, 30, 0.1)
 new.arena[[3]]
 dim(new.arena[[3]])
 library(devtools)
-library(roxygen3)
-check()
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+?quadratContents
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(50)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=5, length.parameter=100, sd.parameter=35)
+head(positions)
+dim(positions)
+library(geiger)#
+library(colorRamps)#
+#
+temp <- phyloNtraits(100)#
+#
+scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)#
+#
+phydistmatrix <- cophenetic(temp[[1]])#
+#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
+#
+positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=5, length.parameter=100, sd.parameter=35)
+dim(positions)
+max(positions$X)
+min(positions$X)
+test
+temp
+quick
+quick <- positions[positions$X >= 0 & positions$X <= 300 & positions$Y >= 0 & positions$Y <= 300,]
+dim(quick)
+dim(positions)
+300*300
+3500/90000
+90000/3500
+832*3
+?randomArena
+library(geiger)#
+library(colorRamps)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+#generate the random arena#
+arena <- randomArena(tree, x.min=0, x.max=300, y.min=0, y.max=300, mean.log.individuals=2)#
+#
+#calculate genetic distances#
+gen.dists <- cophenetic(tree)#
+#
+#define species' colors for plotting#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+#plot the arena#
+plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$arena$individuals])
+library(geiger)#
+library(colorRamps)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+#generate the random arena#
+arena <- randomArena(tree, x.min=0, x.max=300, y.min=0, y.max=300, mean.log.individuals=3.2)#
+#
+#calculate genetic distances#
+gen.dists <- cophenetic(tree)#
+#
+#define species' colors for plotting#
+cols <- blue2green2red(nrow(gen.dists))#
+#
+#plot the arena#
+plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$arena$individuals])
+dim(arena$arena)
+2942-0.2*2942
+library(devtools)
+library(geiger)
+library(devtools)
+document()
