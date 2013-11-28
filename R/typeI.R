@@ -11,7 +11,7 @@
 #' upper CIs, so we have to explicitly flip our expectations in the function. We have not
 #' yet determined whether "wrong" could take c(1,2), and therefore test for type I error
 #' rates if expecting not significant. Note that it is possible to have a type I
-#' error irrespective of power of test, so a row can have more than one 1 in it.
+#' error irrespective of power of test, so a row can have more than one 1 in it. NEED TO MODIFY THIS FUNCTION TO BETTER DEAL WITH IAC. CURRENTLY, IF EXPECTING 0, EVEN IF ALL ZEROS, DOES NOT BEHAVE AS EXPECTED
 #'
 #' @return Matrix with rows corresponding to metrics, and columns for type I errors,
 #' "NoSignal" (i.e. < 50% of communities from community data matrix exhibiting expected
@@ -67,9 +67,13 @@
 
 typeI <- function(significance.results, expectation, wrong)
 {
-	#define a data frame without IAC
-	normal <- significance.results[,names(significance.results)!="IAC"]
-
+	#flip the values of IAC, because large values of this metric (2) correspond to
+	#clustering and small (1) correspond to overdispersion. flip the 1s to 3s first so
+	#you don't screw anything up
+	significance.results$IAC[significance.results$IAC==1] <- 3
+	significance.results$IAC[significance.results$IAC==2] <- 1
+	significance.results$IAC[significance.results$IAC==3] <- 2
+	
 	#set up a blank matrix to save type I and II results into
 	typeI.results <- matrix(nrow=dim(significance.results)[2], ncol=3)
 	
@@ -79,43 +83,40 @@ typeI <- function(significance.results, expectation, wrong)
 	#go through each column of the normal style results (each metric) and see if any plots
 	#deviate from expectation (=typeI), if fewer than half of plots show expectation,
 	#or if at least half show the expectation
-	for(i in 1:dim(normal)[2])
+	for(i in 1:dim(significance.results)[2])
 	{
-		if(sum(normal[,i]==wrong) > 0)
+		#give typeI errors to those for which this is true
+		if(sum(significance.results[,i]==wrong) > 0)
 		{
 			typeI.results[i,1] <- 1
 		}
-		if(sum(normal[,i]==expectation)/dim(normal)[1] < 0.5)
+		#give typeII errors to those for which this is true
+		if(sum(significance.results[,i]==expectation)/dim(significance.results)[1] < 0.5)
 		{
 			typeI.results[i,2] <- 1
 		}
-		if(sum(normal[,i]==expectation)/dim(normal)[1] >= 0.5)
+		#give "good" to those for which this is true
+		if(sum(significance.results[,i]==expectation)/dim(significance.results)[1] >= 0.5)
 		{
 			typeI.results[i,3] <- 1
 		}
 	}
 
-	#go through just the IAC column and if the observed equals the expectation of the rest
-	#of the normal metrics, it's at typeI error, and vice versa. save these results into
-	#the bottom row of the typeI.results matrix
-	if(sum(significance.results$IAC==expectation) > 0)
-	{
-		typeI.results[dim(significance.results)[2],1] <- 1
-	}
-	if(sum(significance.results$IAC==wrong)/dim(significance.results)[1] < 0.5)
-	{
-		typeI.results[dim(significance.results)[2],2] <- 1
-	}
-	if(sum(significance.results$IAC==wrong)/dim(significance.results)[1] >= 0.5)
-	{
-		typeI.results[dim(significance.results)[2],3] <- 1
-	}
-
-	#bind the normal names and "IAC"
-	dimnames(typeI.results)[[1]] <- c(names(normal),"IAC")
+	#bind the normal names
+	dimnames(typeI.results)[[1]] <- names(significance.results)
 
 	#set any comparisons that didn't work to 0
 	typeI.results[is.na(typeI.results)]=0
+	
+	#will ultimately be able to delete this rearrangement of the output, but in order to
+	#maintain easy backward compatibility with some cluster runs still running, pull the
+	#IAC results out and bind them in at the end
+	
+	IAC <- typeI.results[rownames(typeI.results)=="IAC",]
+	
+	typeI.results <- typeI.results[rownames(typeI.results)!="IAC",]
+	
+	typeI.results <- rbind(typeI.results, IAC)
 	
 	return(typeI.results)
 }

@@ -35,7 +35,9 @@
   therefore test for type I error rates if expecting not
   significant. Note that it is possible to have a type I
   error irrespective of power of test, so a row can have
-  more than one 1 in it.
+  more than one 1 in it. NEED TO MODIFY THIS FUNCTION TO
+  BETTER DEAL WITH IAC. CURRENTLY, IF EXPECTING 0, EVEN IF
+  ALL ZEROS, DOES NOT BEHAVE AS EXPECTED
 }
 \examples{
 library(plyr)

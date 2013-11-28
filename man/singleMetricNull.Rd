@@ -65,7 +65,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
-system.time(singleMetricNull(tree, cdm, "mpd", "richness", 10, "output.csv"))
+system.time(singleMetricNull(tree=tree, orig.matrix=cdm, metric="mpd", null.method="richness", no.randomizations=10, temp.file="output.csv"))
 }
 \references{
   Miller, Trisos and Farine.

@@ -1,3 +1,81 @@
+head(regional.abundance)
+library(plyr)
+count(regional.abundance)
+lapply(quadrat.richness, sample, x=regional.abundance)->temp
+temp
+unlist(temp)->-temp2
+unlist(temp)->temp2
+temp2
+count(temp2)
+count(regional.abundance)
+head(regional.abundance)
+length(regional.abundance)
+count(regional.abundance)
+count(regional.abundance)->temp
+temp
+temp[tree$tip.label,]
+temp[tree$tip.label]
+tree$tip.label
+temp
+temp[temp$x[tree$tip.label]]
+temp[temp$x[tree$tip.label],]
+temp$x[tree$tip.label]
+temp$x[tree$tip.label,]
+temp$x
+as.character(temp$x)
+as.character(temp$x)[tree$tip.label]
+as.character(temp$x)[tree$tip.label,]
+temp$x[order(tree$tip.label)]
+temp$x[order(tree$tip.label),]
+temp$x[order(tree$tip.label)]
+temp$x
+class(temp$x)
+class(tree$tip.label)
+class(as.character(temp$x))
+as.character(temp$x)
+as.character(temp$x)[order(tree$tip.label)]
+as.character(temp$x)[sort(tree$tip.label)]
+as.character(temp$x)[tree$tip.label]
+as.character(temp$x)[order(tree$tip.label)]
+order(tree$tip.label)
+tree$tip.label
+as.character(temp$x)[tree$tip.label,]
+as.character(temp$x)[tree$tip.label]
+as.character(temp$x)[as.character(tree$tip.label)]
+as.character(temp$x)[tree$tip.label]
+tree$tip.label
+tree$tip.label[temp$X]
+tree$tip.label[temp$x]
+tree$tip.label[as.character(temp$x)]
+temp
+temp$
+x
+sort(temp$x)
+order(temp$x)
+temp$x[tree$tip.label]
+temp$x[tree$tip.label,]
+merge(tree$tip.label, temp)
+merge(tree$tip.label, temp, all=T)
+merge(tree$tip.label, temp, all=T)[tree$tip.label]
+merge(tree$tip.label, temp, all=T)[tree$tip.label,]
+temp
+temp$x[tree$tip.label]
+temp$x
+tree$tip.label
+as.character(temp.x)
+as.character(temp$x)
+as.character(temp$x)[tree$tip.label]
+temp$x[as.factor(tree$tip.label)]
+total.occs <- count(regional.abundance)#
+		#sort into tree order#
+		total.occs <- total.occs[total.occs$x[as.factor(tree$tip.label)],]
+total.occs
+dim(total.occs)
+test
+test <- total.occs[-2,]
+test
+sums
+sums <- apply(cdm, 1, sum)
 sums
 indiv.list <- lapply(sums, sample, x=regional.abundance)
 indiv.list
@@ -262,104 +340,5 @@ apply(test, 2, sum)
 library(devtools)
 library(roxygen3)
 load_all()
-load_all()
-load_all()
 document()
-tree2 <- sim.bdtree(stop="taxa", n=50)#
-#
-arena2 <- randomArena(tree2, 0, 300, 0, 300, 3.2)#
-#
-bounds2 <- quadratPlacer(15, 300, 300, 30)#
-#
-temp.cdm2 <- quadratContents(arena2$arena, bounds2)#
-#
-cdm2 <- t(temp.cdm2)
-singleMetricNull(tree=tree2, orig.matrix=cdm2, metric="mpd", null.method="richness", no.randomizations=100, temp.file="deleteme.csv")
-cdm2
-rownames(cdm2)
-rownames(cdm2) <- paste("quadrat",1:15,sep="")
-cdm2
-singleMetricNull(tree=tree2, orig.matrix=cdm2, metric="mpd", null.method="richness", no.randomizations=100, temp.file="deleteme.csv")
-singleMetricNull(tree=tree2, orig.matrix=cdm2, metric="mpd", null.method="regionalNull", no.randomizations=100, temp.file="deleteme.csv")
-document()
-singleMetricNull(tree=tree2, orig.matrix=cdm2, metric="mpd", null.method="regionalNull", no.randomizations=100, temp.file="deleteme.csv")
-singleMetricNull(tree=tree2, orig.matrix=cdm2, metric="mpd", null.method="regionalNull", no.randomizations=100, regional.abundance=arena2$regional.abundance, temp.file="deleteme.csv")
-document()
-singleMetricNull(tree=tree2, orig.matrix=cdm2, metric="mpd", null.method="regionalNull", no.randomizations=100, regional.abundance=arena2$regional.abundance, temp.file="deleteme.csv")
-new.arena <- competitionSimulator(tree, arena2, 15, 0.2, 100)
-new.arena <- competitionSimulator(tree2, arena2, 15, 0.2, 100)
-new.arena$related
-length(new.arena$related)
-iterations
-iterations <- 1:101
-plot(new.arena$related~iterations)
-dists <- cophentic(tree2)
-dists <- cophenetic(tree2)
-obs.cdm <- quadratContents(new.arena$arena, bounds2)
-obs.cdm
-obs.cdm <- t(obs.cdm)
-obs.cdm
-rownames(obs.cdm) <- paste("quadrat",1:15,sep="")
-obs.cdm
-mpds <- mpd(obs.cdm, dists)
-document()
-system.time(singleMetricNull(tree=tree2, orig.matrix=obs.cdm, metric="mpd", null.method="richness", no.randomizations=1000, regional.abundance=arena2$regional.abundance, "richness.csv"))
-system.time(singleMetricNull(tree=tree2, orig.matrix=obs.cdm, metric="mpd", null.method="independentswap", no.randomizations=1000, regional.abundance=arena2$regional.abundance, "IS.csv"))
-system.time(singleMetricNull(tree=tree2, orig.matrix=obs.cdm, metric="mpd", null.method="regionalNull", no.randomizations=1000, regional.abundance=arena2$regional.abundance, "RN.csv"))
-library(plyr)
-rich.possibilities <- read.csv("richness.csv")#
-#
-#' #call the summaries function from within a ddply statement#
-expectations <- ddply(rich.possibilities, .(richness), summaries)
-expectations
-rich.possibilities <- read.csv("richness.csv")#
-#
-#' #call the summaries function from within a ddply statement#
-rich.expectations <- ddply(rich.possibilities, .(richness), summaries)
-rm(expectations)
-rich.expectations
-mpds
-richs
-richs <- apply(obs.cdm, 1, lengthNonZeros)
-obs.cdm
-richs
-IS.possibilities <- read.csv("IS.csv")#
-#
-#' #call the summaries function from within a ddply statement#
-IS.expectations <- ddply(IS.possibilities, .(richness), summaries)
-IS.expectations
-RN.possibilities <- read.csv("RN.csv")#
-#
-#' #call the summaries function from within a ddply statement#
-RN.expectations <- ddply(RN.possibilities, .(richness), summaries)
-RN.expectations
-plot(rich.expectations$upper~rich.expectations$richness, ylim=c(4.8,6), pch=20, col="gray80", cex=2)
-plot(rich.expectations$result.upper~rich.expectations$richness, ylim=c(4.8,6), pch=20, col="gray80", cex=2)
-points(rich.expectations$result.lower~rich.expectations$richness, pch=20, col="gray80", cex=2)
-points(mpds~richs, pch=20, col="orange", cex=2)
-plot(IS.expectations$result.upper~IS.expectations$richness, ylim=c(4.8,6), pch=20, col="gray80", cex=2)
-plot(rich.expectations$result.upper~rich.expectations$richness, ylim=c(4.8,6.12), pch=20, col="gray80", cex=2)
-points(rich.expectations$result.lower~rich.expectations$richness, pch=20, col="gray80", cex=2)
-points(mpds~richs, pch=20, col="orange", cex=2)
-plot(IS.expectations$result.upper~IS.expectations$richness, ylim=c(4.8,6.12), pch=20, col="gray80", cex=2)
-plot(IS.expectations$result.upper~IS.expectations$richness, ylim=c(4.8,6.12), pch=20, col="gray80", cex=2)
-points(IS.expectations$result.lower~IS.expectations$richness, pch=20, col="gray80", cex=2)
-points(mpds~richs, pch=20, col="orange", cex=2)
-plot(IS.expectations$result.upper~IS.expectations$richness, ylim=c(4.8,6.12), pch=20, col="gray80", cex=2)
-plot(RN.expectations$result.upper~RN.expectations$richness, ylim=c(4.8,6.12), xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(RN.expectations$result.lower~RN.expectations$richness, xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(mpds~richs, col="orange", cex=2)
-plot(RN.expectations$result.upper~RN.expectations$richness, ylim=c(4.8,6.12), xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(RN.expectations$result.lower~RN.expectations$richness, xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(mpds~richs, col="orange", cex=2, pch=20)
-system.time(singleMetricNull(tree=tree2, orig.matrix=obs.cdm, metric="mpd", null.method="regionalNull", no.randomizations=10000, regional.abundance=arena2$regional.abundance, "RN.csv"))
-RN.possibilities <- read.csv("RN.csv")#
-#
-#' #call the summaries function from within a ddply statement#
-RN.expectations <- ddply(RN.possibilities, .(richness), summaries)
-plot(RN.expectations$result.upper~RN.expectations$richness, ylim=c(4.8,6.12), xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(RN.expectations$result.lower~RN.expectations$richness, xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(mpds~richs, col="orange", cex=2, pch=20)
-plot(RN.expectations$result.upper~RN.expectations$richness, ylim=c(4.8,6.12), xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(RN.expectations$result.lower~RN.expectations$richness, xlim=c(9,21), pch=20, col="gray80", cex=2)
-points(mpds~richs, col="orange", cex=2, pch=20)
+install_github("metricTester", username="eliotmiller")

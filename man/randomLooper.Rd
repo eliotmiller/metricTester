@@ -86,10 +86,9 @@ library(plyr)
 library(picante)
 
 randomLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,
-quadrat_size=50, mean.log.individuals=3.2, max.distance=15, percent.killed=0.2,
-competition.randomizations=25, null.method="richness", concatBYrichness=TRUE,
-no.randomizations=2, expectation=2, wrong=1, no.metrics=19, iterations=2,
-temp.file="deleteme.csv", output.file="confused.csv")
+quadrat_size=50, mean.log.individuals=3.2, null.method="richness",
+concatBYrichness=TRUE, no.randomizations=2, expectation=0, wrong=1|2, no.metrics=19,
+iterations=2, temp.file="deleteme.csv", output.file="random.csv")
 }
 \references{
   Miller, Trisos and Farine.
