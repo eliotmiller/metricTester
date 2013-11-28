@@ -106,7 +106,7 @@ filteringLooper <- function(no.species, x.min, x.max, y.min, y.max, no.quadrats,
 
 		##call the allMetricsNull() function
 
-		allMetricsNull(orig.matrix=cdm, tree=tree, null.method=null.method, no.randomizations=no.randomizations, temp.file=temp.file)
+		allMetricsNull(orig.matrix=cdm, tree=tree, null.method=null.method, regional.abundance=positions$individuals, no.randomizations=no.randomizations, temp.file=temp.file)
 
 		##read the simulations in 
 

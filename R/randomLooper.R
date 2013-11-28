@@ -81,7 +81,7 @@ randomLooper <- function(no.species, x.min, x.max, y.min, y.max, no.quadrats, qu
 
 		##call the allMetricsNull() function
 
-		allMetricsNull(orig.matrix=cdm, tree=tree, null.method=null.method, no.randomizations=no.randomizations, temp.file=temp.file)
+		allMetricsNull(orig.matrix=cdm, tree=tree, null.method=null.method, regional.abundance=positions$regional.abundance, no.randomizations=no.randomizations, temp.file=temp.file)
 
 		##read the simulations in 
 
