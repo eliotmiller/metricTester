@@ -13,7 +13,10 @@
 #' species as columns
 #' @param metric The community structure metric of choice. Options are as in singleMetric
 #' @param null.method A picante-style null, e.g. "richness" or "frequency", or "2x", "3x"
-#' "1s" or "2s", which will call spacodiR
+#' "1s" or "2s", which will call spacodiR. It can also now accomodate calls to
+#' "regionalNull"
+#' @param regional.abundance Optional vector of species names repeated the number of times
+#' present in the regional abundance pool. For use with regionalNull.
 #' @param no.randomizations The desired number of no.randomizations the function will run,
 #' i.e. the number of times orig.matrix will be shuffled and the metric calculated on it
 #' @param temp.file The desired name of the output csv file
@@ -43,7 +46,7 @@
 #'
 #' system.time(singleMetricNull(tree, cdm, "mpd", "richness", 10, "output.csv"))
 
-singleMetricNull <- function(tree, orig.matrix, metric, null.method, no.randomizations, temp.file)
+singleMetricNull <- function(tree, orig.matrix, metric, null.method, regional.abundance, no.randomizations, temp.file)
 {
 	for (j in 1:no.randomizations)
 	{
@@ -74,6 +77,11 @@ singleMetricNull <- function(tree, orig.matrix, metric, null.method, no.randomiz
 			spacodi.cdm <- suppressMessages(as.spacodi(orig.matrix))
 			temp.matrix <- resamp.2s(spacodi.cdm)
 			new.matrix <- suppressMessages(as.picante(temp.matrix))
+		}
+
+		else if(null.method=="regionalNull")
+		{
+			new.matrix <- regionalNull(cdm=orig.matrix, tree=tree, regional.abundance=regional.abundance)
 		}
 
 		else

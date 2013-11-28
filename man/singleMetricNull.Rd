@@ -3,7 +3,7 @@
 \title{Generate null expectations for a single community structure metric}
 \usage{
   singleMetricNull(tree, orig.matrix, metric, null.method,
-    no.randomizations, temp.file)
+    regional.abundance, no.randomizations, temp.file)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -16,7 +16,12 @@
 
   \item{null.method}{A picante-style null, e.g. "richness"
   or "frequency", or "2x", "3x" "1s" or "2s", which will
-  call spacodiR}
+  call spacodiR. It can also now accomodate calls to
+  "regionalNull"}
+
+  \item{regional.abundance}{Optional vector of species
+  names repeated the number of times present in the
+  regional abundance pool. For use with regionalNull.}
 
   \item{no.randomizations}{The desired number of
   no.randomizations the function will run, i.e. the number

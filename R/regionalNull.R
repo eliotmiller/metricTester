@@ -1,0 +1,99 @@
+#' Regional null model
+#'
+#' Entirely vectorized null model that maintains species richness (approximately only
+#' during this phase of the calculation, but we do so strictly later on), species
+#' occurrence frequency, and species abundance distributions.
+#'
+#' @param cdm Picante-style community data matrix with communities/quadrats/plots/etc
+#' as rows and species as columns
+#' @param tree Ape-style phylogeny
+#' @param regional.abundance Vector of species names, where each species' name is repeated
+#' the number of times necessary to accomodate its abundance in the regional species pool
+#' 
+#' @details Although not as fast as, e.g. randomizeMatrix, this functions does not contain
+#' any for loops and so still runs decently fast. It works by drawing the total number of
+#' individuals observed in the input plot from the regional abundance vector. Thus while
+#' a randomized quadrat will not necessarily have the same number of species as the
+#' observed quadrat, over many iterations it will likely be sampled. We can then
+#' concatenate the results by richness at the end which will only compare observed values
+#' to random quadrats of the same richness. As an example, an observed quadrat might have
+#' two individuals of speciesA and two of speciesB. If the regional abundance vector is
+#' c("spA","spA","spA","spA","spB","spB","spB","spC"), and we draw four individuals, it
+#' would be possible to draw 1, 2, or 3 species, but in general, two species would be seen
+#' in the randomized quadrats.
+#'
+#' @return A matrix with all species in the input tree in phylogenetic order, and the same
+#' number of randomized quadrats as used in the input community data matrix
+#'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' library(ape)
+#' library(geiger)
+#' library(plyr)
+#' library(picante)
+#'
+#' tree <- sim.bdtree(stop="taxa", n=50)
+#'
+#' arena <- randomArena(tree2, 0, 300, 0, 300, 3.2)
+#'
+#' bounds <- quadratPlacer(15, 300, 300, 30)
+#'
+#' temp.cdm <- quadratContents(arena$arena, bounds)
+#'
+#' cdm <- t(temp.cdm)
+#'
+#' regionalNull(cdm, tree, arena$regional.abundance)
+
+regionalNull <- function(cdm, tree, regional.abundance)
+{
+	#find the total number of individuals in each quadrat
+	sums <- apply(cdm, 1, sum)
+
+	#this command works beautifully, lucky guess on how to write it. it ends up sampling
+	#the required number of individuals (the sum of all individuals in a quadrat) 
+	#where each species gets drawn with a probability proportional to its abundance
+	#in the regional abundance vector. this does not strictly maintain species richness
+	#but it approximates it, and by concatenating by richness at end, we get same result
+				
+	indiv.list <- lapply(sums, sample, x=regional.abundance)
+		
+	#unlisting the list here will generate one long vector of individuals
+	indiv.list <- unlist(indiv.list)
+
+	#generate a vector of plot IDs, where each plot ID gets repeated the number of indivs
+	#in that plot. end up us
+	plotIDs <- rep(paste("quadrat", 1:length(sums), sep=""), sums)
+		
+	#create a dummy phylocom style dataframe (col1=quadratID, 2=abund, 3=spID)
+	temp.df <- data.frame(plotIDs, abund=rep(1, length(indiv.list)), indiv.list)
+		
+	#use picante's sample to matrix function to turn this into an appropriate cdm
+	#picante sums individuals that occur multiple times in a given quadrat
+	new.cdm <- sample2matrix(temp.df)
+	
+	#sort the cdm into quadrat order
+	new.cdm <- new.cdm[unique(plotIDs),]
+	
+	#add columns for species that weren't recorded in any quadrats
+	not.found <- setdiff(tree$tip.label, names(new.cdm))
+	
+	if(length(not.found > 0))
+	{
+		to.bind <- matrix(nrow=dim(new.cdm)[[1]], ncol=length(not.found), 0)
+		colnames(to.bind) <- not.found
+		new.cdm <- cbind(new.cdm, to.bind)
+	}
+	
+	else
+	{
+		new.cdm <- new.cdm
+	}
+
+	#sort the cdm into phylogenetic order
+	new.cdm <- new.cdm[,tree$tip.label]
+	
+	return(new.cdm)
+}
