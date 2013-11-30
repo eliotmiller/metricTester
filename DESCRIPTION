@@ -4,7 +4,7 @@ Description:
 Version: 0.1
 Authors@R: 'Eliot Miller <eliot.isaac@gmail.com> [aut, cre]'
 Depends:
-    R (>= 3.0.0),
+    R (>= 3.0.1),
     phylobase,
     ecoPDcorr,
     geiger,
