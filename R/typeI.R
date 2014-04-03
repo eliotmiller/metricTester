@@ -34,7 +34,7 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' system.time(allMetricsNull(tree, cdm, "richness", 10, "output.csv"))
+#' system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))
 #'
 #' possibilities <- read.csv("output.csv")
 #'

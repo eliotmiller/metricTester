@@ -1,6 +1,7 @@
 Package: metricTester
-Title: 
-Description: 
+Title: Explore behavior of phylogenetic community structure metrics
+Description: Explore the behavior and performance of phylogenetic metrics and
+    nulls
 Version: 0.1
 Authors@R: 'Eliot Miller <eliot.isaac@gmail.com> [aut, cre]'
 Depends:
@@ -39,3 +40,4 @@ Collate:
     'competitionLooper.R'
     'randomLooper.R'
     'regionalNull.R'
+    'abundanceVector.r'

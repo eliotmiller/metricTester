@@ -1,3 +1,4 @@
+export(abundanceVector)
 export(allMetrics)
 export(allMetricsNull)
 export(compareMins)

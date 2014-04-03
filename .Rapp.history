@@ -1,434 +1,291 @@
-temp$x
-tree$tip.label
-as.character(temp.x)
-as.character(temp$x)
-as.character(temp$x)[tree$tip.label]
-temp$x[as.factor(tree$tip.label)]
-total.occs <- count(regional.abundance)#
-		#sort into tree order#
-		total.occs <- total.occs[total.occs$x[as.factor(tree$tip.label)],]
-total.occs
-dim(total.occs)
+map <- ggmap(baseMap) + theme(plot.margin=unit(-0.5, "line""))
+)
+map <- ggmap(baseMap) + theme(plot.margin=unit(-0.5, "line"))
+map
+38.770565-38.487878
+38.770565-38.487878->a
+a/2
+a/2->b
+38.487878+b
+system.time(topMap <- get_stamenmap(bbox=c(left = -90.514909, bottom = 38.62922, right = -90.135291, top = 38.770565), zoom=12, maptype="terrain"))#
+#
+system.time(bottomMap <- get_stamenmap(bbox=c(left = -90.514909, bottom = 38.487878, right = -90.135291, top = 38.62922), zoom=12, maptype="terrain"))
+test <- map(bottomMap)
+test <- ggmap(bottomMap)
 test
-test <- total.occs[-2,]
-test
-sums
-sums <- apply(cdm, 1, sum)
-sums
-indiv.list <- lapply(sums, sample, x=regional.abundance)
-indiv.list
-count(indiv.list)
-lapply(indiv.list, count)
-lapply(indiv.list, count)->temp
-dim(temp)
-length(temp)
-dim(temp)[[1]]
-temp[[1]]
-length(temp[[1]])
-dim(temp[[1]])
-quadrat.richness
-dim(temp[[2]])
-lapply(temp, dim)
-indiv.list <- lapply(sums, sample, x=regional.abundance)
-temp <- lapply(indiv.list, count)
-lapply(temp, dim)
-indiv.list <- lapply(sums, sample, x=regional.abundance)
-temp <- lapply(indiv.list, count)
-lapply(temp, dim)
-indiv.list <- lapply(sums, sample, x=regional.abundance)
-indiv.list
-length(quadrat.richness)
-length(sum)
-length(sums)
-plotIDs <- rep("quadrat", 1:length(sums), sep="")
-plotIDs <- rep("quadrat", 1:15, sep="")
-plotIDs <- rep(paste("quadrat", 1:length(sums), sep=""), length(indiv.list))
-plotIDs
-15*15
-names(indiv.list)
-dimnames(indiv.list)
-names(indiv.list)
-names(indiv.list) <- paste("quadrat",1:15,sep="")
-indiv.list
-names(indiv.list[[1]])
-indiv.list[[1]]
-names(indiv.list)
-names(indiv.list[1])
-quick.function <- function(x)#
+10000/60
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+simulateComm()
+install_github("ecoPDcorr", username="eliotmiller")
+quit()
+library(metricTester)
+?simulateComm
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+cdm
+quickFUN <- function(vector)
+quickFUN <- function(vector)#
 {#
-	output <- rep(names(x), length(x))#
+	totals <- sum(vector)#
+	output <- vector/totals#
 	return(output)#
 }
-quick.function(indiv.list)
-lapply(indiv.list, quick.function)
-indiv.list <- lapply(sums, sample, x=regional.abundance)
-indiv.list
-sums
-paste("quadrat", 1:length(sums)
-)
-paste("quadrat", 1:length(sums), sep="")
-paste(paste("quadrat", 1:length(sums), sep=""), length(indiv.list))
-paste(paste("quadrat", 1:length(sums), sep=""), indiv.list)
-rep(paste("quadrat", 1:length(sums), sep=""), length(indiv.list))
-indiv.list
-test <- paste("quadrat", 1:length(sums), sep="")
+quickFUN(cdm[1,])
+sum(quickFUN(cdm[1,]))
+test <- apply(cdm, 1, quickFUN)
 test
-rep(test, 1,2)
-rep(test, c(1,2))
-rep(test, sums)
-rep(paste("quadrat", 1:length(sums), sep=""), sums)
-sums
-sum(sums)
-plotIDs <- rep(paste("quadrat", 1:length(sums), sep=""), sums)
-count(plotIDs)
-sums
-temp.df <- data.frame(plotIDs, indiv.list)
-indiv.list <- lapply(sums, sample, x=regional.abundance)
-indiv.list
-sums
-indiv.list <- unlist(indiv.list)
-indiv.list
-temp.df <- data.frame(plotIDs, indiv.list)
-temp.df
-abund
-temp.df <- data.frame(plotIDs, abund=rep(1, length(indiv.list), indiv.list)
-temp.df <- data.frame(plotIDs, abund=rep(1, length(indiv.list)), indiv.list)
-temp.df
-sample2matrix(temp.df)
-temp.df[temp.df$plotIDs=="quadrat1",]
-unique(plotIDs)
+?apply
 cdm
-new.cdm
-new.cdm <- sample2matrix(temp.df)
-new.cdm
-new.cdm[unique(plotIDs),]
-new.cdm <- new.cdm[unique(plotIDs),]
-new.cdm
-new.cdm[,tree$tip.label]
-new.cdm[,as.factor(tree$tip.label)]
-new.cdm[names(cdm)[tree$tip.label],]
-new.cdm[,names(cdm)[tree$tip.label]]
-new.cdm[,names(new.cdm)[tree$tip.label]]
-names(new.cdm)
-names(new.cdm)[tree$tip.label]
-names(new.cdm)[as.factor(tree$tip.label)]
-length(tree$tip.label)
-dim(new.cdm)
-new.cdm
-cbind(new.cdm,rep(0,15))
-setdiff(names(new.cdm),tree$tip.label)
-setdiff(names(new.cdm),tree$tip.label)->test
-length(test)
-setdiff(tree$tip.label, names(new.cdm))
-not.found <- setdiff(tree$tip.label, names(new.cdm))
-not.found > 0
-length(test)
-length(not.found)
-new.cdm
-to.bind
-dim(new.cdm)
-dim(new.cdm)[[1]]
-to.bind <- matrix(nrow=dim(new.cdm)[[1]], ncol=length(not.found), 0)
-to.bind
-names(to.bind)
-names(to.bind) <- not.found
-to.bind
-to.bind <- matrix(nrow=dim(new.cdm)[[1]], ncol=length(not.found), 0)
-to.bind
-dimnames(to.bind)
-colnames(to.bind)
-colnames(to.bind) <- not.found
-to.bind
-new.cdm <- cbind(new.cdm, to.bind)
-new.cdm
-names(new.cdm)
-setdiff(names(new.cdm),tree$tip.label)
-setdiff(tree$tip.label,names(new.cdm))
-names(new.cdm)[tree$tip.label]
-names(new.cdm)[as.factor(tree$tip.label)]
-tree$tip.label
-as.factor(tree$tip.label)
-class(names(new.cdm))
-names(new.cdm)[tree$tip.label,]
-names(new.cdm)[tree$tip.label]
-as.factor(names(new.cdm))[tree$tip.label]
-as.factor(names(new.cdm))[as.factor(tree$tip.label)]
-names(new.cdm)
-names(new.cdm)[order(tree$tip.label)]
-order(names(new.cdm), tree$tip.label)
-names(new.cdm)
-names(new.cdm)[tree$tip.label,]
-names(new.cdm)[,tree$tip.label]
-names(new.cdm)[tree$tip.label]
-names(new.cdm) %in% tree$tip.label
-names(new.cdm)[as.factor(tree$tip.label)]
-names(new.cdm)[as.factor(tree$tip.label),]
-names(new.cdm)[as.factor(tree$tip.label)]
-new.cdm[tree$tip.label,]
-new.cdm[,tree$tip.label]
-new.cdm <- new.cdm[,tree$tip.label]
-new.cdm
-apply(new.cdm, 1, lengthNonZeros)
-apply(new.cdm, 2, sums)
-apply(new.cdm, 2, sum)
-count(regional.abundance)
-regionalNull <- function(cdm, tree, regional.abundance)#
-{#
-	#find the total number of individuals in each quadrat#
-	sums <- apply(cdm, 1, sum)#
-#
-	#this command works beautifully, lucky guess on how to write it. it ends up sampling#
-	#the required number of individuals (the sum of all individuals in a quadrat) #
-	#where each species gets drawn with a probability proportional to its abundance#
-	#in the regional abundance vector. this does not strictly maintain species richness#
-	#but it approximates it, and by concatenating by richness at end, we get same result#
-	indiv.list <- lapply(sums, sample, x=regional.abundance)#
-	#unlisting the list here will generate one long vector of individuals#
-	indiv.list <- unlist(indiv.list)#
-#
-	#generate a vector of plot IDs, where each plot ID gets repeated the number of indivs#
-	#in that plot. end up us#
-	plotIDs <- rep(paste("quadrat", 1:length(sums), sep=""), sums)#
-	#create a dummy phylocom style dataframe#
-	temp.df <- data.frame(plotIDs, abund=rep(1, length(indiv.list)), indiv.list)#
-	#use picante's sample to matrix function to turn this into an appropriate cdm#
-	#picante sums individuals that occur multiple times in a given quadrat#
-	new.cdm <- sample2matrix(temp.df)#
-	#sort the cdm into quadrat order#
-	new.cdm <- new.cdm[unique(plotIDs),]#
-	#add columns for species that weren't recorded in any quadrats#
-	not.found <- setdiff(tree$tip.label, names(new.cdm))#
-	if(length(not.found > 0))#
-	{#
-		to.bind <- matrix(nrow=dim(new.cdm)[[1]], ncol=length(not.found), 0)#
-		colnames(to.bind) <- not.found#
-		new.cdm <- cbind(new.cdm, to.bind)#
-	}#
-	else#
-	{#
-		new.cdm <- new.cdm#
-	}#
-#
-	#sort the cdm into phylogenetic order#
-	new.cdm <- new.cdm[,tree$tip.label]#
-	return(new.cdm)#
-}
-ls()
-rm(arena, bounds, cdm, i, indiv.list, new.cdm, not.found, plotIDs, quadrat.richness, quick.function, regional.abundance, regionalNull, sums, temp, temp.cdm, temp.df, temp2, test, to.bind, total.occs, tree)
-ls()
-tree2 <- sim.bdtree(stop="taxa", n=50)#
-#
-arena2 <- randomArena(tree2, 0, 300, 0, 300, 3.2)#
-#
-bounds2 <- quadratPlacer(15, 300, 300, 30)#
-#
-temp.cdm2 <- quadratContents(arena2$arena, bounds2)#
-#
-cdm2 <- t(temp.cdm2)
-cdm2
-arena2$regional.abundance
-regionalNull()
-regionalNull <- function(cdm, tree, regional.abundance)#
-{#
-	#find the total number of individuals in each quadrat#
-	sums <- apply(cdm, 1, sum)#
-#
-	#this command works beautifully, lucky guess on how to write it. it ends up sampling#
-	#the required number of individuals (the sum of all individuals in a quadrat) #
-	#where each species gets drawn with a probability proportional to its abundance#
-	#in the regional abundance vector. this does not strictly maintain species richness#
-	#but it approximates it, and by concatenating by richness at end, we get same result#
-	indiv.list <- lapply(sums, sample, x=regional.abundance)#
-	#unlisting the list here will generate one long vector of individuals#
-	indiv.list <- unlist(indiv.list)#
-#
-	#generate a vector of plot IDs, where each plot ID gets repeated the number of indivs#
-	#in that plot. end up us#
-	plotIDs <- rep(paste("quadrat", 1:length(sums), sep=""), sums)#
-	#create a dummy phylocom style dataframe (col1=quadratID, 2=abund, 3=spID)#
-	temp.df <- data.frame(plotIDs, abund=rep(1, length(indiv.list)), indiv.list)#
-	#use picante's sample to matrix function to turn this into an appropriate cdm#
-	#picante sums individuals that occur multiple times in a given quadrat#
-	new.cdm <- sample2matrix(temp.df)#
-	#sort the cdm into quadrat order#
-	new.cdm <- new.cdm[unique(plotIDs),]#
-	#add columns for species that weren't recorded in any quadrats#
-	not.found <- setdiff(tree$tip.label, names(new.cdm))#
-	if(length(not.found > 0))#
-	{#
-		to.bind <- matrix(nrow=dim(new.cdm)[[1]], ncol=length(not.found), 0)#
-		colnames(to.bind) <- not.found#
-		new.cdm <- cbind(new.cdm, to.bind)#
-	}#
-	else#
-	{#
-		new.cdm <- new.cdm#
-	}#
-#
-	#sort the cdm into phylogenetic order#
-	new.cdm <- new.cdm[,tree$tip.label]#
-	return(new.cdm)#
-}
-regionalNull(cdm=cdm2, tree=tree2, regional.abundance=arena2$regional.abundance)->test
+apply(cdm, 1, quickFUN)
 test
-cdm2
-apply(cdm2, 2, sum)
-count(arena2$regional.abundance)
-apply(test, 2, sum)
-library(metricTester)
-library(plyr)
-?randomLooper
-library(ape)#
-library(geiger)#
-library(colorRamps)#
-library(plyr)#
-library(picante)
-system.time(randomLooper(no.species=100, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=30, mean.log.individuals=3.2, null.method="richness", concatBYrichness=TRUE,#
-no.randomizations=2, expectation=0, wrong=1|2, no.metrics=19, iterations=1,#
-temp.file="deleteme.csv", output.file="confused.csv"))
-500*23
-11500/60
-191/60
-?typeI
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "richness", 10, "output.csv"))#
-#
-possibilities <- read.csv("output.csv")#
-#
-#call the summaries function from within a ddply statement#
-expectations <- ddply(possibilities, .(richness), summaries)#
-#
-#calculate the observed metrics#
-observed <- allMetrics(tree, cdm)#
-#
-#important merge command, confirm it works#
-results <- merge(observed, expectations, sort=FALSE)#
-#
-oneMetric <- sigTest(results, "PSV")#
-#
-#example of how to loop it over a table of results#
-metric.names <- names(observed)[3:21]#
-#
-sig.results <- list()#
-#
-for(i in 1:length(metric.names))#
-{#
-	sig.results[[i]] <- sigTest(results, metric.names[i])#
-}#
-#
-sig.results <- as.data.frame(sig.results)#
-#
-names(sig.results) <- metric.names#
-#
-error.summ <- typeI(sig.results, expectation=1, wrong=2)
-library(plyr)#
-library(geiger)#
-library(picante)
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree, cdm, "richness", 10, "output.csv"))
+apply(test,2,sum)
+test <- t(test)
+test
 cdm
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))
-possibilities <- read.csv("output.csv")#
-#
-#call the summaries function from within a ddply statement#
-expectations <- ddply(possibilities, .(richness), summaries)#
-#
-#calculate the observed metrics#
-observed <- allMetrics(tree, cdm)#
-#
-#important merge command, confirm it works#
-results <- merge(observed, expectations, sort=FALSE)#
-#
-oneMetric <- sigTest(results, "PSV")#
-#
-#example of how to loop it over a table of results#
-metric.names <- names(observed)[3:21]#
-#
-sig.results <- list()#
-#
-for(i in 1:length(metric.names))#
-{#
-	sig.results[[i]] <- sigTest(results, metric.names[i])#
-}#
-#
-sig.results <- as.data.frame(sig.results)#
-#
-names(sig.results) <- metric.names
-sig.results
-error.summ <- typeI(sig.results, expectation=1, wrong=2)
-error.sum
-error.summ
-error.summ <- typeI(sig.results, expectation=0, wrong=!|2)
-error.summ <- typeI(sig.results, expectation=0, wrong=1|2)
-error.summ
-sig.results$IAC
-sig.results$IAC <- rep(0, 16)
-sig.results
-error.summ <- typeI(sig.results, expectation=0, wrong=1|2)
-error.summ
-sig.results$NAW_MPD <- rep(1, 16)
-error.summ <- typeI(sig.results, expectation=0, wrong=1|2)
-error.summ
-sig.results <- list()#
-#
-for(i in 1:length(metric.names))#
-{#
-	sig.results[[i]] <- sigTest(results, metric.names[i])#
-}#
-#
-sig.results <- as.data.frame(sig.results)#
-#
-names(sig.results) <- metric.names
-sig.results
-sig.results$IAC[sig.results$IAC==2]
-sig.results$IAC[sig.results$IAC==1]
-sig.results$IAC[sig.results$IAC==1] <- 2
-sig.results$IAC
-sig.results$IAC[sig.results$IAC==1] <- 2
-sig.results
-sig.results$IAC[sig.results$IAC==2] <- 1
-sig.results
-library(devtools)
-load_all()
-document()
-sig.results
-typeI(sig.results, 2, 1)
-typeI(sig.results, 1, 2)
-sig.results
-typeI(sig.results, 0, 1|2)
-sig.results$intra_MPD <- rep(0, 16)
-sig.results$intra_MPD <- rep(1, 16)
-typeI(sig.results, 0, 1|2)
-sig.results
-sig.results$IAC <- rep(1, 16)
-typeI(sig.results, 0, 1|2)
-typeI(sig.results, 0, 1|2)->test
+test
+dists <- cophenetic(tree)
+mpd(cdm, dists)
+mpd(cdm, test)
 test
 names(test)
-rownames(test)
-pull.out <- test[rownames(test)=="IAC",]
-pull.out
-test2 <- test[-rownames(test)=="IAC",]
-test2 <- test[rownames(test)!="IAC",]
+names(cdm)
+class(test)
+class(cdm)
+test <- data.frame(test)
+test
+names(test)
+mpd(cdm, test)
+mpd(cdm, dists)
+mpd(test, dists)
+mpd(cdm, dists, abundance.weighted=T)
+mpd(test, dists, abundance.weighted=T)
+cdm
+test
+cdm
+test
+library(metricTester)library(geiger)#simulate tree with birth-death processtree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#generate log-normal abundance curvesim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#use this log-normal abundance curve to create a community #data matrix (cdm) with 16 quadrats of species richness #between 10 and 25. cdm <- simulateComm(tree, min.rich=10, max.rich=25, 	abundances=sim.abundances)#generate a phylogenetic distance matrixdists <- cophenetic(tree)#calculate the various forms of MPD using metricTesternaw.mpd <- modified.mpd(cdm, dists, 	abundance.weighted=FALSE)inter.mpd <- modified.mpd(cdm, dists, 	abundance.weighted="interspecific")intra.mpd <- modified.mpd(cdm, dists, 	abundance.weighted="intraspecific")#calculate the various forms of Clarke and Warwick's #metricstemp.CW <- taxondive(cdm, dists)delta <- temp.CW$Ddelta.star <- temp.CW$Dstardelta.plus <- temp.CW$Dplus#Non-abundance-weighted MPD is equal to delta +. Also, call #the raw va
+lues if you want to see those directlyplot(delta.plus~naw.mpd)#Interspecific abundance-weighted MPD is equal to delta *plot(delta.star~inter.mpd)#Intraspecific abundance-weighted MPD is equal to deltaplot(delta~intra.mpd)
+plot(delta.plus~naw.mpd, xlab="MPD", ylab="Delta plus")
+mat
+mat <- matrix(nrow=2, ncol=2)
+layout(mat=mat)
+mat
+mat <- matrix(0, ncol=2, nrow=2)
+mat
+layout(mat)
+layout(mat=mat)
+m
+mat
+mat <- matrix(1:4)
+mat
+mat <- matrix(1:4, nrow=2)
+mat
+layout(mat)
+plot(delta.plus~naw.mpd, xlab="MPD", ylab="Delta plus")
+plot(delta.star~inter.mpd, xlab="Interspecific AW MPD", ylab="Delta star")
+plot(delta~intra.mpd, xlab="Intraspecific AW MPD", ylab="Delta")
+locationSampler
+library(ape)
+data(woodmouse)
+head(woodmouse)
+M.K80 <- dist.dna(woodmouse,model="K80")
+M.K80
+M.TN93 <- dist.dna(woodmouse, model="TN93")
+tr.K80 <- nj(M.K80)
+tr.TN93 <- nj(M.TN93)
+layout(matrix(1:2,1))
+plot(tr.K80)
+plot(tr.TN93)
+plot(tr.K80)
+quartz()
+plot(tr.TN93)
+head(woodmouse)
+?dist.dna
+ls()
+M.K80
+M.TN93
+M.K80-M.TN93
+dist.dna
+test <- c("a","a","b","c")
+test
+unique(test)
+length(unique(test))
+?par
+par(mar=c(0,0.1,0,0.1))
+library(vegan)
+data(dune)
+dune
+sol <- metaMDS(dune)
+sol
+plot(sol, type="t")
+str(sol)
+sol$points
+sol <- metaMDS(dune, k=3)
+plot(sol, type='t')
+sol$points
+dune
+plot(sol, type='t')
+plot(sol, type='p')
+class(sol)
+?plot.metaMDS
+plot(sol, type='n')
+plot(sol, type='t')
+test <- dune
+test
+test[,4]
+length(test[,4])
+test[,4] <- rep(c("est1","est2","est3","est4"),5)
+test
+sol <- metaMDS(test)
+test <- t(test)
+test
+class(test)
+test <- data.frame(test)
+test
+metaMDS(test)
+?sapply
+require(stats); require(graphics)#
+#
+x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))#
+# compute the list mean for each list element
+x
+lapply(x, quantile, probs = 1:3/4)
+sapply(x, quantile)
+i39 <- sapply(3:9, seq) # list of vectors
+i39
+test <- data.frame(species=c("sp1","sp1","sp2","sp2"), value1=c(3,4,1,6), value2=c(10,11,8,14))
+test
+library(plyr)
+dist(test[1:2,2:3])
+test <- data.frame(species=c("sp1","sp1","sp1","sp2","sp2","sp2"), value1=c(3,4,5,1,6,8), value2=c(9,10,11,8,14,16))
+test
+test2 <- test[1:3,]
 test2
+dist(test2)
+dist(test2[,2:3])
+dist(test2[,2:3])->test3
+sd(test3)
+?dist
+?mahalonobis
+ma <- cbind(1:6, 1:3)
+(S <-  var(ma))
+S
+mahalanobis(c(0, 0), 1:2, S)
+SDs
+test
+dist(test)
+dist(test[,2:3])
+dlply(test, "species", summarise, dists=dist(c("value1","value2")))
+dlply(test, "species", summarise, dists=dist)
+test
+x
+colMeans(x)
+x <- matrix(rnorm(100*3), ncol = 3)#
+stopifnot(mahalanobis(x, 0, diag(ncol(x))) == rowSums(x*x))#
+        ##- Here, D^2 = usual squared Euclidean distances
+x
+colMeans(x)
+library(picante)
+?rao
+raoD
+?raoD
+?pd
+?taxondive
+library(metricTester)
+?simulateComm
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+psv(cdm, tree)
+psv.temp <- psv(cdm, tree)
+test.case <- psv.temp$PSVs * psv.temp$SR
+test.case
+pd(cdm, tree)
+pd.temp <- pd(cdm,tree)
+plot(test.case~pd.temp$PD)
+pd.temp <- pd(cdm,tree, include.root=FALSE)
+plot(test.case~pd.temp$PD)
+allMetrics(tree, cdm)->All
+All
+plot(test.case)
+plot(test.case~All$NAW_MPD)
+plot(test.case~All$inter_MPD)
+plot(test.case~All$intra_MPD)
+plot(test.case~All$PD)
+plot(test.case~All$Haed)
+plot(test.case~All$Eaed)
+plot(test.case~All$Eed)
+plot(test.case~All$Hed)
+plot(test.case~All$QE)
+plot(test.case~All$richness)
+?SimpsonsPhy
+allMetrics
+?simpson
+ALl
+All
+?pd
+cdm
+cdm2 <- t(cdm)
+?allMetricsNull
+allMetricsNull
+resamp.2s(cdm2)
+cdm2
+resamp.2s(cdm2)
+b<-c(9,10)
+b
+paste("echidna","is","an","animal")
+class(a)a<-c(5,6,7,"echidna")
+a <- c(5,6,7,"echidna")#
+b <- c("echidna","dog","abies")#
+frame <- data.frame(a,b)#
+frame#
+class(frame)
+rm(frame)
+frame
+?frame
+a <- c(5,6,7,"echidna")#
+b <- c("echidna","dog","abies")#
+example.frame <- data.frame(a,b)#
+example.frame#
+class(example.frame)
+a <- c(5,6,7)#
+b <- c("echidna","dog","abies")#
+example.frame <- data.frame(a,b)#
+example.frame#
+class(example.frame)
+class(example.frame$a)#
+class(example.frame$b)
+example.frame$a
+22*9
+str(example.frame)
+ls()
+test.case
+temp <- lm(test.case~test.case)
+class(test.case)
+pd.temp
+temp <- lm(pd.temp$PD~pd.temp$SR)
+plot(temp)
+test <- data.frame(x=c(1,2,3),y=c(1,2,3),z=c(1,2,3))
+test
+names(test) <- c("one","two")
+test
+library("devtools")
+library("roxygen2")
+load_all()
 document()
-typeI(sig.results, 0, 1|2)
-document()
-typeI(sig.results, 0, 1|2)
+devtools::check()

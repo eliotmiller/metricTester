@@ -37,7 +37,7 @@
 #'
 #' tree <- sim.bdtree(stop="taxa", n=50)
 #'
-#' arena <- randomArena(tree2, 0, 300, 0, 300, 3.2)
+#' arena <- randomArena(tree, 0, 300, 0, 300, 3.2)
 #'
 #' bounds <- quadratPlacer(15, 300, 300, 30)
 #'
