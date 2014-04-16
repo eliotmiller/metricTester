@@ -47,7 +47,13 @@ simulateComm <- function(tree, min.rich, max.rich, abundances)
 		cdm <- sample2matrix(cdm.fake)
 
 		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions
-		cdm <- cdm[tree$tip.label]
+		#need to fake prune the phylo here in case not all the species are in the cdm as are in the phylo
+
+		dropped <- setdiff(tree$tip.label, colnames(cdm))
+		
+		drop.tree <- drop.tip(tree, dropped)
+
+		cdm <- cdm[drop.tree$tip.label]
 
 		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")
 

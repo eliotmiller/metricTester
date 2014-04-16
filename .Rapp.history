@@ -1,180 +1,3 @@
-map <- ggmap(baseMap) + theme(plot.margin=unit(-0.5, "line""))
-)
-map <- ggmap(baseMap) + theme(plot.margin=unit(-0.5, "line"))
-map
-38.770565-38.487878
-38.770565-38.487878->a
-a/2
-a/2->b
-38.487878+b
-system.time(topMap <- get_stamenmap(bbox=c(left = -90.514909, bottom = 38.62922, right = -90.135291, top = 38.770565), zoom=12, maptype="terrain"))#
-#
-system.time(bottomMap <- get_stamenmap(bbox=c(left = -90.514909, bottom = 38.487878, right = -90.135291, top = 38.62922), zoom=12, maptype="terrain"))
-test <- map(bottomMap)
-test <- ggmap(bottomMap)
-test
-10000/60
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-library(metricTester)
-simulateComm()
-install_github("ecoPDcorr", username="eliotmiller")
-quit()
-library(metricTester)
-?simulateComm
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-cdm
-quickFUN <- function(vector)
-quickFUN <- function(vector)#
-{#
-	totals <- sum(vector)#
-	output <- vector/totals#
-	return(output)#
-}
-quickFUN(cdm[1,])
-sum(quickFUN(cdm[1,]))
-test <- apply(cdm, 1, quickFUN)
-test
-?apply
-cdm
-apply(cdm, 1, quickFUN)
-test
-apply(test,2,sum)
-test <- t(test)
-test
-cdm
-test
-dists <- cophenetic(tree)
-mpd(cdm, dists)
-mpd(cdm, test)
-test
-names(test)
-names(cdm)
-class(test)
-class(cdm)
-test <- data.frame(test)
-test
-names(test)
-mpd(cdm, test)
-mpd(cdm, dists)
-mpd(test, dists)
-mpd(cdm, dists, abundance.weighted=T)
-mpd(test, dists, abundance.weighted=T)
-cdm
-test
-cdm
-test
-library(metricTester)library(geiger)#simulate tree with birth-death processtree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#generate log-normal abundance curvesim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#use this log-normal abundance curve to create a community #data matrix (cdm) with 16 quadrats of species richness #between 10 and 25. cdm <- simulateComm(tree, min.rich=10, max.rich=25, 	abundances=sim.abundances)#generate a phylogenetic distance matrixdists <- cophenetic(tree)#calculate the various forms of MPD using metricTesternaw.mpd <- modified.mpd(cdm, dists, 	abundance.weighted=FALSE)inter.mpd <- modified.mpd(cdm, dists, 	abundance.weighted="interspecific")intra.mpd <- modified.mpd(cdm, dists, 	abundance.weighted="intraspecific")#calculate the various forms of Clarke and Warwick's #metricstemp.CW <- taxondive(cdm, dists)delta <- temp.CW$Ddelta.star <- temp.CW$Dstardelta.plus <- temp.CW$Dplus#Non-abundance-weighted MPD is equal to delta +. Also, call #the raw va
-lues if you want to see those directlyplot(delta.plus~naw.mpd)#Interspecific abundance-weighted MPD is equal to delta *plot(delta.star~inter.mpd)#Intraspecific abundance-weighted MPD is equal to deltaplot(delta~intra.mpd)
-plot(delta.plus~naw.mpd, xlab="MPD", ylab="Delta plus")
-mat
-mat <- matrix(nrow=2, ncol=2)
-layout(mat=mat)
-mat
-mat <- matrix(0, ncol=2, nrow=2)
-mat
-layout(mat)
-layout(mat=mat)
-m
-mat
-mat <- matrix(1:4)
-mat
-mat <- matrix(1:4, nrow=2)
-mat
-layout(mat)
-plot(delta.plus~naw.mpd, xlab="MPD", ylab="Delta plus")
-plot(delta.star~inter.mpd, xlab="Interspecific AW MPD", ylab="Delta star")
-plot(delta~intra.mpd, xlab="Intraspecific AW MPD", ylab="Delta")
-locationSampler
-library(ape)
-data(woodmouse)
-head(woodmouse)
-M.K80 <- dist.dna(woodmouse,model="K80")
-M.K80
-M.TN93 <- dist.dna(woodmouse, model="TN93")
-tr.K80 <- nj(M.K80)
-tr.TN93 <- nj(M.TN93)
-layout(matrix(1:2,1))
-plot(tr.K80)
-plot(tr.TN93)
-plot(tr.K80)
-quartz()
-plot(tr.TN93)
-head(woodmouse)
-?dist.dna
-ls()
-M.K80
-M.TN93
-M.K80-M.TN93
-dist.dna
-test <- c("a","a","b","c")
-test
-unique(test)
-length(unique(test))
-?par
-par(mar=c(0,0.1,0,0.1))
-library(vegan)
-data(dune)
-dune
-sol <- metaMDS(dune)
-sol
-plot(sol, type="t")
-str(sol)
-sol$points
-sol <- metaMDS(dune, k=3)
-plot(sol, type='t')
-sol$points
-dune
-plot(sol, type='t')
-plot(sol, type='p')
-class(sol)
-?plot.metaMDS
-plot(sol, type='n')
-plot(sol, type='t')
-test <- dune
-test
-test[,4]
-length(test[,4])
-test[,4] <- rep(c("est1","est2","est3","est4"),5)
-test
-sol <- metaMDS(test)
-test <- t(test)
-test
-class(test)
-test <- data.frame(test)
-test
-metaMDS(test)
-?sapply
-require(stats); require(graphics)#
-#
-x <- list(a = 1:10, beta = exp(-3:3), logic = c(TRUE,FALSE,FALSE,TRUE))#
-# compute the list mean for each list element
-x
-lapply(x, quantile, probs = 1:3/4)
-sapply(x, quantile)
-i39 <- sapply(3:9, seq) # list of vectors
-i39
-test <- data.frame(species=c("sp1","sp1","sp2","sp2"), value1=c(3,4,1,6), value2=c(10,11,8,14))
-test
-library(plyr)
-dist(test[1:2,2:3])
-test <- data.frame(species=c("sp1","sp1","sp1","sp2","sp2","sp2"), value1=c(3,4,5,1,6,8), value2=c(9,10,11,8,14,16))
-test
-test2 <- test[1:3,]
-test2
-dist(test2)
-dist(test2[,2:3])
-dist(test2[,2:3])->test3
-sd(test3)
-?dist
 ?mahalonobis
 ma <- cbind(1:6, 1:3)
 (S <-  var(ma))
@@ -284,8 +107,363 @@ test <- data.frame(x=c(1,2,3),y=c(1,2,3),z=c(1,2,3))
 test
 names(test) <- c("one","two")
 test
-library("devtools")
-library("roxygen2")
+library(devtools)
+install_github("metricTester", username="eliot_miller")
+install_github("metricTester", username="eliotmiller")
+install_github("ecoPDcorr", username="eliotmiller")
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+?allMetrics
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+results <- allMetrics(tree, cdm)
+results
+cdm
+library(metricTester)
+?allMetrics
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+results <- allMetrics(tree, cdm)
+results
+cdm
+simulateComm
+?metricTester
+vignette(metricTester)
+?vignette
+14187.98+9556.34+13156.43
+12250*2+10151.76
+1937.98-595.42+906.43
+8931.66-5500
+8931.66-5000
+3931-5950
+9500+24.12+154.70+2248.99+5873.49
+9500+24.12+154.70+2248.99+5873.49-33.27
+17768.03-6100
+-3900
+17768.03-6100-3900
+778+500
+776.24+587.35
+776.24+587.35-1278
+9500+24.12+154.70+2248.99+873.49-33.27
+9500+24.12+154.70+2248.99+873.49
+9500+24.12+154.70+2248.99+873.49-33.27
+9500+24.12+154.70+2248.99+873.49-33.27-6100
+9500+24.12+154.70+2248.99+873.49-33.27-6100-3900
+24.12+154.70+2248.99
+1363.59+368
+1363.59+368-776
+9500+24.12+154.7+2248.99+873.49
+9500+24.12+154.7+2248.99+873.49-33.27
+9500+24.12+154.7+2248.99+873.49-33.27->a
+a
+a*0.1
+285+95
+380+1339.04
+a
+a-6100
+a-6100-3900
+587.35+776.24
+587.35+776.24+368
+587.35+776.24+368-776
+380+1167.7
+library(FD)
+?gowdis
+1000/58.43
+2000/85.50
+400-72-58
+400-72-58+58+64
+88+162
+400-69-55
+one <- c(270, 58, 64, 8)
+one
+sum(one)
+one/400
+(one/400) * log10((one/400))
+sum((one/400) * log10((one/400)))
+two <- c(127,23,88,162)
+sum((two/400) * log10((two/400)))
+three <- c(276,69,55)
+sum((three/400) * log10((three/400)))
+300*0.05
+300*0.9
+300*(270+58)+15(8)+270(64)
+300*(270+58)+15(8)+270*(64)
+300*(270+58)+15*(8)+270*(64)
+300*(270+58)+15*(8)+270*(64)/2
+(300*(270+58)+15*(8)+270*(64))/2
+(300*(150)+15*(162)+270*(88))/2
+(300*(276+69)+15*(55)+270*(0))/2
+(500*104)+(250*44)+(250*32)
+(500*104)+(250*44)+(250*32)/1000
+((500*104)+(250*44)+(250*32))/1000
+270+58
+31*8+92*64+92*328
+(31*8+92*64+92*328)/1000
+(16*8+51*64+52*328)/1000
+(4*8+10*64+15*328)/1000
+(32*8+44*64+104*328)/1000
+400-55
+8*13
+library(metricTester)
+?simulateComm
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=100, max.rich=150, abundances=sim.abundances)
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=20, abundances=sim.abundances)
+simulateComm
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=20, abundances=sim.abundances)
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=15, max.rich=25, abundances=sim.abundances)
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=20, max.rich=25, abundances=sim.abundances)
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=25, max.rich=30, abundances=sim.abundances)
+simulateComm
+tree
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
+simulateComm <- function(tree, min.rich, max.rich, abundances)#
+{#
+	col.1 <- c()#
+	col.2 <- c()#
+	col.3 <- c()#
+	for (i in seq(from=min.rich, to=max.rich))#
+	{#
+		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times#
+		col.1 <- append(col.1, rich)#
+		numbers <- sample(abundances, i)#
+		col.2 <- append(col.2, numbers)#
+		species <- sample(tree$tip.label, i)#
+		col.3 <- append(col.3, species)#
+	}#
+		cdm.fake <- data.frame(col.1, col.2, col.3)#
+		cdm <- sample2matrix(cdm.fake)#
+#
+		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions#
+		cdm <- cdm[tree$tip.label,]#
+#
+		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
+#
+		dimnames(cdm)[[1]] <- quadratNames#
+#
+		return(cdm)#
+}
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
+cdm
+head(cdm)
+simulateComm <- function(tree, min.rich, max.rich, abundances)#
+{#
+	col.1 <- c()#
+	col.2 <- c()#
+	col.3 <- c()#
+	for (i in seq(from=min.rich, to=max.rich))#
+	{#
+		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times#
+		col.1 <- append(col.1, rich)#
+		numbers <- sample(abundances, i)#
+		col.2 <- append(col.2, numbers)#
+		species <- sample(tree$tip.label, i)#
+		col.3 <- append(col.3, species)#
+	}#
+		cdm.fake <- data.frame(col.1, col.2, col.3)#
+		cdm <- sample2matrix(cdm.fake)#
+#
+		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions#
+		cdm <- cdm[,tree$tip.label]#
+#
+		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
+#
+		dimnames(cdm)[[1]] <- quadratNames#
+#
+		return(cdm)#
+}
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
+library(metricTester)
+col.1 <- c()#
+	col.2 <- c()#
+	col.3 <- c()
+rich <- rep(4, 4)
+rich
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+numbers <- sample(abundances, 4)
+numbers <- sample(sim.abundances, 4)
+numbers
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)
+tree
+species <- sample(tree$tip.label, 4)
+species
+cdm.fake <- data.frame(rich, numbers, species)
+cdm
+cdm.frake
+cdm.fake
+cdm <- sample2matrix(cdm.fake)
+cdm
+cdm[tree$tip.label]
+tree$tip.label
+cdm[,tree$tip.label]
+cdm[tree$tip.label,]
+cdm[,tree$tip.label]
+cdm[,order(tree$tip.label)]
+cdm
+cdm[tree$tip.label]
+cdm[,tree$tip.label]
+tree$tip.label
+cdm
+order(colnames(cdm))
+cdm[,order(colnames(cdm))]
+dropped <- setdiff(colnames(cdm), tree$tip.label)
+dropped
+dropped <- setdiff(tree$tip.label, colnames(cdm))
+dropped
+?drop.tip
+drop.tip(tree, dropped)
+cdm
+cdm <- cdm[drop.tree$tip.label]
+drop.tree <- drop.tip(tree, dropped)#
+#
+		cdm <- cdm[drop.tree$tip.label]
+cdm
+simulateComm <- function(tree, min.rich, max.rich, abundances)#
+{#
+	col.1 <- c()#
+	col.2 <- c()#
+	col.3 <- c()#
+	for (i in seq(from=min.rich, to=max.rich))#
+	{#
+		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times#
+		col.1 <- append(col.1, rich)#
+		numbers <- sample(abundances, i)#
+		col.2 <- append(col.2, numbers)#
+		species <- sample(tree$tip.label, i)#
+		col.3 <- append(col.3, species)#
+	}#
+		cdm.fake <- data.frame(col.1, col.2, col.3)#
+		cdm <- sample2matrix(cdm.fake)#
+#
+		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions#
+		#need to fake prune the phylo here in case not all the species are in the cdm as are in the phylo#
+#
+		dropped <- setdiff(tree$tip.label, colnames(cdm))#
+		drop.tree <- drop.tip(tree, dropped)#
+#
+		cdm <- cdm[drop.tree$tip.label]#
+#
+		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
+#
+		dimnames(cdm)[[1]] <- quadratNames#
+#
+		return(cdm)#
+}
+?simulateComm
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+head(cdm)
+library(devtools)
 load_all()
 document()
-devtools::check()
