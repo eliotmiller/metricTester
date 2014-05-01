@@ -8,10 +8,10 @@
 #' @param wrong Value of a typeI error rate, e.g. 2 if expecting 1.
 #' 
 #' @details Note that IAC is thought to detect clustering if observed is greater than
-#' upper CIs, so we have to explicitly flip our expectations in the function. We have not
-#' yet determined whether "wrong" could take c(1,2), and therefore test for type I error
-#' rates if expecting not significant. Note that it is possible to have a type I
-#' error irrespective of power of test, so a row can have more than one 1 in it. NEED TO MODIFY THIS FUNCTION TO BETTER DEAL WITH IAC. CURRENTLY, IF EXPECTING 0, EVEN IF ALL ZEROS, DOES NOT BEHAVE AS EXPECTED
+#' upper CIs, so we have to explicitly flip our expectations in the function. See
+#' example below for how to test for type I error rates if expecting random community
+#' structure. Note that it is possible to have a type I
+#' error irrespective of power of test, so a row can have more than one 1 in it.
 #'
 #' @return Matrix with rows corresponding to metrics, and columns for type I errors,
 #' "NoSignal" (i.e. < 50% of communities from community data matrix exhibiting expected
@@ -64,6 +64,8 @@
 #' names(sig.results) <- metric.names
 #'
 #' error.summ <- typeI(sig.results, expectation=1, wrong=2)
+#'
+#' #if you are expecting 0s (random structure), then use: expectation=0, wrong=1|2
 
 typeI <- function(significance.results, expectation, wrong)
 {

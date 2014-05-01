@@ -23,7 +23,11 @@
 #' 
 #' @details This runs much faster than trying to do this in memory in R. I will upload
 #' some of those type of functions in the near future anyhow. If you call null metrics
-#' 2x, 3x, 1s or 2s, it will call spacodiR for the resampling
+#' 2x, 3x, 1s or 2s, it will call spacodiR for the resampling. Note that if you have
+#' many quadrats (sites, communities, etc., i.e. rows in your community data matrix),
+#' some with repeated species richness, this may be more efficient than using a function
+#' like ses.pd() or ses.mpd() from picante (though it is almost entirely dependent on code
+#' from that package).
 #'
 #' @return A csv file with each column equal to the value of a given metric for the
 #' shuffled community in question (a row in the input matrix). 
@@ -44,7 +48,8 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' system.time(singleMetricNull(tree=tree, orig.matrix=cdm, metric="mpd", null.method="richness", no.randomizations=10, temp.file="output.csv"))
+#' system.time(singleMetricNull(tree=tree, orig.matrix=cdm, metric="mpd", 
+#' null.method="richness", no.randomizations=10, temp.file="output.csv"))
 
 singleMetricNull <- function(tree, orig.matrix, metric, null.method, regional.abundance, no.randomizations, temp.file)
 {

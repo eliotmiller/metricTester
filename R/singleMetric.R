@@ -13,7 +13,8 @@
 #' "psv", "psc", "pse", "pae", "iac", "haed", "eaed", "eed", "hed", "simpson", "pd",
 #' "pd.c" (Cadotte's re-defined PD), and "qe".
 #' 
-#' @details That's not detailed enough?
+#' @details Useful wrapper function to calculate a number of phylogenetic community 
+#' structure metrics from different packages.
 #'
 #' @return A data frame with the calculated metric and the associated species richness
 #' of all input "communities".

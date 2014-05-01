@@ -6,7 +6,9 @@
 #' @param no.species Desired number of species in resulting phylogeny
 #' 
 #' @details Uses geiger's sim.bdtree function with b=0.1 and d=0. Evolves two traits up
-#' phylogeny with Brownian motion evolution process.
+#' phylogeny with Brownian motion evolution process. Sigma from the Brownian motion
+#' process is set to 0.1 and cannot currently be manipulated without modifying and
+#' redefining the function itself.
 #'
 #' @return A list where the first object is a phylogeny with the desired number of species
 #' and the second object is a matrix of trait values for those species.

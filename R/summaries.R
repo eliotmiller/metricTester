@@ -1,7 +1,7 @@
 #' Return average and CIs of input vector
 #'
 #' Given a vector of numbers, such as a column from a data frame of null expectations,
-#' returns the average and 95% CIs of that vector
+#' returns the average and 95 percent CIs of that vector
 #'
 #' @param null.output Vector of numbers
 #' 
@@ -29,7 +29,8 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))
+#' system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", 
+#' no.randomizations=10, temp.file="output.csv"))
 #'
 #' possibilities <- read.csv("output.csv")
 #'
