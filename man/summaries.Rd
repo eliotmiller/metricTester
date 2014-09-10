@@ -2,28 +2,27 @@
 \alias{summaries}
 \title{Return average and CIs of input vector}
 \usage{
-  summaries(null.output)
+summaries(null.output)
 }
 \arguments{
   \item{null.output}{Vector of numbers}
 }
 \value{
-  temp
+temp
 }
 \description{
-  Given a vector of numbers, such as a column from a data
-  frame of null expectations, returns the average and 95%
-  CIs of that vector
+Given a vector of numbers, such as a column from a data
+frame of null expectations, returns the average and 95
+percent CIs of that vector
 }
 \details{
-  Took out the call to iterations, but if you want that
-  back it's just the length of v. Note that it's very
-  important when you run this to have your null output be a
-  file that has one column called richness, and all others
-  be various metrics you want confidence intervals returned
-  for. Note also that this function must be used from
-  within a ddply statement in order to work as desired, see
-  example.
+Took out the call to iterations, but if you want that back
+it's just the length of v. Note that it's very important
+when you run this to have your null output be a file that
+has one column called richness, and all others be various
+metrics you want confidence intervals returned for. Note
+also that this function must be used from within a ddply
+statement in order to work as desired, see example.
 }
 \examples{
 library(plyr)
@@ -37,7 +36,8 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))
+system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness",
+no.randomizations=10, temp.file="output.csv"))
 
 possibilities <- read.csv("output.csv")
 
@@ -45,6 +45,6 @@ possibilities <- read.csv("output.csv")
 expectations <- ddply(possibilities, .(richness), summaries)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

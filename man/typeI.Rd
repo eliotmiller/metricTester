@@ -2,7 +2,7 @@
 \alias{typeI}
 \title{Test for type I errors}
 \usage{
-  typeI(significance.results, expectation, wrong)
+typeI(significance.results, expectation, wrong)
 }
 \arguments{
   \item{significance.results}{Data frame of significance
@@ -15,29 +15,26 @@
   expecting 1.}
 }
 \value{
-  Matrix with rows corresponding to metrics, and columns
-  for type I errors, "NoSignal" (i.e. < 50% of communities
-  from community data matrix exhibiting expected pattern),
-  and "Good" (i.e. > 50% of communities exhibiting expected
-  pattern). Values in table are 0s and 1s, where 1
-  corresponds to a confirmation of the pattern in question.
+Matrix with rows corresponding to metrics, and columns for
+type I errors, "NoSignal" (i.e. < 50% of communities from
+community data matrix exhibiting expected pattern), and
+"Good" (i.e. > 50% of communities exhibiting expected
+pattern). Values in table are 0s and 1s, where 1
+corresponds to a confirmation of the pattern in question.
 }
 \description{
-  Sloppy function that needs work. Intended to test for
-  type I and II errors of results of testing of various
-  metrics against a single spatial simulations.
+Sloppy function that needs work. Intended to test for type
+I and II errors of results of testing of various metrics
+against a single spatial simulations.
 }
 \details{
-  Note that IAC is thought to detect clustering if observed
-  is greater than upper CIs, so we have to explicitly flip
-  our expectations in the function. We have not yet
-  determined whether "wrong" could take c(1,2), and
-  therefore test for type I error rates if expecting not
-  significant. Note that it is possible to have a type I
-  error irrespective of power of test, so a row can have
-  more than one 1 in it. NEED TO MODIFY THIS FUNCTION TO
-  BETTER DEAL WITH IAC. CURRENTLY, IF EXPECTING 0, EVEN IF
-  ALL ZEROS, DOES NOT BEHAVE AS EXPECTED
+Note that IAC is thought to detect clustering if observed
+is greater than upper CIs, so we have to explicitly flip
+our expectations in the function. See example below for how
+to test for type I error rates if expecting random
+community structure. Note that it is possible to have a
+type I error irrespective of power of test, so a row can
+have more than one 1 in it.
 }
 \examples{
 library(plyr)
@@ -51,7 +48,8 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))
+system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness",
+no.randomizations=10, temp.file="output.csv"))
 
 possibilities <- read.csv("output.csv")
 
@@ -81,8 +79,10 @@ sig.results <- as.data.frame(sig.results)
 names(sig.results) <- metric.names
 
 error.summ <- typeI(sig.results, expectation=1, wrong=2)
+
+#if you are expecting 0s (random structure), then use: expectation=0, wrong=1|2
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

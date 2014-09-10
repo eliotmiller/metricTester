@@ -2,7 +2,7 @@
 \alias{quadratPlacer}
 \title{Randomly place quadrats in arena}
 \usage{
-  quadratPlacer(no.quadrats, x.max, y.max, quadrat_size)
+quadratPlacer(no.quadrats, x.max, y.max, quadrat_size)
 }
 \arguments{
   \item{no.quadrats}{Number of quadrats to place}
@@ -14,23 +14,23 @@
   \item{quadrat_size}{Size of desired quadrat}
 }
 \value{
-  A matrix with the X & Y coordinates of the four corners
-  of each quadrat placed
+A matrix with the X & Y coordinates of the four corners of
+each quadrat placed
 }
 \description{
-  Given a desired number of quadrats, the arena size, and
-  the quadrat size, will attempt to place quadrats down in
-  a non-overlapping fashion
+Given a desired number of quadrats, the arena size, and the
+quadrat size, will attempt to place quadrats down in a
+non-overlapping fashion
 }
 \details{
-  Places quadrats down in non-overlapping fashion according
-  to parameters supplied. Will run indefinitely if
-  unacceptable parameters are supplied, but will not crash.
+Places quadrats down in non-overlapping fashion according
+to parameters supplied. Will run indefinitely if
+unacceptable parameters are supplied, but will not crash.
 }
 \examples{
 bounds <- quadratPlacer(no.quadrats=15, x.max=300, y.max=300, quadrat_size=50)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

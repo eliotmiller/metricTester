@@ -6,39 +6,10 @@ Version: 0.1
 Author: Eliot Miller, Chris Trisos & Damien Farine
 Maintainer: Eliot Miller <eliot.isaac@gmail.com>
 Depends:
-    R (>= 3.0.0), 
-    phylobase, 
-    ecoPDcorr, 
-    geiger, 
+    R (>= 3.0.0),
+    phylobase,
+    ecoPDcorr,
+    geiger,
     spacodiR
 License: GPL-3
 LazyData: true
-Collate:
-    'allMetrics.R'
-    'locationSampler.R'
-    'modified.mpd.R'
-    'phyloNtraits.R'
-    'psc.corr.R'
-    'scaler.R'
-    'simulateComm.R'
-    'summaries.R'
-    'typeI.R'
-    'lengthNonZeros.R'
-    'quadratPlacer.R'
-    'quadratContents.R'
-    'quadratPlotter.R'
-    'readIn.R'
-    'sigTest.R'
-    'allMetricsNull.R'
-    'singleMetric.R'
-    'singleMetricNull.R'
-    'compareMins.R'
-    'competitionSimulator.R'
-    'filteringLooper.R'
-    'killSome.R'
-    'randomArena.R'
-    'settleSome.R'
-    'competitionLooper.R'
-    'randomLooper.R'
-    'regionalNull.R'
-    'abundanceVector.r'

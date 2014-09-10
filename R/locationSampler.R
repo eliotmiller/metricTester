@@ -38,7 +38,8 @@
 #'
 #' scaled <- scaler(results[[2]], min.arena=0, max.arena=300)
 #'
-#' positions <- locationSampler(phyloNtraits.results=results, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
+#' positions <- locationSampler(phyloNtraits.results=results, scaled.results=scaled, 
+#' mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
 
 locationSampler <- function(phyloNtraits.results, scaled.results, mean.log.individuals, length.parameter, sd.parameter)
 {

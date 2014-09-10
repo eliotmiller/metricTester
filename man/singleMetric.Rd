@@ -2,7 +2,7 @@
 \alias{singleMetric}
 \title{Calculate specific phylogenetic community structure metric}
 \usage{
-  singleMetric(tree, picante_cdm, metric)
+singleMetric(tree, picante_cdm, metric)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -19,16 +19,18 @@
   "pd.c" (Cadotte's re-defined PD), and "qe".}
 }
 \value{
-  A data frame with the calculated metric and the
-  associated species richness of all input "communities".
+A data frame with the calculated metric and the associated
+species richness of all input "communities".
 }
 \description{
-  Given a phylo object, and a picante-style community data
-  matrix (sites are rows, species are columns), calculate a
-  phylogenetic community structure metric of interest.
+Given a phylo object, and a picante-style community data
+matrix (sites are rows, species are columns), calculate a
+phylogenetic community structure metric of interest.
 }
 \details{
-  That's not detailed enough?
+Useful wrapper function to calculate a number of
+phylogenetic community structure metrics from different
+packages.
 }
 \examples{
 library(geiger)
@@ -44,6 +46,6 @@ cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 results <- singleMetric(tree, cdm, "mpd")
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

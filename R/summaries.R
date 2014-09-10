@@ -41,13 +41,13 @@ summaries <- function(null.output)
 {
     # Create the output variable names
 	metricNames <- names(null.output)[names(null.output)!="richness" & names(null.output)!="quadratNames"]
-	summary.names <- c("average", "lower", "upper")
+	summary.names <- c("average", "sd", "lower", "upper")
 	combo.names <- paste(rep(metricNames, each = length(summary.names)), rep(summary.names, length(metricNames)), sep = ".")
 
 	# Write a confidence interval function to be able to each variable
 	CI <- function(x)
 	{
-		c(mean(x, na.rm = TRUE), quantile(x, c(0.025, 0.975), na.rm = TRUE))
+		c(mean(x, na.rm = TRUE), sd(x, na.rm=TRUE), quantile(x, c(0.025, 0.975), na.rm = TRUE))
 	}
 
 	# Convert the numeric part of the data frame to matrix

@@ -2,23 +2,23 @@
 \alias{compareMins}
 \title{Utility function to identify minimum values}
 \usage{
-  compareMins(x)
+compareMins(x)
 }
 \arguments{
   \item{x}{A vector}
 }
 \value{
-  A logical vector of length input vector minus 1,
-  corresponding to whether an element of the input vector
-  equals the last element of the input vector.
+A logical vector of length input vector minus 1,
+corresponding to whether an element of the input vector
+equals the last element of the input vector.
 }
 \description{
-  Given a vector where the last element is the minimum,
-  identifies which elements in that vector match the last
-  element.
+Given a vector where the last element is the minimum,
+identifies which elements in that vector match the last
+element.
 }
 \details{
-  Simple utility function
+Simple utility function
 }
 \examples{
 #create a basic input vector
@@ -28,6 +28,6 @@ temp <- c(1,2,3,4,5,6,1)
 compareMins(temp)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

@@ -34,7 +34,8 @@
 #'
 #' #output <- t(output)
 #'
-#' #ordr <- c("IAC","Haed","PD","PD_Cadotte","Hed","Eed","AW_MNTD","NAW_MNTD","PSC","PAE","Eaed","NAW_MPD","PSV","inter_MPD","PSE","intra_MPD","QE","complete_MPD","SimpsonsPhy")
+#' #ordr <- c("IAC","Haed","PD","PD_Cadotte","Hed","Eed","AW_MNTD","NAW_MNTD","PSC","PAE",
+#' "Eaed","NAW_MPD","PSV","inter_MPD","PSE","intra_MPD","QE","complete_MPD","SimpsonsPhy")
 #'
 #' #output <- output[,ordr]
 #'
@@ -44,7 +45,8 @@
 #'
 #' #par(mar=c(6.6,4.1,4.1,2.1))
 #'
-#' #barplot(output, beside=TRUE, las=2, cex.names=1, col=c("red","gray","blue"), xlab="Metric", ylab="Count")
+#' #barplot(output, beside=TRUE, las=2, cex.names=1, col=c("red","gray","blue"), 
+#' xlab="Metric", ylab="Count")
 #'
 #' #legend(x=65, y=85, c("Type I error","Type II error","Successful"), fill=c("red","gray","blue"))
 

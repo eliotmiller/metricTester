@@ -77,16 +77,6 @@ filteringLooper <- function(no.species, x.min, x.max, y.min, y.max, no.quadrats,
 
 		positions <- locationSampler(temp, mean.log.individuals=mean.log.individuals, scaled, length.parameter=length.parameter, sd.parameter=sd.parameter)
 
-		phydistmatrix <- cophenetic(tree)
-
-		##define a color for each species
-
-		cols <- blue2green2red(nrow(phydistmatrix))
-
-		##plot the arena. don't close the window. 
-
-		plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,x.max), ylim=c(0,y.max), col=cols[positions$individuals])
-
 		bounds <- quadratPlacer(no.quadrats, x.max=x.max, y.max=y.max, quadrat_size=quadrat_size)
 
 		quadratPlotter(bounds)

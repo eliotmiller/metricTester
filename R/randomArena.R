@@ -41,7 +41,8 @@
 #' cols <- blue2green2red(nrow(gen.dists))
 #'
 #' #plot the arena
-#' plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$arena$individuals])
+#' plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
+#' col=cols[arena$arena$individuals])
 
 randomArena <- function(tree, x.min, x.max, y.min, y.max, mean.log.individuals)
 {

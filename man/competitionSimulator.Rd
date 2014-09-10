@@ -2,8 +2,8 @@
 \alias{competitionSimulator}
 \title{Simulate competitive exclusion over generations}
 \usage{
-  competitionSimulator(tree, initialArena, max.distance,
-    percent.killed, iterations)
+competitionSimulator(tree, initialArena, max.distance, percent.killed,
+  iterations)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -27,28 +27,26 @@
   simulation for.}
 }
 \value{
-  A list of 5 elements: the average relatedness in the
-  geographic neighbordhood of consideration (appended to
-  any previous values that were fed into the function), the
-  number of individuals killed, the original input regional
-  abundance vector, the new spatial arena, and the
-  dimensions of that arena. On the last iteration, it
-  returns the arena BEFORE settling new individuals
-  randomly.
+A list of 5 elements: the average relatedness in the
+geographic neighbordhood of consideration (appended to any
+previous values that were fed into the function), the
+number of individuals killed, the original input regional
+abundance vector, the new spatial arena, and the dimensions
+of that arena. On the last iteration, it returns the arena
+BEFORE settling new individuals randomly.
 }
 \description{
-  Given a phylogenetic tree, a spatial arena of individuals
-  with species identities, and arguments for the desired
-  distance and percent removed, removes some of the most
-  closely related individuals in the arena, settles
-  individuals based on abundances from a regional species
-  pool, and repeats across the desired number of
-  generations.
+Given a phylogenetic tree, a spatial arena of individuals
+with species identities, and arguments for the desired
+distance and percent removed, removes some of the most
+closely related individuals in the arena, settles
+individuals based on abundances from a regional species
+pool, and repeats across the desired number of generations.
 }
 \details{
-  This function combines the killSome and settleSome
-  functions into a loop that runs for the desired number of
-  generations.
+This function combines the killSome and settleSome
+functions into a loop that runs for the desired number of
+generations.
 }
 \examples{
 library(geiger)
@@ -69,6 +67,6 @@ generations <- 1:25
 plot(temp$related[2:length(temp$related)]~generations)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

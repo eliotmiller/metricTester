@@ -2,27 +2,27 @@
 \alias{settleSome}
 \title{Randomly settle individuals in a spatial arena}
 \usage{
-  settleSome(killSomeOutput)
+settleSome(killSomeOutput)
 }
 \arguments{
   \item{killSomeOutput}{Output from the killSome function}
 }
 \value{
-  A list of 4 elements: the average relatedness in the
-  geographic neighbordhood of consideration (passed
-  directly from the killSome output, not re-calculated
-  here), the regional abundance vector, the new spatial
-  arena, and the dimensions of that arena.
+A list of 4 elements: the average relatedness in the
+geographic neighbordhood of consideration (passed directly
+from the killSome output, not re-calculated here), the
+regional abundance vector, the new spatial arena, and the
+dimensions of that arena.
 }
 \description{
-  Given output from the killSome function, randomly settles
-  individuals in the arena.
+Given output from the killSome function, randomly settles
+individuals in the arena.
 }
 \details{
-  This function uses the number killed element of the
-  killSome output to randomly draw from the regional
-  abundance vector, then settles the individuals at random
-  in the arena.
+This function uses the number killed element of the
+killSome output to randomly draw from the regional
+abundance vector, then settles the individuals at random in
+the arena.
 }
 \examples{
 library(geiger)
@@ -47,6 +47,6 @@ dim(new.arena$arena)
 dim(newer.arena$arena)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

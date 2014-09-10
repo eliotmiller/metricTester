@@ -2,8 +2,8 @@
 \alias{locationSampler}
 \title{Simulate spatially explicity community}
 \usage{
-  locationSampler(phyloNtraits.results, scaled.results,
-    mean.log.individuals, length.parameter, sd.parameter)
+locationSampler(phyloNtraits.results, scaled.results, mean.log.individuals,
+  length.parameter, sd.parameter)
 }
 \arguments{
   \item{phyloNtraits.results}{Results of a call to
@@ -26,27 +26,26 @@
   which species' locations are drawn}
 }
 \value{
-  A data frame with X & Y coordinates for all individuals
-  and their species identity
+A data frame with X & Y coordinates for all individuals and
+their species identity
 }
 \description{
-  Given the results of a call to phyloNtraits(), will
-  generate a data frame with the spatial locations of
-  individuals and their species' identity.
+Given the results of a call to phyloNtraits(), will
+generate a data frame with the spatial locations of
+individuals and their species' identity.
 }
 \details{
-  Should be sped up by removing for loops and inserting new
-  mini-functions then applying them with e.g. mapply().
-  Regardless, it works somewhat quickly. It takes results
-  of calls to phyloNtraits() and, if desired, scaler(), and
-  given the input parameters mean log of individuals in the
-  resulting community, the length of the vector from which
-  a species' X & Y coordinates will drawn, and the sd of
-  that vector, it returns a dataframe of species and their
-  X Y coordinates. The distribution of abundances among
-  species follows a log-normal distribution. The
-  distribution of individuals within species follows a
-  normal distribution.
+Should be sped up by removing for loops and inserting new
+mini-functions then applying them with e.g. mapply().
+Regardless, it works somewhat quickly. It takes results of
+calls to phyloNtraits() and, if desired, scaler(), and
+given the input parameters mean log of individuals in the
+resulting community, the length of the vector from which a
+species' X & Y coordinates will drawn, and the sd of that
+vector, it returns a dataframe of species and their X Y
+coordinates. The distribution of abundances among species
+follows a log-normal distribution. The distribution of
+individuals within species follows a normal distribution.
 }
 \examples{
 library(geiger)
@@ -55,9 +54,10 @@ results <- phyloNtraits(50)
 
 scaled <- scaler(results[[2]], min.arena=0, max.arena=300)
 
-positions <- locationSampler(phyloNtraits.results=results, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
+positions <- locationSampler(phyloNtraits.results=results, scaled.results=scaled,
+mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

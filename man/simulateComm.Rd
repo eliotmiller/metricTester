@@ -2,7 +2,7 @@
 \alias{simulateComm}
 \title{Generate a simulated community data matrix}
 \usage{
-  simulateComm(tree, min.rich, max.rich, abundances)
+simulateComm(tree, min.rich, max.rich, abundances)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -15,18 +15,18 @@
   a log-normal distribution}
 }
 \value{
-  A community data matrix (a data frame) with species as
-  columns and sites as rows.
+A community data matrix (a data frame) with species as
+columns and sites as rows.
 }
 \description{
-  Given a phylo object, desired min and max species
-  richnesses, and a vector of potential species abundances,
-  will generate a community data matrix with these
-  characteristics.
+Given a phylo object, desired min and max species
+richnesses, and a vector of potential species abundances,
+will generate a community data matrix with these
+characteristics.
 }
 \details{
-  There is currently no implementation to control the
-  frequency with which a given species is selected.
+There is currently no implementation to control the
+frequency with which a given species is selected.
 }
 \examples{
 library(geiger)
@@ -40,6 +40,6 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

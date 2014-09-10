@@ -2,7 +2,7 @@
 \alias{sigTest}
 \title{Test significance of observed metrics}
 \usage{
-  sigTest(results.table, observed)
+sigTest(results.table, observed)
 }
 \arguments{
   \item{results.table}{Data frame of observed metrics with
@@ -11,19 +11,19 @@
   \item{observed}{Name of metric of interest}
 }
 \value{
-  A vector of 0s 1s and 2s, corresponding to not
-  significant, clustered and overdispersed.
+A vector of 0s 1s and 2s, corresponding to not significant,
+clustered and overdispersed.
 }
 \description{
-  Given a table of results, where the expected confidence
-  intervals are bound to the rows of observed scores, and
-  the name of the metric of interest, returns a vector of
-  0, 1 and 2, where 0=not significant, 1=clustered, and
-  2=overdispersed.
+Given a table of results, where the expected confidence
+intervals are bound to the rows of observed scores, and the
+name of the metric of interest, returns a vector of 0, 1
+and 2, where 0=not significant, 1=clustered, and
+2=overdispersed.
 }
 \details{
-  The column names need to be fairly carefully labeled, so
-  follow convention.
+The column names need to be fairly carefully labeled, so
+follow convention.
 }
 \examples{
 library(plyr)
@@ -37,7 +37,8 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))
+system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness",
+no.randomizations=10, temp.file="output.csv"))
 
 possibilities <- read.csv("output.csv")
 
@@ -67,6 +68,6 @@ sig.results <- as.data.frame(sig.results)
 names(sig.results) <- metric.names
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

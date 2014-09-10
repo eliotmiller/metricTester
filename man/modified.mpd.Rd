@@ -2,7 +2,7 @@
 \alias{modified.mpd}
 \title{Calculate different versions of abundance-weighted MPD}
 \usage{
-  modified.mpd(samp, dis, abundance.weighted = FALSE)
+modified.mpd(samp, dis, abundance.weighted = FALSE)
 }
 \arguments{
   \item{samp}{A picante-style community data matrix with
@@ -14,17 +14,17 @@
   "interspecific", "intraspecific", or "complete"}
 }
 \value{
-  A vector of MPD values, calculated according to the
-  abudance-weighted method specified
+A vector of MPD values, calculated according to the
+abudance-weighted method specified
 }
 \description{
-  Given a picante-style community data matrix (sites are
-  rows, species are columns), a phylogenetic distance
-  matrix, and a desired method of abundance-weighting, will
-  calculate MPD.
+Given a picante-style community data matrix (sites are
+rows, species are columns), a phylogenetic distance matrix,
+and a desired method of abundance-weighting, will calculate
+MPD.
 }
 \details{
-  To be explained in forthcoming publication
+To be explained in forthcoming publication
 }
 \examples{
 library(geiger)
@@ -42,6 +42,6 @@ dists <- cophenetic(tree)
 results <- modified.mpd(cdm, dists, abundance.weighted = "interspecific")
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

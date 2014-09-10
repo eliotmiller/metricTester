@@ -2,7 +2,7 @@
 \alias{psc.corr}
 \title{Calculate corrected PSC}
 \usage{
-  psc.corr(samp, tree)
+psc.corr(samp, tree)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -11,17 +11,17 @@
   sites as rows, and species as columns}
 }
 \value{
-  A data frame of correctly calculated PSC values, with
-  associated species richness and name of all communities
-  in input cdm
+A data frame of correctly calculated PSC values, with
+associated species richness and name of all communities in
+input cdm
 }
 \description{
-  Given a phylo object and a picante-style community data
-  matrix (sites are rows, species are columns), calculated
-  corrected phylogenetic species clustering
+Given a phylo object and a picante-style community data
+matrix (sites are rows, species are columns), calculated
+corrected phylogenetic species clustering
 }
 \details{
-  Returns the inverse of psc as defined in picante
+Returns the inverse of psc as defined in picante
 }
 \examples{
 library(geiger)
@@ -37,6 +37,6 @@ cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 results <- psc.corr(samp=cdm, tree=tree)
 }
 \references{
-  Helmus et al 2007
+Helmus et al 2007
 }
 

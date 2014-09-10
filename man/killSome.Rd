@@ -2,7 +2,7 @@
 \alias{killSome}
 \title{Remove most closely related individuals}
 \usage{
-  killSome(tree, arenaOutput, max.distance, percent.killed)
+killSome(tree, arenaOutput, max.distance, percent.killed)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -23,31 +23,30 @@
   e.g. 0.5 = half).}
 }
 \value{
-  A list of 5 elements: the average relatedness in the
-  geographic neighbordhood of consideration (appended to
-  any previous values that were fed into the function), the
-  number of individuals killed, the original input regional
-  abundance vector, the new spatial arena, and the
-  dimensions of that arena.
+A list of 5 elements: the average relatedness in the
+geographic neighbordhood of consideration (appended to any
+previous values that were fed into the function), the
+number of individuals killed, the original input regional
+abundance vector, the new spatial arena, and the dimensions
+of that arena.
 }
 \description{
-  Given a phylogenetic tree, a spatial arena of individuals
-  with species identities, and arguments for the desired
-  distance and percent removed, removes some of the most
-  closely related individuals in the arena.
+Given a phylogenetic tree, a spatial arena of individuals
+with species identities, and arguments for the desired
+distance and percent removed, removes some of the most
+closely related individuals in the arena.
 }
 \details{
-  This function identifies individuals in the most
-  genetically clustered geographic neighborhoods, continues
-  on to identify the most closely related individual to a
-  focal individual, and randomly chooses whether to remove
-  that individual or the focal individual. It expects a
-  list with a number of additional elements beyond the
-  arena (currently, the mean genetic relatedness of
-  geographic neighborhoods, a vector of regional abundance
-  [where each element is a species name, repeated as many
-  times as is present in pool], and the dimensions of the
-  arena).
+This function identifies individuals in the most
+genetically clustered geographic neighborhoods, continues
+on to identify the most closely related individual to a
+focal individual, and randomly chooses whether to remove
+that individual or the focal individual. It expects a list
+with a number of additional elements beyond the arena
+(currently, the mean genetic relatedness of geographic
+neighborhoods, a vector of regional abundance [where each
+element is a species name, repeated as many times as is
+present in pool], and the dimensions of the arena).
 }
 \examples{
 library(geiger)
@@ -63,6 +62,6 @@ dim(arena$arena)
 dim(arena$new.arena)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

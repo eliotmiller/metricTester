@@ -2,11 +2,10 @@
 \alias{randomLooper}
 \title{Test metrics across multiple random arenas}
 \usage{
-  randomLooper(no.species, x.min, x.max, y.min, y.max,
-    no.quadrats, quadrat_size, mean.log.individuals,
-    null.method, concatBYrichness = TRUE,
-    no.randomizations, expectation, wrong, no.metrics,
-    iterations, temp.file, output.file)
+randomLooper(no.species, x.min, x.max, y.min, y.max, no.quadrats, quadrat_size,
+  mean.log.individuals, null.method, concatBYrichness = TRUE,
+  no.randomizations, expectation, wrong, no.metrics, iterations, temp.file,
+  output.file)
 }
 \arguments{
   \item{no.species}{Number of species in each arena}
@@ -55,28 +54,27 @@
   \item{output.file}{File name of results file}
 }
 \value{
-  Two csvs and a matrix of results summarizing the type I
-  and type II errors across all metrics and spatial
-  simulations. One csv is just a temporary file storing the
-  null expectations, the other is a csv of the same thing
-  as the output matrix.
+Two csvs and a matrix of results summarizing the type I and
+type II errors across all metrics and spatial simulations.
+One csv is just a temporary file storing the null
+expectations, the other is a csv of the same thing as the
+output matrix.
 }
 \description{
-  Large, somewhat sloppy function tying many previous
-  functions together into a single simulator function that
-  generates random spatial arenas, samples quadrats,
-  generates null expectations, tests for significance of
-  observed metrics, and summarizes results as a matrix of
-  type I and type II error rates.
+Large, somewhat sloppy function tying many previous
+functions together into a single simulator function that
+generates random spatial arenas, samples quadrats,
+generates null expectations, tests for significance of
+observed metrics, and summarizes results as a matrix of
+type I and type II error rates.
 }
 \details{
-  Could easily modify this function to save more
-  information than it currently does, though obviously
-  beware the additional space such an operation might
-  require. A single null.csv file for 19 metrics by 1000
-  iterations is about ~50 megabytes. The results matrix is
-  also written to csv in case the function crashes part-way
-  through.
+Could easily modify this function to save more information
+than it currently does, though obviously beware the
+additional space such an operation might require. A single
+null.csv file for 19 metrics by 1000 iterations is about
+~50 megabytes. The results matrix is also written to csv in
+case the function crashes part-way through.
 }
 \examples{
 library(ape)
@@ -91,6 +89,6 @@ concatBYrichness=TRUE, no.randomizations=2, expectation=0, wrong=1|2, no.metrics
 iterations=2, temp.file="deleteme.csv", output.file="random.csv")
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

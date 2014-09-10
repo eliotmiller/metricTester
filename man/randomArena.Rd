@@ -2,8 +2,7 @@
 \alias{randomArena}
 \title{Generate a random spatial arena}
 \usage{
-  randomArena(tree, x.min, x.max, y.min, y.max,
-    mean.log.individuals)
+randomArena(tree, x.min, x.max, y.min, y.max, mean.log.individuals)
 }
 \arguments{
   \item{tree}{Phylo object}
@@ -20,23 +19,23 @@
   distribution}
 }
 \value{
-  A list of 4 elements: the mean of the genetic distance
-  matrix of the input phylogeny, the regional abundance
-  vector (where each element is a species name, repeated as
-  many times as is present in pool), the spatial arena, and
-  the dimensions of that arena.
+A list of 4 elements: the mean of the genetic distance
+matrix of the input phylogeny, the regional abundance
+vector (where each element is a species name, repeated as
+many times as is present in pool), the spatial arena, and
+the dimensions of that arena.
 }
 \description{
-  Given a phylogenetic tree, the desired dimensions of the
-  arena, and the mean log of the regional abundance pool,
-  randomly generates spatial arena.
+Given a phylogenetic tree, the desired dimensions of the
+arena, and the mean log of the regional abundance pool,
+randomly generates spatial arena.
 }
 \details{
-  This function generates a log-normal regional abundance
-  distribution and assigns those abundances to random
-  species. It then draws from this regional abundance
-  distribution to settle individuals at random in the
-  landscape.
+This function generates a log-normal regional abundance
+distribution and assigns those abundances to random
+species. It then draws from this regional abundance
+distribution to settle individuals at random in the
+landscape.
 }
 \examples{
 library(geiger)
@@ -55,9 +54,10 @@ gen.dists <- cophenetic(tree)
 cols <- blue2green2red(nrow(gen.dists))
 
 #plot the arena
-plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[arena$arena$individuals])
+plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300),
+col=cols[arena$arena$individuals])
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

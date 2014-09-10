@@ -2,22 +2,22 @@
 \alias{lengthNonZeros}
 \title{Calculate the species richness of a community}
 \usage{
-  lengthNonZeros(input.vector)
+lengthNonZeros(input.vector)
 }
 \arguments{
   \item{input.vector}{A vector from a community data matrix
   of abundances.}
 }
 \value{
-  A named vector of species richness.
+A named vector of species richness.
 }
 \description{
-  Given a vector of abundances or presence/absences from a
-  community data matrix, will calculate the species
-  richness of that community.
+Given a vector of abundances or presence/absences from a
+community data matrix, will calculate the species richness
+of that community.
 }
 \details{
-  An internal function to calculate richness of a cdm.
+An internal function to calculate richness of a cdm.
 }
 \examples{
 library(geiger)
@@ -34,6 +34,6 @@ cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 apply(cdm, 1, lengthNonZeros)
 }
 \references{
-  Miller, Trisos and Farine.
+Miller, Trisos and Farine.
 }
 

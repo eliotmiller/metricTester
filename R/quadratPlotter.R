@@ -27,10 +27,12 @@
 #' #define a color for each species
 #' cols <- blue2green2red(nrow(phydistmatrix))
 #'
-#' positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
+#' positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled, 
+#' mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
 #'
 #' #plot the arena. don't close the window
-#' plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), col=cols[positions$individuals])
+#' plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
+#' col=cols[positions$individuals])
 #'
 #' bounds <- quadratPlacer(no.quadrats=15, x.max=300, y.max=300, quadrat_size=50)
 #'
