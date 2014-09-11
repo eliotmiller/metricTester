@@ -6,7 +6,7 @@
 #'
 #' @param results.table Data frame of observed metrics with expected CIs bound in. See
 #' example
-#' @param observed Name of metric of interest
+#' @param metric Name of metric of interest
 #' 
 #' @details The column names need to be fairly carefully labeled, so follow convention.
 #'
@@ -43,7 +43,7 @@
 #' #important merge command, confirm it works
 #' results <- merge(observed, expectations, sort=FALSE)
 #'
-#' oneMetric <- sigTest(results, "PSV")
+#' oneMetric <- arenaTest(results, "PSV")
 #'
 #' #example of how to loop it over a table of results
 #' metric.names <- names(observed)[3:21]
@@ -52,23 +52,20 @@
 #'
 #' for(i in 1:length(metric.names))
 #' {
-#'	sig.results[[i]] <- sigTest(results, metric.names[i])
+#'	sig.results[[i]] <- arenaTest(results, metric.names[i])
 #' }
 #'
 #' sig.results <- as.data.frame(sig.results)
 #'
 #' names(sig.results) <- metric.names
 
-sigTest <- function(results.table, observed)
+arenaTest <- function(results.table, metric)
 {
-	upper.name <- paste(observed, "upper", sep=".")
-	lower.name <- paste(observed, "lower", sep=".")
-	upper <- results.table[,upper.name]
-	lower <- results.table[,lower.name]
-	overdispersed <- results.table[,observed] > upper
-	overdispersed[overdispersed==TRUE] <- 2
-	clustered <- results.table[,observed] < lower
-	clustered[overdispersed==TRUE] <- 1
-	significance <- overdispersed + clustered
-	return(significance)
+	average.name <- paste(metric, "average", sep=".")
+	SD.name <- paste(metric, "sd", sep=".")
+	average <- results.table[,average.name]
+	SD <- results.table[,SD.name]
+	observed <- results.table[,metric]
+	ses <- (observed-average)/SD
+	return(ses)
 }

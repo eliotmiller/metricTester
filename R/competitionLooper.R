@@ -121,7 +121,7 @@ competitionLooper <- function(no.species, x.min, x.max, y.min, y.max, no.quadrat
 
 		for(j in 1:length(metric.names))
 		{
-			sig.results[[j]] <- sigTest(results, metric.names[j])
+			sig.results[[j]] <- quadratTest(results, metric.names[j])
 		}
 
 		sig.results <- as.data.frame(sig.results)
