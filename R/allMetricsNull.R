@@ -86,7 +86,7 @@ allMetricsNull <- function(tree, orig.matrix, null.method, regional.abundance, n
 
 		else
 		{
-			new.matrix <- randomizeMatrix(orig.matrix, null.method)
+			new.matrix <- randomizeMatrix(orig.matrix, null.method, iterations=100000)
 		}
 		
 		temp.results <- allMetrics(tree, new.matrix)

@@ -1,696 +1,194 @@
-380+1339.04
-a
-a-6100
-a-6100-3900
-587.35+776.24
-587.35+776.24+368
-587.35+776.24+368-776
-380+1167.7
-library(FD)
-?gowdis
-1000/58.43
-2000/85.50
-400-72-58
-400-72-58+58+64
-88+162
-400-69-55
-one <- c(270, 58, 64, 8)
-one
-sum(one)
-one/400
-(one/400) * log10((one/400))
-sum((one/400) * log10((one/400)))
-two <- c(127,23,88,162)
-sum((two/400) * log10((two/400)))
-three <- c(276,69,55)
-sum((three/400) * log10((three/400)))
-300*0.05
-300*0.9
-300*(270+58)+15(8)+270(64)
-300*(270+58)+15(8)+270*(64)
-300*(270+58)+15*(8)+270*(64)
-300*(270+58)+15*(8)+270*(64)/2
-(300*(270+58)+15*(8)+270*(64))/2
-(300*(150)+15*(162)+270*(88))/2
-(300*(276+69)+15*(55)+270*(0))/2
-(500*104)+(250*44)+(250*32)
-(500*104)+(250*44)+(250*32)/1000
-((500*104)+(250*44)+(250*32))/1000
-270+58
-31*8+92*64+92*328
-(31*8+92*64+92*328)/1000
-(16*8+51*64+52*328)/1000
-(4*8+10*64+15*328)/1000
-(32*8+44*64+104*328)/1000
-400-55
-8*13
+`
+testing
+testing next
+install.packages(c("geiger","phytools","picante","dply","vegan","geometry","FD"), dependencies=TRUE)
+install.packages("dplyr", dependencies=T)
+install.packages("devtools", dependencies=T)
+library(devtools)
+install_github("metricTester",username="eliotmiller")
+install_github("ecoPDcorr",username="eliotmiller")
+install_github("metricTester",username="eliotmiller")
 library(metricTester)
+filteringLooper
+allMetricsNull
+?filteringLooper
+system.time(library(ape)#
+library(geiger)#
+library(colorRamps)#
+library(plyr)#
+library(picante)#
+#
+filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
+library(ape)#
+library(geiger)#
+library(colorRamps)#
+library(plyr)#
+library(picante)
+filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv")
+system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
+fix(randomizeMatrix)
+fix(allMetricsNull)
+system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
+system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="independent.swap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
+system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="independentswap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
+allMetricsNull
+fix(allMetricsNull)
+system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="independentswap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
+fix(allMetricsNull)
+system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="independentswap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
+output.file="confused.csv"))
 ?simulateComm
 library(geiger)#
 library(picante)#
 #
 #simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=100, max.rich=150, abundances=sim.abundances)
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=20, abundances=sim.abundances)
-simulateComm
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=20, abundances=sim.abundances)
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=15, max.rich=25, abundances=sim.abundances)
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=20, max.rich=25, abundances=sim.abundances)
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=25, max.rich=30, abundances=sim.abundances)
-simulateComm
-tree
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-library(metricTester)
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
-simulateComm <- function(tree, min.rich, max.rich, abundances)#
-{#
-	col.1 <- c()#
-	col.2 <- c()#
-	col.3 <- c()#
-	for (i in seq(from=min.rich, to=max.rich))#
-	{#
-		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times#
-		col.1 <- append(col.1, rich)#
-		numbers <- sample(abundances, i)#
-		col.2 <- append(col.2, numbers)#
-		species <- sample(tree$tip.label, i)#
-		col.3 <- append(col.3, species)#
-	}#
-		cdm.fake <- data.frame(col.1, col.2, col.3)#
-		cdm <- sample2matrix(cdm.fake)#
-#
-		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions#
-		cdm <- cdm[tree$tip.label,]#
-#
-		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
-#
-		dimnames(cdm)[[1]] <- quadratNames#
-#
-		return(cdm)#
-}
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
-cdm
-head(cdm)
-simulateComm <- function(tree, min.rich, max.rich, abundances)#
-{#
-	col.1 <- c()#
-	col.2 <- c()#
-	col.3 <- c()#
-	for (i in seq(from=min.rich, to=max.rich))#
-	{#
-		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times#
-		col.1 <- append(col.1, rich)#
-		numbers <- sample(abundances, i)#
-		col.2 <- append(col.2, numbers)#
-		species <- sample(tree$tip.label, i)#
-		col.3 <- append(col.3, species)#
-	}#
-		cdm.fake <- data.frame(col.1, col.2, col.3)#
-		cdm <- sample2matrix(cdm.fake)#
-#
-		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions#
-		cdm <- cdm[,tree$tip.label]#
-#
-		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
-#
-		dimnames(cdm)[[1]] <- quadratNames#
-#
-		return(cdm)#
-}
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=40, max.rich=50, abundances=sim.abundances)
-library(metricTester)
-col.1 <- c()#
-	col.2 <- c()#
-	col.3 <- c()
-rich <- rep(4, 4)
-rich
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
-numbers <- sample(abundances, 4)
-numbers <- sample(sim.abundances, 4)
-numbers
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)
-tree
-species <- sample(tree$tip.label, 4)
-species
-cdm.fake <- data.frame(rich, numbers, species)
-cdm
-cdm.frake
-cdm.fake
-cdm <- sample2matrix(cdm.fake)
-cdm
-cdm[tree$tip.label]
-tree$tip.label
-cdm[,tree$tip.label]
-cdm[tree$tip.label,]
-cdm[,tree$tip.label]
-cdm[,order(tree$tip.label)]
-cdm
-cdm[tree$tip.label]
-cdm[,tree$tip.label]
-tree$tip.label
-cdm
-order(colnames(cdm))
-cdm[,order(colnames(cdm))]
-dropped <- setdiff(colnames(cdm), tree$tip.label)
-dropped
-dropped <- setdiff(tree$tip.label, colnames(cdm))
-dropped
-?drop.tip
-drop.tip(tree, dropped)
-cdm
-cdm <- cdm[drop.tree$tip.label]
-drop.tree <- drop.tip(tree, dropped)#
-#
-		cdm <- cdm[drop.tree$tip.label]
-cdm
-simulateComm <- function(tree, min.rich, max.rich, abundances)#
-{#
-	col.1 <- c()#
-	col.2 <- c()#
-	col.3 <- c()#
-	for (i in seq(from=min.rich, to=max.rich))#
-	{#
-		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times#
-		col.1 <- append(col.1, rich)#
-		numbers <- sample(abundances, i)#
-		col.2 <- append(col.2, numbers)#
-		species <- sample(tree$tip.label, i)#
-		col.3 <- append(col.3, species)#
-	}#
-		cdm.fake <- data.frame(col.1, col.2, col.3)#
-		cdm <- sample2matrix(cdm.fake)#
-#
-		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions#
-		#need to fake prune the phylo here in case not all the species are in the cdm as are in the phylo#
-#
-		dropped <- setdiff(tree$tip.label, colnames(cdm))#
-		drop.tree <- drop.tip(tree, dropped)#
-#
-		cdm <- cdm[drop.tree$tip.label]#
-#
-		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")#
-#
-		dimnames(cdm)[[1]] <- quadratNames#
-#
-		return(cdm)#
-}
-?simulateComm
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=200)#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
 #
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 head(cdm)
-library(devtools)
-install_github("metricTester","eliotmiller")
-10^5
-10^4
-99900/1000
-99900/1000*2
-10*0.15
-517-144
-~/Desktop/redude.zip
-#set wd manually#
-#
-#start requisite libraries#
-#
-library(dplyr)#
-library(ggmap)#
-library(metricTester)#
-library(moments)#
-library(phylospacer)#
-library(phytools)#
-library(picante)#
-library(plotrix)#
-#cannot start plyr right away, conflicts with dplyr. Need to entirely revise metricTester#
-#to account for this#
-#library(plyr)#
-library(RColorBrewer)#
-#
-###########################################################################################
-############BRING IN AND PREP THE RAW DATA FOR ALL THREE GRID CELLS########################
-###########################################################################################
-#
-#load the raw databases straight from ArcMap#
-fifty.raw <- read.csv("hak_fifty.txt")#
-onehundred.raw <- read.csv("hak_onehundred.txt")#
-twohundred.raw <- read.csv("hak_twohundred.txt")#
-#
-#construct a new combined table (i have confirmed that the object ID is the order these #
-#output tables were provided in, therefore ok to just bind them). note that you are not#
-#keeping IBRA here, i think i have a table that has these values in it per cell, rather#
-#than summarizing here.#
-#
-combined <- data.frame(record.id=fifty.raw$record_ID, species=fifty.raw$species, catalog.no=fifty.raw$catalog_No, latitude=fifty.raw$latitude, longitude=fifty.raw$longitude, fifty.cell=fifty.raw$ID, onehundred.cell=onehundred.raw$ID, twohundred.cell=twohundred.raw$ID)#
-#
-#make a sweet ggmap of your data. either with googlemaps#
-#
-baseMap <- get_googlemap(center="Australia", zoom=4, scale=2, maptype="terrain")#
-#
-#or with stamenmaps. Don't bother with this for now. First, stamenmaps doesn't seem to be#
-#in Australia, and two, even for those that are, there is an offset between the anchor for#
-#the map and the points, so they don't plot right#
-#
-#baseMap2 <- get_stamenmap(bbox=c(left = min(combined$longitude), bottom = min(combined$latitude), right = max(combined$longitude), top = max(combined$latitude)), zoom=5, maptype="toner")#
-#
-#creating this function here called getPalette that you then use in the scale_color_manual#
-#below. I don't understand why this works, see: http://novyden.blogspot.com/2013/09/how-to-expand-color-palette-with-ggplot.html#
-#it throws an error here too. he only had n=9 in his page (with "Set1"), and didn't throw #
-#warnings, and seemed to generate same plot. could probably change to that.#
-#
-colorCount <- length(unique(combined$species))#
-getPalette <- colorRampPalette(brewer.pal(n=colorCount, name="Set1"))#
-#
-map <- ggmap(baseMap, extent="device") +#
-	geom_point(aes(x=longitude, y=latitude, color=species), alpha=0.5, size=3, data=combined) +#
-	scale_color_manual(values=getPalette(colorCount)) +#
-	theme(legend.position="none")#
-#
-#map2 <- ggmap(baseMap2) +#
-#	geom_point(aes(x=longitude, y=latitude, color=species), data=combined)#
-#
-#cut the combined data set down to just unique ALA record IDs. not sure why there are#
-#duplicates here, but there are a few (125696 records beforehand)#
-#
-cutter <- combined$record.id[duplicated(combined$record.id)]#
-#
-cutter <- cutter[-grep("ADDED", cutter)]#
-#
-#OH NO! realized while doing this that i clearly accidentally forgot to change the name#
-#(record id) of some of the points I added in (saw this by calling cutter and looking at#
-#what records that started with "ADDED" were). pull these from the cutter list. note this#
-#new and pretty awesome reverse use of %in%. just add the whole expression into paranthesi#
-#with an exclamation mark ahead of it.#
-#
-combined <- combined[!(combined$record.id %in% cutter), ]#
-#
-#now create a community data matrix for each grid cell size#
-#
-#first turn the data frame to a tbl_df, to make sure it doesn't accidentally to print #
-#to screen#
-#
-combined_df <- tbl_df(combined)#
-#
-#now use the group_by standalone function of the new dplyr to set up the data frame for#
-#summarizing#
-#
-fifty.grouped <- group_by(x=combined_df, "fifty.cell", "species")#
-onehundred.grouped <- group_by(x=combined_df, "onehundred.cell", "species")#
-twohundred.grouped <- group_by(x=combined_df, "twohundred.cell", "species")#
-#
-#use the dplyr standalone summarise function to start to create an initial cdm.#
-#
-fifty.temp <- summarise(fifty.grouped, n=length(record.id))#
-onehundred.temp <- summarise(onehundred.grouped, n=length(record.id))#
-twohundred.temp <- summarise(twohundred.grouped, n=length(record.id))#
-#
-#now use the dplyr function select to just rearrange the columns into the "phylocom"#
-#format for conversion with picante to an appropriate cdm.#
-#
-fifty.temp <- select(fifty.temp, fifty.cell, n, species)#
-onehundred.temp <- select(onehundred.temp, onehundred.cell, n, species)#
-twohundred.temp <- select(twohundred.temp, twohundred.cell, n, species)#
-#
-#now use picante's function to get it into a proper cdm#
-#
-fifty <- sample2matrix(fifty.temp)#
-onehundred <- sample2matrix(onehundred.temp)#
-twohundred <- sample2matrix(twohundred.temp)#
-#
-#use the vegan function estimateR to extrapolate the expected species richness for each #
-#site based on the abundances at that site. this function takes a standard CDM, so convert#
-#to that format using picante's sample2matrix function. begin with just the occurrences#
-#
-est.fifty <- estimateR(fifty)#
-est.onehundred <- estimateR(onehundred)#
-est.twohundred <- estimateR(twohundred)#
-#
-#the piece we are most interested in from these estimated species richnesses is the #
-#second row of the matrix, the S.chao1. for whatever reason, the ACE estimate of species #
-#richness spits a lot of NAs, so we won't use that one. another thing of note here is that#
-#grid cells with a single count of a single sp seem to be interpreted as having only one#
-#species. so we'll need to cut sites with only one species#
-#generate a vector of the percentage observed of the expected species#
-#
-percent.fifty <- est.fifty[1,]/est.fifty[2,]#
-percent.onehundred <- est.onehundred[1,]/est.onehundred[2,]#
-percent.twohundred <- est.twohundred[1,]/est.twohundred[2,]#
-#
-#initially chose to retain quadrats with estimated 70% of species sampled. looked at #
-#histograms before making this decision, later plotted to see where these cuts were taking#
-#place. saw that it was losing some cells from really species rich areas like SW WA. this#
-#must be because of the really high number of range-restricted species there. probably#
-#should add back in any cells that have over e.g. 15 spp. this cuts the fifty from#
-#2671 -> 2380; onehundred from 854 -> 800; twohundred from 241 -> 234. Note that there are#
-#517 spp in each of these datasets ahead of these cuts. the structure of these pretty#
-#elaborate logical subsetting statements is: subset the original data frame by instances#
-#where the rownames match the names of all cells estimated to have at least 70% of species#
-#sampled OR where the rownames match the names of cells where more than 15 spp were sample#
-#
-fifty <- fifty[rownames(fifty) %in% names(percent.fifty[percent.fifty >= 0.7]) | rownames(fifty) %in% names(est.fifty[1,][est.fifty[1,] > 15]), ]#
-onehundred <- onehundred[rownames(onehundred) %in% names(percent.onehundred[percent.onehundred >= 0.7]) | rownames(onehundred) %in% names(est.onehundred[1,][est.onehundred[1,] > 15]), ]#
-twohundred <- twohundred[rownames(twohundred) %in% names(percent.twohundred[percent.twohundred >= 0.7]) | rownames(twohundred) %in% names(est.twohundred[1,][est.twohundred[1,] > 15]), ]#
-#
-#figure out what the observed species richness is for each quadrat#
-#
-rich.fifty <- apply(fifty, 1, lengthNonZeros)#
-rich.onehundred <- apply(onehundred, 1, lengthNonZeros)#
-rich.twohundred <- apply(twohundred, 1, lengthNonZeros)#
-#
-#cut all those cells with species richness of only 1. doing this goes from fifty#
-#2361 -> 1826; 795 -> 750; 233 -> 233#
-#
-fifty <- fifty[rownames(fifty) %in% names(rich.fifty[rich.fifty != 1]), ]#
-onehundred <- onehundred[rownames(onehundred) %in% names(rich.onehundred[rich.onehundred != 1]), ]#
-twohundred <- twohundred[rownames(twohundred) %in% names(rich.twohundred[rich.twohundred != 1]), ]#
-#
-#find out how many species are actually left in the cdm now. with the previous cuts, we#
-#lose G divaricata from fifty, and nothing from either one or two hundred#
-#
-sp.fifty <- apply(fifty, 2, lengthNonZeros)#
-sp.onehundred <- apply(onehundred, 2, lengthNonZeros)#
-sp.twohundred <- apply(twohundred, 2, lengthNonZeros)#
-#
-#have a sneak peak at which cells are being cut with these cuts. first define quadrats#
-#that got kept. then plot. this worked with the modification to include cells if they had#
-#more than 15 spp sampled#
-#
-temp <- combined[combined$onehundred.cell %in% rownames(onehundred), ]#
-#
-map2 <- ggmap(baseMap, extent="device") +#
-	geom_point(aes(x=longitude, y=latitude, color=species), alpha=0.5, size=2, data=temp) +#
-	scale_color_manual(values=getPalette(colorCount)) +#
-	theme(legend.position="none")#
-#
-###########################################################################################
-####################BRING IN THE BIOMEANS FOR ALL THREE GRID CELLS#########################
-###########################################################################################
-#
-#load in the climatic data for each grid cell size#
-#
-biomeans.fifty <- read.csv("biomeans_fifty.csv", header=TRUE, sep=",")#
-biomeans.onehundred <- read.csv("biomeans_onehund.csv", header=TRUE, sep=",")#
-biomeans.twohundred <- read.csv("biomeans_twohund.csv", header=TRUE, sep=",")#
-#
-#also bring in the evapotranspiration file#
-#
-evapo <- read.csv("evapotranspiration.csv")#
-#
-#cut the climate data down to those cells that are in the final CDMS. note that the name#
-#for the onehundred cell is called "id" instead of "gridcell". note also that don't have#
-#climate data for some of the cells, so will have to cut the results tables down later#
-#
-biomeans.fifty <- biomeans.fifty[biomeans.fifty$gridcell %in% rownames(fifty), ]#
-biomeans.onehundred <- biomeans.onehundred[biomeans.onehundred$id %in% rownames(onehundred), ]#
-biomeans.twohundred <- biomeans.twohundred[biomeans.twohundred$gridcell %in% rownames(twohundred), ]#
-#
-#cut the CDMs down to just those quadrats we have climate data for#
-#
-fifty.final <- fifty[rownames(fifty) %in% biomeans.fifty$gridcell, ]#
-onehundred.final <- onehundred[rownames(onehundred) %in% biomeans.onehundred$id, ]#
-twohundred.final <- twohundred[rownames(twohundred) %in% biomeans.twohundred$gridcell, ]#
-#
-#cut the evapo file down#
-#
-evapo <- evapo[evapo$id %in% rownames(onehundred.final), ]#
-#
-#make sure the climate data is sorted in the same order as the CDMs they correspond to#
-#eyeballed this and quite sure it is.#
-#
-###########################################################################################
-####################BRING IN AND PREP THE PHYLOGENIES#########################
-###########################################################################################
-#
-#first load in the prepped phylogeny from Austin (the product of saving out the file from#
-#script-mast to full phylo)#
-#
-mast <- read.tree("mastTemp.tre")#
-#
-#now use your randomly add taxa function to add in all missing species.#
-#
-#note that both tables need to have columns with names c("species","group")#
-#
-#bring in your cleaned species along with species grouping file#
-#
-allGroupings <- read.csv("hak_groupings_heights.csv")#
-#
-#this is a dplyr function, select only the columns you care about#
-#
-allGroupings <- select(allGroupings, species, group)#
-#
-randomlyAddTaxa <- function(tree, groupings, noRandomTrees, printToScreen=TRUE, saveToFile=FALSE)#
+test <- randomizeMatrix(cdm, "independentswap")
+system.time(test <- randomizeMatrix(cdm, "independentswap"))
+system.time(test <- randomizeMatrix(cdm, "independentswap", iterations=1000000))
+system.time(test <- randomizeMatrix(cdm, "trialswap", iterations=1000000))
+system.time(test <- randomizeMatrix(cdm, "trialswap", iterations=10))
+for(i in 1:4)
+fileName <- paste("name",i)
+for(i in 1:4)
+fileName <- paste("name",i)
+for(i in 1:4)#
 {#
-	#set the species and group to character vectors#
-	groupings$species <- as.character(groupings$species)#
-	groupings$group <- as.character(groupings$group)#
-#
-	#subset the groupings to those we have phylogenetic information for	#
-	realGroupings <- groupings[groupings$species %in% tree$tip.label, ]#
-#
-	#and those we only have taxonomic information for#
-	possGroupings <- groupings[!(groupings$species %in% tree$tip.label), ]#
-#
-	if(printToScreen==TRUE)#
-	{#
-		print("You are missing phylogenetic information for these species:", quote=FALSE)#
-		print(possGroupings$species)#
-	}#
-#
-	#set up an empty list to save the results into#
-	random.trees <- list()#
-	for(i in 1:noRandomTrees)#
-	{#
-		new.tree <- tree#
-		for(j in 1:dim(possGroupings)[1])#
-		{#
-			#subset the real groupings to those instances where the group matches the sp#
-			#you are adding in. then randomly choose one of those species in that group in#
-			#the genetic phylogeny. then identify which "node" that tip is#
-			bindingToList <- realGroupings$species[realGroupings$group == possGroupings$group[j]]#
-			bindingToSpecies <- sample(bindingToList, 1)#
-			bindingTo <- which(new.tree$tip.label==bindingToSpecies)#
-#
-			#this identifies the node that subtends the species you are binding to#
-			cameFrom <- new.tree$edge[,1][new.tree$edge[,2]==bindingTo]#
-#
-			#set up this temporary matrix so you can give it row names and subset according#
-			#to the row name. this row name becomes index, which is what you use to subset#
-			#to find the right edge length#
-			tempMatrix <- new.tree$edge#
-			rownames(tempMatrix) <- 1:dim(tempMatrix)[1]#
-			index <- rownames(tempMatrix)[tempMatrix[,1]==cameFrom & tempMatrix[,2]==bindingTo]#
-			index <- as.numeric(index)#
-#
-			#determine what the distance from that node to the tips is#
-			wholeDistance <- new.tree$edge.length[index]#
-#
-			#use bind.tip to add in the tip#
-			new.tree <- bind.tip(tree=new.tree, tip.label=possGroupings$species[j], edge.length=wholeDistance/2, where=bindingTo, position=wholeDistance/2)#
-		}		#
-		#add the last version of new tree in as a new element in the list of random, final trees#
-		random.trees[[i]] <- new.tree#
-	}#
-#
-	class(random.trees) <- "multiPhylo"#
-#
-	if(saveToFile == FALSE)#
-	{#
-		return(random.trees)#
-	}#
-	else#
-	{#
-		write.tree(random.trees, file="randomized_trees.tre")#
-		print("Trees saved to working directory")#
-	}#
-}#
-#
-#now try using your function. it takes ~0.4 seconds to generate 1 random tree
-ls()
-140/380
-100/220
-100/320
-120/320
-110/320
-110/330
-160/330
-60+160
-220/330
-15*95%
-15*0.95
-to.choose <- c("pat","jon","becky","jed","p","jake","mom","dad")
-length(to.choose)
-sample(to.choose, 8)
-library(spacodiR)
-?2x
-samp.2x
-resamp.2x
-?resamp.2x
-data(sp.example)#
-attach(sp.example)#
-spl#
-#
-# shuffle dataset#
-resamp.2x(obj=spl, level=0.2)
-spl
-apply
-spl
+	fileName <- paste("name",i)#
+	print(fileName)#
+}
+?filteringLooper
+filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+test <- phyloNtraits(50)
+test[[1]]
+plot(test[[1]])
+test <- phyloNtraits(50)
+plot(test[[1]])
+test <- phyloNtraits(50)
+plot(test[[1]])
+sigTest
+summaries
+?summaries
 library(metricTester)
-apply(spl, 1, lengthNonZeros)
-test <- resamp.2x(spl)
-apply(test, 1, lengthNonZeros)
-test <- resamp.2x(spl)
-apply(test, 1, lengthNonZeros)
-apply(test, 1, sum)
-apply(spl, 1, sum)
-apply(spl, 2, lengthNonZeros)
-apply(test, 2, lengthNonZeros)
-test <- resamp.2x(spl)
-apply(test, 2, lengthNonZeros)
-apply(test, 2, sum)
-apply(spl, 2, sum)
-test <- resamp.2x(spl)
-apply(spl, 2, sum)
-apply(test, 2, sum)
-apply(test, 1, sum)
-apply(spl, 1, sum)
-test <- resamp.xx(spl)
-test <- resamp.3x(spl)
-apply(spl, 1, lengthNonZeros)
-apply(test, 1, lengthNonZeros)
-apply(test, 2, lengthNonZeros)
-apply(spl, 2, lengthNonZeros)
-apply(spl, 2, sum)
-apply(test, 2, sum)
-apply(test, 1, sum)
-apply(spl, 1, sum)
-test <- resamp.3x(spl)
-apply(test, 1, sum)
-spl
-library(plyr)
-library(dplyr)
-library(plyr)
-?summarise
-library(dplyr)
-plyr::sumarise()
-plyr::arrange
-plyr::sumarise
-plyr::arrange
-dplyr::arrange
-test <- c(1,9,23,28,46,40,61,71,95,104,126,142,51)
-plot(test)
-test2<-c()
-for(i in length(test))
-cumsum(test)
-test2 <- cumsum(test)
-plot(test2)
-130/150
-130/160
-66/130
-45000/12
-.95*40
-.85*20
-150/220
-120+83
-203/340
-45+175+500+80+56
-856*5
-675+80
-45/12
-20/10
-40*0.05
-library(metricTester)
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness",no.randomizations=10, temp.file="output.csv"))
-phyloNtraits
-rTraitCont
-?rTraitCont
-?typeI
+?summaries
+library(plyr)#
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))#
+#
+possibilities <- read.csv("output.csv")
+expectations <- ddply(possibilities, .(richness), summaries)
+expectations
+filteringLooper
+head(expectations)
+expectations <- ddply(possibilities, .(quadratNames), summaries)
+head(expectations)
+?allMetrics
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+results <- allMetrics(tree, cdm)
+head(results)
+sigTest
+head(expectations)
+summaries <- function(null.output)#
+{#
+    # Create the output variable names#
+	metricNames <- names(null.output)[names(null.output)!="richness" & names(null.output)!="quadratNames"]#
+	summary.names <- c("average", "sd", "lower", "upper")#
+	combo.names <- paste(rep(metricNames, each = length(summary.names)), rep(summary.names, length(metricNames)), sep = ".")#
+#
+	# Write a confidence interval function to be able to each variable#
+	CI <- function(x)#
+	{#
+		c(mean(x, na.rm = TRUE), sd(x, na.rm=TRUE), quantile(x, c(0.025, 0.975), na.rm = TRUE))#
+	}#
+#
+	# Convert the numeric part of the data frame to matrix#
+    # and then apply the function g to each column#
+    L <- apply(data.matrix(null.output[, metricNames]), 2, CI)#
+    # String the matrix in column order to a vector (that means basically run through the whole matrix creating a long vector as you go)#
+    # add combo names to it, then return. #
+    v <- as.vector(L)#
+    names(v) <- combo.names#
+    return(v)#
+}
+expectations <- ddply(possibilities, .(quadratNames), summaries)
+head(expectations)
+?filteringLooper
+filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+library(ape)#
+library(geiger)#
+library(colorRamps)#
+library(plyr)#
+library(picante)#
+#
+filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
+quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
+null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
+wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
+output.file="confused.csv")
+summaries
+?sigTest
 library(plyr)#
 library(geiger)#
 library(picante)#
@@ -713,11 +211,10 @@ expectations <- ddply(possibilities, .(richness), summaries)#
 observed <- allMetrics(tree, cdm)#
 #
 #important merge command, confirm it works#
-results <- merge(observed, expectations, sort=FALSE)#
-#
-oneMetric <- sigTest(results, "PSV")#
-#
-#example of how to loop it over a table of results#
+results <- merge(observed, expectations, sort=FALSE)
+head(results)
+oneMetric <- sigTest(results, "PSV")
+oneMetric
 metric.names <- names(observed)[3:21]#
 #
 sig.results <- list()#
@@ -729,42 +226,41 @@ for(i in 1:length(metric.names))#
 #
 sig.results <- as.data.frame(sig.results)#
 #
-names(sig.results) <- metric.names#
+names(sig.results) <- metric.names
+sig.results
+Mean
+mean
+sd
+SD
+ses.mpd
+?ses.mpd
+head(results)
+observed <- allMetrics(tree, cdm)#
 #
-error.summ <- typeI(sig.results, expectation=1, wrong=2)
-typeI
-sig.results
-typeI(sig.results, expectation=1, wrong=2)
-typeI(sig.results, expectation=0, wrong=1|2)
-sig.results
-sig.results$IAC
-sig.results$IAC <- rep(0, length(sig.results$IAC))
-sig.results
-typeI(sig.results, expectation=0, wrong=1|2)
-librar(devtools)
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-install.packages(devtools)
-install.packages("devtools")
-library(devtools)
-has_devel()
-Sys.which("pdflatex")
-Sys.getenv("PATH")
-Sys.which("pdflatex")
-Sys.setenv(PATH=paste(Sys.getenv("PATH"),"/usr/texbin",sep=":"))
-Rcmd.build()
-?build
-R CMD build
-Sys.which("pdflatex")
-?Sys.which
-library(spacodiR)
-?resamp.1s
-data(sp.example)#
-attach(sp.example)#
-spl#
-#
-# shuffle dataset#
-resamp.1s(obj=spl)
+#important merge command, confirm it works#
+results <- merge(observed, expectations, sort=FALSE)
+head(results)
+oneMetric <- sigTest(results, "PSV")
+oneMetric
+ses
+head(results)
+results[,"PSV.average"]
+results[,"PSV.sd"]
+results[,"PSV.average"]->average
+results[,"PSV.sd"]->SD
+SD
+average
+average-SD
+observed
+results[,"PSV"]->observed
+observed
+ses <-
+ses
+ses <- (observed-average)/sd
+ses <- (observed-average)/SD
+ses
+oneMetric
+plot(ses,oneMetric)
 library(devtools)
 load_all()
 document()
