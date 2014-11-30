@@ -11,5 +11,7 @@ Depends:
     ecoPDcorr,
     geiger,
     spacodiR
+Suggests:
+    testthat
 License: GPL-3
 LazyData: true

@@ -3,10 +3,10 @@
 \alias{quadratPlotter}
 \title{Plot simulated quadrats in arena}
 \usage{
-quadratPlotter(quadrat_bounds)
+quadratPlotter(quadrat.bounds)
 }
 \arguments{
-\item{quadrat_bounds}{Matrix of quadrat bounds}
+\item{quadrat.bounds}{Matrix of quadrat bounds}
 }
 \value{
 Plotted quadrats
@@ -23,7 +23,9 @@ An active plot with the simulated arena needs to already be open, see example.
 library(geiger)
 library(colorRamps)
 
-temp <- phyloNtraits(50)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+
+temp <- evolveTraits(tree)
 
 scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)
 
@@ -32,14 +34,18 @@ phydistmatrix <- cophenetic(temp[[1]])
 #define a color for each species
 cols <- blue2green2red(nrow(phydistmatrix))
 
-positions <- locationSampler(phyloNtraits.results=temp, scaled.results=scaled,
-mean.log.individuals=4, length.parameter=5000, sd.parameter=50)
+#prep the data for the simulation
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+competition.iterations=25)
+
+positions <- filteringArena(prepped)
 
 #plot the arena. don't close the window
-plot(positions$X, positions$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300),
-col=cols[positions$individuals])
+plot(positions$arena$X, positions$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300),
+col=cols[positions$arena$individuals])
 
-bounds <- quadratPlacer(no.quadrats=15, x.max=300, y.max=300, quadrat_size=50)
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
 
 quadratPlotter(bounds)
 }

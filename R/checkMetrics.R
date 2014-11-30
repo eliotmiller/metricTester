@@ -1,0 +1,47 @@
+#' Confirm that the metric functions are in suitable format
+#'
+#' Utility function. Creates a list of functions, either those defined in defineMetrics
+#' or a named list of metric functions.
+#'
+#' @param x Optional named list of metric functions. Else, defines the metrics as those
+#' defined in defineMetrics.
+#' 
+#' @details A few quick checks to confirm the metric functions are input in suitable
+#' format.
+#'
+#' @return A list of functions.
+#'
+#' @export
+#'
+#' @import phylobase grid ecoPDcorr
+#'
+#' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' library(geiger)
+#' library(picante)
+#'
+#' checkMetrics(defineMetrics())
+
+checkMetrics <- function(x)
+{
+	if (is.null(x))
+	{
+		metrics <- defineMetrics()
+	}
+	else
+	{
+		if (!inherits(x, "list"))
+		{
+			stop("The metrics need to be input as a list of named functions")
+		}
+		if (is.null(names(x)))
+		{
+			stop("The metrics need to be input as a list of named functions")
+		}
+				
+		metrics <- x
+	}
+	
+	metrics
+}

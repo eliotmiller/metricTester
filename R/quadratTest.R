@@ -1,74 +1,93 @@
-#' Test significance of observed metrics
+#' Calculate if single, observed metrics deviate beyond expectations
 #'
-#' Given a table of results, where the expected confidence intervals are bound to the rows
-#' of observed scores, and the name of the metric of interest, returns a vector of 0, 1 
-#' and 2, where 0=not significant, 1=clustered, and 2=overdispersed.
+#' Given a table of results, where means, SDs, and CIs are bound to the observed scores at
+#' the corresponding richness or quadrat, this function calculates whether each observed
+#' score is significantly less or ore than expected at that quadrat or richness.
 #'
-#' @param results.table Data frame of observed metrics with expected CIs bound in. See
-#' example
-#' @param metric Name of metric of interest
+#' @param results.table Data frame of observed metrics with expected mean, SD and CI bound
+#' in. See example
+#' @param concat.by Whether to concatenate the results by richness or quadrat. If the
+#' former, observed scores are compared to all randomized scores where the quadrat had the
+#' corresponding richness. If the latter, observed scores (e.g. those from quadrat 1) are
+#' compared to all randomized quadrat 1 scores.
 #' 
-#' @details The column names need to be fairly carefully labeled, so follow convention.
+#' @details Given a table of results, where means, SDs, and CIs are bound to the observed
+#' scores at the corresponding richness or quadrat, this function returns 0, 1, or 2,
+#' corresponding to not significant, significantly clustered, and significantly
+#' overdispersed. 
 #'
-#' @return A vector of 0s 1s and 2s, corresponding to not significant, clustered and
-#' overdispersed.
+#' @return A data frame of 0s, 1s, and 2s.
 #'
 #' @export
 #'
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(plyr)
+#' library(dplyr)
 #' library(geiger)
 #' library(picante)
 #'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
-#' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+#' #simulate a log normal abundance distribution
+#' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
+#' #simulate a community of varying richness
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", 
-#' no.randomizations=10, temp.file="output.csv"))
+#' #run the metrics and nulls combo function
+#' rawResults <- metricsNnulls(tree, cdm)
 #'
-#' possibilities <- read.csv("output.csv")
+#' #reduce the randomizations to a more manageable format
+#' reduced <- reduceRandomizations(rawResults)
 #'
-#' #call the summaries function from within a ddply statement
-#' expectations <- ddply(possibilities, .(richness), summaries)
+#' #calculate the observed metrics from the input CDM
+#' observed <- observedMetrics(tree, cdm)
 #'
-#' #calculate the observed metrics
-#' observed <- allMetrics(tree, cdm)
+#' #summarize the means, SD and CI of the randomizations
+#' summarized <- lapply(reduced, summaries, concat.by)
 #'
-#' #important merge command, confirm it works
-#' results <- merge(observed, expectations, sort=FALSE)
+#' #merge the observations and the summarized randomizations to facilitate significance
+#' #testing
+#' merged <- lapply(summarized, merge, observed)
 #'
-#' oneMetric <- quadratTest(results, "PSV")
+#' #calculate the standardized scores of each observed metric as compared to the richness
+#' #null model randomization
+#' quadratTest(merged$richness, "richness")
 #'
-#' #example of how to loop it over a table of results
-#' metric.names <- names(observed)[3:21]
-#'
-#' sig.results <- list()
-#'
-#' for(i in 1:length(metric.names))
-#' {
-#'	sig.results[[i]] <- quadratTest(results, metric.names[i])
-#' }
-#'
-#' sig.results <- as.data.frame(sig.results)
-#'
-#' names(sig.results) <- metric.names
+#' #do the same as above but across all null models
+#' temp <- lapply(1:length(merged), function(x) quadratTest(merged[[x]], "richness"))
 
-quadratTest <- function(results.table, metric)
+quadratTest <- function(results.table, concat.by)
 {
-	upper.name <- paste(metric, "upper", sep=".")
-	lower.name <- paste(metric, "lower", sep=".")
-	upper <- results.table[,upper.name]
-	lower <- results.table[,lower.name]
-	overdispersed <- results.table[,metric] > upper
-	overdispersed[overdispersed==TRUE] <- 2
-	clustered <- results.table[,metric] < lower
-	clustered[overdispersed==TRUE] <- 1
-	significance <- overdispersed + clustered
-	return(significance)
+	#take advantage of the defineMetrics function to find the name of all metrics
+	#get rid of the "richness" metric name
+	metricNames <- names(defineMetrics())[2:length(names(defineMetrics()))]
+	significance <- list()
+	for(i in 1:length(metricNames))
+	{
+		upper.name <- paste(metricNames[i], "upper", sep=".")
+		lower.name <- paste(metricNames[i], "lower", sep=".")
+		upper <- results.table[,upper.name]
+		lower <- results.table[,lower.name]
+		overdispersed <- results.table[,metricNames[i]] > upper
+		overdispersed[overdispersed==TRUE] <- 2
+		clustered <- results.table[,metricNames[i]] < lower
+		clustered[overdispersed==TRUE] <- 1
+		significance[[i]] <- overdispersed + clustered
+	}
+	if(concat.by=="richness")
+	{
+		significance <- as.data.frame(significance)
+		names(significance) <- metricNames
+		significance <- data.frame(richness=results.table$richness, significance)
+	}
+	else if(concat.by=="quadrat")
+	{
+		significance <- as.data.frame(significance)
+		names(significance) <- metricNames
+		significance <- data.frame(quadrat=results.table$quadrat, significance)
+	}
+	significance
 }

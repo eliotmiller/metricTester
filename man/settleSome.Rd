@@ -3,10 +3,10 @@
 \alias{settleSome}
 \title{Randomly settle individuals in a spatial arena}
 \usage{
-settleSome(killSomeOutput)
+settleSome(killSome.output)
 }
 \arguments{
-\item{killSomeOutput}{Output from the killSome function}
+\item{killSome.output}{Output from the killSome function}
 }
 \value{
 A list of 4 elements: the average relatedness in the geographic neighbordhood
@@ -27,19 +27,22 @@ library(geiger)
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
-#create a random arena
-arena <- randomArena(tree, x.min=0, x.max=300, y.min=0, y.max=300, mean.log.individuals=2)
+#prep the data for the simulation
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+competition.iterations=5)
 
-#remove some of the most closely related individuals
-new.arena <- killSome(tree, arenaOutput=arena, max.distance=50, percent.killed=0.2)
+#use the competition simulation
+positions <- competitionArena(prepped)
 
-dim(arena$arena)
-dim(arena$new.arena)
+#in normal use, these parameters will be carried down from the simulations.input object
+new.arena <- killSome(tree, arena.output=positions, max.distance=50,
+proportion.killed=0.2)
 
 #now settle some indiviudals
-
 newer.arena <- settleSome(new.arena)
 
+#look at how number of individuals in arena changes
 dim(new.arena$arena)
 dim(newer.arena$arena)
 }

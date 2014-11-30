@@ -1,9 +1,9 @@
-#' Scale output of phyloNtraits to arena size
+#' Scale output of evolveTraits to arena size
 #'
 #' Given a matrix of two traits, and the minimum and maximum extent of the desired arena,
 #' will return a data frame of species' traits scaled to the new arena size.
 #'
-#' @param input.traits Second element of the results of a call to phyloNtraits()
+#' @param input.traits Second element of the results of a call to evolveTraits()
 #' @param min.arena Minimum size of arena, e.g. 0
 #' @param max.arena Maximum size of arena
 #' 
@@ -20,11 +20,13 @@
 #' @examples
 #' library(geiger)
 #'
-#' results <- phyloNtraits(50)
+#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
-#' scaled <- scaler(results[[2]], min.arena=0, max.arena=300)
+#' temp <- evolveTraits(tree)
+#'
+#' scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)
 
-##write a function that will take the second element of the output of the phyloNtraits
+##write a function that will take the second element of the output of the evolveTraits
 ##function, and the min and max arena arguments, and output a data frame of scaled traits
 ##where min and max traits are min and max of arena
 

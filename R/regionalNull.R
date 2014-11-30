@@ -1,4 +1,4 @@
-#' Regional null model
+#' Randomize community data matrix with regional null model
 #'
 #' Entirely vectorized null model that maintains species richness (approximately only
 #' during this phase of the calculation, but we do so strictly later on), species
@@ -10,12 +10,12 @@
 #' @param regional.abundance Vector of species names, where each species' name is repeated
 #' the number of times necessary to accomodate its abundance in the regional species pool
 #' 
-#' @details Although not as fast as, e.g. randomizeMatrix, this functions does not contain
-#' any for loops and so still runs decently fast. It works by drawing the total number of
-#' individuals observed in the input plot from the regional abundance vector. Thus while
+#' @details Although not as fast as, e.g. randomizeMatrix, this function still runs 
+#' fairly quickly. It works by drawing the total number of
+#' individuals observed in the input plot from the regional abundance vector. Thus, while
 #' a randomized quadrat will not necessarily have the same number of species as the
 #' observed quadrat, over many iterations it will likely be sampled. We can then
-#' concatenate the results by richness at the end which will only compare observed values
+#' concatenate the results by richness at the end, which will only compare observed values
 #' to random quadrats of the same richness. As an example, an observed quadrat might have
 #' two individuals of speciesA and two of speciesB. If the regional abundance vector is
 #' c("spA","spA","spA","spA","spB","spB","spB","spC"), and we draw four individuals, it
@@ -30,22 +30,24 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(ape)
 #' library(geiger)
-#' library(plyr)
-#' library(picante)
+#' library(colorRamps)
 #'
-#' tree <- sim.bdtree(stop="taxa", n=50)
+#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
-#' arena <- randomArena(tree, 0, 300, 0, 300, 3.2)
+#' #prep the data for the simulation
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+#' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+#' competition.iterations=3)
 #'
-#' bounds <- quadratPlacer(15, 300, 300, 30)
+#' positions <- competitionArena(prepped)
 #'
-#' temp.cdm <- quadratContents(arena$arena, bounds)
+#' bounds <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)
 #'
-#' cdm <- t(temp.cdm)
+#' #return a CDM in picante format
+#' cdm <- quadratContents(positions$arena, bounds)
 #'
-#' regionalNull(cdm, tree, arena$regional.abundance)
+#' test <- regionalNull(cdm, tree, regional.abundance=abundanceVector(cdm))
 
 regionalNull <- function(cdm, tree, regional.abundance)
 {
@@ -94,6 +96,10 @@ regionalNull <- function(cdm, tree, regional.abundance)
 
 	#sort the cdm into phylogenetic order
 	new.cdm <- new.cdm[,tree$tip.label]
+	
+	#re-class as matrix and return
+	
+	new.cdm <- as.matrix(new.cdm)
 	
 	return(new.cdm)
 }

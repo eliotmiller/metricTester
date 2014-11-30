@@ -3,16 +3,14 @@
 \alias{quadratPlacer}
 \title{Randomly place quadrats in arena}
 \usage{
-quadratPlacer(no.quadrats, x.max, y.max, quadrat_size)
+quadratPlacer(no.quadrats, arena.length, quadrat.length)
 }
 \arguments{
 \item{no.quadrats}{Number of quadrats to place}
 
-\item{x.max}{Maximum x bounds of arena}
+\item{arena.length}{Length of one side of arena}
 
-\item{y.max}{Maximum y bounds of arena}
-
-\item{quadrat_size}{Size of desired quadrat}
+\item{quadrat.length}{Length of one side of desired quadrat}
 }
 \value{
 A matrix with the X & Y coordinates of the four corners of each quadrat placed
@@ -23,11 +21,11 @@ to place quadrats down in a non-overlapping fashion
 }
 \details{
 Places quadrats down in non-overlapping fashion according to parameters
-supplied. Will run indefinitely if unacceptable parameters are supplied, but will not
-crash.
+supplied. Because this would run indefinitely if unacceptable parameters were supplied,
+a conservative check is implemented to "ensure" the function does not get stuck.
 }
 \examples{
-bounds <- quadratPlacer(no.quadrats=15, x.max=300, y.max=300, quadrat_size=50)
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
 }
 \references{
 Miller, Trisos and Farine.

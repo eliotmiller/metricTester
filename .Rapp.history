@@ -1,266 +1,718 @@
-`
-testing
-testing next
-install.packages(c("geiger","phytools","picante","dply","vegan","geometry","FD"), dependencies=TRUE)
-install.packages("dplyr", dependencies=T)
-install.packages("devtools", dependencies=T)
-library(devtools)
-install_github("metricTester",username="eliotmiller")
-install_github("ecoPDcorr",username="eliotmiller")
-install_github("metricTester",username="eliotmiller")
-library(metricTester)
-filteringLooper
-allMetricsNull
-?filteringLooper
-system.time(library(ape)#
-library(geiger)#
-library(colorRamps)#
-library(plyr)#
-library(picante)#
-#
-filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-library(ape)#
-library(geiger)#
-library(colorRamps)#
-library(plyr)#
-library(picante)
-filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv")
-system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-fix(randomizeMatrix)
-fix(allMetricsNull)
-system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="independent.swap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="independentswap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-allMetricsNull
-fix(allMetricsNull)
-system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="independentswap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-fix(allMetricsNull)
-system.time(filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="independentswap", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=1, temp.file="deleteme.csv",#
-output.file="confused.csv"))
-?simulateComm
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-head(cdm)
-test <- randomizeMatrix(cdm, "independentswap")
-system.time(test <- randomizeMatrix(cdm, "independentswap"))
-system.time(test <- randomizeMatrix(cdm, "independentswap", iterations=1000000))
-system.time(test <- randomizeMatrix(cdm, "trialswap", iterations=1000000))
-system.time(test <- randomizeMatrix(cdm, "trialswap", iterations=10))
-for(i in 1:4)
-fileName <- paste("name",i)
-for(i in 1:4)
-fileName <- paste("name",i)
-for(i in 1:4)#
+fdisRandomizer <- function(traits, samples, iterations)#
 {#
-	fileName <- paste("name",i)#
-	print(fileName)#
-}
-?filteringLooper
-filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-test <- phyloNtraits(50)
-test[[1]]
-plot(test[[1]])
-test <- phyloNtraits(50)
-plot(test[[1]])
-test <- phyloNtraits(50)
-plot(test[[1]])
-sigTest
-summaries
-?summaries
-library(metricTester)
-?summaries
-library(plyr)#
-library(geiger)#
-library(picante)#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
 #
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))#
-#
-possibilities <- read.csv("output.csv")
-expectations <- ddply(possibilities, .(richness), summaries)
-expectations
-filteringLooper
-head(expectations)
-expectations <- ddply(possibilities, .(quadratNames), summaries)
-head(expectations)
-?allMetrics
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-results <- allMetrics(tree, cdm)
-head(results)
-sigTest
-head(expectations)
-summaries <- function(null.output)#
-{#
-    # Create the output variable names#
-	metricNames <- names(null.output)[names(null.output)!="richness" & names(null.output)!="quadratNames"]#
-	summary.names <- c("average", "sd", "lower", "upper")#
-	combo.names <- paste(rep(metricNames, each = length(summary.names)), rep(summary.names, length(metricNames)), sep = ".")#
-#
-	# Write a confidence interval function to be able to each variable#
-	CI <- function(x)#
+	for(i in 1:length(iterations))#
 	{#
-		c(mean(x, na.rm = TRUE), sd(x, na.rm=TRUE), quantile(x, c(0.025, 0.975), na.rm = TRUE))#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}
+fdisRandomizer(traits, samples, 2)
+results <- matrix(nrow=2, ncol=length(samples), 0)
+results
+for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}
+for(i in 1:2)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}
+results
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}
+fdisRandomizer(traits, samples, 2)
+fdisRandomizer(traits, samples, 5)
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+8738/60
+dim(tempResults)
+write.csv(tempResults, "dontLose.csv")
+head(tempResults)
+??misc
+??ci
+library(Rmisc)
+apply(tempResults, 2, mean)
+test <- apply(tempResults, 2, mean)
+plot(test~samples)
+test2 <- CI(tempResults[1,])
+test2
+test2 <- apply(tempResults, 2, CI)
+head(test2)
+toPlot <- apply(tempResults, 2, CI)
+plot(toPlot[2,]~samples)
+plot(toPlot[2,]~samples, pch=20, col="black")
+min(toPlot)
+max(toPlot)
+plot(toPlot[2,]~samples, pch=20, col="black", ylim=c(min(toPlot),max(toPlot)))
+plot(toPlot[2,]~samples, pch=20, col="red", ylim=c(min(toPlot),max(toPlot)))#
+#
+points(toPlot[1,]~samples, pch=20, col="black")#
+points(toPlot[3,]~samples, pch=20, col="black")
+samples
+bestFit <- function(y)#
+{#
+	temp <- loess(y ~ samples)#
+	predictions <- predict(temp)#
+	return(predictions)#
+}
+bestFit(test2[2,])
+temp <- bestFit(test2[2,])
+plot(temp~samples)
+lines(temp~samples)
+plot(temp~samples)
+lines(temp~samples)
+plot(test2[2,]~samples)
+plot(test2[2,]~samples, pch=20, cex=2)
+plot(test2[2,]~samples, pch=20, cex=2, ylab="FDis", xlab="Sample size")
+gc()
+traits <- data.frame(rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000))#
+#
+names(traits) <- paste("traits", 1:4, sep="")#
+#
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
+#
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
 	}#
 #
-	# Convert the numeric part of the data frame to matrix#
-    # and then apply the function g to each column#
-    L <- apply(data.matrix(null.output[, metricNames]), 2, CI)#
-    # String the matrix in column order to a vector (that means basically run through the whole matrix creating a long vector as you go)#
-    # add combo names to it, then return. #
-    v <- as.vector(L)#
-    names(v) <- combo.names#
-    return(v)#
-}
-expectations <- ddply(possibilities, .(quadratNames), summaries)
-head(expectations)
-?filteringLooper
-filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-library(ape)#
-library(geiger)#
-library(colorRamps)#
-library(plyr)#
-library(picante)#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
 #
-filteringLooper(no.species=50, x.min=0, x.max=300, y.min=0, y.max=300, no.quadrats=15,#
-quadrat_size=50, mean.log.individuals=4, length.parameter=5000, sd.parameter=50,#
-null.method="richness", concatBYrichness=TRUE, no.randomizations=2, expectation=1,#
-wrong=2, no.metrics=19, iterations=3, temp.file="deleteme.csv",#
-output.file="confused.csv")
-summaries
-?sigTest
-library(plyr)#
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(allMetricsNull(tree=tree, orig.matrix=cdm, null.method="richness", no.randomizations=10, temp.file="output.csv"))#
-#
-possibilities <- read.csv("output.csv")#
-#
-#call the summaries function from within a ddply statement#
-expectations <- ddply(possibilities, .(richness), summaries)#
-#
-#calculate the observed metrics#
-observed <- allMetrics(tree, cdm)#
-#
-#important merge command, confirm it works#
-results <- merge(observed, expectations, sort=FALSE)
-head(results)
-oneMetric <- sigTest(results, "PSV")
-oneMetric
-metric.names <- names(observed)[3:21]#
-#
-sig.results <- list()#
-#
-for(i in 1:length(metric.names))#
-{#
-	sig.results[[i]] <- sigTest(results, metric.names[i])#
+	results <- FDis(traits, roadMap)#
+	return(results)#
 }#
 #
-sig.results <- as.data.frame(sig.results)#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
 #
-names(sig.results) <- metric.names
-sig.results
-Mean
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 2))
+head(traits)
+dim(traits)
+dim(samples)
+length(samples)
+traits <- data.frame(rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000))#
+#
+names(traits) <- paste("traits", 1:4, sep="")#
+#
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
+#
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+write.csv(tempResults, "4dimensions.csv")
+test <- apply(tempResults, 2, mean)
+plot(test~samples)
+test
+plot(test~samples)
+ls()
+test2
+plot(test~samples, pch=20, col="blue")
+plot(test2[2,]~samples,pch=20, col="red")
+plot(test~samples, pch=20, col="blue")
+points(test2[2,]~samples,pch=20, col="red")
+plot(test~samples, pch=20, col="blue", ylim=c(min(test2),max(test)))
+points(test2[2,]~samples,pch=20, col="red")
+traits <- data.frame(rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000))#
+#
+names(traits) <- paste("traits", 1:5, sep="")#
+#
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
+#
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}
+head(traits)
+system.time(tempResults <- fdisRandomizer(traits, samples, 2))
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+dim(tempResults)
+test3 <- apply(tempResults, 2, mean)
+plot(test3~samples)
+plot(test~samples, pch=20, col="blue", ylim=c(min(test2),max(test3)))
+points(test2[2,]~samples,pch=20, col="red")
+points(test3~samples,pch=20, col="purple")
+samples
+abline(v=64)
+write.csv(tempResults, "5dimensions.csv")
+traits <- data.frame(rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000))#
+#
+names(traits) <- paste("traits", 1:6, sep="")#
+#
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
+#
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 2))
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+write.csv(tempResults, "6dimensions.csv")
+dim(tempResults)
+dim(traits)
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:dimensions)#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	return(results)#
+}
+test <- stupid(10)
+head(test)
+dim(test)
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:dimensions)#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	names(results) <- paste("traits", 1:dimensions, sep="")#
+	return(results)#
+}
+test <- stupid(10)
+head(test)
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:(dimensions-1))#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	names(results) <- paste("traits", 1:dimensions, sep="")#
+	return(results)#
+}
+test <- stupid(10)
+head(test)
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:(dimensions-1))#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	names(results) <- paste("traits", 1:dimensions, sep="")#
+	return(results)#
+}#
+#
+traits <- stupid(10)#
+#
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
+#
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 2))
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:(dimensions-1))#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	names(results) <- paste("traits", 1:dimensions, sep="")#
+	return(results)#
+}#
+#
+traits <- stupid(100)#
+#
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
+#
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 2))
+dim(traits)
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+3dim <- test2[2,]
+dim3 <- test2[2,]
+dim4 <- test
+dim5 <- test3
+dim100 <- apply(tempResults, 2, mean)
+plot(dim100~samples, pch=20, cex=2, col="orange", ylim=c(min(dim3),max(dim100)))
+plot(dim100~samples, pch=20, cex=2, col="red", ylim=c(min(dim3),max(dim100)))
+plot(dim5~samples, pch=20, cex=2, col="orange")
+plot(dim100~samples, pch=20, cex=2, col="red", ylim=c(min(dim3),max(dim100)))
+points(dim5~samples, pch=20, cex=2, col="orange")
+points(dim4~samples, pch=20, cex=2, col="yellow")
+head(dim4)
+points(dim3~samples, pch=20, cex=2, col="yellow")
+write.csv(tempResults, "100dimensions.csv")
+26.5+6.82
+possibilities <- read.csv("output.csv")
+head(possibilities)
+library(dplyr)
+test
+rm(test)
+test
+test <- 1
+test
+tested <- group_by(possibilities, richness)
+summarize(test, mean)
+summarize(tested, mean)
+head(testd)
+head(tested)
+expectations
+expectations <- ddply(possibilities, .(richness), summaries)
+library(plyr)
+expectations <- ddply(possibilities, .(richness), summaries)
+load_all()
+library(metricTester)
+expectations <- ddply(possibilities, .(richness), summaries)
+expectations
+head(possibilities)
+temp <- data.frame(rich=possibilities$richness, mpd=possibilities$NAW_MPD)
+head(temp)
+temp2 <- group_by(temp, rich)
+temp3 <- summarize(temp2, mean)
+head(temp3)
+temp3
 mean
-sd
-SD
-ses.mpd
-?ses.mpd
-head(results)
-observed <- allMetrics(tree, cdm)#
+temp <- read.csv("output.csv")
+library(dplyr)
+temp2 <- group_by(temp2, richness)
+temp2 <- data.frame(rich=temp$richness, mpd=temp$NAW_MPD)
+head(temp2)
+temp3 <- group_by(temp2, rich)
+temp4 <- summarize(temp3, mean)
+?summarize
+temp4 <- summarize(temp3, test=mean(mpd))
+temp4
+temp2 <- data.frame(rich=temp$richness, mpd=temp$NAW_MPD, aw_MPD=temp$AW_MPD)
+head(temp)
+temp2 <- data.frame(rich=temp$richness, mpd=temp$NAW_MPD, aw_MPD=temp$inter_MPD)
+temp2 <- data.frame(rich=temp$richness, mpd=temp$NAW_MPD, aw_mpd=temp$inter_MPD)
+head(temp)
+head(temp2)
+temp3 <- group_by(temp2, test1 = mean(mpd))
+head(temp3)
+temp3 <- group_by(temp2, rich)
+temp4 <- summarize(temp3, tes1=mean(mpd))
+head(temp4)
+temp4 <- summarize(temp3, tes1=mean(mpd), tes2=mean(aw_mpd))
+head(temp4)
+library(ecoPD)
+set.seed(0)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+library(geiger)
+set.seed(0)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+set.seed(0)
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+set.seed(0)
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+library(metricTester)
+set.seed(0)
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+write.csv(cdm, "temp.csv", row.names=FALSE)
+cdm
+write.csv(cdm, "temp.csv", row.names=T)
+library(ecoPD)
+library(geiger)
+set.seed(0)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+cdm <- read.csv("temp.csv")
+cdm
+row.names(cdm) <- cdm$X
+cdm$X <- NULL
+cdm
+ecoPD_cdm <- suppressWarnings(phylo4com(tree, spacodiR_cdm))
+ecoPD_cdm <- suppressWarnings(phylo4com(tree, t(cdm)))
+pae(ecoPD_cdm)
+iac(ecoPD_cdm)
+write.tree(tree, "temp.tre")
+temp.results <- data.frame(pae=pae(ecoPD_cdm), iac=iac(ecoPD_cdm))
+temp.results
+write.csv(temp.results, "ecoPD_methods.csv")
+library(metricTester)
+tree <- read.tree("temp.tre")
+tree
+cdm <- read.csv("temp.csv")
+cdm
+row.names(cdm) <- cdm$X
+cdm$X <- NULL
+cdm
+ecoPD_cdm <- suppressWarnings(phylo4com(tree, spacodiR_cdm))
+ecoPD_cdm <- suppressWarnings(phylo4com(tree, cdm))
+tree
+ecoPD_cdm <- suppressWarnings(phylo4com(tree, t(cdm)))
+pae(ecoPD_cdm)
+iac(ecoPD_cdm)
+library(ecoPD)
+library(devtools)
+library(metricTester)
+prepData <- function(tree, picante.cdm)#
+{#
+	dists  <- cophenetic(tree)#
+	ecoPD.cdm <- suppressWarnings(phylo4com(tree, t(picante.cdm)))#
+	dat   <- list("tree"=tree, "dists"=dists, "picante.cdm"=picante.cdm, "ecoPD.cdm"=ecoPD.cdm)#
+	class(dat) <- c("list", "metrics.input")#
+	dat#
+}#
 #
-#important merge command, confirm it works#
-results <- merge(observed, expectations, sort=FALSE)
-head(results)
-oneMetric <- sigTest(results, "PSV")
-oneMetric
-ses
-head(results)
-results[,"PSV.average"]
-results[,"PSV.sd"]
-results[,"PSV.average"]->average
-results[,"PSV.sd"]->SD
-SD
-average
-average-SD
-observed
-results[,"PSV"]->observed
-observed
-ses <-
-ses
-ses <- (observed-average)/sd
-ses <- (observed-average)/SD
-ses
-oneMetric
-plot(ses,oneMetric)
+#this function first confirms that the input is of class metrics.input and, if so, then#
+#confirms that the metrics to be calculated are in a named list (via checkMetrics),#
+#then lapply's across all metrics#
+#
+calcMetrics <- function(metrics.input, metrics=NULL)#
+{#
+	if(!inherits(metrics.input, "metrics.input"))#
+	{#
+		stop("Input needs to be of class 'metrics.input'")#
+	}#
+	metrics <- checkMetrics(metrics)#
+	lapply(metrics, function(x) x(metrics.input))#
+}#
+#
+#this function either assigns the metrics to be those defined in defineMetrics, or allows#
+#the user to input different functions as a named list#
+#
+checkMetrics <- function(x)#
+{#
+	if (is.null(x))#
+	{#
+		metrics <- defineMetrics()#
+	}#
+	else#
+	{#
+		if (!inherits(x, "list"))#
+		{#
+			stop("The metrics need to be input as a list of named functions")#
+		}#
+		if (is.null(names(x)))#
+		{#
+			stop("The metrics need to be input as a list of named functions")#
+		}#
+		metrics <- x#
+	}#
+	metrics#
+}#
+#
+defineMetrics <- function()#
+{#
+	list("richness"=my_richness,#
+	"NAW_MPD"=naw_mpd,#
+	"inter_MPD"=inter_mpd,#
+	"intra_MPD"=intra_mpd,#
+	"complete_MPD"=complete_mpd,#
+	"NAW_MNTD"=naw_mntd,#
+	"AW_MNTD"=aw_mntd,#
+	"PSV"=my_psv,#
+	"PSC"=my_psc,#
+	"PSE"=my_pse,#
+	"PAE"=PAE,#
+	"IAC"=IAC,#
+	"Haed"=Haed,#
+	"Eaed"=Eaed,#
+	"Eed"=Eed,#
+	"Hed"=Hed,#
+	"SimpsonsPhy"=SimpsonsPhy,#
+	"PD"=my_PD,#
+	"PD_Cadotte"=my_PD_Cadotte,#
+	"QE"=my_QE#
+	)#
+}#
+#
+my_richness <- function(metrics.input)#
+	apply(metrics.input$picante.cdm, 1, lengthNonZeros)#
+#
+naw_mpd <- function(metrics.input)#
+	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted=FALSE)#
+#
+inter_mpd <- function(metrics.input)#
+	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="interspecific")#
+#
+intra_mpd <- function(metrics.input)#
+	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="intraspecific")#
+#
+complete_mpd <- function(metrics.input)#
+	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="complete")#
+#
+naw_mntd <- function(metrics.input)#
+	mntd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted=FALSE)#
+#
+aw_mntd <- function(metrics.input)#
+	mntd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted=TRUE)#
+#
+my_psv <- function(metrics.input)#
+{#
+	PSV <- psv(metrics.input$picante.cdm, metrics.input$tree)#
+	PSV <- PSV$PSVs#
+}#
+#
+my_psc <- function(metrics.input)#
+{#
+	PSC <- psc.corr(metrics.input$picante.cdm, metrics.input$tree)#
+	PSC <- PSC$PSCs#
+}#
+#
+my_pse <- function(metrics.input)#
+{#
+	PSE <- pse(metrics.input$picante.cdm, metrics.input$tree)#
+	PSE <- PSE$PSEs#
+}#
+#
+PAE <- function(metrics.input)#
+	pae(metrics.input$ecoPD.cdm)#
+#
+IAC <- function(metrics.input)#
+	iac(metrics.input$ecoPD.cdm)#
+#
+Haed <- function(metrics.input)#
+	haed(metrics.input$ecoPD.cdm)#
+#
+Eaed <- function(metrics.input)#
+	eaed(metrics.input$ecoPD.cdm)#
+#
+Eed <- function(metrics.input)#
+	eed(metrics.input$ecoPD.cdm)#
+#
+Hed <- function(metrics.input)#
+	hed(metrics.input$ecoPD.cdm)#
+#
+SimpsonsPhy <- function(metrics.input)#
+	simpson(metrics.input$ecoPD.cdm, method="phylogenetic")#
+#
+my_PD <- function(metrics.input)#
+{#
+	PD <- pd(metrics.input$picante.cdm, metrics.input$tree, include.root=TRUE)#
+	PD <- PD$PD#
+}#
+#
+my_PD_Cadotte <- function(metrics.input)#
+{#
+	PD <- pd(metrics.input$picante.cdm, metrics.input$tree, include.root=FALSE)#
+	PD <- PD$PD#
+}#
+#
+my_QE <- function(metrics.input)#
+{#
+	QE <- raoD(metrics.input$picante.cdm, metrics.input$tree)#
+	QE <- QE$Dkk#
+}
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+prepData(tree, cdm)
+prepped <- prepData(tree, cdm)
+calcMetrics(prepped)
+as.data.frame(calcMetrics(prepped))
+48*8
+4500*12
+19/12
+318.80-306=a
+318.80-306->a
+a
+168-154
+14+12.8
+424-7->a
+b <- 902-7
+c <- 933-7
+d <- 189-7
+e <- 32-7
+f <- 23-7
+g <- 1825-7
+h <- 784-7
+a+b+c+d+e+f+g+h
+7*8
+70-56
+927+896+183+26+17+1819+778+418
 library(devtools)
 load_all()
-document()
+?saveRDS
+test1 <- readRDS("test_iteration1by_richness.RDS")
+str(test1)
+str(test1, 2)
+test1$random
+test1$random$ses
+test2 <- readRDS("test_iteration2by_richness.RDS")
+test2$random$ses

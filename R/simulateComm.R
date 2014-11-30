@@ -25,7 +25,7 @@
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
-#' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+#' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
@@ -36,7 +36,9 @@ simulateComm <- function(tree, min.rich, max.rich, abundances)
 	col.3 <- c()
 	for (i in seq(from=min.rich, to=max.rich))
 	{
-		rich <- rep(i, i) ##this generates a vector of community names by repeating whatver the value of richness is (i) i times
+		#this generates a vector of community names by repeating 
+		#whatver the value of richness is (i) i times
+		rich <- rep(i, i) 
 		col.1 <- append(col.1, rich)
 		numbers <- sample(abundances, i)
 		col.2 <- append(col.2, numbers)
@@ -46,8 +48,10 @@ simulateComm <- function(tree, min.rich, max.rich, abundances)
 		cdm.fake <- data.frame(col.1, col.2, col.3)
 		cdm <- sample2matrix(cdm.fake)
 
-		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and perhaps other functions
-		#need to fake prune the phylo here in case not all the species are in the cdm as are in the phylo
+		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and 
+		#perhaps other functions
+		#need to fake prune the phylo here in case not all the species are in the cdm as 
+		#are in the phylo
 
 		dropped <- setdiff(tree$tip.label, colnames(cdm))
 		
@@ -55,9 +59,9 @@ simulateComm <- function(tree, min.rich, max.rich, abundances)
 
 		cdm <- cdm[drop.tree$tip.label]
 
-		quadratNames <- paste("quadrat",1:dim(cdm)[1], sep="")
+		quadrat <- paste("quadrat",1:dim(cdm)[1], sep="")
 
-		dimnames(cdm)[[1]] <- quadratNames
+		dimnames(cdm)[[1]] <- quadrat
 
 		return(cdm)
 }

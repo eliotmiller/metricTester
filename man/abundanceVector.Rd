@@ -21,14 +21,13 @@ Simple function to create a regional abundance vector given a "regional"
 community data matrix.
 }
 \examples{
-library(plyr)
 library(geiger)
 library(picante)
 
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 

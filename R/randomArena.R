@@ -1,18 +1,12 @@
 #' Generate a random spatial arena
 #'
-#' Given a phylogenetic tree, the desired dimensions of the arena, and the mean log of the
-#' regional abundance pool, randomly generates
-#' spatial arena.
+#' Given a simulations.input object, will create a randomly settled arena according to the
+#' parameters in the simulations.input object.
 #'
-#' @param tree Phylo object
-#' @param x.min The x minimum of the output arena, e.g. 0
-#' @param x.max The x maximum of the output arena
-#' @param y.min The y minimum of the output arena, e.g. 0
-#' @param y.max The y maximum of the output arena
-#' @param mean.log.individuals Mean of the log-normal distribution
+#' @param simulations.input A prepared simulations.input object from prepSimulations
 #' 
-#' @details This function generates a log-normal regional abundance distribution and
-#' assigns those abundances to random species. It then draws from this regional abundance
+#' @details This function uses the log-normal regional abundance distribution to randomly
+#' assign abundances to species in the tree. It then draws from this regional abundance
 #' distribution to settle individuals at random in the landscape. 
 #'
 #' @return A list of 4 elements: the mean of the genetic distance matrix of the input
@@ -26,28 +20,27 @@
 #'
 #' @examples
 #' library(geiger)
-#' library(colorRamps)
 #'
-#' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
-#' #generate the random arena
-#' arena <- randomArena(tree, x.min=0, x.max=300, y.min=0, y.max=300, mean.log.individuals=2)
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+#' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+#' competition.iterations=2)
 #'
-#' #calculate genetic distances
-#' gen.dists <- cophenetic(tree)
-#'
-#' #define species' colors for plotting
-#' cols <- blue2green2red(nrow(gen.dists))
-#'
-#' #plot the arena
-#' plot(arena$arena$X, arena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
-#' col=cols[arena$arena$individuals])
+#' test <- randomArena(prepped)
 
-randomArena <- function(tree, x.min, x.max, y.min, y.max, mean.log.individuals)
+randomArena <- function(simulations.input)
 {
+	#this ugly bit of code is because I used to define these things as arguments to funct
+	#this makes input easier
+	x.min=0
+	x.max=simulations.input$arena.length
+	y.min=0
+	y.max=simulations.input$arena.length
+
 	#generate log-normal regional abundance curve, and randomly assign abundances to species
-	indivs.per.species <- rlnorm(n=length(tree$tip.label), mean.log.individuals, sdlog=1)
+	indivs.per.species <- rlnorm(n=length(simulations.input$tree$tip.label), 
+		simulations.input$mean.log.individuals, sdlog=1)
 	
 	#set species with < 0 individuals to 0 abundance
 	indivs.per.species[indivs.per.species < 0] <- 0
@@ -58,7 +51,7 @@ randomArena <- function(tree, x.min, x.max, y.min, y.max, mean.log.individuals)
 	#actually generate a vector individuals with species identities (the "regional pool")
 	individuals <- c()
 
-	individuals <- rep(tree$tip.label, times=indivs.per.species)
+	individuals <- rep(simulations.input$tree$tip.label, times=indivs.per.species)
 
 	#start a dataframe to bind X,Y coordinates into	
 	arena <- data.frame(individuals)
@@ -69,7 +62,9 @@ randomArena <- function(tree, x.min, x.max, y.min, y.max, mean.log.individuals)
 	
 	#create and return the output
 	
-	output <- list(related=mean(cophenetic(tree)), regional.abundance=individuals, arena=arena, dims=c(x.min, x.max, y.min, y.max))
+	output <- list(related=mean(cophenetic(simulations.input$tree)),
+		regional.abundance=individuals, arena=arena, 
+		dims=c(x.min, x.max, y.min, y.max))
 	
 	return(output)
 }

@@ -3,20 +3,20 @@
 \alias{killSome}
 \title{Remove most closely related individuals}
 \usage{
-killSome(tree, arenaOutput, max.distance, percent.killed)
+killSome(tree, arena.output, max.distance, proportion.killed)
 }
 \arguments{
 \item{tree}{Phylo object}
 
-\item{arenaOutput}{A spatial arena with three columns: individuals (the species ID),
+\item{arena.output}{A spatial arena with three columns: individuals (the species ID),
 X (the x axis location of that individual), and Y (the y axis location). The
-arenaOutput actually needs a number of other elements in order for later functions to
+arena.output actually needs a number of other elements in order for later functions to
 work properly, so any modifications to the code should take note of this.}
 
 \item{max.distance}{The geographic distance within which geographically neighboring
 indivduals should be considered to influence the individual in question.}
 
-\item{percent.killed}{The percent of individuals in the total arena that should be
+\item{proportion.killed}{The percent of individuals in the total arena that should be
 considered (as a proportion, e.g. 0.5 = half).}
 }
 \value{
@@ -45,12 +45,21 @@ library(geiger)
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
-arena <- randomArena(tree, x.min=0, x.max=300, y.min=0, y.max=300, mean.log.individuals=2)
+#prep the data for the simulation
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+competition.iterations=5)
 
-new.arena <- killSome(tree, arenaOutput=arena, max.distance=50, percent.killed=0.2)
+#use the competition simulation
+positions <- competitionArena(prepped)
 
-dim(arena$arena)
-dim(arena$new.arena)
+#in normal use, these parameters will be carried down from the simulations.input object
+new.arena <- killSome(tree, arena.output=positions, max.distance=50,
+proportion.killed=0.2)
+
+#look at how number of individuals in arena changes
+dim(positions$arena)
+dim(new.arena$arena)
 }
 \references{
 Miller, Trisos and Farine.
