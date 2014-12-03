@@ -1,14 +1,3 @@
-fdisRandomizer <- function(traits, samples, iterations)#
-{#
-	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
-#
-	for(i in 1:length(iterations))#
-	{#
-		results[i,] <- fdisSingle(traits, samples)#
-	}#
-	return(results)#
-}
-fdisRandomizer(traits, samples, 2)
 results <- matrix(nrow=2, ncol=length(samples), 0)
 results
 for(i in 1:iterations)#
@@ -708,11 +697,22 @@ a+b+c+d+e+f+g+h
 927+896+183+26+17+1819+778+418
 library(devtools)
 load_all()
-?saveRDS
-test1 <- readRDS("test_iteration1by_richness.RDS")
-str(test1)
-str(test1, 2)
-test1$random
-test1$random$ses
-test2 <- readRDS("test_iteration2by_richness.RDS")
-test2$random$ses
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, #
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+competition.iterations=3)#
+#'#
+positions <- competitionArena(prepped)#
+#'#
+bounds <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)#
+#'#
+#' #return a CDM in picante format#
+cdm <- quadratContents(positions$arena, bounds)
+cdm
+test <- regionalNull(cdm, tree, regional.abundance=abundanceVector(cdm))
+test
+check()
+document()
+document()
+devtools::check()

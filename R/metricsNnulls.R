@@ -1,3 +1,9 @@
+#' Parallelized function that calculates metrics on randomized matrices
+#'
+#' This function sends out jobs to as many cores as are specified. Each randomizes the
+#' input CDM according to all defined null models, then calculates each observed metric on
+#' each randomized matrix.
+#'
 #' @param tree Phylo object
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
@@ -7,6 +13,15 @@
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
 #' specify the desired number of cores to utilize.
+#'
+#' @details This function sends out jobs to as many cores as are specified. Each randomizes the
+#' input CDM according to all defined null models, then calculates each observed metric on
+#' each randomized matrix.
+#'
+#' @return A list of lists of vectors. The first level has as many elements as there
+#' are randomizations. The second level has one list for each null model. Each element of
+#' this second level is a named vector corresponding to the calculated metric at each
+#' quadrat.
 #'
 #' @examples
 #' library(geiger)
