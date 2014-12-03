@@ -23,6 +23,10 @@
 #' this second level is a named vector corresponding to the calculated metric at each
 #' quadrat.
 #'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
 #' @examples
 #' library(geiger)
 #' library(picante)
