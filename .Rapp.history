@@ -1,156 +1,3 @@
-results
-fdisRandomizer <- function(traits, samples, iterations)#
-{#
-	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
-#
-	for(i in 1:iterations)#
-	{#
-		results[i,] <- fdisSingle(traits, samples)#
-	}#
-	return(results)#
-}
-fdisRandomizer(traits, samples, 2)
-fdisRandomizer(traits, samples, 5)
-system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
-8738/60
-dim(tempResults)
-write.csv(tempResults, "dontLose.csv")
-head(tempResults)
-??misc
-??ci
-library(Rmisc)
-apply(tempResults, 2, mean)
-test <- apply(tempResults, 2, mean)
-plot(test~samples)
-test2 <- CI(tempResults[1,])
-test2
-test2 <- apply(tempResults, 2, CI)
-head(test2)
-toPlot <- apply(tempResults, 2, CI)
-plot(toPlot[2,]~samples)
-plot(toPlot[2,]~samples, pch=20, col="black")
-min(toPlot)
-max(toPlot)
-plot(toPlot[2,]~samples, pch=20, col="black", ylim=c(min(toPlot),max(toPlot)))
-plot(toPlot[2,]~samples, pch=20, col="red", ylim=c(min(toPlot),max(toPlot)))#
-#
-points(toPlot[1,]~samples, pch=20, col="black")#
-points(toPlot[3,]~samples, pch=20, col="black")
-samples
-bestFit <- function(y)#
-{#
-	temp <- loess(y ~ samples)#
-	predictions <- predict(temp)#
-	return(predictions)#
-}
-bestFit(test2[2,])
-temp <- bestFit(test2[2,])
-plot(temp~samples)
-lines(temp~samples)
-plot(temp~samples)
-lines(temp~samples)
-plot(test2[2,]~samples)
-plot(test2[2,]~samples, pch=20, cex=2)
-plot(test2[2,]~samples, pch=20, cex=2, ylab="FDis", xlab="Sample size")
-gc()
-traits <- data.frame(rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000))#
-#
-names(traits) <- paste("traits", 1:4, sep="")#
-#
-traits <- as.matrix(traits)#
-#
-row.names(traits) <- 1:1000#
-#
-samples <- 2:30#
-#
-samples <- samples^2#
-#
-secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
-#
-fdisSingle <- function(traits, samples)#
-{#
-	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
-	for(i in 1:dim(roadMap)[1])#
-	{#
-		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
-	}#
-#
-	roadMap <- as.data.frame(roadMap)#
-	row.names(roadMap) <- samples#
-	names(roadMap) <- 1:dim(traits)[1]#
-#
-	results <- FDis(traits, roadMap)#
-	return(results)#
-}#
-#
-fdisRandomizer <- function(traits, samples, iterations)#
-{#
-	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
-#
-	for(i in 1:iterations)#
-	{#
-		results[i,] <- fdisSingle(traits, samples)#
-	}#
-	return(results)#
-}#
-#
-system.time(tempResults <- fdisRandomizer(traits, samples, 2))
-head(traits)
-dim(traits)
-dim(samples)
-length(samples)
-traits <- data.frame(rnorm(1000), rnorm(1000), rnorm(1000), rnorm(1000))#
-#
-names(traits) <- paste("traits", 1:4, sep="")#
-#
-traits <- as.matrix(traits)#
-#
-row.names(traits) <- 1:1000#
-#
-samples <- 2:30#
-#
-samples <- samples^2#
-#
-secondTable <- matrix(nrow=length(samples), ncol=1000, 0)#
-#
-fdisSingle <- function(traits, samples)#
-{#
-	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
-	for(i in 1:dim(roadMap)[1])#
-	{#
-		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
-	}#
-#
-	roadMap <- as.data.frame(roadMap)#
-	row.names(roadMap) <- samples#
-	names(roadMap) <- 1:dim(traits)[1]#
-#
-	results <- FDis(traits, roadMap)#
-	return(results)#
-}#
-#
-fdisRandomizer <- function(traits, samples, iterations)#
-{#
-	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
-#
-	for(i in 1:iterations)#
-	{#
-		results[i,] <- fdisSingle(traits, samples)#
-	}#
-	return(results)#
-}#
-#
-system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
-write.csv(tempResults, "4dimensions.csv")
-test <- apply(tempResults, 2, mean)
-plot(test~samples)
-test
-plot(test~samples)
-ls()
-test2
-plot(test~samples, pch=20, col="blue")
-plot(test2[2,]~samples,pch=20, col="red")
-plot(test~samples, pch=20, col="blue")
 points(test2[2,]~samples,pch=20, col="red")
 plot(test~samples, pch=20, col="blue", ylim=c(min(test2),max(test)))
 points(test2[2,]~samples,pch=20, col="red")
@@ -688,16 +535,210 @@ a+b+c+d+e+f+g+h
 install.packages(c("R6","lazyeval","BH"))
 install.packages(c("Rcpp"))
 library(devtools)
-load_all()
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+metricsNnulls
+sqrt(100)
+30^2
+sqrt
+9100
+sqrt(1000)
+library(phytools)
+library(geiger)
+tree <- sim.bdtree(b=1, stop="taxa", n=100)
+plot(tree)
+trait <- rnorm(n=100, mean=100)
+trait
+names(trait) <- tree$tip.label
+contMap(tree=tree, x=trait)
+library(ecodist)#
+#
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:(dimensions-1))#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	names(results) <- paste("traits", 1:dimensions, sep="")#
+	return(results)#
+}#
+#
+traits <- stupid(100)
+head(traits)
+library(ecodist)#
+#
+stupid <- function(dimensions)#
+{#
+	results <- data.frame(rnorm(1000))#
+	for(i in 1:(dimensions-1))#
+	{#
+		results <- cbind(results, rnorm(1000))#
+	}#
+	names(results) <- paste("traits", 1:dimensions, sep="")#
+	return(results)#
+}#
+#
+traits <- stupid(3)
+head(traits)
+traits <- as.matrix(traits)#
+#
+row.names(traits) <- 1:1000#
+#
+samples <- 2:30#
+#
+samples <- samples^2#
+#
+secondTable <- matrix(nrow=length(samples), ncol=1000, 0)
+head(secondTable)
+sum(secondTable[,1])
+sum(secondTable[1,])
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+#this function returns the weighted centroids per cloud of points in multivariate space#
+#given some ordination results and a road map telling which point belongs to which cluster#
+#e.g. a file you have occasionally called "secondTable.csv"#
+#
+centers <- function(ordination.results, road.map)#
+{#
+	results <- matrix(ncol=dim(ordination.results)[2], nrow=dim(road.map)[1])#
+	for(i in 1:dim(road.map)[1])#
+	{#
+		results[i,] <- apply(ordination.results, 2, weighted.mean, w=road.map[i,])#
+	}#
+	row.names(results) <- row.names(road.map)#
+	return(results)#
+}
+#this function determines the weighted centroid of each cloud of points and then#
+#determines the mean absolute deviation (weighted) from each centroid per cloud#
+#
+FDis <- function(ordination.results, road.map)#
+{	#
+	require(ecodist)#
+#
+	results <- c()#
+#
+	centerPoints <- centers(ordination.results, road.map)#
+#
+	temp <- rbind(ordination.results, centerPoints)#
+	allDistances <- dist(temp)#
+	distMatrix <- full(allDistances)#
+	for(i in 1:dim(road.map)[1])#
+	{#
+		#figure out which column corresponds to distances from the weighted centroids#
+		#pull it out and get rid of the final elements (distances among centroids)#
+		centroidDists <- distMatrix[,dim(road.map)[2]+i]#
+		centroidDists <- centroidDists[1:(length(centroidDists)-(dim(road.map)[1]))]#
+		#now calculate the weighted mean distance from this centroid#
+		results[i] <- weighted.mean(centroidDists, road.map[i,])#
+	}#
+	names(results) <- row.names(road.map)#
+#
+	return(results)#
+}
+fdisSingle <- function(traits, samples)#
+{#
+	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
+	for(i in 1:dim(roadMap)[1])#
+	{#
+		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
+	}#
+#
+	roadMap <- as.data.frame(roadMap)#
+	row.names(roadMap) <- samples#
+	names(roadMap) <- 1:dim(traits)[1]#
+#
+	results <- FDis(traits, roadMap)#
+	return(results)#
+}#
+#
+fdisRandomizer <- function(traits, samples, iterations)#
+{#
+	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
+#
+	for(i in 1:iterations)#
+	{#
+		results[i,] <- fdisSingle(traits, samples)#
+	}#
+	return(results)#
+}#
+#
+system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
+system.time(tempResults <- fdisRandomizer(traits, samples, 2))
+head(tempResults)
+head(samples)
+tail(samples)
+test <- rnorm(1000)
+hist(test)
+head(test)
+test2 <- sample(test, 5)
+mean(test2)
+test2 <- sample(test, 5)
+mean(test2)
+test2 <- sample(test, 5)
+mean(test2)
+test2 <- sample(test, 5)
+mean(test2)
+test2 <- sample(test, 5)
+mean(test2)
+test2 <- sample(test, 1000)
+mean(test2)
+library(phytools)
+?phylomorphospace
+?fastAnc
+library(metricTester)
+?summaries
+library(dplyr)#
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm)#
+#
+results <- reduceRandomizations(rawResults)
+library(devtools)
 load_all()
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-rawResults <- metricsNnulls(tree, cdm, randomizations=1, cores=1)
-str(rawResults)
-rawResults[[1]][[1]][1]
-rawResults[[1]][[1]][[1]]
-rawResults[[1]][[1]][[2]]
-rawResults[[1]][[1]][[3]]
+rawResults <- metricsNnulls(tree, cdm)
+str(rawResults,2)
+head(rawResults[[1]]$twoX)
+str(results)
+results <- reduceRandomizations(rawResults)
+str(results)
+results$trial_swap
+load_all()
 document()
-quit()
