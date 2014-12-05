@@ -36,7 +36,6 @@
 
 summaries <- function(null.output, concat.by="richness")
 {
-	require(dplyr)
 	#set up the results table to be the appropriate size if concat.by = richness
 	#you want the table to have one row for every richness value and four columns for each
 	#metric plus an additional column for the richness

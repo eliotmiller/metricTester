@@ -56,8 +56,6 @@ linker <- function(tree, arena.length, mean.log.individuals, length.parameter,
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
 	quadrat.length, concat.by, randomizations, cores)
 {
-	require(foreach)
-	require(doMC)
 	registerDoMC(cores)
 
 	#prep the data for spatial simulations

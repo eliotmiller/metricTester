@@ -10,7 +10,11 @@ Depends:
     phylobase,
     ecoPDcorr,
     geiger,
-    spacodiR
+    spacodiR,
+    dplyr,
+    picante,
+    doMC,
+    foreach
 Suggests:
     testthat
 License: GPL-3

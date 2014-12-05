@@ -43,8 +43,6 @@
 metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL, randomizations=2, 
 	cores=1)
 {
-	require(foreach)
-	require(doMC)
 	registerDoMC(cores)
 	#prep the inputs for parallel randomizations
 	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance)
