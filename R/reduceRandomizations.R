@@ -4,6 +4,19 @@
 #' combine the dataframes from each null model into a single data frame. The output is a
 #' more manageable list of dataframes. 
 #'
+#' @param randomizations.list The results of a call to metricsNnulls()
+#'
+#' @details Given a list of lists of dataframes, such as those that come from a call to
+#' metricsNnulls, where the first level of the list relates to a given randomization, and
+#' each second level is a data frame containing the calculated metrics after randomization
+#' according to a given null model, reduces the results to a simpler list of data frames,
+#' where each data frame contains all the results from a given null model from the input
+#' randomizations.list.
+#'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
 #' @examples
 #' library(geiger)
 #' library(picante)

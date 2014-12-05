@@ -5,10 +5,21 @@
 \usage{
 reduceRandomizations(randomizations.list)
 }
+\arguments{
+\item{randomizations.list}{The results of a call to metricsNnulls()}
+}
 \description{
 The metricsNnulls function creates lists of lists of dataframes. This function will
 combine the dataframes from each null model into a single data frame. The output is a
 more manageable list of dataframes.
+}
+\details{
+Given a list of lists of dataframes, such as those that come from a call to
+metricsNnulls, where the first level of the list relates to a given randomization, and
+each second level is a data frame containing the calculated metrics after randomization
+according to a given null model, reduces the results to a simpler list of data frames,
+where each data frame contains all the results from a given null model from the input
+randomizations.list.
 }
 \examples{
 library(geiger)
@@ -24,5 +35,8 @@ cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 rawResults <- metricsNnulls(tree, cdm)
 
 results <- reduceRandomizations(rawResults)
+}
+\references{
+Miller, Trisos and Farine.
 }
 

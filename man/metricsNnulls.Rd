@@ -50,4 +50,7 @@ cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
 rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1)
 }
+\references{
+Miller, Trisos and Farine.
+}
 
