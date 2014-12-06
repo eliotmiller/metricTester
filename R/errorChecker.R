@@ -42,10 +42,13 @@
 #' #run the metrics and nulls combo function
 #' rawResults <- metricsNnulls(tree, cdm, randomizations=3)
 #'
+#' #summarize the results
+#' results <- reduceRandomizations(rawResults)
+#'
 #' #calculate the observed metrics from the input CDM
 #' observed <- observedMetrics(tree, cdm)
 #'
-#' test <- errorChecker(observed, rawResults, "richness")
+#' test <- errorChecker(observed, results, "richness")
 
 errorChecker <- function(observed, reduced.randomizations, concat.by)
 {

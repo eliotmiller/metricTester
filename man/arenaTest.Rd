@@ -53,7 +53,7 @@ reduced <- reduceRandomizations(rawResults)
 observed <- observedMetrics(tree, cdm)
 
 #summarize the means, SD and CI of the randomizations
-summarized <- lapply(reduced, summaries, concat.by)
+summarized <- lapply(reduced, summaries, concat.by="richness")
 
 #merge the observations and the summarized randomizations to facilitate significance
 #testing

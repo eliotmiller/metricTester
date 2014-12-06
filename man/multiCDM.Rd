@@ -35,19 +35,15 @@ library(picante)
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
-#simulate a log normal abundance distribution
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
+	length.parameter=1000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+	competition.iterations=5)
 
-#simulate a community of varying richness
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+#run the spatial simulations
+arenas <- runSimulations(prepped)
 
-#run the metrics and nulls combo function
-rawResults <- metricsNnulls(tree, cdm, randomizations=3)
-
-#calculate the observed metrics from the input CDM
-observed <- observedMetrics(tree, cdm)
-
-test <- errorChecker(observed, rawResults, "richness")
+#derive CDMs. quadrats are placed in the same places across all spatial simulations
+cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
 }
 \references{
 Miller, Trisos and Farine.

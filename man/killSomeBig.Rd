@@ -68,7 +68,7 @@ new.arena <- killSomeBig(tree, arena.output=random, max.distance=50,
 proportion.killed=0.2)
 
 #look at how number of individuals in arena changes
-dim(positions$arena)
+dim(random$arena)
 dim(new.arena$arena)
 }
 \references{

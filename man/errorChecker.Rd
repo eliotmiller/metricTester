@@ -49,10 +49,13 @@ cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #run the metrics and nulls combo function
 rawResults <- metricsNnulls(tree, cdm, randomizations=3)
 
+#summarize the results
+results <- reduceRandomizations(rawResults)
+
 #calculate the observed metrics from the input CDM
 observed <- observedMetrics(tree, cdm)
 
-test <- errorChecker(observed, rawResults, "richness")
+test <- errorChecker(observed, results, "richness")
 }
 \references{
 Miller, Trisos and Farine.

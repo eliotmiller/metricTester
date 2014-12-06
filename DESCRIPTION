@@ -14,7 +14,8 @@ Depends:
     dplyr,
     picante,
     doMC,
-    foreach
+    foreach,
+    doParallel
 Suggests:
     testthat
 License: GPL-3

@@ -60,7 +60,7 @@
 #' proportion.killed=0.2)
 #'
 #' #look at how number of individuals in arena changes
-#' dim(positions$arena)
+#' dim(random$arena)
 #' dim(new.arena$arena)
 
 killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
