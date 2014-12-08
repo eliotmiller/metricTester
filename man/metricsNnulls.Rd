@@ -4,7 +4,7 @@
 \title{Parallelized function that calculates metrics on randomized matrices}
 \usage{
 metricsNnulls(tree, picante.cdm, regional.abundance = NULL,
-  randomizations = 2, cores = 1)
+  randomizations = 2, cores = 1, cluster = FALSE)
 }
 \arguments{
 \item{tree}{Phylo object}
@@ -20,6 +20,10 @@ metrics calculated across it.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
 specify the desired number of cores to utilize.}
+
+\item{cluster}{Default is FALSE. Set to TRUE if running on a cluster computer. Invokes
+multicore processing on a single computer if FALSE, otherwise parallel processing on
+cluster.}
 }
 \value{
 A list of lists of vectors. The first level has as many elements as there
@@ -48,7 +52,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 
-rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1)
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
 }
 \references{
 Miller, Trisos and Farine.

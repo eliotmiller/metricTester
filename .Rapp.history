@@ -1,176 +1,3 @@
-c <- 933-7
-d <- 189-7
-e <- 32-7
-f <- 23-7
-g <- 1825-7
-h <- 784-7
-a+b+c+d+e+f+g+h
-7*8
-70-56
-927+896+183+26+17+1819+778+418
-install.packages(c("R6","lazyeval","BH"))
-install.packages(c("Rcpp"))
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-library(metricTester)
-metricsNnulls
-sqrt(100)
-30^2
-sqrt
-9100
-sqrt(1000)
-library(phytools)
-library(geiger)
-tree <- sim.bdtree(b=1, stop="taxa", n=100)
-plot(tree)
-trait <- rnorm(n=100, mean=100)
-trait
-names(trait) <- tree$tip.label
-contMap(tree=tree, x=trait)
-library(ecodist)#
-#
-stupid <- function(dimensions)#
-{#
-	results <- data.frame(rnorm(1000))#
-	for(i in 1:(dimensions-1))#
-	{#
-		results <- cbind(results, rnorm(1000))#
-	}#
-	names(results) <- paste("traits", 1:dimensions, sep="")#
-	return(results)#
-}#
-#
-traits <- stupid(100)
-head(traits)
-library(ecodist)#
-#
-stupid <- function(dimensions)#
-{#
-	results <- data.frame(rnorm(1000))#
-	for(i in 1:(dimensions-1))#
-	{#
-		results <- cbind(results, rnorm(1000))#
-	}#
-	names(results) <- paste("traits", 1:dimensions, sep="")#
-	return(results)#
-}#
-#
-traits <- stupid(3)
-head(traits)
-traits <- as.matrix(traits)#
-#
-row.names(traits) <- 1:1000#
-#
-samples <- 2:30#
-#
-samples <- samples^2#
-#
-secondTable <- matrix(nrow=length(samples), ncol=1000, 0)
-head(secondTable)
-sum(secondTable[,1])
-sum(secondTable[1,])
-fdisSingle <- function(traits, samples)#
-{#
-	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
-	for(i in 1:dim(roadMap)[1])#
-	{#
-		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
-	}#
-#
-	roadMap <- as.data.frame(roadMap)#
-	row.names(roadMap) <- samples#
-	names(roadMap) <- 1:dim(traits)[1]#
-#
-	results <- FDis(traits, roadMap)#
-	return(results)#
-}#
-#
-fdisRandomizer <- function(traits, samples, iterations)#
-{#
-	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
-#
-	for(i in 1:iterations)#
-	{#
-		results[i,] <- fdisSingle(traits, samples)#
-	}#
-	return(results)#
-}#
-#
-system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
-#this function returns the weighted centroids per cloud of points in multivariate space#
-#given some ordination results and a road map telling which point belongs to which cluster#
-#e.g. a file you have occasionally called "secondTable.csv"#
-#
-centers <- function(ordination.results, road.map)#
-{#
-	results <- matrix(ncol=dim(ordination.results)[2], nrow=dim(road.map)[1])#
-	for(i in 1:dim(road.map)[1])#
-	{#
-		results[i,] <- apply(ordination.results, 2, weighted.mean, w=road.map[i,])#
-	}#
-	row.names(results) <- row.names(road.map)#
-	return(results)#
-}
-#this function determines the weighted centroid of each cloud of points and then#
-#determines the mean absolute deviation (weighted) from each centroid per cloud#
-#
-FDis <- function(ordination.results, road.map)#
-{	#
-	require(ecodist)#
-#
-	results <- c()#
-#
-	centerPoints <- centers(ordination.results, road.map)#
-#
-	temp <- rbind(ordination.results, centerPoints)#
-	allDistances <- dist(temp)#
-	distMatrix <- full(allDistances)#
-	for(i in 1:dim(road.map)[1])#
-	{#
-		#figure out which column corresponds to distances from the weighted centroids#
-		#pull it out and get rid of the final elements (distances among centroids)#
-		centroidDists <- distMatrix[,dim(road.map)[2]+i]#
-		centroidDists <- centroidDists[1:(length(centroidDists)-(dim(road.map)[1]))]#
-		#now calculate the weighted mean distance from this centroid#
-		results[i] <- weighted.mean(centroidDists, road.map[i,])#
-	}#
-	names(results) <- row.names(road.map)#
-#
-	return(results)#
-}
-fdisSingle <- function(traits, samples)#
-{#
-	roadMap <- matrix(nrow=length(samples), ncol=dim(traits)[1], 0)#
-	for(i in 1:dim(roadMap)[1])#
-	{#
-		roadMap[i,][sample(1:length(roadMap[i,]), samples[i])] <- 1#
-	}#
-#
-	roadMap <- as.data.frame(roadMap)#
-	row.names(roadMap) <- samples#
-	names(roadMap) <- 1:dim(traits)[1]#
-#
-	results <- FDis(traits, roadMap)#
-	return(results)#
-}#
-#
-fdisRandomizer <- function(traits, samples, iterations)#
-{#
-	results <- matrix(nrow=iterations, ncol=length(samples), 0)#
-#
-	for(i in 1:iterations)#
-	{#
-		results[i,] <- fdisSingle(traits, samples)#
-	}#
-	return(results)#
-}#
-#
-system.time(tempResults <- fdisRandomizer(traits, samples, 1000))
-system.time(tempResults <- fdisRandomizer(traits, samples, 2))
-head(tempResults)
-head(samples)
-tail(samples)
-test <- rnorm(1000)
 hist(test)
 head(test)
 test2 <- sample(test, 5)
@@ -450,9 +277,26 @@ hed(weeds)
 aed(weeds)
 packageVersion("ecoPDcorr")
 packageVersion("phylobase")
-remove.packages("metricTester")
+library(metricTeser)
+library(metricTester)
+?metricsNnullsCL()
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1))
+metricsNnullsCL
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
 library(devtools)
 load_all()
+?foreach
+load_all()
+metricsNnullsCL
+?metricsNnullsCL
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
@@ -460,16 +304,45 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
 #
 system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1))
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
 system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
 system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1))
-system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1))
 load_all()
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1))
 system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
-install.packages("metricTester", username="eliotmiller")
-install_github("metricTester", username="eliotmiller")
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=8, cores=1))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=8, cores=8))
+str(rawResults)
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=8, cores=8))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=8, cores=1))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=20, cores=1))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=20, cores=8))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=40, cores=8))
+str(rawResults)
+length(rawResults)
+results <- reduceRandomizations(rawResults)
+str(results)
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=40, cores=1))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=40, cores=8))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=80, cores=8))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=80, cores=1))
+25/9
+results <- reduceRandomizations(rawResults)
+str(results)
+642+361
+cluster
+load_all()
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=1))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=1))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=1))
+load_all()
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=1))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=8))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=1, cluster=TRUE))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=16, cores=8, cluster=TRUE))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=32, cores=8, cluster=TRUE))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=64, cores=8, cluster=TRUE))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=64, cores=8, cluster=FALSE))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=64, cores=1, cluster=FALSE))
+19.28/4.3
