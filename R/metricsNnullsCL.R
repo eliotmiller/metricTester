@@ -38,7 +38,7 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1)
+#' rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1)
 
 metricsNnullsCL <- function(tree, picante.cdm, regional.abundance=NULL, randomizations=2, 
 	cores=1)
@@ -53,6 +53,9 @@ metricsNnullsCL <- function(tree, picante.cdm, regional.abundance=NULL, randomiz
 	#inner element are the metrics for a given null model
 	foreach(i = 1:randomizations) %dopar%
 	{
+		runNulls <- metricTester::runNulls()
+		prepData <- metricTester::prepData()
+		calcMetrics <- metricTester::calcMetrics()
 		#run the nulls across the prepped data. this randomizes the CDMs all at once
 		randomMatrices <- runNulls(nullsPrepped)
 		#prep the randomized CDMs to calculate the metrics across them

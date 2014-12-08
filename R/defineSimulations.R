@@ -24,5 +24,5 @@
 
 defineSimulations <- function()
 {
-	list("random"=randomArena, "filtering"=filteringArena, "competition"=competitionArena)
+	list("random"=randomArena, "filtering"=filteringArena)
 }
