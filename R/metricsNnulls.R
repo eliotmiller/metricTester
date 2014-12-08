@@ -13,6 +13,9 @@
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
 #' specify the desired number of cores to utilize.
+#' @param cluster Default is FALSE. Set to TRUE if running on a cluster computer. Invokes
+#' multicore processing on a single computer if FALSE, otherwise parallel processing on
+#' cluster.
 #'
 #' @details This function sends out jobs to as many cores as are specified. Each randomizes the
 #' input CDM according to all defined null models, then calculates each observed metric on
@@ -38,25 +41,54 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1)
+#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
 
 metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL, randomizations=2, 
-	cores=1)
+	cores=1, cluster=FALSE)
 {
-	registerDoMC(cores)
+	if(cluster==FALSE)
+	{
+		registerDoMC(cores)
+	}
+	else if(cluster==TRUE)
+	{
+		cl <- makeCluster(cores)
+		registerDoParallel(cl)
+	}
+	else
+	{
+		stop("'cluster' must be set to either TRUE OR FALSE")
+	}
 	#prep the inputs for parallel randomizations
 	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance)
 	#set up a list to save results into (might not be necessary)
 	randomResults <- list()
 	#call the parallel for loop. each iteration, save a new list of lists, where each
 	#inner element are the metrics for a given null model
-	foreach(i = 1:randomizations) %dopar%
+	if(cluster==FALSE)
 	{
-		#run the nulls across the prepped data. this randomizes the CDMs all at once
-		randomMatrices <- runNulls(nullsPrepped)
-		#prep the randomized CDMs to calculate the metrics across them
-		randomPrepped <- lapply(randomMatrices, function(x) prepData(tree, x))
-		#calculate the metrics
-		randomResults[[i]] <- lapply(randomPrepped, calcMetrics)
+		foreach(i = 1:randomizations) %dopar%
+		{
+			#run the nulls across the prepped data. this randomizes the CDMs all at once
+			randomMatrices <- runNulls(nullsPrepped)
+			#prep the randomized CDMs to calculate the metrics across them
+			randomPrepped <- lapply(randomMatrices, function(x) prepData(tree, x))
+			#calculate the metrics
+			randomResults[[i]] <- lapply(randomPrepped, calcMetrics)
+		}
+	}
+	else
+	{
+		foreach(i = 1:randomizations,
+			.export=c("runNulls","prepData","calcMetrics")) %dopar%
+		{
+			#run the nulls across the prepped data. this randomizes the CDMs all at once
+			randomMatrices <- runNulls(nullsPrepped)
+			#prep the randomized CDMs to calculate the metrics across them
+			randomPrepped <- lapply(randomMatrices, function(x) prepData(tree, x))
+			#calculate the metrics
+			randomResults[[i]] <- lapply(randomPrepped, calcMetrics)
+		}
+		stopCluster(cl)
 	}
 }

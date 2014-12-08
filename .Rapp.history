@@ -1,3 +1,5 @@
+c <- 933-7
+d <- 189-7
 e <- 32-7
 f <- 23-7
 g <- 1825-7
@@ -448,24 +450,9 @@ hed(weeds)
 aed(weeds)
 packageVersion("ecoPDcorr")
 packageVersion("phylobase")
+remove.packages("metricTester")
 library(devtools)
 load_all()
-?metricsNnulls
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1))
-str(rawResults)
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
@@ -480,8 +467,9 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
 #
 system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
-rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1)
-str(rawResults)
-metricsNnullsCL
-metricsNnulls
-prepData
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
+load_all()
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
+install.packages("metricTester", username="eliotmiller")
+install_github("metricTester", username="eliotmiller")
