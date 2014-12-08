@@ -56,7 +56,7 @@
 #' system.time(multiLinker(tree=tree, arena.length=300, mean.log.individuals=3.2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3, 
 #'	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness", 
-#'	randomizations=3, cores=8, iterations=3, prefix="test"))
+#'	randomizations=3, cores=8, cluster=FALSE, iterations=3, prefix="test"))
 
 multiLinker <- function(tree, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
@@ -75,7 +75,7 @@ multiLinker <- function(tree, arena.length, mean.log.individuals, length.paramet
 		}
 		temp <- linker(tree, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 
-			no.quadrats, quadrat.length, concat.by, randomizations, cores)
+			no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster)
 		saveRDS(temp, file=filename)
 	}
 	return("Files saved to working directory")

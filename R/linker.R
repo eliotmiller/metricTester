@@ -54,7 +54,7 @@
 
 linker <- function(tree, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores)
+	quadrat.length, concat.by, randomizations, cores, cluster=FALSE)
 {
 	#prep the data for spatial simulations
 	prepped <- prepSimulations(tree, arena.length, mean.log.individuals, length.parameter, 
@@ -71,7 +71,7 @@ linker <- function(tree, arena.length, mean.log.individuals, length.parameter,
 	#randomizations, one for each. third level is data frames, one per null model
 	allRandomizations <- lapply(1:length(cdms), function(x) metricsNnulls(tree=tree, 
 		picante.cdm=cdms[[x]], regional.abundance=arenas[[x]]$regional.abundance,
-		cores=cores, randomizations=randomizations))
+		cores=cores, cluster, randomizations=randomizations))
 	#reduce the randomizations to a list of lists of (first order of lists is for each
 	#spatial simulation) data frames
 	reduced <- lapply(allRandomizations, reduceRandomizations)
