@@ -60,7 +60,7 @@
 
 multiLinker <- function(tree, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, iterations, prefix)
+	quadrat.length, concat.by, randomizations, cores, cluster, iterations, prefix)
 {
 	#create a simple file name, specify whether concatenating by quadrat or richness
 	for(i in 1:iterations)
