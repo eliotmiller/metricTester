@@ -67,10 +67,14 @@ summaries <- function(null.output, concat.by="richness")
 			#note that we want to start the last column at 5, to leave the first blank for
 			#either quadrat or richness names
 			lastCol <- (4*(i-2))+1
-			results[,lastCol-3] <- summarize(grouped, mean(metric, na.rm = TRUE))[,2]
-			results[,lastCol-2] <- summarize(grouped, sd(metric, na.rm = TRUE))[,2]
-			results[,lastCol-1] <- summarize(grouped, quantile(metric, 0.025, na.rm=TRUE))[,2]
-			results[,lastCol] <- summarize(grouped, quantile(metric, 0.975, na.rm=TRUE))[,2]
+			results[,lastCol-3] <- as.data.frame(summarize(grouped, 
+				mean(metric, na.rm = TRUE)))[,2]
+			results[,lastCol-2] <- as.data.frame(summarize(grouped, 
+				sd(metric, na.rm = TRUE)))[,2]
+			results[,lastCol-1] <- as.data.frame(summarize(grouped, 
+				quantile(metric, 0.025, na.rm=TRUE)))[,2]
+			results[,lastCol] <- as.data.frame(summarize(grouped, 
+				quantile(metric, 0.975, na.rm=TRUE)))[,2]
 		}
 		#dplyr automatically creates title for summarized columns, so just pull last used
 		rows <- summarize(grouped, mean(metric, na.rm = TRUE))[,1]
@@ -86,10 +90,14 @@ summaries <- function(null.output, concat.by="richness")
 			#note that we want to start the last column at 5, to leave the first blank for
 			#either quadrat or richness names
 			lastCol <- (4*(i-2))+1
-			results[,lastCol-3] <- summarize(grouped, mean(metric, na.rm = TRUE))[,2]
-			results[,lastCol-2] <- summarize(grouped, sd(metric, na.rm = TRUE))[,2]
-			results[,lastCol-1] <- summarize(grouped, quantile(metric, 0.025, na.rm=TRUE))[,2]
-			results[,lastCol] <- summarize(grouped, quantile(metric, 0.975, na.rm=TRUE))[,2]
+			results[,lastCol-3] <- as.data.frame(summarize(grouped, 
+				mean(metric, na.rm = TRUE)))[,2]
+			results[,lastCol-2] <- as.data.frame(summarize(grouped, 
+				sd(metric, na.rm = TRUE)))[,2]
+			results[,lastCol-1] <- as.data.frame(summarize(grouped, 
+				quantile(metric, 0.025, na.rm=TRUE)))[,2]
+			results[,lastCol] <- as.data.frame(summarize(grouped, 
+				quantile(metric, 0.975, na.rm=TRUE)))[,2]
 		}
 		#dplyr automatically creates title for summarized columns, so just pull last used
 		rows <- summarize(grouped, mean(metric, na.rm = TRUE))[,1]

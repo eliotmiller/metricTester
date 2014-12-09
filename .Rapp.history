@@ -1,26 +1,3 @@
-d <- 189-7
-e <- 32-7
-f <- 23-7
-g <- 1825-7
-h <- 784-7
-a+b+c+d+e+f+g+h
-7*8
-70-56
-927+896+183+26+17+1819+778+418
-install.packages(c("R6","lazyeval","BH"))
-install.packages(c("Rcpp"))
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-library(metricTester)
-metricsNnulls
-sqrt(100)
-30^2
-sqrt
-9100
-sqrt(1000)
-library(phytools)
-library(geiger)
-tree <- sim.bdtree(b=1, stop="taxa", n=100)
 plot(tree)
 trait <- rnorm(n=100, mean=100)
 trait
@@ -463,7 +440,34 @@ system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
 system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1))
 metricsNnullsCL
 system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
+library(Hmisc)
+?weighted.mean
 library(devtools)
 load_all()
-document()
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=100, cores=8, cluster=FALSE, iterations=3, #
+	prefix="twenty_mc"))
+?linker
 ?metricsNnulls
+library()
+library
+?library
+library(logical.return=T)
+(.packages())
+packageVersion((.packages()))
+packageVersion(c(.packages()))
+temp <- (.packages())
+temp
+packageVersion(paste(temp))
+for(i in 1:length(temp))
+packageVersion(temp[i])
+for(i in 1:length(temp))
+print(packageVersion(temp[i]))
+for(i in 1:length(temp))
+print(c(temp[i],packageVersion(temp[i]))
+)
+packageVersion("dplyr")
+install.packages("dplyr")
