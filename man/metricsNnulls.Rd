@@ -21,9 +21,10 @@ metrics calculated across it.}
 \item{cores}{This function can run in parallel. In order to do so, the user must
 specify the desired number of cores to utilize.}
 
-\item{cluster}{Default is FALSE. Set to TRUE if running on a cluster computer. Invokes
-multicore processing on a single computer if FALSE, otherwise parallel processing on
-cluster.}
+\item{cluster}{Default is FALSE. Was intended to be set to TRUE if running on a cluster
+computer. Invokes multicore processing on a single computer if FALSE, otherwise
+parallel processing on cluster. However, currently causing errors due to namespace
+issues with doParallel vs doMC.}
 }
 \value{
 A list of lists of vectors. The first level has as many elements as there
@@ -37,9 +38,9 @@ input CDM according to all defined null models, then calculates each observed me
 each randomized matrix.
 }
 \details{
-This function sends out jobs to as many cores as are specified. Each randomizes the
-input CDM according to all defined null models, then calculates each observed metric on
-each randomized matrix.
+This function sends out jobs to as many cores as are specified. Each
+randomizes the input CDM according to all defined null models, then calculates each
+observed metric on each randomized matrix.
 }
 \examples{
 library(geiger)

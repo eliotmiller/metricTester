@@ -13,13 +13,14 @@
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
 #' specify the desired number of cores to utilize.
-#' @param cluster Default is FALSE. Set to TRUE if running on a cluster computer. Invokes
-#' multicore processing on a single computer if FALSE, otherwise parallel processing on
-#' cluster.
+#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
+#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
+#' parallel processing on cluster. However, currently causing errors due to namespace
+#' issues with doParallel vs doMC.
 #'
-#' @details This function sends out jobs to as many cores as are specified. Each randomizes the
-#' input CDM according to all defined null models, then calculates each observed metric on
-#' each randomized matrix.
+#' @details This function sends out jobs to as many cores as are specified. Each 
+#' randomizes the input CDM according to all defined null models, then calculates each
+#' observed metric on each randomized matrix.
 #'
 #' @return A list of lists of vectors. The first level has as many elements as there
 #' are randomizations. The second level has one list for each null model. Each element of
@@ -80,7 +81,8 @@ metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL, randomizat
 	else
 	{
 		foreach(i = 1:randomizations,
-			.export=c("runNulls","prepData","calcMetrics")) %dopar%
+			.export=c("runNulls","prepData","calcMetrics","errorChecker",
+				"arenaTest","quadratTest")) %dopar%
 		{
 			#run the nulls across the prepped data. this randomizes the CDMs all at once
 			randomMatrices <- runNulls(nullsPrepped)

@@ -5,7 +5,7 @@
 \usage{
 linker(tree, arena.length, mean.log.individuals, length.parameter, sd.parameter,
   max.distance, proportion.killed, competition.iterations, no.quadrats,
-  quadrat.length, concat.by, randomizations, cores)
+  quadrat.length, concat.by, randomizations, cores, cluster = FALSE)
 }
 \arguments{
 \item{tree}{Phylo object}
@@ -69,7 +69,7 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 system.time(test <- linker(tree=tree, arena.length=300, mean.log.individuals=2,
 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
 	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness",
-	randomizations=3, cores=3))
+	randomizations=3, cores=3, cluster=FALSE))
 }
 \references{
 Miller, Trisos and Farine.
