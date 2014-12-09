@@ -1,0 +1,322 @@
+prepped
+metricsNnulls
+ls()
+prepped
+metricsNnulls
+calcMetrics(prepped)
+warnings()
+calcMetrics
+debug(calcMetrics)
+calcMetrics(prepped)
+?checkMetrics
+checkMetrics(defineMetrics())
+debug(calcMetrics)
+calcMetrics(prepped)
+getNode
+ecoPDcorr
+?pae
+pae(weeds)
+metrics <- checkMetrics(metrics)
+cdm
+prepped <- prepData(tree, cdm)
+prepped
+results <- calcMetrics(prepped)
+?debug
+undebug(calcMetrics)
+checkMetrics()
+checkMetrics(x)
+checkMetrics(metrics)
+checkMetrics(NULL)
+prepped
+metricTester::naw_mpd(prepped)
+metricTester:::naw_mpd(prepped)
+metricTester:::Haed(prepped)
+metricTester:::my_PD_Cadotte(prepped)
+metricTester:::Eed(prepped)
+warnings()
+metricTester:::Hed(prepped)
+?eed
+aed(weeds)
+haed(weeds)
+ls
+ls()
+class(st)
+pae(st)
+haed(st)
+metricTester:::Hed(prepped)
+hed(st)
+hed
+library(ecoPDcorr)
+?hed
+hed(weeds)
+library(metricTester)
+packageVersion("phylobase")
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+system.time(multiLinkerCL(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=1000, cores=8, iterations=10, prefix="test2"))
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(metricTester)#
+#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
+#
+system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=1000, cores=8, iterations=10, prefix="test2"))
+library(ecoPDcorr)
+library(devtools)
+install_github("ecoPDcorr", username="eliotmiller")
+library(ecoPDcorr)
+packageVersion("phylobase")
+install.packages("phylobase")
+library(ecoPDcorr)
+library(ecoPDcorr)#
+#
+hed(weeds)
+pae(weeds)
+iac(weeds)
+haed(weeds)
+eaed(weeds)
+eed(weeds)
+aed
+aed(weeds)
+hed(weeds)
+eed(weeds)
+aed(weeds)
+pae(weeds)
+iac(weeds)
+haed(weeds)
+eaed(weeds)
+eed(weeds)
+hed(weeds)
+simpson(weeds)
+simpson(weeds, method="phylogenetic")
+pd(weeds)
+install.packages("phylobase")
+library(ecoPDcorr)
+hed(weeds)
+eaed(weeds)
+hed(weeds)
+ecoPD(weeds)
+ecoPD(weeds, method="poly")
+ecoPDcorr:::ecoPD(weeds, method="poly")
+library(devtools)
+install_github("ecoPDcorr", username="eliotmiller")
+library(ecoPDcorr)
+hed(weeds)
+eaed(weeds)
+library(methods)
+hed(weeds)
+remove.packages("ecoPD")
+library(metricTester)
+pae(weeds)
+hed(weeds)
+aed(weeds)
+packageVersion("ecoPDcorr")
+packageVersion("phylobase")
+library(metricTeser)
+library(metricTester)
+?metricsNnullsCL()
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1))
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3))
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=1))
+metricsNnullsCL
+system.time(rawResults <- metricsNnullsCL(tree, cdm, randomizations=3, cores=3))
+library(Hmisc)
+?weighted.mean
+library(devtools)
+load_all()
+?metricsNnulls
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
+str(rawResults)
+packageVersion("dplyr")
+?errorChecker
+errorChecker
+?errorChecker
+results <- reduceRandomizations(rawResults)#
+#
+#calculate the observed metrics from the input CDM#
+observed <- observedMetrics(tree, cdm)#
+#
+test <- errorChecker(observed, results, "richness")
+str(observed)
+str(results)
+summaries(results$frequency)
+results <- matrix(ncol=4 * (dim(results$frequency)[2]-2) + 1, #
+			nrow=length(unique(results$frequency$quadrat)), 0)
+dim(results)
+results
+test <- summaries(results$frequency, concat.by="richness")
+summaries(results$frequency, concat.by="richness")
+results <- reduceRandomizations(rawResults)
+str(results)
+test <- summaries(results$frequency, concat.by="richness")
+test <- summaries(results$frequency, concat.by="richness")
+results <- matrix(ncol=4 * (dim(results$frequency)[2]-2) + 1, #
+			nrow=length(unique(results$frequency$richness)), 0)
+str(results)
+results
+for(i in 3:dim(results$frequency)[2])#
+		{#
+			#create a temporary data frame because difficult to use dplyr over big tables#
+			temp <- data.frame(richness=results$frequency$richness, metric=results$frequency[,i])#
+			grouped <- group_by(temp, richness)#
+			#note that we want to start the last column at 5, to leave the first blank for#
+			#either quadrat or richness names#
+			lastCol <- (4*(i-2))+1#
+			results[,lastCol-3] <- summarize(grouped, mean(metric, na.rm = TRUE))[,2]#
+			results[,lastCol-2] <- summarize(grouped, sd(metric, na.rm = TRUE))[,2]#
+			results[,lastCol-1] <- summarize(grouped, quantile(metric, 0.025, na.rm=TRUE))[,2]#
+			results[,lastCol] <- summarize(grouped, quantile(metric, 0.975, na.rm=TRUE))[,2]#
+}
+debug(summaries)
+test <- summaries(results$frequency, concat.by="richness")
+undebug(errorChecker)
+undebug(summaries)
+results2 <- matrix(ncol=4 * (dim(results$frequency)[2]-2) + 1, #
+			nrow=length(unique(results$frequency$richness)), 0)
+results$frequency
+results
+results <- reduceRandomizations(rawResults)
+results2 <- matrix(ncol=4 * (dim(results$frequency)[2]-2) + 1, #
+			nrow=length(unique(results$frequency$richness)), 0)
+results2
+metricNames <- names(results$frequency)[names(results$frequency)!="richness" & names(results$frequency)!="quadrat"]
+metricNames
+summaryNames <- c("average", "sd", "lower", "upper")
+summaryNames
+comboNames <- paste(rep(metricNames, each = length(summaryNames)), #
+		rep(summaryNames, length(metricNames)), sep = ".")
+comboNames
+length(comboNames)
+str(results,2)
+test <- summaries(results$frequency, concat.by="richness")
+3:dim(null.output)[2]
+3:dim(results$frequency)[2]
+temp <- data.frame(richness=results$frequency$richness, metric=results$frequency[,1])
+temp
+str(results)
+grouped <- group_by(temp, richness)
+grouped
+head(grouped)
+lastCol <- (4*(1-2))+1
+lastCol
+lastCol <- (4*(3-2))+1
+lastCol
+results[,lastCol-3] <- summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+head(grouped)
+temp <- data.frame(richness=null.output$richness, metric=null.output[,3])
+temp <- data.frame(richness=results$frequency$richness, metric=results$frequency[,3])
+head(temp)
+grouped <- group_by(temp, richness)
+grouped
+lastCol <- (4*(3-2))+1
+lastCol
+results
+results2
+results2[,lastCol-3] <- summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+results2
+results2
+class(results2)
+results2 <- matrix(ncol=4 * (dim(results$frequency)[2]-2) + 1, #
+			nrow=length(unique(results$frequency$richness)), 0)
+results2
+summarize(grouped, mean(metric, na.rm = TRUE))
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+class(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+results3 <- results2
+head(grouped)
+results3[,lastCol-3] <- summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+head(results3)
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+class(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+as.vector(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+as.numeric(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+numeric(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+summarize(grouped, mean(metric, na.rm = TRUE))
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+summarize(grouped, mean(metric, na.rm = TRUE))[,2][,2]
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+class(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+as.data.frame(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+as.data.frame(summarize(grouped, mean(metric, na.rm = TRUE)))[,2]
+summarize(grouped, mean(metric, na.rm = TRUE)))[,2]
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+(summarize(grouped, mean(metric, na.rm = TRUE)))[,2]
+class(summarize(grouped, mean(metric, na.rm = TRUE)))[,2]
+class(summarize(grouped, mean(metric, na.rm = TRUE)))[,2])
+class(summarize(grouped, mean(metric, na.rm = TRUE))))[,2]
+summarize(grouped, mean(metric, na.rm = TRUE))
+summarize(grouped, mean(metric, na.rm = TRUE))[,2]
+class(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+as.data.frame(summarize(grouped, mean(metric, na.rm = TRUE))[,2])
+as.data.frame(summarize(grouped, mean(metric, na.rm = TRUE)))[,2]
+load_all()
+?summaries
+results <- reduceRandomizations(rawResults)#
+#
+test <- summaries(results$frequency, concat.by="richness")
+test
+?errorChecker
+results <- reduceRandomizations(rawResults)#
+#
+#calculate the observed metrics from the input CDM#
+observed <- observedMetrics(tree, cdm)#
+#
+test <- errorChecker(observed, results, "richness")
+test
+test <- errorChecker(observed, results, "richness")
+str(test)
+test
+summarized <- lapply(reduced, summaries, concat.by="richness")
+summarized <- lapply(results, summaries, concat.by="richness")
+summarized
+merged <- lapply(summarized, merge, observed)
+merged
+arenaTest(merged$richness, "richness")
+temp <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], "richness"))
+temp
+?errorChecker
+system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=8, cores=8, cluster=TRUE, iterations=1, #
+	prefix="one_cluster"))
+load_all()
+system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=8, cores=8, cluster=TRUE, iterations=1, #
+	prefix="one_cluster"))
+multiLinker
+metricsNnulls
+system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=8, cores=8, cluster=F, iterations=1, #
+	prefix="one_cluster"))
+system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="richness", randomizations=8, cores=8, cluster=T, iterations=1, #
+	prefix="one_cluster"))
+load_all()
+document()

@@ -3,7 +3,7 @@
 #' This function wraps a number of wrapper functions into one big metric + null 
 #' tester function. Only a single test is performed, with results saved into memory.
 #'
-#' @param tree Phylo object
+#' @param no.taxa The desired number of species in the input phylogeny
 #' @param arena.length A numeric, specifying the length of a single side of the arena
 #' @param mean.log.individuals Mean log of abundance vector from which species abundances
 #' will be drawn
@@ -44,18 +44,17 @@
 #' library(geiger)
 #' library(picante)
 #'
-#' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
-#'
-#' system.time(test <- linker(tree=tree, arena.length=300, mean.log.individuals=2, 
+#' system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
 #'	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness", 
 #'	randomizations=3, cores=3, cluster=FALSE))
 
-linker <- function(tree, arena.length, mean.log.individuals, length.parameter, 
+linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
 	quadrat.length, concat.by, randomizations, cores, cluster=FALSE)
 {
+	#simulate tree with birth-death process
+	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=no.taxa)
 	#prep the data for spatial simulations
 	prepped <- prepSimulations(tree, arena.length, mean.log.individuals, length.parameter, 
 		sd.parameter, max.distance, proportion.killed, competition.iterations)

@@ -3,13 +3,13 @@
 \alias{multiLinker}
 \title{Run multiple simulations and calculations to test metric + null performance}
 \usage{
-multiLinker(tree, arena.length, mean.log.individuals, length.parameter,
+multiLinker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
   no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster,
   iterations, prefix)
 }
 \arguments{
-\item{tree}{Phylo object}
+\item{no.taxa}{The desired number of species in the input phylogeny}
 
 \item{arena.length}{A numeric, specifying the length of a single side of the arena}
 
@@ -72,10 +72,7 @@ library(dplyr)
 library(geiger)
 library(picante)
 
-#simulate tree with birth-death process
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
-
-system.time(multiLinker(tree=tree, arena.length=300, mean.log.individuals=3.2,
+system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,
 	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness",
 	randomizations=3, cores=8, cluster=FALSE, iterations=3, prefix="test"))

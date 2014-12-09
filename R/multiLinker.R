@@ -2,7 +2,7 @@
 #'
 #' This function runs multiple iterations of the linker function, saving results to file.
 #'
-#' @param tree Phylo object
+#' @param no.taxa The desired number of species in the input phylogeny
 #' @param arena.length A numeric, specifying the length of a single side of the arena
 #' @param mean.log.individuals Mean log of abundance vector from which species abundances
 #' will be drawn
@@ -50,15 +50,12 @@
 #' library(geiger)
 #' library(picante)
 #'
-#' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
-#'
-#' system.time(multiLinker(tree=tree, arena.length=300, mean.log.individuals=3.2, 
+#' system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3, 
 #'	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness", 
 #'	randomizations=3, cores=8, cluster=FALSE, iterations=3, prefix="test"))
 
-multiLinker <- function(tree, arena.length, mean.log.individuals, length.parameter, 
+multiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
 	quadrat.length, concat.by, randomizations, cores, cluster, iterations, prefix)
 {
@@ -73,7 +70,7 @@ multiLinker <- function(tree, arena.length, mean.log.individuals, length.paramet
 		{
 			filename <- paste(prefix, "_", "iteration", i, "by_", concat.by, ".RDS", sep="")
 		}
-		temp <- linker(tree, arena.length, mean.log.individuals, length.parameter, 
+		temp <- linker(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 
 			no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster)
 		saveRDS(temp, file=filename)
