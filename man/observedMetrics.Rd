@@ -3,13 +3,17 @@
 \alias{observedMetrics}
 \title{Wrapper for prepping and calculating observed metrics}
 \usage{
-observedMetrics(tree, picante.cdm)
+observedMetrics(tree, picante.cdm, metrics)
 }
 \arguments{
 \item{tree}{Phylo object}
 
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
 species as columns}
+
+\item{metrics}{Optional list of named metric functions to use. These
+must be defined in the defineMetrics function. If invoked, this option will likely
+be used to run a subset of the defined metrics.}
 }
 \value{
 A data frame with the species richness and calculated phylogenetic community
@@ -33,11 +37,17 @@ prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
 length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 competition.iterations=3)
 
-positions <- competitionArena(prepped)
+positions <- randomArena(prepped)
 
 tempCDM <- makeCDM(positions, 15, 30)
 
 results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm)
+
+#example of how to pass specific metrics to be calculated (always use at least
+#richness)
+
+results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm,
+metrics=list("richness"=my_richness,"PSV"=my_psv))
 }
 \references{
 Miller, Trisos and Farine.

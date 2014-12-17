@@ -3,7 +3,7 @@
 \alias{quadratTest}
 \title{Calculate if single, observed metrics deviate beyond expectations}
 \usage{
-quadratTest(results.table, concat.by)
+quadratTest(results.table, concat.by, metrics)
 }
 \arguments{
 \item{results.table}{Data frame of observed metrics with expected mean, SD and CI bound
@@ -13,6 +13,10 @@ in. See example}
 former, observed scores are compared to all randomized scores where the quadrat had the
 corresponding richness. If the latter, observed scores (e.g. those from quadrat 1) are
 compared to all randomized quadrat 1 scores.}
+
+\item{metrics}{Optional list of named metric functions to use. These
+must be defined in the defineMetrics function. If invoked, this option will likely
+be used to run a subset of the defined metrics.}
 }
 \value{
 A data frame of 0s, 1s, and 2s.

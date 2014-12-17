@@ -8,6 +8,9 @@
 #' @param reduced.randomizations List of random, reduced results, such as those from
 #' reduceRandomizations()
 #' @param concat.by Whether to concatenate the randomizations by richness or quadrat
+#' @param metrics Optional list of named metric functions to use. These
+#' must be defined in the defineMetrics function. If invoked, this option will likely
+#' be used to run a subset of the defined metrics.
 #' 
 #' @details This function wraps a number of smaller functions into a useful type I and II
 #' error checker. It takes a reduced list of randomizations such as those reduced from
@@ -50,8 +53,15 @@
 #'
 #' test <- errorChecker(observed, results, "richness")
 
-errorChecker <- function(observed, reduced.randomizations, concat.by)
+errorChecker <- function(observed, reduced.randomizations, concat.by, metrics)
 {
+	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
+	#which case all length of all metrics will be used
+	if(missing(metrics))
+	{
+		metrics <- NULL
+	}
+
 	summarized <- lapply(reduced.randomizations, summaries, concat.by)
 	#this is an important command. depending on what you concatenated by, there should be
 	#only a single matching column betweeen the tables (either richness or quadrat), and
@@ -61,13 +71,14 @@ errorChecker <- function(observed, reduced.randomizations, concat.by)
 	#this will return a list of data frames, one for each null model, where the first col
 	#is whatever we summarized on, and each successive column is the SES of the observed
 	#score based on the randomizations
-	sesResults <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], concat.by))
+	sesResults <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], concat.by,
+		metrics))
 	names(sesResults) <- names(merged)
 	#this will return a list of data frames, one for each null model, where the first col
 	#is whatever we summarized on, and each successive column is an indicator of whether
 	#the observed score in a quadrat was bigger or lesser
 	quadratResults <- lapply(1:length(merged), function(x) quadratTest(merged[[x]], 
-		concat.by))
+		concat.by, metrics))
 	names(quadratResults) <- names(merged)
 	results <- list("ses"=sesResults, "quadrat"=quadratResults)
 	results

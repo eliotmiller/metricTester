@@ -24,6 +24,15 @@
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
+#' @param simulations Optional list of named spatial simulation functions to use. These
+#' must be defined in the defineSimulations function. If invoked, this option will likely
+#' be used to run a subset of the defined spatial simulations.
+#' @param nulls Optional list of named null model functions to use. These
+#' must be defined in the defineNulls function. If invoked, this option will likely
+#' be used to run a subset of the defined null models.
+#' @param metrics Optional list of named metric functions to use. These
+#' must be defined in the defineMetrics function. If invoked, this option will likely
+#' be used to run a subset of the defined metrics.
 #' 
 #' @details This function wraps a number of other wrapper functions into
 #' one big metric + null performance tester function. Only a single test is performed, 
@@ -51,26 +60,42 @@
 
 linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, cluster=FALSE)
+	quadrat.length, concat.by, randomizations, cores, cluster=FALSE, simulations, nulls,
+	metrics)
 {
+	#set these things to NULL if they are not passed in, meaning that all defined sims,
+	#nulls and metrics will be calculated
+	if(missing(simulations))
+	{
+		simulations <- NULL
+	}
+	if(missing(nulls))
+	{
+		nulls <- NULL
+	}
+	if(missing(metrics))
+	{
+		metrics <- NULL
+	}
+
 	#simulate tree with birth-death process
 	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=no.taxa)
 	#prep the data for spatial simulations
 	prepped <- prepSimulations(tree, arena.length, mean.log.individuals, length.parameter, 
 		sd.parameter, max.distance, proportion.killed, competition.iterations)
 	#run the spatial simulations
-	arenas <- runSimulations(prepped)
+	arenas <- runSimulations(prepped, simulations)
 	#derive CDMs. quadrats are placed in the same places across all spatial simulations
 	cdms <- multiCDM(arenas, no.quadrats, quadrat.length)
 	#calculate observed metrics for all three spatial simulations
-	observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x))
+	observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x, metrics))
 	#randomize all observed CDMs the desired number of times. this will generate a list of
 	#lists of data frames. first level of list is for each spatial simulation (e.g. 3 if
 	#there is random, habitat filtering and competitive exclusion). second level is for
 	#randomizations, one for each. third level is data frames, one per null model
 	allRandomizations <- lapply(1:length(cdms), function(x) metricsNnulls(tree=tree, 
 		picante.cdm=cdms[[x]], regional.abundance=arenas[[x]]$regional.abundance,
-		cores=cores, cluster, randomizations=randomizations))
+		cores=cores, cluster, randomizations=randomizations, metrics, nulls=nulls))
 	#reduce the randomizations to a list of lists of (first order of lists is for each
 	#spatial simulation) data frames
 	reduced <- lapply(allRandomizations, reduceRandomizations)
@@ -81,7 +106,7 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 	#significance results
 	results <- lapply(1:length(reduced), function(x) 
 		errorChecker(observed=observed[[x]], reduced.randomizations=reduced[[x]],
-		concat.by=concat.by))
+		concat.by=concat.by, metrics))
 	names(results) <- names(arenas)
 	results
 }

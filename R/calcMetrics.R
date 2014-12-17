@@ -4,8 +4,9 @@
 #' metrics of interest.
 #'
 #' @param metrics.input metrics.input object
-#' @param metrics Untested. It should be possible to provided a list of named metrics
-#' here, rather than needing to define them in defineNulls. 
+#' @param metrics Optional list of named metric functions to use. These
+#' must be defined in the defineMetrics function. If invoked, this option will likely
+#' be used to run a subset of the defined metrics.
 #' 
 #' @details Currently we are calculating 19 phylogenetic community structure metrics.
 #' This function first confirms that the input is of class metrics.input and, if so, then
@@ -36,15 +37,22 @@
 #'
 #' results <- calcMetrics(prepped)
 
-calcMetrics <- function(metrics.input, metrics=NULL)
+calcMetrics <- function(metrics.input, metrics)
 {
 	if(!inherits(metrics.input, "metrics.input"))
 	{
 		stop("Input needs to be of class 'metrics.input'")
 	}
+	
+	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
+	#which case all metrics will be calculated
+	if(missing(metrics))
+	{
+		metrics <- NULL
+	}
 		
 	metrics <- checkMetrics(metrics)
-		
+	
 	tempResults <- lapply(metrics, function(x) x(metrics.input))
 	
 	#convert the list to a data frame

@@ -4,7 +4,7 @@
 \title{Parallelized function that calculates metrics on randomized matrices}
 \usage{
 metricsNnulls(tree, picante.cdm, regional.abundance = NULL,
-  randomizations = 2, cores = 1, cluster = FALSE)
+  randomizations = 2, cores = 1, cluster = FALSE, nulls, metrics)
 }
 \arguments{
 \item{tree}{Phylo object}
@@ -25,6 +25,14 @@ specify the desired number of cores to utilize.}
 computer. Invokes multicore processing on a single computer if FALSE, otherwise
 parallel processing on cluster. However, currently causing errors due to namespace
 issues with doParallel vs doMC.}
+
+\item{nulls}{Optional list of named null model functions to use. These
+must be defined in the defineNulls function. If invoked, this option will likely
+be used to run a subset of the defined null models.}
+
+\item{metrics}{Optional list of named metric functions to use. These
+must be defined in the defineMetrics function. If invoked, this option will likely
+be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of vectors. The first level has as many elements as there

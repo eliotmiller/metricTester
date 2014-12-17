@@ -10,6 +10,9 @@
 #' former, observed scores are compared to all randomized scores where the quadrat had the
 #' corresponding richness. If the latter, observed scores (e.g. those from quadrat 1) are
 #' compared to all randomized quadrat 1 scores.
+#' @param metrics Optional list of named metric functions to use. These
+#' must be defined in the defineMetrics function. If invoked, this option will likely
+#' be used to run a subset of the defined metrics.
 #' 
 #' @details Given a table of results, where means, SDs, and CIs are bound to the observed
 #' scores at the corresponding richness or quadrat, this function returns 0, 1, or 2,
@@ -59,11 +62,19 @@
 #' #do the same as above but across all null models
 #' temp <- lapply(1:length(merged), function(x) quadratTest(merged[[x]], "richness"))
 
-quadratTest <- function(results.table, concat.by)
+quadratTest <- function(results.table, concat.by, metrics)
 {
-	#take advantage of the defineMetrics function to find the name of all metrics
+	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
+	#which case all length of all metrics will be used
+	if(missing(metrics))
+	{
+		metrics <- NULL
+	}
+		
+	#take advantage of the checkMetrics function to find the name of all metrics
 	#get rid of the "richness" metric name
-	metricNames <- names(defineMetrics())[2:length(names(defineMetrics()))]
+	metricNames <- names(checkMetrics(x=metrics))[2:length(names(checkMetrics(x=metrics)))]
+
 	significance <- list()
 	for(i in 1:length(metricNames))
 	{

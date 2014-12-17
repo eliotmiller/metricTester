@@ -3,7 +3,7 @@
 \alias{errorChecker}
 \title{Wrapper for summarizing randomizations and testing significance of observed metrics}
 \usage{
-errorChecker(observed, reduced.randomizations, concat.by)
+errorChecker(observed, reduced.randomizations, concat.by, metrics)
 }
 \arguments{
 \item{observed}{Data frame of observed metric scores, such as from observedMetrics()}
@@ -12,6 +12,10 @@ errorChecker(observed, reduced.randomizations, concat.by)
 reduceRandomizations()}
 
 \item{concat.by}{Whether to concatenate the randomizations by richness or quadrat}
+
+\item{metrics}{Optional list of named metric functions to use. These
+must be defined in the defineMetrics function. If invoked, this option will likely
+be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of data frames.

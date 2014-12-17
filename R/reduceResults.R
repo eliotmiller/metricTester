@@ -13,6 +13,8 @@
 #' where each data frame contains all the results from a given null model from the input
 #' randomizations.list.
 #'
+#' @return A list of data frames. 
+#'
 #' @export
 #'
 #' @references Miller, Trisos and Farine.

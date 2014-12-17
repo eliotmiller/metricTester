@@ -30,6 +30,15 @@
 #' number of randomizations of the original CDMs. 
 #' @param prefix Optional character vector to affix to the output RData file names, e.g.
 #' "test1". 
+#' @param simulations Optional list of named spatial simulation functions to use. These
+#' must be defined in the defineSimulations function. If invoked, this option will likely
+#' be used to run a subset of the defined spatial simulations.
+#' @param nulls Optional list of named null model functions to use. These
+#' must be defined in the defineNulls function. If invoked, this option will likely
+#' be used to run a subset of the defined null models.
+#' @param metrics Optional list of named metric functions to use. These
+#' must be defined in the defineMetrics function. If invoked, this option will likely
+#' be used to run a subset of the defined metrics.
 #' 
 #' @details This function wraps a number of other wrapper functions into
 #' one big metric + null performance tester function. Only a single test is performed, 
@@ -57,7 +66,8 @@
 
 multiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, cluster, iterations, prefix)
+	quadrat.length, concat.by, randomizations, cores, cluster, iterations, prefix,
+	simulations, nulls, metrics)
 {
 	#create a simple file name, specify whether concatenating by quadrat or richness
 	for(i in 1:iterations)
@@ -72,7 +82,8 @@ multiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.para
 		}
 		temp <- linker(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 
-			no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster)
+			no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster,
+			simulations, nulls, metrics)
 		saveRDS(temp, file=filename)
 	}
 	return("Files saved to working directory")

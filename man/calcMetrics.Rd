@@ -3,13 +3,14 @@
 \alias{calcMetrics}
 \title{Calculate phylogenetic community structure metrics}
 \usage{
-calcMetrics(metrics.input, metrics = NULL)
+calcMetrics(metrics.input, metrics)
 }
 \arguments{
 \item{metrics.input}{metrics.input object}
 
-\item{metrics}{Untested. It should be possible to provided a list of named metrics
-here, rather than needing to define them in defineNulls.}
+\item{metrics}{Optional list of named metric functions to use. These
+must be defined in the defineMetrics function. If invoked, this option will likely
+be used to run a subset of the defined metrics.}
 }
 \value{
 A data frame with the calculated metrics and the associated species richness

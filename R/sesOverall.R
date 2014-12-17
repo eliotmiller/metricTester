@@ -1,7 +1,25 @@
-#example
-#results <- readIn()
-#summ <- reduceResults(results)
-#test <- sesOverall(summ$ses)
+#' Overall per simulation-null-metric SES test
+#'
+#' This function provides one of many ways of summarizing and considering simulation
+#' results.
+#'
+#' @param simulation.list A summarized results list such as one output from
+#' reduceResults(). See examples.
+#'
+#' @details This function provides one way of summarizing and considering simulation
+#' results. It takes as input a vector of all standardized effect sizes for all quadrats
+#' from a given simulation-null-metric combination, and calculates the mean of the vector
+#' and whether it differs significantly from a mean of zero. 
+#'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' #not run
+#' #results <- readIn()
+#' #summ <- reduceResults(results)
+#' #test <- sesOverall(summ$ses)
 
 sesOverall <- function(simulation.list)
 {

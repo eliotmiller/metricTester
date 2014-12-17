@@ -6,7 +6,7 @@
 linker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
   no.quadrats, quadrat.length, concat.by, randomizations, cores,
-  cluster = FALSE)
+  cluster = FALSE, simulations, nulls, metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}
@@ -42,6 +42,18 @@ simulations}
 used to compare the significance of the observed metric scores.}
 
 \item{cores}{The number of cores to be used for parallel processing.}
+
+\item{simulations}{Optional list of named spatial simulation functions to use. These
+must be defined in the defineSimulations function. If invoked, this option will likely
+be used to run a subset of the defined spatial simulations.}
+
+\item{nulls}{Optional list of named null model functions to use. These
+must be defined in the defineNulls function. If invoked, this option will likely
+be used to run a subset of the defined null models.}
+
+\item{metrics}{Optional list of named metric functions to use. These
+must be defined in the defineMetrics function. If invoked, this option will likely
+be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of data frames. The first level of the output has one element
