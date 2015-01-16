@@ -1,13 +1,13 @@
-#' Apply wrapper for the tWrap function
+#' Apply wrapper for the wilcoWrap function
 #'
-#' Applies tWrap over a dataframe of metric values, excluding richness.
+#' Applies wilcoWrap over a dataframe of metric values, excluding richness.
 #'
 #' @param dataframe A dataframe of numeric values
+#' @param alternative Optional alternative hypothesis. Default is "two-sided". Use 
+#' "greater" for competition; "less" for habitat filtering.
 #'
-#' @details Applies tWrap over a dataframe of metric values, excluding richness, which is
-#' considered a metric in some previous functions. Note that there is currently no easy
-#' way to pass arguments (like changing mu or whether the test is two- or one-tailed) down
-#' to tWrap.
+#' @details Applies wilcoWrap over a dataframe of metric values, excluding richness, which
+#' is considered a metric in some previous functions. 
 #'
 #' @return A dataframe, with one row for each metric. The first column is the mean of the
 #' vector of metric values, the second is the p.value of whether it differs from mu=0,
@@ -23,14 +23,14 @@
 #' ex <- data.frame(a, b)
 #' tWrapApply(ex)
 
-tWrapApply <- function(dataframe)
+wilcoWrapApply <- function(dataframe, alternative)
 {
 	#exclude "richness" and "quadrat" columns
 	exclude <- c("richness", "quadrat")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
 
-	#apply tWrap over a data frame of metric SES scores for a given null and spatial sim
-	output <- apply(temp, 2, tWrap)
+	#apply wilcoWrap over data frame of metric SES scores for a given null and spatial sim
+	output <- apply(temp, 2, wilcoWrap, mu=0, alternative)
 	
 	#transform the table, convert to a data frame, save the row names as an actual column,
 	#exclude "richness" as a metric. output a data frame with three columns

@@ -32,5 +32,7 @@ readIn <- function(working.directory)
 	#save each rds file into a different element of the output list
 	results <- lapply(files, readRDS)
 	
+	names(results) <- paste("iteration", 1:length(results), sep="")
+	
 	return(results)
 }

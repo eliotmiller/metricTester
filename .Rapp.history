@@ -1,254 +1,3 @@
-head(tempResults)
-head(samples)
-tail(samples)
-test <- rnorm(1000)
-hist(test)
-head(test)
-test2 <- sample(test, 5)
-mean(test2)
-test2 <- sample(test, 5)
-mean(test2)
-test2 <- sample(test, 5)
-mean(test2)
-test2 <- sample(test, 5)
-mean(test2)
-test2 <- sample(test, 5)
-mean(test2)
-test2 <- sample(test, 1000)
-mean(test2)
-library(phytools)
-?phylomorphospace
-?fastAnc
-library(metricTester)
-?summaries
-library(dplyr)#
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-rawResults <- metricsNnulls(tree, cdm)#
-#
-results <- reduceRandomizations(rawResults)
-log(1)
-log(0.5)
-e
-ln(e)
-library(metricTester)
-?summaries
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-rawResults <- metricsNnulls(tree, cdm)
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-rawResults <- metricsNnulls(tree, cdm)
-str(rawResults,2)
-packageVersion("geiger")
-packageVersion("ape")
-packageVersion("phylobase")
-install_github("ecoPDcorr",username="eliotmiller")
-packageVersion("phylobase")
-install.packages("phylobase")
-packageVersion("phylobase")
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-rawResults <- metricsNnulls(tree, cdm)
-?getNode
-ls()
-test
-library(metricTester)
-metricsNnulls
-?metricsNnulls
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1)
-packageVersion("phylobase")
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1)
-install.packages("phylobase")
-library(metricTester)
-library(ecoPD)
-library(ecoPDcorr)
-library(metricTester)
-?simulateComm
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-cdm
-ecoPD.cdm <- suppressWarnings(phylo4com(tree, t(cdm)))
-ecoPD.cdm
-?getNode
-ls()
-library(phylobase)
-packageVersion("phylobase")
-?getNode
-data(geospiza)#
-  nodeLabels(geospiza) <- LETTERS[1:nNodes(geospiza)]#
-  plot(as(geospiza, "phylo4"), show.node.label=TRUE)#
-  getNode(geospiza, 18)
-getNode(geospiza, "D")
-install.packages("phylobase")
-?getNode
-data(geospiza)#
-  nodeLabels(geospiza) <- LETTERS[1:nNodes(geospiza)]#
-  plot(as(geospiza, "phylo4"), show.node.label=TRUE)#
-  getNode(geospiza, 18)
-library(phylobase)
-data(geospiza)#
-  nodeLabels(geospiza) <- LETTERS[1:nNodes(geospiza)]#
-  plot(as(geospiza, "phylo4"), show.node.label=TRUE)#
-  getNode(geospiza, 18)
-install.packages("ecoPD")
-library(ecoPDcorr)
-?pae
-pae(weeds)
-packageVersion(phylobase)
-?phylo4com
-data(weeds.data)#
-  data(weeds.tree)#
-  phylo4com(weeds.tree, weeds.data$cover, weeds.data$plot,#
-    weeds.data$taxa)
-silly <- phylo4com(weeds.tree, weeds.data$cover, weeds.data$plot,#
-+     weeds.data$taxa)
-phylo4com(weeds.tree, weeds.data$cover, weeds.data$plot,#
-    weeds.data$taxa)
-phylo4com(weeds.tree, weeds.data$cover, weeds.data$plot,#
-    weeds.data$taxa)->st
-pae(st)
-library(metricTester)
-?metricsNnulls
-metricsNnulls
-?prepDat
-?prepData
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
-#
-prepped <- prepData(tree, cdm)
-prepped
-metricsNnulls
-ls()
-prepped
-metricsNnulls
-calcMetrics(prepped)
-warnings()
-calcMetrics
-debug(calcMetrics)
-calcMetrics(prepped)
-?checkMetrics
-checkMetrics(defineMetrics())
-debug(calcMetrics)
-calcMetrics(prepped)
-getNode
-ecoPDcorr
-?pae
-pae(weeds)
-metrics <- checkMetrics(metrics)
-cdm
-prepped <- prepData(tree, cdm)
-prepped
-results <- calcMetrics(prepped)
-?debug
-undebug(calcMetrics)
-checkMetrics()
-checkMetrics(x)
-checkMetrics(metrics)
-checkMetrics(NULL)
-prepped
-metricTester::naw_mpd(prepped)
-metricTester:::naw_mpd(prepped)
-metricTester:::Haed(prepped)
-metricTester:::my_PD_Cadotte(prepped)
-metricTester:::Eed(prepped)
-warnings()
-metricTester:::Hed(prepped)
-?eed
-aed(weeds)
-haed(weeds)
-ls
-ls()
-class(st)
-pae(st)
-haed(st)
-metricTester:::Hed(prepped)
-hed(st)
-hed
-library(ecoPDcorr)
-?hed
-hed(weeds)
-library(metricTester)
-packageVersion("phylobase")
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-system.time(multiLinkerCL(tree=tree, arena.length=316, mean.log.individuals=4, #
- 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
-	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
-	concat.by="richness", randomizations=1000, cores=8, iterations=10, prefix="test2"))
-library(devtools)
-install_github("metricTester", username="eliotmiller")
-library(metricTester)#
-#
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=100)#
-#
-system.time(multiLinker(tree=tree, arena.length=316, mean.log.individuals=4, #
- 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
-	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
-	concat.by="richness", randomizations=1000, cores=8, iterations=10, prefix="test2"))
-library(ecoPDcorr)
-library(devtools)
-install_github("ecoPDcorr", username="eliotmiller")
-library(ecoPDcorr)
-packageVersion("phylobase")
-install.packages("phylobase")
-library(ecoPDcorr)
-library(ecoPDcorr)#
-#
-hed(weeds)
-pae(weeds)
-iac(weeds)
-haed(weeds)
-eaed(weeds)
-eed(weeds)
-aed
-aed(weeds)
-hed(weeds)
-eed(weeds)
 aed(weeds)
 pae(weeds)
 iac(weeds)
@@ -387,9 +136,208 @@ function2(arg2="test")
 function2(arg2="test", arg1=test2)
 function2(arg2="test", arg1="test3")
 library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+multiLinker(no.taxa=100, arena.length=316, mean.log.individuals=3, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="quadrat", randomizations=3, cores=3, cluster=FALSE, iterations=1,#
+	prefix="lewis5",#
+	metrics=list("richness"=my_richness, "NAW_MPD"=naw_mpd, "inter_MPD"=inter_mpd, #
+	"intra_MPD"=intra_mpd, "complete_MPD"=complete_mpd, "NAW_MNTD"=naw_mntd,#
+	"AW_MNTD"=aw_mntd, "PSE"=my_pse, "PAE"=PAE, "IAC"=IAC, "Haed"=Haed, "Eaed"=Eaed,#
+	"Eed"=Eed, "Hed"=Hed, "PD"=my_PD, "PD_Cadotte"=my_PD_Cadotte),#
+	nulls=list("twoX"=my_2x, "threeX"=my_3x, "oneS"=my_1s,#
+	"regional"=my_regional, "richness"=my_richnessNull, "frequency"=my_frequency,#
+	"independent_swap"=my_IS, "trial_swap"=my_TS))
+my_richness
+metricTester::my_richness
+metricTester:::my_richness
+multiLinker(no.taxa=100, arena.length=316, mean.log.individuals=3, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="quadrat", randomizations=3, cores=3, cluster=FALSE, iterations=1,#
+	prefix="lewis5",#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS))
+10/5
+191+14+40
+316^2
+316^2/10000
+i <- "input"#
+j <- "output"#
+cat(i,"\n",j)
+i <- "input"#
+j <- "output"#
+cat(i,j)
+i <- "input"#
+j <- "output"#
+c(i,j)
+args <- commandArgs(TRUE)
+args
+library(devtools)
+install_github("addTaxa", username="eliotmiller")
+q()
+library(addTaxa)
+?randomlyAddTaxa
+frame1 <- matrix(ncol=10, nrow=10, rnorm(100))
+frame1
+frame1 <- as.data.frame(frame1)
+frame1
+frames
+frames <- list("frame1" = frame1, "frame2" =frame1, "frame3" = frame1)
+frames
+lapply(frames, mean)
+mean(frame1)
+sum(frame1)
+lapply(frames, sum)
+sum(frames$frame1[,1])
+simple
+col
+column
+df
+d.frame
+simple <- function(d.frame, column)#
+{#
+	temp <- d.frame[,column]#
+	output <- sum(temp)#
+	output#
+}
+lapply(frames, simple)
+lapply(frames, simple, 1)
+poss <- c(1,4,5)
+lapply(frames, simple, poss)
+sum(frame1[,1])
+sum(frame1[,4])
+sum(frame1[,6])
+sum(frame1[,5])
+0.1772752+4.39506+3.108849
+lapply(frames, function(x) simple(frames, poss[x]))
+lapply(frames, function(x) simple(poss[x]))
+lapply(frames, function(x) poss[x])
+poss
+lapply(frames, function(x) as.list(poss[x]))
+lapply(frames, function(x)) poss[x]
+lapply(frames, function(x) poss[x])
+lapply(frames, simple)
+sum(frame1)
+poss <- as.list(poss)
+poss
+lapply(frames, simple, poss)
+lapply(frames, function(x) simple(frames, poss[[x]]))
+lapply(frames, function(x) simple(frames[[x]], poss[[x]]))
+lapply(frames, function(x) simple(column=poss[[x]]))
+lapply(frames, function(x) simple(d.frame=frames, column=poss[[x]]))
+lapply(frames, function(x) simple(d.frame=frames[[x]], column=poss[[x]]))
+24*60
+1440*0.056
+1440*0.0093
+library(geiger)
+?bd.ms
+plot(1:10)
+quartz(height=100, width=100)
+quartz(height=20, width=20)
+plot(1:10)
+quartz(height=1, width=1)
+plot(1:10)
+quartz(height=3, width=3)
+plot(1:10)
+jpeg(filename="small.jpg", quality=10)
+dev.off()
+jpeg(filename="small.jpg", quality=10)
+plot(1:10)
+dev.off()
+jpeg(filename="small.jpg", quality=100)
+plot(1:10)
+dev.off()
+?jpeg
+52365/60
+872/60
+6.78*500
+32115.369/60
+535/60
+.025*14.5
+.42*22
+.15*22
+.06*22
+.04*22
+.04*44
+.05*44
+.07*22
+11*0.14
+17*7
+103+210
+1.54*500
+333+279
+(302+335)/200
+(302+335)/2000
+Sys.time()
+gsub(" ", "_", Sys.time())
+1310-4*125
+810-250
+library(devtools)
 load_all()
-devtools::check()
-Sys.setenv(PATH=paste(Sys.getenv("PATH"),"/usr/texbin",sep=":"))
-devtools::check()
-document()
-devtools::check()
+results <- readIn()
+str(results[[62]])
+str(results[[62]],2)
+str(results[[62]][[2]],2)
+lapply(results[[62]][[2]], dim)
+lapply(results[[62]][[2]]$ses, dim)
+apply(lapply(results[[62]][[2]]$ses, dim), 1, lengthNonZeros)
+temp <- lapply(results[[62]][[2]]$ses, dim)
+temp
+unlist(temp)
+as.data.frame(temp)
+apply(as.data.frame(temp), 2, lengthNonZeros)
+results[[62]]$random$ses$richness$regional
+str(results[[62]],2)
+results[[62]]$random$ses$regional
+results[[62]]$filtering$ses$regional
+dim(results[[62]]$filtering$ses$regional)
+dim(results[[62]]$filtering$ses$regional)==0
+dim(results[[62]]$random$ses$regional)==0
+sum(dim(results[[62]]$filtering$ses$regional)==0)
+lapply(results[[62]], length)
+empty
+str(results[[62]],2)
+length(results[[62]][[1]])
+length(results[[62]][[1]]$ses)
+length(results[[62]][[1]]$sd)
+length(results[[62]][[1]]$ses)
+length(results[[62]])
+empty <- matrix(ncol=2, nrow=length(results[[62]]) * #
+		length(results[[62]][[1]]$ses)
+)
+empty
+dims
+dim(results[[62]][[1]]$ses[[1]])
+class(dim(results[[62]][[1]]$ses[[1]]))
+test <- matrix(ncol=2, nrow=1)
+test
+test[1,] <- dim(results[[62]][[1]]$ses[[1]])
+test
+dim(results[[62]][[2]]$ses$regional)
+test <- matrix(ncol=2, nrow=1)
+test[1,] <- dim(results[[62]][[2]]$ses$regional)
+test
+test <- matrix(ncol=2, nrow=1)
+test[1,1:2] <- dim(results[[62]][[2]]$ses$regional)
+test
+load_all()
+failed(results[[62]])
+load_all()
+failed(results[[62]])
+load_all()
+failed(results[[62]])
+load_all()
+load_all()
+failed(results[[62]])
+load_all()
+failed(results[[62]])
+load_all()
+failed(results[[62]])
