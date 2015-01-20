@@ -1,17 +1,14 @@
-#' Reduce randomized results to a manageable list of dataframes
+#' Reduce results from multiLinker into a manageable format
 #'
-#' The metricsNnulls function creates lists of lists of dataframes. This function will
-#' combine the dataframes from each null model into a single data frame. The output is a
-#' more manageable list of dataframes. 
+#' Calling multiLinker creates .RDS files, one per iteration. This function will
+#' combine these results into a more manageable format.
 #'
-#' @param randomizations.list The results of a call to metricsNnulls()
+#' @param results.list The results of a call to readIn()
 #'
-#' @details Given a list of lists of dataframes, such as those that come from a call to
-#' metricsNnulls, where the first level of the list relates to a given randomization, and
-#' each second level is a data frame containing the calculated metrics after randomization
-#' according to a given null model, reduces the results to a simpler list of data frames,
-#' where each data frame contains all the results from a given null model from the input
-#' randomizations.list.
+#' @details Given a list of results readIn() from multiLinker, this function will reduce
+#' those results into a manageable format like that expected for calls to quadratOverall
+#' and sesOverall. Currently has not been tested on the results from concatenating by
+#' both quadrat and richness, will likely need to be updated.
 #'
 #' @return A list of data frames. 
 #'

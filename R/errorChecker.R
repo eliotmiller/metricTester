@@ -7,7 +7,7 @@
 #' @param observed Data frame of observed metric scores, such as from observedMetrics()
 #' @param reduced.randomizations List of random, reduced results, such as those from
 #' reduceRandomizations()
-#' @param concat.by Whether to concatenate the randomizations by richness or quadrat
+#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
 #' @param metrics Optional list of named metric functions to use. These
 #' must be defined in the defineMetrics function. If invoked, this option will likely
 #' be used to run a subset of the defined metrics.
@@ -62,24 +62,69 @@ errorChecker <- function(observed, reduced.randomizations, concat.by, metrics)
 		metrics <- NULL
 	}
 
+	#lapply the summaries function over the reduced randomizations
 	summarized <- lapply(reduced.randomizations, summaries, concat.by)
+	
 	#this is an important command. depending on what you concatenated by, there should be
 	#only a single matching column betweeen the tables (either richness or quadrat), and
 	#so it should merge on that. there are not currently any checks for missing values
 	#e.g. with regional null, so need to build something in soon
-	merged <- lapply(summarized, merge, observed)
+	if(concat.by == "richness" | concat.by== "quadrat")
+	{
+		merged <- lapply(summarized, merge, observed)
+	}
+	else if(concat.by == "both")
+	{
+		toFeed <- names(summarized)
+		merged <- lapply(1:length(toFeed), function(x) 
+			list("richness"=merge(summarized[[x]]$richness, observed),
+			"quadrat"=merge(summarized[[x]]$quadrat, observed)))
+		names(merged) <- toFeed
+	}
+
 	#this will return a list of data frames, one for each null model, where the first col
 	#is whatever we summarized on, and each successive column is the SES of the observed
 	#score based on the randomizations
-	sesResults <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], concat.by,
-		metrics))
+	if(concat.by == "richness" | concat.by== "quadrat")
+	{
+		sesResults <- lapply(1:length(merged), function(x) arenaTest(merged[[x]],
+			concat.by, metrics))
+	}
+	
+	#this will return a list of lists of data frames. each of first element of lists
+	#corresponds to a null model. then within that there is one data frame for richness
+	#and one for quadrat
+	else if(concat.by == "both")
+	{
+		sesResults <- lapply(1:length(toFeed), function(x) 
+			list("richness"=arenaTest(merged[[x]]$richness, concat.by="richness",
+			metrics), "quadrat"=arenaTest(merged[[x]]$quadrat, concat.by="quadrat", 
+			metrics)))
+	}
+	#set the names right (works for either both or rich/quad)
 	names(sesResults) <- names(merged)
+	
 	#this will return a list of data frames, one for each null model, where the first col
 	#is whatever we summarized on, and each successive column is an indicator of whether
 	#the observed score in a quadrat was bigger or lesser
-	quadratResults <- lapply(1:length(merged), function(x) quadratTest(merged[[x]], 
-		concat.by, metrics))
+	if(concat.by == "richness" | concat.by== "quadrat")
+	{
+		quadratResults <- lapply(1:length(merged), function(x) quadratTest(merged[[x]], 
+			concat.by, metrics))
+	}
+	
+	#structure follows sesResults with argument concat.by=both above
+	else if(concat.by == "both")
+	{
+		quadratResults <- lapply(1:length(toFeed), function(x) 
+			list("richness"=quadratTest(merged[[x]]$richness, concat.by="richness",
+			metrics), "quadrat"=quadratTest(merged[[x]]$quadrat, concat.by="quadrat", 
+			metrics)))
+	}
+
+	#set the names right (works for either both or rich/quad)
 	names(quadratResults) <- names(merged)
+	
 	results <- list("ses"=sesResults, "quadrat"=quadratResults)
 	results
 }

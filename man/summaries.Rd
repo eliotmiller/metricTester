@@ -8,10 +8,10 @@ summaries(null.output, concat.by = "richness")
 \arguments{
 \item{null.output}{Vector of numbers}
 
-\item{concat.by}{Either richness or quadrat}
+\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 }
 \value{
-A data frame of summarized metric scores
+Either a list of or a data frame of summarized metric scores, see details.
 }
 \description{
 Summarizes observed metric scores. Returns the mean, standard deviation and
@@ -20,7 +20,8 @@ Summarizes observed metric scores. Returns the mean, standard deviation and
 \details{
 Given a data frame of metric values, summarizes either by quadrat or richness.
 Outputs the mean, standard deviation and 95% confidence intervals of each quadrat or
-observed richness.
+observed richness. If provided with concat.by="both", outputs a list of two data
+frames, one for by richness and one for by quadrat. Otherwise, outputs a data frame.
 }
 \examples{
 library(dplyr)

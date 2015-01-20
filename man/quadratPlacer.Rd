@@ -10,7 +10,7 @@ quadratPlacer(no.quadrats, arena.length, quadrat.length)
 
 \item{arena.length}{Length of one side of arena}
 
-\item{quadrat.length}{Length of one side of desired quadrat}
+\item{quadrat.length}{Length of one side of desired quadrat.}
 }
 \value{
 A matrix with the X & Y coordinates of the four corners of each quadrat placed

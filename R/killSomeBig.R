@@ -48,7 +48,7 @@
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #prep the data for the simulation
-#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
 #' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 #' competition.iterations=5)
 #'
@@ -87,7 +87,7 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 	{
 		temp <- makeCDM(single.simulation=arena.output, no.quadrats=noQuadrats,
 			quadrat.length=max.distance)
-		avRelatedness[[i]] <- modified.mpd(samp=temp$cdm, dis=genDists, 
+		avRelatedness[[i]] <- modifiedMPD(samp=temp$cdm, dis=genDists, 
 			abundance.weighted="interspecific")
 	}
 
@@ -171,7 +171,7 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 		#individuals to actually engage in competition. only consider individuals in
 		#neighborhoods more clustered than the cutoff defined above. note that individuals
 		#can be NA (e.g. only individual in that neighborhood), so need to add is.na below
-		indivRelated <- modified.mpd(samp=t(summary(toSample$individuals)),
+		indivRelated <- modifiedMPD(samp=t(summary(toSample$individuals)),
 			dis=genDists)
 		
 		if(indivRelated > cutoff | is.na(indivRelated))
@@ -247,7 +247,7 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 		quadrat.length=max.distance)
 	
 	#calculate the interspecific MPD for these quadrats
-	tempRelated <- modified.mpd(samp=tempCDM$cdm, dis=genDists, 
+	tempRelated <- modifiedMPD(samp=tempCDM$cdm, dis=genDists, 
 		abundance.weighted="interspecific")
 	
 	#calculate the mean interspecific MPD for the quadrats, and append to vector in output

@@ -36,7 +36,7 @@
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #prep the data for the simulation
-#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
 #' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 #' competition.iterations=3)
 #'
@@ -54,7 +54,7 @@ regionalNull <- function(cdm, tree, regional.abundance)
 	#find the total number of individuals in each quadrat
 	sums <- apply(cdm, 1, sum)
 
-	#this command works beautifully, lucky guess on how to write it. it ends up sampling
+	#this command works well, lucky guess on how to write it. it ends up sampling
 	#the required number of individuals (the sum of all individuals in a quadrat) 
 	#where each species gets drawn with a probability proportional to its abundance
 	#in the regional abundance vector. this does not strictly maintain species richness

@@ -1,0 +1,52 @@
+library(metricTester)
+context("Functions related to sampling quadrats from arenas")
+
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+temp <- evolveTraits(tree)
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+	competition.iterations=3)
+singleArena <- filteringArena(prepped)
+bounds <- quadratPlacer(no.quadrats=20, arena.length=300, quadrat.length=sqrt(1000))
+cdm <- quadratContents(singleArena$arena, bounds)
+
+#make a simple for loop to run through the bounds and see if any are overlapping.
+#make an empty vector to save errors into
+error <- c()
+for(i in 1:dim(bounds)[1])
+{
+	for(j in 1:dim(bounds)[1])
+	{
+		#if X1 is bigger than another X1 and less than the corresponding X2, and if
+		#Y1 is bigger than another Y1 and less than the corresponding Y2, then there is
+		#a problem
+		if(any(bounds[i,1] > bounds[j,1] &
+			bounds[i,1] < bounds[j,2] &
+			bounds[i,3] > bounds[j,3] &
+			bounds[i,3] < bounds[j,4]))
+		{
+			#turn error to TRUE and break the for loop, or else it will get written over
+			error[i] <- TRUE
+			break;
+		}
+		else
+		{
+			error[i] <- FALSE
+		}
+	}
+}
+
+test_that("Quadrats are sampled and returned in appropriate format",
+{
+	#cdm should be in matrix format
+	expect_is(cdm, "matrix")
+	#quadrats without any species are cut, so just confirm there are at least some rows
+	#species that do not occur are still in cdm, so there should be fifty columns
+	expect_true(dim(cdm)[1] > 1)
+	expect_true(dim(cdm)[2] == 50)
+})
+
+test_that("Quadrats are non-overlapping",
+{
+	expect_false(any(error))
+})

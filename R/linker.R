@@ -20,7 +20,7 @@
 #' simulations
 #' @param no.quadrats Number of quadrats to place
 #' @param quadrat.length Length of one side of desired quadrat
-#' @param concat.by Whether to concatenate the randomizations by richness or quadrat
+#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.

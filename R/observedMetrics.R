@@ -9,7 +9,6 @@
 #' @param metrics Optional list of named metric functions to use. These
 #' must be defined in the defineMetrics function. If invoked, this option will likely
 #' be used to run a subset of the defined metrics.
-
 #'
 #' @details A simple wrapper function to quickly prep data and calculate observed metrics.
 #'
@@ -27,7 +26,7 @@
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #prep the data for the simulation
-#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
 #' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 #' competition.iterations=3)
 #'

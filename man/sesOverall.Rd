@@ -3,11 +3,14 @@
 \alias{sesOverall}
 \title{Overall per simulation-null-metric SES test}
 \usage{
-sesOverall(simulation.list)
+sesOverall(simulation.list, test)
 }
 \arguments{
 \item{simulation.list}{A summarized results list such as one output from
 reduceResults(). See examples.}
+
+\item{test}{Either "ttest" or "wilcotest", depending on whether the user wants to run
+a two-sided t-test or a Wilcoxon signed rank test.}
 }
 \description{
 This function provides one of many ways of summarizing and considering simulation
@@ -17,13 +20,16 @@ results.
 This function provides one way of summarizing and considering simulation
 results. It takes as input a vector of all standardized effect sizes for all quadrats
 from a given simulation-null-metric combination, and calculates the mean of the vector
-and whether it differs significantly from a mean of zero.
+and whether it differs significantly from a mean of zero. It does this either with a
+simple two-sided t-test, or with a Wilcoxon signed rank test. If the latter, and if
+there are three different spatial simulations with names random, filtering and
+competition, the test is two-sided, less and greater, respectively.
 }
 \examples{
 #not run
 #results <- readIn()
 #summ <- reduceResults(results)
-#test <- sesOverall(summ$ses)
+#examp <- sesOverall(summ$ses)
 }
 \references{
 Miller, Trisos and Farine.

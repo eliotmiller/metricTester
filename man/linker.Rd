@@ -36,7 +36,7 @@ simulations}
 
 \item{quadrat.length}{Length of one side of desired quadrat}
 
-\item{concat.by}{Whether to concatenate the randomizations by richness or quadrat}
+\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 
 \item{randomizations}{The number of randomized CDMs, per null, to generate. These are
 used to compare the significance of the observed metric scores.}

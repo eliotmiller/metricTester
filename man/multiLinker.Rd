@@ -36,7 +36,7 @@ simulations}
 
 \item{quadrat.length}{Length of one side of desired quadrat}
 
-\item{concat.by}{Whether to concatenate the randomizations by richness or quadrat}
+\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 
 \item{randomizations}{The number of randomized CDMs, per null, to generate. These are
 used to compare the significance of the observed metric scores.}
@@ -87,7 +87,7 @@ library(picante)
 system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,
 	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness",
-	randomizations=3, cores=8, cluster=FALSE, iterations=3, prefix="test"))
+	randomizations=3, cores=3, cluster=FALSE, iterations=2, prefix="test"))
 }
 \references{
 Miller, Trisos and Farine.

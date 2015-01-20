@@ -1,12 +1,13 @@
 #' Identify failed runs
 #'
-#' This identifies failed spatial sim/null model runs that failed
+#' This identifies spatial sim/null model runs that failed
 #'
 #' @param single.iteration The results of a single iteration of multiLinker
 #'
 #' @details It is possible that a given null model, e.g. regional, failed on a given run. 
-#' If this is the case, one can identify it with this function and remove it in subsequent
-#' functions so that errors are not thrown.
+#' If this is the case, one can identify it with this function and remove it from the
+#' results of that iteration. This prevents errors further down the line when summarizing
+#' overall results.
 #'
 #' @export
 #'

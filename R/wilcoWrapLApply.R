@@ -19,7 +19,7 @@
 #' b <- rnorm(n=100, mean=100)
 #' ex <- data.frame(a, b)
 #' test <- list("ex1"=ex, "ex2"=ex)
-#' tWrapLApply(test)
+#' wilcoWrapLApply(test, alternative="two.sided")
 
 wilcoWrapLApply <- function(null.list, alternative)
 {

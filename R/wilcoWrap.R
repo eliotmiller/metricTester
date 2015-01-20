@@ -22,7 +22,7 @@
 #'
 #' @examples
 #' a <- rnorm(100)
-#' tWrap(a)
+#' wilcoWrap(a)
 
 wilcoWrap <- function(vect, mu=0, alternative)
 {

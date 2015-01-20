@@ -32,23 +32,21 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 temp <- evolveTraits(tree)
 
-scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)
-
 phydistmatrix <- cophenetic(temp[[1]])
 
 #define a color for each species
 cols <- blue2green2red(nrow(phydistmatrix))
 
 #prep the data for the simulation
-prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
 length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
-competition.iterations=25)
+competition.iterations=3)
 
 singleArena <- filteringArena(prepped)
 
 #plot the arena. don't close the window
-plot(singleArena$arena$X, singleArena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300),
-col=cols[singleArena$arena$individuals])
+plot(singleArena$arena$X, singleArena$arena$Y, pch=20, cex=0.5, xlim=c(0,300),
+	ylim=c(0,300), col=cols[singleArena$arena$individuals])
 
 bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
 

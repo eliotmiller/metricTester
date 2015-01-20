@@ -5,8 +5,8 @@
 #'
 #' @param tree A phylogeny
 #' 
-#' @details Evolves two traits up phylogeny with Brownian motion evolution process. Sigma
-#' is currently set to 0.1 as default.
+#' @details Evolves two traits independently up phylogeny with Brownian motion evolution 
+#' process. Sigma is currently set to 0.1 as default.
 #'
 #' @return A list where the first object is a phylogeny with the desired number of species
 #' and the second object is a matrix of trait values for those species.

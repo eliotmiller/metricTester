@@ -48,7 +48,7 @@ simulateComm <- function(tree, min.rich, max.rich, abundances)
 		cdm.fake <- data.frame(col.1, col.2, col.3)
 		cdm <- sample2matrix(cdm.fake)
 
-		#sort cdm into same order as phylogeny. seems to be necessary for psc.corr and 
+		#sort cdm into same order as phylogeny. seems to be necessary for pscCorr and 
 		#perhaps other functions
 		#need to fake prune the phylo here in case not all the species are in the cdm as 
 		#are in the phylo

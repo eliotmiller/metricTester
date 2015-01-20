@@ -27,9 +27,9 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' results <- psc.corr(samp=cdm, tree=tree)
+#' results <- pscCorr(samp=cdm, tree=tree)
 
-psc.corr<-function(samp,tree){
+pscCorr<-function(samp,tree){
   # Make samp matrix a pa matrix
   samp[samp>0]<-1
   flag=0

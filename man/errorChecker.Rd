@@ -11,7 +11,7 @@ errorChecker(observed, reduced.randomizations, concat.by, metrics)
 \item{reduced.randomizations}{List of random, reduced results, such as those from
 reduceRandomizations()}
 
-\item{concat.by}{Whether to concatenate the randomizations by richness or quadrat}
+\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 
 \item{metrics}{Optional list of named metric functions to use. These
 must be defined in the defineMetrics function. If invoked, this option will likely

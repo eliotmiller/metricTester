@@ -10,7 +10,8 @@
 #' @param abundance.weighted One of either "FALSE", "interspecific",
 #' "intraspecific", or "complete"
 #' 
-#' @details See accompanying publication for details.
+#' @details See accompanying publication for details. The guts of this function come
+#' directly from picante.
 #'
 #' @return A vector of MPD values, calculated according to the abudance-weighted method
 #' specified
@@ -32,9 +33,9 @@
 #'
 #' dists <- cophenetic(tree)
 #'
-#' results <- modified.mpd(cdm, dists, abundance.weighted = "interspecific")
+#' results <- modifiedMPD(cdm, dists, abundance.weighted = "interspecific")
 
-modified.mpd <- function (samp, dis, abundance.weighted = FALSE) 
+modifiedMPD <- function(samp, dis, abundance.weighted = FALSE) 
 {
     N <- dim(samp)[1]
     mpd <- numeric(N)

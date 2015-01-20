@@ -30,7 +30,7 @@
 #' cols <- blue2green2red(nrow(phydistmatrix))
 #'
 #' #prep the data for the simulation
-#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4, 
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
 #' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 #' competition.iterations=25)
 #'

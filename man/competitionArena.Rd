@@ -22,14 +22,17 @@ a regional species pool, and repeats across the desired number of generations.
 }
 \details{
 This function combines the killSome and settleSome functions into a loop that
-runs for the desired number of generations.
+runs for the desired number of generations. If the number of individuals in the arena
+exceeds 50,000, then the killSomeBig function is invoked. This runs much slower than
+the default version of the function, but will not use all memory and crash at large
+numbers of individuals.
 }
 \examples{
 library(geiger)
 
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
-prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=4,
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
 length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 competition.iterations=2)
 

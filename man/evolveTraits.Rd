@@ -17,8 +17,8 @@ Given a phylogeny, will generate associated trait data for two traits following 
 Brownian motion evolution model.
 }
 \details{
-Evolves two traits up phylogeny with Brownian motion evolution process. Sigma
-is currently set to 0.1 as default.
+Evolves two traits independently up phylogeny with Brownian motion evolution
+process. Sigma is currently set to 0.1 as default.
 }
 \examples{
 library(geiger)

@@ -21,7 +21,7 @@
 #' a <- rnorm(n=100)
 #' b <- rnorm(n=100, mean=100)
 #' ex <- data.frame(a, b)
-#' tWrapApply(ex)
+#' wilcoWrapApply(ex, alternative="two.sided")
 
 wilcoWrapApply <- function(dataframe, alternative)
 {

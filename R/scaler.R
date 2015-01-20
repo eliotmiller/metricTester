@@ -32,8 +32,10 @@
 
 scaler <- function(input.traits, min.arena, max.arena)
 {
-	std1 <- (input.traits[,1] - min(input.traits[,1]))/(max(input.traits[,1])-min(input.traits[,1]))
-	std2 <- (input.traits[,2] - min(input.traits[,2]))/(max(input.traits[,2])-min(input.traits[,2]))
+	std1 <- (input.traits[,1] - 
+		min(input.traits[,1]))/(max(input.traits[,1])-min(input.traits[,1]))
+	std2 <- (input.traits[,2] - 
+		min(input.traits[,2]))/(max(input.traits[,2])-min(input.traits[,2]))
 	
 	output.trait1 <- (max.arena - min.arena) * std1 + min.arena
 	output.trait2 <- (max.arena - min.arena) * std2 + min.arena

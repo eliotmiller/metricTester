@@ -7,12 +7,13 @@ arenaTest(results.table, concat.by, metrics)
 }
 \arguments{
 \item{results.table}{Data frame of observed metrics with expected mean, SD and CI bound
-in. See example}
+in. See example.}
 
-\item{concat.by}{Whether to concatenate the results by richness or quadrat. If the
-former, observed scores are compared to all randomized scores where the quadrat had the
-corresponding richness. If the latter, observed scores (e.g. those from quadrat 1) are
-compared to all randomized quadrat 1 scores.}
+\item{concat.by}{Whether to concatenate results by richness, quadrat or both. If
+richness, observed scores are compared to all randomized scores where the quadrat had
+the corresponding richness. If quadrat, observed scores (e.g. those from quadrat 1)
+are compared to all randomized quadrat 1 scores. If both, both are run and each is
+saved as a separate data frame in a single list.}
 
 \item{metrics}{Optional list of named metric functions to use. These
 must be defined in the defineMetrics function. If invoked, this option will likely

@@ -51,16 +51,16 @@ my_richness <- function(metrics.input)
 	apply(metrics.input$picante.cdm, 1, lengthNonZeros)
 
 naw_mpd <- function(metrics.input)
-	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted=FALSE)
+	modifiedMPD(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted=FALSE)
 
 inter_mpd <- function(metrics.input)
-	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="interspecific")
+	modifiedMPD(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="interspecific")
 
 intra_mpd <- function(metrics.input)
-	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="intraspecific")
+	modifiedMPD(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="intraspecific")
 
 complete_mpd <- function(metrics.input)
-	modified.mpd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="complete")
+	modifiedMPD(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted="complete")
 
 naw_mntd <- function(metrics.input)
 	mntd(metrics.input$picante.cdm, metrics.input$dists, abundance.weighted=FALSE)
@@ -77,7 +77,7 @@ my_psv <- function(metrics.input)
 
 my_psc <- function(metrics.input)
 {
-	PSC <- psc.corr(metrics.input$picante.cdm, metrics.input$tree)
+	PSC <- pscCorr(metrics.input$picante.cdm, metrics.input$tree)
 	PSC <- PSC$PSCs
 	PSC
 }
