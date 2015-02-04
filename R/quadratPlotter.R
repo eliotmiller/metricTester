@@ -22,8 +22,6 @@
 #'
 #' temp <- evolveTraits(tree)
 #'
-#' scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)
-#'
 #' phydistmatrix <- cophenetic(temp[[1]])
 #'
 #' #define a color for each species

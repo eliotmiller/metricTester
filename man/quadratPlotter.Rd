@@ -27,8 +27,6 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 temp <- evolveTraits(tree)
 
-scaled <- scaler(temp[[2]], min.arena=0, max.arena=300)
-
 phydistmatrix <- cophenetic(temp[[1]])
 
 #define a color for each species
