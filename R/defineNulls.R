@@ -32,7 +32,8 @@ defineNulls <- function()
 	"richness"=my_richnessNull,
 	"frequency"=my_frequency,
 	"independent_swap"=my_IS,
-	"trial_swap"=my_TS
+	"trial_swap"=my_TS,
+	"dispersal"=my_dispersal
 	)
 }
 
@@ -86,4 +87,10 @@ my_TS <- function(nulls.input)
 {
 	new.matrix <- randomizeMatrix(nulls.input$picante.cdm, "trialswap", 
 		iterations=100000)
+}
+
+my_dispersal <- function(nulls.input)
+{
+	new.matrix <- dispersalNull(cdm=nulls.input$picante.cdm, tree=nulls.input$tree,
+		distances.among=nulls.input$distances.among)
 }

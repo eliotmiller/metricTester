@@ -4,7 +4,8 @@
 \title{Parallelized function that calculates metrics on randomized matrices}
 \usage{
 metricsNnulls(tree, picante.cdm, regional.abundance = NULL,
-  randomizations = 2, cores = 1, cluster = FALSE, nulls, metrics)
+  distances.among = NULL, randomizations = 2, cores = 1,
+  cluster = FALSE, nulls, metrics)
 }
 \arguments{
 \item{tree}{Phylo object}

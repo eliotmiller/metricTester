@@ -3,7 +3,8 @@
 \alias{prepNulls}
 \title{Prep data for null randomizations}
 \usage{
-prepNulls(tree, picante.cdm, regional.abundance = NULL)
+prepNulls(tree, picante.cdm, regional.abundance = NULL,
+  distances.among = NULL)
 }
 \arguments{
 \item{tree}{Phylo object}

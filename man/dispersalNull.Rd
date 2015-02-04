@@ -3,7 +3,7 @@
 \alias{dispersalNull}
 \title{Randomize community data matrix with dispersal null model}
 \usage{
-dispersalNull(cdm, distances.among)
+dispersalNull(cdm, tree, distances.among)
 }
 \arguments{
 \item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
@@ -79,6 +79,8 @@ row.names(cdm) <- paste("cell", 1:100, sep="")
 #fill NAs with 0s.
 
 cdm[is.na(cdm)] <- 0
+
+newCDM <- dispersalNull(cdm, distances)
 }
 \references{
 Miller, Trisos and Farine.

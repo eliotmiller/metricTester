@@ -73,8 +73,10 @@
 #' #fill NAs with 0s.
 #'
 #' cdm[is.na(cdm)] <- 0
+#'
+#' newCDM <- dispersalNull(cdm, distances)
 
-dispersalNull <- function(cdm, distances.among)
+dispersalNull <- function(cdm, tree, distances.among)
 {
 	#create a check to ensure that all species that occur in the cdm are also in the tree
 	if(length(setdiff(names(cdm),tree$tip.label))!=0)
@@ -130,7 +132,7 @@ dispersalNull <- function(cdm, distances.among)
 			temp <- sample(x=cdm[selectedQuadrat,], size=1, prob=cdm[selectedQuadrat,])
 			#if the species selected is not found in that quadrat in the growing phylocom
 			#data frame, add the relevant info to that frame
-			if(!(row.names(temp) %in% phylocom[phylocom$plot==row.names(cdm)[i],]$id))
+			if(!(names(temp) %in% phylocom[phylocom$plot==row.names(cdm)[i],]$id))
 			{
 				j <- j+1
 				phylocom[j,1] <- row.names(cdm)[i]
@@ -146,8 +148,21 @@ dispersalNull <- function(cdm, distances.among)
 	newCDM <- Reduce(rbind, replacementList)
 	newCDM <- sample2matrix(newCDM)
 	
-	#it comes out in a weird order, so sort back to same order as input CDM
+	#it comes out in a weird order, so sort back to same quadrat order as input CDM
 	newCDM <- newCDM[row.names(cdm),]
+	
+	#add columns for species that were not recorded in any quadrats
+	notFound <- setdiff(tree$tip.label, names(newCDM))
+	
+	if(length(notFound > 0))
+	{
+		toBind <- matrix(nrow=dim(newCDM)[[1]], ncol=length(notFound), 0)
+		colnames(toBind) <- notFound
+		newCDM <- cbind(newCDM, toBind)
+	}
+	
+	#and sort into same species order as input cdm
+	newCDM <- newCDM[,names(cdm)]
 	
 	newCDM
 }

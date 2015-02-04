@@ -50,8 +50,8 @@
 #'
 #' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
 
-metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL, randomizations=2, 
-	cores=1, cluster=FALSE, nulls, metrics)
+metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL,
+	 distances.among=NULL, randomizations=2, cores=1, cluster=FALSE, nulls, metrics)
 {
 	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
 	#which case all metrics will be calculated
@@ -81,7 +81,7 @@ metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL, randomizat
 		stop("'cluster' must be set to either TRUE OR FALSE")
 	}
 	#prep the inputs for parallel randomizations
-	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance)
+	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance, distances.among)
 	#set up a list to save results into (might not be necessary)
 	randomResults <- list()
 	#call the parallel for loop. each iteration, save a new list of lists, where each

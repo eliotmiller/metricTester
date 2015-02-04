@@ -37,7 +37,7 @@
 #this function creates an object of class metrics.input, which is used internally by 
 #metricTester to handle varying inputs for different metrics in different packages
 
-prepNulls <- function(tree, picante.cdm, regional.abundance=NULL)
+prepNulls <- function(tree, picante.cdm, regional.abundance=NULL, distances.among=NULL)
 {
 	spacodi.cdm <- suppressMessages(as.spacodi(picante.cdm))
 	if(is.null(regional.abundance))
@@ -45,8 +45,13 @@ prepNulls <- function(tree, picante.cdm, regional.abundance=NULL)
 		warning("Regional abundance not provided. Assumed to be equivalent to CDM")
 		regional.abundance <- abundanceVector(picante.cdm)
 	}
+	if(is.null(distances.among))
+	{
+		warning("Distances among quadrats not provided. Null models that require this input will not be run")
+		distances.among <- "ignore"
+	}
 	dat <- list("tree"=tree, "picante.cdm"=picante.cdm, "spacodi.cdm"=spacodi.cdm, 
-		"regional.abundance"=regional.abundance)
+		"regional.abundance"=regional.abundance, "distances.among"=distances.among)
 	class(dat) <- c("list", "nulls.input")
 	dat
 }
