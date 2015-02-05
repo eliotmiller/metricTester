@@ -1,3 +1,17 @@
+#' Fill in soon
+#'
+#' Fill in later
+#'
+#' @details Fill in later
+#'
+#' @return Fill in later
+#'
+#' @export
+#'
+#' @import phylobase grid ecoPDcorr
+#'
+#' @references Miller, Trisos and Farine.
+#'
 #' @examples
 #' test <- expectations(cdm, tree, regional.abundance=NULL, distances.among=distances, 
 #'	randomizations=3, cores=3, cluster=FALSE, 
