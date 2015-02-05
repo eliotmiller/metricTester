@@ -23,7 +23,7 @@ expectations <- function(picante.cdm, tree, regional.abundance=NULL, distances.a
 	randomizations, cores, cluster=FALSE, metrics, nulls, concat.by, output.raw=FALSE)
 {
 	#calculate the raw randomized results across whatever metrics and nulls are called
-	rawResults <- metricsNnulls(picante.cdm=cdm, tree=tree, 
+	rawResults <- metricsNnulls(picante.cdm=picante.cdm, tree=tree, 
 		regional.abundance=regional.abundance, distances.among=distances.among, 
 		randomizations=randomizations, cores=cores, cluster=cluster, metrics=metrics, 
 		nulls=nulls)
