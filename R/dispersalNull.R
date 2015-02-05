@@ -92,7 +92,7 @@ dispersalNull <- function(cdm, tree, distances.among)
 	}
 	
 	#create a check to ensure that cdm and distances.among are in the same order cell-wise
-	if(any(row.names(cdm)!=row.names(distances)))
+	if(any(row.names(cdm)!=row.names(distances.among)))
 	{
 		stop("Your cdm and distance matrix are not in the same quadrat order")
 	}
