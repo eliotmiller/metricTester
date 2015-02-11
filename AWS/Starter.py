@@ -32,7 +32,7 @@ def main():
         subprocess.call(command , shell=True)
 
         #run command the command line
-        subprocess.call("echo Hello World2", shell=True)
+        subprocess.call("rm running", shell=True)
 
     return 0
 
