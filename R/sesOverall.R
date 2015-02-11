@@ -7,6 +7,7 @@
 #' reduceResults(). See examples.
 #' @param test Either "ttest" or "wilcotest", depending on whether the user wants to run
 #' a two-sided t-test or a Wilcoxon signed rank test.
+#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both
 #'
 #' @details This function provides one way of summarizing and considering simulation
 #' results. It takes as input a vector of all standardized effect sizes for all quadrats
@@ -26,8 +27,13 @@
 #' #summ <- reduceResults(results)
 #' #examp <- sesOverall(summ$ses)
 
-sesOverall <- function(simulation.list, test)
+sesOverall <- function(simulation.list, test, concat.by)
 {
+	if(!(concat.by %in% c("both","quadrat","richness")))
+	{
+		stop("concat.by must equal either both, richness, or quadrat")
+	}
+
 	#add a line to throw an error if from.node is not properly specified
 	if(test != "ttest" & test != "wilcotest")
 	{
@@ -35,14 +41,19 @@ sesOverall <- function(simulation.list, test)
 	}
 
 	#if test is set to ttest, just do a simple t.test to see if mean differs from 0.
-	if(test=="ttest")
+	if(test=="ttest" & (concat.by=="richness" | concat.by=="quadrat"))
 	{
 		#lapply tWrapLApply over simulation.list
-		temp <- lapply(simulation.list, tWrapLApply)
+		tempAll <- lapply(simulation.list, tWrapLApply)
+	}
+	
+	else if(test=="ttest" & concat.by=="both")
+	{
+		stop("t.test with concat by both not currently operational")
 	}
 	
 	#more probably people will use the wilcoxon signed rank test. go into that here
-	else if(test=="wilcotest")
+	else if(test=="wilcotest" & (concat.by=="richness" | concat.by=="quadrat"))
 	{
 		#if the names of the spatial simulations are "random" "competition" and 
 		#"filtering", create a character vector of expected alternative hypotheses to feed
@@ -61,22 +72,83 @@ sesOverall <- function(simulation.list, test)
 			toFeed <- rep("two.sided", 3)
 		}
 		
-		temp <- lapply(seq_along(toFeed), function(x)
+		tempAll <- lapply(seq_along(toFeed), function(x)
 			wilcoWrapLApply(simulation.list[[x]], alternative=toFeed[x]))
 	}
 	
+	else if(test=="wilcotest" & concat.by=="both")
+	{
+		if(setequal(names(simulation.list), c("random","filtering","competition")))
+		{
+			toFeed <- names(simulation.list)
+			toFeed[toFeed=="random"] <- "two.sided"
+			toFeed[toFeed=="filtering"] <- "less"
+			toFeed[toFeed=="competition"] <- "greater"
+		}
+		
+		else if(!setequal(names(simulation.list), c("random","filtering","competition")))
+		{
+			print("You included new spatial simulations. Modify expectations manually")
+			toFeed <- rep("two.sided", 3)
+		}
+
+		tempAll <- list()
+		
+		#i refers to spatial simulation (you will only feed in $ses components)
+		for(i in 1:length(toFeed))
+		{
+			#j refers to null models
+			tempNull <- list()
+			for(j in 1:length(simulation.list[[1]]))
+			{
+				#k refers either to concatenating by richness or by quadrat
+				for(k in 1:length(simulation.list[[1]][[1]]))
+				{
+					temp <- wilcoWrapLApply(simulation.list[[i]][[j]],
+						alternative=toFeed[i])
+					#this function was designed for use over a list of null models, so
+					#change name here to reflect what it is actually being used for
+					names(temp)[4] <- "concat.by"
+				}
+				#set the jth element of tempNull equal to the dataframe temp
+				tempNull[[j]] <- temp
+				#repeat the name of the null the correct length of the null model and bind
+				tempNull[[j]]$null.model <- rep(names(simulation.list[[i]][j]),
+					dim(tempNull[[j]])[1])
+			}
+			#set the ith element of tempAll equal to the list tempNull
+			tempAll[[i]] <- tempNull
+			#reduce the list down to put into similar format to if you concat by rich or q
+			tempAll[[i]] <- Reduce(rbind, tempAll[[i]])
+			#repeat the sim name the correct length and bind
+			tempAll[[i]]$simulation <- rep(names(simulation.list[i]),
+				dim(tempAll[[i]])[1])
+		}
+	}
+	
 	#reduce the output list into a single data frame
-	output <- Reduce(rbind, temp)
+	output <- Reduce(rbind, tempAll)
 	
-	#create a vector of expanded simulation names. note that this code is sensitive to
-	#changes. for instance, if one simulation tests certain nulls that another does not,
-	#this will not end up being correct. this generates a data frame, but we only save the
-	#second column
-	simNames <- expand.grid(temp[[1]]$null.model, names(simulation.list))[,2]
+	if(concat.by=="richness" | concat.by=="quadrat")
+	{
+		#create a vector of expanded simulation names. note that this code is sensitive to
+		#changes. for instance, if one simulation tests certain nulls that another does
+		#not, this will not end up being correct. this generates a data frame, but we only
+		#save the second column
+		simNames <- expand.grid(tempAll[[1]]$null.model, names(simulation.list))[,2]
 	
-	output$simulation <- simNames
+		output$simulation <- simNames
 	
-	output <- dplyr::select(output, simulation, null.model, metric, estimate, p.value)
+		output <- dplyr::select(output, simulation, null.model, metric, estimate, p.value)
+	
+		output <- cbind(output, concat.by=rep(concat.by, dim(output)[1]))
+	}
+	
+	else if(concat.by=="both")
+	{
+		output <- dplyr::select(output, simulation, null.model, metric, concat.by,
+			estimate, p.value)
+	}
 	
 	output
 }
