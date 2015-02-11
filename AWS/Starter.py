@@ -2,10 +2,8 @@
 
 __author__ = 'alexf4'
 import sys
-import datetime
 import subprocess
 import os
-import time
 
 #This is the entry point into the python program
 def main():
@@ -15,17 +13,10 @@ def main():
     if os.path.exists("/home/ubuntu/running") is False:
         tempfile = open("/home/ubuntu/running", "wb")
 
-    #This will be an infinite loop
-    #while(True):
-
-
         #run command the command line
         subprocess.call("echo Hello World", shell=True)
 
-        subprocess.call("nohup /usr/bin/R --vanilla < simpleScript.R >& output.Rout &", shell=True)
-
-        #Hack to make sure the correct file has enough time to be made
-        time.sleep(1)
+        subprocess.call("nohup /usr/bin/R --vanilla < simpleScript.R > output.Rout ", shell=True)
 
         #Set the command var to empty
         command = ""
