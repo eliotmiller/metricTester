@@ -31,6 +31,21 @@ def main():
         #send file to S3 with AWS CLI
         subprocess.call(command , shell=True)
 
+
+        #find the instance id of this ami
+        #MAy need the full path of curl
+        process = subprocess.Popen(["curl http://169.254.169.254/latest/meta-data/ami-id"], stdout=subprocess.PIPE)
+        result = process.communicate()[0]
+
+        #Result should be the instance id - ami-2bb65342
+
+        #might be able to do this - ec2-terminate-instances $(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+
+        #Shut down this instance
+        subprocess.call("/usr/local/bin/aws ec2-terminate-instances " + result , shell=True)
+
+
+
         #run command the command line
         subprocess.call("rm running", shell=True)
 
