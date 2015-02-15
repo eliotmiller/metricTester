@@ -32,6 +32,10 @@ def main():
         subprocess.call(command , shell=True)
 
 
+         #run command the command line if you still need this
+        subprocess.call("rm running", shell=True)
+
+
         #find the instance id of this ami
         #MAy need the full path of curl
         process = subprocess.Popen(["curl http://169.254.169.254/latest/meta-data/ami-id"], stdout=subprocess.PIPE)
@@ -46,8 +50,7 @@ def main():
 
 
 
-        #run command the command line
-        subprocess.call("rm running", shell=True)
+
 
     return 0
 
