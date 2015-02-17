@@ -4,6 +4,8 @@ __author__ = 'alexf4'
 import sys
 import subprocess
 import os
+import urllib2
+
 
 #This is the entry point into the python program
 def main():
@@ -38,15 +40,26 @@ def main():
 
         #find the instance id of this ami
         #MAy need the full path of curl
-        process = subprocess.Popen(["curl http://169.254.169.254/latest/meta-data/ami-id"], stdout=subprocess.PIPE)
-        result = process.communicate()[0]
+        #process = subprocess.Popen(["curl" , "http://169.254.169.254/latest/meta-data/instance-id"], stdout=subprocess.PIPE)
+        #result = process.communicate()[0]
+
+
+        #Get the instance id
+        response = urllib2.urlopen('http://169.254.169.254/latest/meta-data/instance-id')
+        instanceid = response.read()
+
+        subprocess.call("/usr/local/bin/aws ec2-terminate-instances " + instanceid , shell=True)
+
+
+       # output = Popen(["mycmd", "myarg"], stdout=PIPE).communicate()[0]
+
 
         #Result should be the instance id - ami-2bb65342
 
         #might be able to do this - ec2-terminate-instances $(curl -s http://169.254.169.254/latest/meta-data/instance-id)
 
         #Shut down this instance
-        subprocess.call("/usr/local/bin/aws ec2-terminate-instances " + result , shell=True)
+        #subprocess.call("/usr/local/bin/aws ec2-terminate-instances " + result , shell=True)
 
 
 
