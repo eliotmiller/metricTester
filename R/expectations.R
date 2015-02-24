@@ -19,14 +19,15 @@
 #'	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
 #'	concat.by="both", output.raw=FALSE)
 
-expectations <- function(picante.cdm, tree, regional.abundance=NULL, distances.among, 
-	randomizations, cores, cluster=FALSE, metrics, nulls, concat.by, output.raw=FALSE)
+expectations <- function(picante.cdm, tree, optional.dists=NULL, regional.abundance=NULL, 
+	distances.among=NULL, randomizations, cores, cluster=FALSE, metrics, nulls, concat.by,
+	output.raw=FALSE)
 {
 	#calculate the raw randomized results across whatever metrics and nulls are called
 	rawResults <- metricsNnulls(picante.cdm=picante.cdm, tree=tree, 
-		regional.abundance=regional.abundance, distances.among=distances.among, 
-		randomizations=randomizations, cores=cores, cluster=cluster, metrics=metrics, 
-		nulls=nulls)
+		optional.dists=optional.dists, regional.abundance=regional.abundance, 
+		distances.among=distances.among, randomizations=randomizations, cores=cores,
+		cluster=cluster, metrics=metrics, nulls=nulls)
 	#reduce these randomizations into more managable results
 	results <- reduceRandomizations(rawResults)
 	#if the user wants the raw data, provide that

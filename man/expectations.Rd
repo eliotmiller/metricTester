@@ -3,9 +3,9 @@
 \alias{expectations}
 \title{Fill in soon}
 \usage{
-expectations(picante.cdm, tree, regional.abundance = NULL, distances.among,
-  randomizations, cores, cluster = FALSE, metrics, nulls, concat.by,
-  output.raw = FALSE)
+expectations(picante.cdm, tree, optional.dists = NULL,
+  regional.abundance = NULL, distances.among = NULL, randomizations, cores,
+  cluster = FALSE, metrics, nulls, concat.by, output.raw = FALSE)
 }
 \value{
 Fill in later

@@ -3,10 +3,12 @@
 \alias{reduceResults}
 \title{Reduce results from multiLinker into a manageable format}
 \usage{
-reduceResults(results.list)
+reduceResults(results.list, concat.by)
 }
 \arguments{
 \item{results.list}{The results of a call to readIn()}
+
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both}
 }
 \value{
 A list of data frames.
@@ -18,8 +20,7 @@ combine these results into a more manageable format.
 \details{
 Given a list of results readIn() from multiLinker, this function will reduce
 those results into a manageable format like that expected for calls to quadratOverall
-and sesOverall. Currently has not been tested on the results from concatenating by
-both quadrat and richness, will likely need to be updated.
+and sesOverall.
 }
 \references{
 Miller, Trisos and Farine.

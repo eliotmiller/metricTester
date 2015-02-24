@@ -6,7 +6,7 @@
 #' @param tree Phylo object. 
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
-#' @optional.dists A symmetric distance matrix can be directly supplied. This option is
+#' @param optional.dists A symmetric distance matrix can be directly supplied. This option is
 #' experimental. Performance depends on the metric being used. If the metric in question
 #' relies on the dists element of the result of this function, then this optional distance
 #' matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still

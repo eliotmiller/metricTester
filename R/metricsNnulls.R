@@ -7,6 +7,11 @@
 #' @param tree Phylo object
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
+#' @param optional.dists A symmetric distance matrix can be directly supplied. This option is
+#' experimental. Performance depends on the metric being used. If the metric in question
+#' relies on the dists element of the result of this function, then this optional distance
+#' matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still
+#' employ the tree data.
 #' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 #' Optional, will be generated from the input CDM if not provided.
 #' @param randomizations The number of times the input CDM should be randomized and the
@@ -50,7 +55,7 @@
 #'
 #' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
 
-metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL,
+metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
 	 distances.among=NULL, randomizations=2, cores=1, cluster=FALSE, nulls, metrics)
 {
 	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
@@ -93,7 +98,8 @@ metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL,
 			#run the nulls across the prepped data. this randomizes the CDMs all at once
 			randomMatrices <- runNulls(nullsPrepped, nulls)
 			#prep the randomized CDMs to calculate the metrics across them
-			randomPrepped <- lapply(randomMatrices, function(x) prepData(tree, x))
+			randomPrepped <- lapply(randomMatrices, function(x) 
+				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
 			#calculate the metrics
 			randomResults[[i]] <- lapply(randomPrepped, calcMetrics, metrics)
 		}
@@ -107,7 +113,8 @@ metricsNnulls <- function(tree, picante.cdm, regional.abundance=NULL,
 			#run the nulls across the prepped data. this randomizes the CDMs all at once
 			randomMatrices <- runNulls(nullsPrepped, nulls)
 			#prep the randomized CDMs to calculate the metrics across them
-			randomPrepped <- lapply(randomMatrices, function(x) prepData(tree, x))
+			randomPrepped <- lapply(randomMatrices, function(x) 
+				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
 			#calculate the metrics
 			randomResults[[i]] <- lapply(randomPrepped, calcMetrics, metrics)
 		}

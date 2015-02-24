@@ -3,7 +3,7 @@
 \alias{sesOverall}
 \title{Overall per simulation-null-metric SES test}
 \usage{
-sesOverall(simulation.list, test)
+sesOverall(simulation.list, test, concat.by)
 }
 \arguments{
 \item{simulation.list}{A summarized results list such as one output from
@@ -11,6 +11,8 @@ reduceResults(). See examples.}
 
 \item{test}{Either "ttest" or "wilcotest", depending on whether the user wants to run
 a two-sided t-test or a Wilcoxon signed rank test.}
+
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both}
 }
 \description{
 This function provides one of many ways of summarizing and considering simulation

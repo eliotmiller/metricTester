@@ -1,332 +1,3 @@
-selectedList[[1]]
-cdmList[[1]]
-sample(cdmList[[1]], 1, prob=cdmList[[1]])
-head(matrix2sample(cdm))
-richness <- apply(cdm, 1, lengthNonZeros)
-richness
-selectNear <- function(distances.between)#
-{#
-	#distances.between is a vector of distances between the focal cell and other cells#
-	#first exclude distances to the focal cell (and any other with distance = 0)#
-	distances.between <- distances.between[distances.between != 0]#
-	#now sample a cell name with a probability proportional to the inverse of the distance#
-	#from the focal cell#
-	newCell <- sample(x=names(distances.between), size=1, prob=1/distances.between)#
-	newCell#
-}
-selectNear(distances.among[,1])
-selectNear(distances[,1])
-selectNear(distances[,11])
-sample(x=cdm["cell32",], size=1, #
-				prob=cdm["cell32",])
-sample(x=cdm["cell32",], size=1, #
-				prob=cdm["cell32",])->test
-test
-names(test)
-test
-test[1]
-dispersalNull <- function(cdm, distances.among)#
-{#
-	#create a check to ensure that all species that occur in the cdm are also in the tree#
-	if(length(setdiff(names(cdm),tree$tip.label))!=0)#
-	{#
-		stop("You have included species in your cdm that are not in your phylogeny")#
-	}#
-	#create a check to ensure that cdm and distances.among contain the same exact cells#
-	if(length(setdiff(row.names(cdm), row.names(distances.among))) != 0 &#
-		length(setdiff(row.names(distances.among), row.names(cdm))) != 0)#
-	{#
-		stop("Your cdm quadrat names and distance matrix names do no match")#
-	}#
-	#create a check to ensure that cdm and distances.among are in the same order cell-wise#
-	if(any(row.names(cdm)!=row.names(distances)))#
-	{#
-		stop("Your cdm and distance matrix are not in the same quadrat order")#
-	}#
-#
-	#calculate species richness of input cdm. for each quadrat, sample a grid cell based#
-	#on its proximity to the quadrat in question (this is your sampleNear function), then #
-	#sample a species based on its abundance in the sampled grid cell. if that species is#
-	#already included in the replacement quadrat, run this over again. do this entire loop#
-	#per quadrat while the length of replacement species is < the observed richness for#
-	#that quadrat#
-	richness <- apply(cdm, 1, lengthNonZeros)#
-#
-	#create a list that you will use to save vectors of species into (one list element#
-	#per quadrat)#
-	replacementList <- list()#
-	for(i in 1:dim(cdm)[1])#
-	{#
-		#create an empty vector that you will save over on each iteration of i#
-		#that will become the list of species for that quadrat, plus abundance#
-		tempQuadrat <- c()#
-		while(length(tempQuadrat) < richness[i])#
-		{#
-			#select the quadrat you will sample from#
-			selectedQuadrat <- selectNear(distances.among[,i])#
-			#select a species from that quadrat based on abundanced#
-			temp <- sample(x=cdm[selectedQuadrat,], size=1, #
-				prob=cdm[selectedQuadrat,])#
-			if(!(names(temp) %in% names(tempQuadrat)))#
-			{#
-				tempQuadrat <- append(tempQuadrat, temp)#
-			}#
-		}#
-		#set the correct element of the list to the temporary quadrat#
-		replacementList[[i]] <- tempQuadrat#
-	}#
-#
-	replacementList#
-}
-test <- dispersalNull(cdm, distances)
-test
-dispersalNull <- function(cdm, distances.among)#
-{#
-	#create a check to ensure that all species that occur in the cdm are also in the tree#
-	if(length(setdiff(names(cdm),tree$tip.label))!=0)#
-	{#
-		stop("You have included species in your cdm that are not in your phylogeny")#
-	}#
-	#create a check to ensure that cdm and distances.among contain the same exact cells#
-	if(length(setdiff(row.names(cdm), row.names(distances.among))) != 0 &#
-		length(setdiff(row.names(distances.among), row.names(cdm))) != 0)#
-	{#
-		stop("Your cdm quadrat names and distance matrix names do no match")#
-	}#
-	#create a check to ensure that cdm and distances.among are in the same order cell-wise#
-	if(any(row.names(cdm)!=row.names(distances)))#
-	{#
-		stop("Your cdm and distance matrix are not in the same quadrat order")#
-	}#
-#
-	#calculate species richness of input cdm. for each quadrat, sample a grid cell based#
-	#on its proximity to the quadrat in question (this is your sampleNear function), then #
-	#sample a species based on its abundance in the sampled grid cell. if that species is#
-	#already included in the replacement quadrat, run this over again. do this entire loop#
-	#per quadrat while the length of replacement species is < the observed richness for#
-	#that quadrat#
-	richness <- apply(cdm, 1, lengthNonZeros)#
-#
-	#create a list that you will use to save vectors of species into (one list element#
-	#per quadrat)#
-	replacementList <- list()#
-	for(i in 1:dim(cdm)[1])#
-	{#
-		#create an empty vector that you will save over on each iteration of i#
-		#that will become the list of species for that quadrat, plus abundance#
-		tempQuadrat <- c()#
-		while(length(tempQuadrat) < richness[i])#
-		{#
-			#select the quadrat you will sample from#
-			selectedQuadrat <- selectNear(distances.among[,i])#
-			#select a species from that quadrat based on abundanced#
-			temp <- sample(x=cdm[selectedQuadrat,], size=1, #
-				prob=cdm[selectedQuadrat,])#
-			if(!(names(temp) %in% names(tempQuadrat)))#
-			{#
-				tempQuadrat <- append(tempQuadrat, temp)#
-				print(tempQuadrat)#
-			}#
-		}#
-		#set the correct element of the list to the temporary quadrat#
-		replacementList[[i]] <- tempQuadrat#
-	}#
-#
-	replacementList#
-}
-test <- dispersalNull(cdm, distances)
-tempQuadrat <- c()
-temp <- sample(x=cdm["cell32",], size=1, #
-				prob=cdm["cell32",])
-temp
-tempQuadrat <- append(tempQuadrat, temp)
-tempQuadrat
-tempQuadrat <- c()
-tempQuadrat <- append(temp, tempQuadrat)
-tempQuadrat
-class(temp)
-as.vector(temp)
-as.numeric(temp)
-16609.369/60/60
-20*4.6
-92/24
-library(metricTester)
-#new regional null test#
-library(metricTester)#
-#
-#set up a matrix to simulate lat/long#
-coordDF <- matrix(ncol=2, nrow=100)#
-#
-coordDF[,1] <- runif(n=100, min=40, max=50)#
-coordDF[,2] <- runif(n=100, min=-130, max=-120)#
-#
-#convert to data frame, give column names. also give row names such as if the cells had#
-#names (as they should or there'd be no way to track them)#
-coordDF <- as.data.frame(coordDF)#
-#
-row.names(coordDF) <- paste("cell", 1:100, sep="")#
-#
-names(coordDF) <- c("latitude","longitude")#
-#
-#calculate the distances among all of these points. in the real program you're going to#
-#want to calculate great arc distance or whatever it's called#
-distances <- dist(coordDF, diag=TRUE, upper=TRUE)#
-#
-#turn it into a symmetric distance matrix#
-distances <- as.matrix(distances)#
-#
-#simulate a regional phylogeny of 100 species#
-tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)#
-#
-#simulate a community data matrix of 100 cells by 100 species. do it 4 times so that#
-#you can use your simulateComm function and have it span a reasonable range of richness#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm1 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)#
-cdm2 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)#
-cdm3 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)#
-cdm4 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)#
-#
-#bind these into a list and use dplyr rbind_all to bind together. recast as data frame#
-#and ensure no species are lost#
-#
-cdmList <- list(cdm1, cdm2, cdm3, cdm4)#
-#
-cdm <- rbind_all(cdmList)#
-#
-cdm <- as.data.frame(cdm)#
-#
-dim(cdm)#
-#
-#fix as necessary manually here, seems to usually work. then give cell names#
-#
-row.names(cdm) <- paste("cell", 1:100, sep="")#
-#
-#fill NAs with 0s.#
-#
-cdm[is.na(cdm)] <- 0
-head(cdm)
-dim(cdm)
-richness <- apply(cdm, 1, lengthNonZeros)
-richness
-replacementList <- list()
-selectNear <- function(distances.between)#
-{#
-	#distances.between is a vector of distances between the focal cell and other cells#
-	#first exclude distances to the focal cell (and any other with distance = 0)#
-	distances.between <- distances.between[distances.between != 0]#
-	#now sample a cell name with a probability proportional to the inverse of the distance#
-	#from the focal cell#
-	newCell <- sample(x=names(distances.between), size=1, prob=1/distances.between)#
-	newCell#
-}
-head(matrix2sample(cdm))
-temp <- sample(x=cdm["cell32",], size=1, #
-				prob=cdm["cell32",])
-temp
-phylocom
-phylocom <- matrix(ncol=3, nrow=sum(richness))
-phylocom
-dim(phylocom)
-phylocom <- as.data.frame(phylocom)
-temp
-head(matrix2sample(cdm))
-phylocom
-head(phylocom)
-names(phylocom) <- c("plot", "abund", "id")
-head(phylocom)
-phylocom[1,] <- c("cell1",10,"sp1")
-head(phylocom)
-phylocom[phylocom$plot=="cell1",]
-head(phylocom)
-phylocom <- matrix(ncol=3, nrow=sum(richness), 0)#
-		phylocom <- as.data.frame(phylocom)#
-		#give it appropriate names#
-		names(phylocom) <- c("plot", "abund", "id")
-head(phylocom)
-phylocom[1,] <- c("cell1",10,"sp1")
-phylocom[phylocom$plot=="cell1",]
-row.names(cdm)[1]
-row.names(cdm)[11]
-phylocom[phylocom$plot==row.names(cdm)[1],]$id
-phylocom[1,] <- c("cell1",10,"sp19")
-phylocom[phylocom$plot==row.names(cdm)[1],]$id
-phylocom[11,] <- c("cell1",10,"sp21")
-phylocom[phylocom$plot==row.names(cdm)[1],]$id
-head(phylocom)
-phylocom == c(0,0,0)
-head(phylocom == c(0,0,0))
-temp
-row.names(temp)
-temp+1
-names(temp)
-dispersalNull <- function(cdm, distances.among)#
-{#
-	#create a check to ensure that all species that occur in the cdm are also in the tree#
-	if(length(setdiff(names(cdm),tree$tip.label))!=0)#
-	{#
-		stop("You have included species in your cdm that are not in your phylogeny")#
-	}#
-	#create a check to ensure that cdm and distances.among contain the same exact cells#
-	if(length(setdiff(row.names(cdm), row.names(distances.among))) != 0 &#
-		length(setdiff(row.names(distances.among), row.names(cdm))) != 0)#
-	{#
-		stop("Your cdm quadrat names and distance matrix names do no match")#
-	}#
-	#create a check to ensure that cdm and distances.among are in the same order cell-wise#
-	if(any(row.names(cdm)!=row.names(distances)))#
-	{#
-		stop("Your cdm and distance matrix are not in the same quadrat order")#
-	}#
-#
-	#calculate species richness of input cdm. for each quadrat, sample a grid cell based#
-	#on its proximity to the quadrat in question (this is your sampleNear function), then #
-	#sample a species based on its abundance in the sampled grid cell. if that species is#
-	#already included in the replacement quadrat, run this over again. do this entire loop#
-	#per quadrat while the length of replacement species is < the observed richness for#
-	#that quadrat#
-	richness <- apply(cdm, 1, lengthNonZeros)#
-#
-	#create a list that you will use to save vectors of species into (one list element#
-	#per quadrat)#
-	replacementList <- list()#
-	for(i in 1:dim(cdm)[1])#
-	{#
-		#create an empty data frame in phylocom format#
-		phylocom <- matrix(ncol=3, nrow=sum(richness), 0)#
-		phylocom <- as.data.frame(phylocom)#
-		#give it appropriate names#
-		names(phylocom) <- c("plot", "abund", "id")#
-		#start the while loop. set j equal to 0. this will be like a row ID. each time#
-		#an appropriate species is found, it will add one to the ID and move along the#
-		#phylocom df#
-		j <- 0#
-		while(length(tempQuadrat) < richness[i])#
-		{#
-			#select the quadrat you will sample from. give your selectNear a column from#
-			#the distance matrix#
-			selectedQuadrat <- selectNear(distances.among[,i])#
-			#select a species from that quadrat. probability proportional to abundance#
-			temp <- sample(x=cdm[selectedQuadrat,], size=1, #
-				prob=cdm[selectedQuadrat,])#
-			#if the species selected is not found in that quadrat in the growing phylocom#
-			#data frame, add the relevant info to that frame#
-			if(!(names(temp) %in% phylocom[phylocom$plot==row.names(cdm)[i],]$id))#
-			{#
-				j <- j+1#
-				phylocom[j,1] <- row.names(temp)#
-				phylocom[j,2] <- temp#
-				phylocom[j,3] <- names(temp)#
-			}#
-		}#
-		#convert the phylocom sample back to a matrix#
-		newCDM <- sample2matrix(phylocom)#
-	}#
-	newCDM#
-}
-test <- dispersalNull(cdm, distances)
-length(phylocom[phylocom$plot==row.names(cdm)[i],]$id)
-length(phylocom[phylocom$plot==row.names(cdm)[1],]$id)
 head(phylocom)
 dispersalNull <- function(cdm, distances.among)#
 {#
@@ -1205,5 +876,171 @@ head(temp)
 64000/60
 64000/24
 64000/24/365
+paste("a","b","C",sep="")
+2660-250-200-100-130-1300-170
+870-650-120-80
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")#
+#
+temp <- rnorm(100)#
+#
+filename <- paste(prefixBoth, ".RDS", sep="")#
+#
+for(i in 1:3)#
+{#
+	newFilename <- paste("iteration", i, filename, sep="")#
+	saveRDS(temp, file=newFilename)#
+}
+0.1*8*50
+1.5*5
+1.035*3.3/2.5
+1.036*3.3/2.5
+5.5/2
+1.036*2.75/2.5
+250/35
+6.6*35
+231/5
+230/35
+0.34/10*7.5
+0.1/2.7*8.5
+.34*7.5
+0.1*8.5
+640/12
+53/4
+53/3
+library(metricTester)#
+#
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")#
+#
+system.time(multiLinker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=3.5, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="both", randomizations=1000, cores=4, cluster=FALSE, iterations=1,#
+	prefix=prefixBoth,#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS)))
+.1*16*50
+20*16*0.12
+library(metricTester)#
+#
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")
+?metricsNnulls
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=20, cluster=FALSE)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
+50*0.7*16
+50*0.07*16
+50*0.2*16
+50*0.08*20
+metricsNnulls(tree=tree, #
+		picante.cdm=cdm, regional.abundance=NULL,#
+		cores=1, cluster=TRUE, randomizations=randomizations, metrics=NULL, nulls=NULL)
+metricsNnulls(tree=tree, #
+		picante.cdm=cdm, regional.abundance=NULL,#
+		cores=1, cluster=TRUE, randomizations=randomizations, metrics=NULL, nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS))
+dim(cdm)
+lat <- rnorm(50)
+long <- rnorm(50)
+temp <- data.frame(lat,long)
+dists <- dist(temp)
+metricsNnulls(tree=tree, #
+		picante.cdm=cdm, regional.abundance=NULL, distances.among=dists,#
+		cores=1, cluster=TRUE, randomizations=randomizations, metrics=NULL, nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS))
+metricsNnulls(tree=tree, #
+		picante.cdm=cdm, regional.abundance=NULL, distances.among=dists,#
+		cores=1, cluster=TRUE, randomizations=3, metrics=NULL, nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS))
+metricsNnulls(tree=tree, #
+		picante.cdm=cdm, regional.abundance=NULL, distances.among=dists,#
+		cores=16, cluster=TRUE, randomizations=3, metrics=NULL, nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS))
+metricsNnulls(tree=tree, #
+		picante.cdm=cdm, regional.abundance=NULL, distances.among=dists,#
+		cores=100, cluster=TRUE, randomizations=3, metrics=NULL, nulls=list("twoX"=metricTester:::my_2x, "threeX"=metricTester:::my_3x, "oneS"=metricTester:::my_1s,#
+	"regional"=metricTester:::my_regional, "richness"=metricTester:::my_richnessNull, "frequency"=metricTester:::my_frequency,#
+	"independent_swap"=metricTester:::my_IS, "trial_swap"=metricTester:::my_TS))
+ls()
+50*0.07*32
+50*0.07*20
+50*0.12*14
+50*0.065*32
+50*0.065*20
 library(devtools)
 load_all()
+?prepData
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+prepped <- prepData(tree, cdm)
+cophenetic(tree)
+class(cophenetic(tree))
+temp <- cophenetic(tree)
+prepData(temp, cdm)
+colnames(cdm)
+row.names(temp)
+length(setdiff(colnames(picante.cdm), row.names(tree))) > 0
+length(setdiff(colnames(cdm), row.names(tree))) > 0
+length(setdiff(colnames(cdm), row.names(temp))) > 0
+is.phylo(tree)
+is.matrix(temp)
+is.matrix(tree)
+length(setdiff(colnames(cdm), row.names(temp))) > 0
+length(row.names(temp), setdiff(colnames(cdm))) > 0
+length(row.names(temp), colnames(cdm))) > 0
+length(row.names(temp), colnames(cdm)) > 0
+length(setdiff(row.names(temp), colnames(cdm))) > 0
+setdiff(row.names(temp), colnames(cdm))
+load_all()
+load_all()
+prepped <- prepData(tree, cdm)
+prepped
+prepped <- prepData(temp, cdm)
+load_all()
+prepped <- prepData(temp, cdm)
+load_all()
+prepped <- prepData(temp, cdm)
+prepped <- prepData(tree=tree, picante.cdm=cdm, optional.dists=temp)
+load_all()
+prepped <- prepData(tree=tree, picante.cdm=cdm, optional.dists=temp)
+prepped
+install_github("metricTester", username="eliotmiller")
