@@ -3,10 +3,19 @@
 \alias{sesSingle}
 \title{Summary of results from a single iteration}
 \usage{
-sesSingle(single.iteration)
+sesSingle(single.iteration, concat.by)
 }
 \arguments{
 \item{single.iteration}{The results of a single iteration from multiLinker.}
+
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+}
+\value{
+A data frame summarizing the mean of standardized effect sizes and the
+significance of those devations from expectations for a given iteration (e.g. the
+quadrats from a given arena). It does consider all spatial simulations, nulls and
+metrics from that iteration. This test works across a single iteration, and will
+generally not be used by itself; it is called by sesIndiv.
 }
 \description{
 Use Wilcoxon signed rank test to determine whether quadrats from a SINGLE iteration

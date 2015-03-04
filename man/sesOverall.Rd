@@ -12,7 +12,13 @@ reduceResults(). See examples.}
 \item{test}{Either "ttest" or "wilcotest", depending on whether the user wants to run
 a two-sided t-test or a Wilcoxon signed rank test.}
 
-\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both}
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+}
+\value{
+A data frame summarizing the mean, overall standardized effect sizes and the
+significance of those devations from expectations for each simulation, null, metric
+combination. This test works across all iterations, and looks for overall shifts in
+SES from expectations (see details for for expectations).
 }
 \description{
 This function provides one of many ways of summarizing and considering simulation

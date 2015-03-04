@@ -1,3 +1,85 @@
+phylocom[phylocom$plot=="cell1",]
+row.names(cdm)[1]
+row.names(cdm)[11]
+phylocom[phylocom$plot==row.names(cdm)[1],]$id
+phylocom[1,] <- c("cell1",10,"sp19")
+phylocom[phylocom$plot==row.names(cdm)[1],]$id
+phylocom[11,] <- c("cell1",10,"sp21")
+phylocom[phylocom$plot==row.names(cdm)[1],]$id
+head(phylocom)
+phylocom == c(0,0,0)
+head(phylocom == c(0,0,0))
+temp
+row.names(temp)
+temp+1
+names(temp)
+dispersalNull <- function(cdm, distances.among)#
+{#
+	#create a check to ensure that all species that occur in the cdm are also in the tree#
+	if(length(setdiff(names(cdm),tree$tip.label))!=0)#
+	{#
+		stop("You have included species in your cdm that are not in your phylogeny")#
+	}#
+	#create a check to ensure that cdm and distances.among contain the same exact cells#
+	if(length(setdiff(row.names(cdm), row.names(distances.among))) != 0 &#
+		length(setdiff(row.names(distances.among), row.names(cdm))) != 0)#
+	{#
+		stop("Your cdm quadrat names and distance matrix names do no match")#
+	}#
+	#create a check to ensure that cdm and distances.among are in the same order cell-wise#
+	if(any(row.names(cdm)!=row.names(distances)))#
+	{#
+		stop("Your cdm and distance matrix are not in the same quadrat order")#
+	}#
+#
+	#calculate species richness of input cdm. for each quadrat, sample a grid cell based#
+	#on its proximity to the quadrat in question (this is your sampleNear function), then #
+	#sample a species based on its abundance in the sampled grid cell. if that species is#
+	#already included in the replacement quadrat, run this over again. do this entire loop#
+	#per quadrat while the length of replacement species is < the observed richness for#
+	#that quadrat#
+	richness <- apply(cdm, 1, lengthNonZeros)#
+#
+	#create a list that you will use to save vectors of species into (one list element#
+	#per quadrat)#
+	replacementList <- list()#
+	for(i in 1:dim(cdm)[1])#
+	{#
+		#create an empty data frame in phylocom format#
+		phylocom <- matrix(ncol=3, nrow=sum(richness), 0)#
+		phylocom <- as.data.frame(phylocom)#
+		#give it appropriate names#
+		names(phylocom) <- c("plot", "abund", "id")#
+		#start the while loop. set j equal to 0. this will be like a row ID. each time#
+		#an appropriate species is found, it will add one to the ID and move along the#
+		#phylocom df#
+		j <- 0#
+		while(length(tempQuadrat) < richness[i])#
+		{#
+			#select the quadrat you will sample from. give your selectNear a column from#
+			#the distance matrix#
+			selectedQuadrat <- selectNear(distances.among[,i])#
+			#select a species from that quadrat. probability proportional to abundance#
+			temp <- sample(x=cdm[selectedQuadrat,], size=1, #
+				prob=cdm[selectedQuadrat,])#
+			#if the species selected is not found in that quadrat in the growing phylocom#
+			#data frame, add the relevant info to that frame#
+			if(!(names(temp) %in% phylocom[phylocom$plot==row.names(cdm)[i],]$id))#
+			{#
+				j <- j+1#
+				phylocom[j,1] <- row.names(temp)#
+				phylocom[j,2] <- temp#
+				phylocom[j,3] <- names(temp)#
+			}#
+		}#
+		#convert the phylocom sample back to a matrix#
+		newCDM <- sample2matrix(phylocom)#
+	}#
+	newCDM#
+}
+test <- dispersalNull(cdm, distances)
+length(phylocom[phylocom$plot==row.names(cdm)[i],]$id)
+length(phylocom[phylocom$plot==row.names(cdm)[1],]$id)
 head(phylocom)
 dispersalNull <- function(cdm, distances.among)#
 {#
@@ -1000,11 +1082,13 @@ ls()
 50*0.065*20
 library(devtools)
 load_all()
+load_all()
+load_all()
 ?prepData
-library(geiger)#
-library(picante)#
-#
-#simulate tree with birth-death process#
+document()
+document()
+temp <- cophenetic(tree)
+?prepData
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
@@ -1012,35 +1096,10 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
 #
 prepped <- prepData(tree, cdm)
-cophenetic(tree)
-class(cophenetic(tree))
 temp <- cophenetic(tree)
-prepData(temp, cdm)
-colnames(cdm)
-row.names(temp)
-length(setdiff(colnames(picante.cdm), row.names(tree))) > 0
-length(setdiff(colnames(cdm), row.names(tree))) > 0
-length(setdiff(colnames(cdm), row.names(temp))) > 0
-is.phylo(tree)
-is.matrix(temp)
-is.matrix(tree)
-length(setdiff(colnames(cdm), row.names(temp))) > 0
-length(row.names(temp), setdiff(colnames(cdm))) > 0
-length(row.names(temp), colnames(cdm))) > 0
-length(row.names(temp), colnames(cdm)) > 0
-length(setdiff(row.names(temp), colnames(cdm))) > 0
-setdiff(row.names(temp), colnames(cdm))
-load_all()
-load_all()
-prepped <- prepData(tree, cdm)
-prepped
-prepped <- prepData(temp, cdm)
-load_all()
-prepped <- prepData(temp, cdm)
-load_all()
-prepped <- prepData(temp, cdm)
-prepped <- prepData(tree=tree, picante.cdm=cdm, optional.dists=temp)
-load_all()
-prepped <- prepData(tree=tree, picante.cdm=cdm, optional.dists=temp)
-prepped
+head(temp)
+temp <- temp* -2
+test <- prepData(tree, cdm, temp)
+str(test)
+head(test$dists)
 install_github("metricTester", username="eliotmiller")

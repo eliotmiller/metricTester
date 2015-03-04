@@ -3,19 +3,29 @@
 \alias{failed}
 \title{Identify failed runs}
 \usage{
-failed(single.iteration)
+failed(single.iteration, concat.by)
 }
 \arguments{
 \item{single.iteration}{The results of a single iteration of multiLinker}
+
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+}
+\value{
+A data frame summarizing which simulation/null runs failed.
 }
 \description{
 This identifies spatial sim/null model runs that failed
 }
 \details{
 It is possible that a given null model, e.g. regional, failed on a given run.
-If this is the case, one can identify it with this function and remove it from the
-results of that iteration. This prevents errors further down the line when summarizing
-overall results.
+These failures, in my experience so far, can only occur if a given species richness is
+insufficiently sampled by the null model, then concat.by="richness". Otherwise, I
+believe the run will always succeed. Thus, to simplify coding, this function only
+evaluates the by "richness" runs for failure when concat.by="both". If it is possible
+for a null to fail if concatenating by quadrat then this function will need to be
+re-written. The main point of this function it to identify failed runs and later
+remove them from the results of a given iteration. This prevents errors further
+down the line when summarizing results.
 }
 \references{
 Miller, Trisos and Farine.

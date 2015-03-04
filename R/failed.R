@@ -3,18 +3,25 @@
 #' This identifies spatial sim/null model runs that failed
 #'
 #' @param single.iteration The results of a single iteration of multiLinker
+#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
 #'
 #' @details It is possible that a given null model, e.g. regional, failed on a given run. 
-#' If this is the case, one can identify it with this function and remove it from the
-#' results of that iteration. This prevents errors further down the line when summarizing
-#' overall results.
+#' These failures, in my experience so far, can only occur if a given species richness is
+#' insufficiently sampled by the null model, then concat.by="richness". Otherwise, I
+#' believe the run will always succeed. Thus, to simplify coding, this function only
+#' evaluates the by "richness" runs for failure when concat.by="both". If it is possible
+#' for a null to fail if concatenating by quadrat then this function will need to be
+#' re-written. The main point of this function it to identify failed runs and later
+#' remove them from the results of a given iteration. This prevents errors further
+#' down the line when summarizing results.
+#'
+#' @return A data frame summarizing which simulation/null runs failed.
 #'
 #' @export
 #'
 #' @references Miller, Trisos and Farine.
-#'
 
-failed <- function(single.iteration)
+failed <- function(single.iteration, concat.by)
 {
 	#it is really tough to properly go across each sub element within a single iteration
 	#result with lapply, so just get in there with some for loops and brute force it.
@@ -46,7 +53,18 @@ failed <- function(single.iteration)
 			#pull the relevant name for the null model
 			temp[rowID,2] <- names(single.iteration[[i]]$ses)[j]
 			#find the dimensions of the null model
-			dims <- dim(single.iteration[[i]]$ses[[j]])
+			if(concat.by=="richness" | concat.by=="quadrat")
+			{
+				dims <- dim(single.iteration[[i]]$ses[[j]])
+			}
+			else if(concat.by=="both")
+			{
+				dims <- dim(single.iteration[[i]]$ses[[j]]$richness)
+			}
+			else
+			{
+				stop("concat.by must equal either both, richness, or quadrat")
+			}
 			#set the relevant row equal to the dimensions
 			temp[rowID,3:4] <- dims
 			#now add a cheap fix to skip to next iteration of loop if the dimensions have
@@ -56,11 +74,19 @@ failed <- function(single.iteration)
 				next()
 			}
 			#otherwise go into the remainder of the for loop
-			#determine the length of NAs
-			lengthNA <- apply(apply(single.iteration[[i]]$ses[[j]], 2, is.na), 2, sum)
-			#determine the length of each column period
-			lengthCol <- apply(single.iteration[[i]]$ses[[j]], 2, length)
-			#pull the element named "richness" from each of these
+			#determine the length of each column and of NAs per column
+			if(concat.by=="richness" | concat.by=="quadrat")
+			{
+				lengthNA <- apply(apply(single.iteration[[i]]$ses[[j]], 2, is.na), 2, sum)
+				lengthCol <- apply(single.iteration[[i]]$ses[[j]], 2, length)
+			}
+			else
+			{
+				lengthNA <- apply(apply(single.iteration[[i]]$ses[[j]]$richness, 
+					2, is.na), 2, sum)
+				lengthCol <- apply(single.iteration[[i]]$ses[[j]]$richness, 2, length)
+			}
+			#delete the element named "richness" from each of these
 			lengthNA <- lengthNA[names(lengthNA) != "richness"]
 			lengthCol <- lengthCol[names(lengthCol) != "richness"]
 			#now if these things are ever equal there is a problem

@@ -7,7 +7,7 @@
 #' reduceResults(). See examples.
 #' @param test Either "ttest" or "wilcotest", depending on whether the user wants to run
 #' a two-sided t-test or a Wilcoxon signed rank test.
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both
+#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
 #'
 #' @details This function provides one way of summarizing and considering simulation
 #' results. It takes as input a vector of all standardized effect sizes for all quadrats
@@ -16,6 +16,11 @@
 #' simple two-sided t-test, or with a Wilcoxon signed rank test. If the latter, and if
 #' there are three different spatial simulations with names random, filtering and
 #' competition, the test is two-sided, less and greater, respectively. 
+#'
+#' @return A data frame summarizing the mean, overall standardized effect sizes and the
+#' significance of those devations from expectations for each simulation, null, metric
+#' combination. This test works across all iterations, and looks for overall shifts in
+#' SES from expectations (see details for for expectations).
 #'
 #' @export
 #'
@@ -118,7 +123,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 			}
 			#set the ith element of tempAll equal to the list tempNull
 			tempAll[[i]] <- tempNull
-			#reduce the list down to put into similar format to if you concat by rich or q
+			#reduce the list down
 			tempAll[[i]] <- Reduce(rbind, tempAll[[i]])
 			#repeat the sim name the correct length and bind
 			tempAll[[i]]$simulation <- rep(names(simulation.list[i]),

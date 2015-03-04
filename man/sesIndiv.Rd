@@ -3,11 +3,18 @@
 \alias{sesIndiv}
 \title{Summary statistics of SES results}
 \usage{
-sesIndiv(raw.results)
+sesIndiv(raw.results, concat.by)
 }
 \arguments{
 \item{raw.results}{A list of lists of lists of dataframes; the results of a call to
 readIn.}
+
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+}
+\value{
+A data frame summarizing the total number of runs per spatial simulation, null,
+metric, concat.by combination, as well as the type I and II error rates of each such
+unique combination.
 }
 \description{
 Summarizes individual iteration performance of each sim/null/metric combination across
@@ -17,7 +24,13 @@ all iterations
 This function takes a raw list of results from multiple iterations from
 multiLinker, and runs sesSingle across each one. It then summarizes the results of
 those single runs as the number of sim/null/metrics that deviated beyond expectations
-and the number that were within expectations.
+and the number that were within expectations. A given unique sim/null/concat.by/metric
+combination iteration is considered as throwing a type I error only if p is less
+than or equal to 0.05 for the random spatial simulation. It would be possible to also
+assess whether such unique combinations throw the opposite signal than expected for
+habitat filtering and competitive exclusion. A unique combination iteration is
+considered to throw a type II error if the p value from  either the filtering or the
+exclusion simulation is greater than 0.05.
 }
 \examples{
 #not run

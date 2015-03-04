@@ -1,10 +1,46 @@
-#' Fill in soon
+#' Generate expectations for null+metric combinations
 #'
-#' Fill in later
+#' Will generate mean, SD and CI expectations for the desired metric + null combinations.
 #'
-#' @details Fill in later
+#' @param picante.cdm A picante-style community data matrix with sites as rows, and
+#' species as columns
+#' @param tree Phylo object
+#' @param optional.dists A symmetric distance matrix can be directly supplied. This option
+#' is experimental. Performance depends on metric being used. If the metric in question
+#' relies on the dists element of the result of this function, then this optional distance
+#' matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still
+#' employ the tree data.
+#' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
+#' Optional, will be generated from the input CDM if not provided.
+#' @param distances.among A symmetric distance matrix, summarizing the distances among all
+#' quadrats from the cdm. Optional, only used by some null models.
+#' @param randomizations The number of times the input CDM should be randomized and the
+#' metrics calculated across it.
+#' @param cores This function can run in parallel. In order to do so, the user must
+#' specify the desired number of cores to utilize.
+#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
+#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
+#' parallel processing on cluster. However, currently causing errors due to namespace
+#' issues with doParallel vs doMC.
+#' @param metrics Optional list of named metric functions to use. These
+#' must be defined in the defineMetrics function. If invoked, this option will likely
+#' be used to run a subset of the defined metrics.
+#' @param nulls Optional list of named null model functions to use. These
+#' must be defined in the defineNulls function. If invoked, this option will likely
+#' be used to run a subset of the defined null models.
+#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
+#' @param output.raw Default is FALSE. Set to TRUE if you prefer raw randomized values as
+#' opposed to summarized mean, SD, CI, etc.
 #'
-#' @return Fill in later
+#' @details Given a list of desired metrics (which should always include richness) and
+#' null models, will generate the expected mean, standard deviation and confidence
+#' intervals based on the number of specified randomizations. This function is flexible in
+#' that new metrics and nulls can be added and tested with it. By setting output.raw to
+#' TRUE, the function can also output raw randomized values as opposed to the summarized
+#' values.
+#'
+#' @return A list of data frames, where each data frame corresponds to a given null model,
+#' and contains the mean, SD, and CI for each metric for that null model.
 #'
 #' @export
 #'
