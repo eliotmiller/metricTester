@@ -144,9 +144,10 @@ sesOverall <- function(simulation.list, test, concat.by)
 	
 		output$simulation <- simNames
 	
-		output <- dplyr::select(output, simulation, null.model, metric, estimate, p.value)
-	
 		output <- cbind(output, concat.by=rep(concat.by, dim(output)[1]))
+	
+		output <- dplyr::select(output, simulation, null.model, metric, concat.by,
+			estimate, p.value)		
 	}
 	
 	else if(concat.by=="both")

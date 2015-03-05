@@ -3,7 +3,7 @@
 \alias{prepData}
 \title{Prep data to test phylogenetic community structure metrics}
 \usage{
-prepData(tree, picante.cdm, optional.dists)
+prepData(tree, picante.cdm, optional.dists = NULL)
 }
 \arguments{
 \item{tree}{Phylo object.}
@@ -11,7 +11,8 @@ prepData(tree, picante.cdm, optional.dists)
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
 species as columns}
 
-\item{optional.dists}{A symmetric distance matrix can be directly supplied. This option is
+\item{optional.dists}{A symmetric distance matrix describing the pairwise distances
+among species can be directly supplied. This option is
 experimental. Performance depends on the metric being used. If the metric in question
 relies on the dists element of the result of this function, then this optional distance
 matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still

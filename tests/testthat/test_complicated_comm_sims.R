@@ -4,7 +4,13 @@ context("Complicated community simulations and component functions for final sim
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
-rawResults <- metricsNnulls(tree, cdm, randomizations=3)
+abund <- abundanceVector(cdm)
+coords <- data.frame(lat=rnorm(n=16, mean=20, sd=1), long=rnorm(16, mean=100, sd=1))
+dists <- as.matrix(dist(coords, diag=T, upper=T))
+row.names(dists) <- row.names(cdm)
+colnames(dists) <- row.names(cdm)
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, regional.abundance=abund,
+	distances.among=dists, randomizations=3)
 results <- reduceRandomizations(rawResults)
 observed <- observedMetrics(tree, cdm)
 test1 <- errorChecker(observed, results, "richness")

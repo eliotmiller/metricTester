@@ -14,6 +14,9 @@ species as columns}
 
 \item{regional.abundance}{A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 Optional, will be generated from the input CDM if not provided.}
+
+\item{distances.among}{An optional symmetric distance matrix describing the distances
+among quadrats/cells/communities/etc, for use with null models like the dispersal null.}
 }
 \value{
 A list of class nulls.input

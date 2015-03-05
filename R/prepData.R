@@ -6,7 +6,8 @@
 #' @param tree Phylo object. 
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
-#' @param optional.dists A symmetric distance matrix can be directly supplied. This option is
+#' @param optional.dists A symmetric distance matrix describing the pairwise distances
+#' among species can be directly supplied. This option is
 #' experimental. Performance depends on the metric being used. If the metric in question
 #' relies on the dists element of the result of this function, then this optional distance
 #' matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still
@@ -38,9 +39,9 @@
 #'
 #' prepped <- prepData(tree, cdm)
 
-prepData <- function(tree, picante.cdm, optional.dists)
+prepData <- function(tree, picante.cdm, optional.dists=NULL)
 {
-	if(!missing(optional.dists))
+	if(!is.null(optional.dists))
 	{
 		#this is a very rudimentary check to see if the optional distance matrix contains
 		#all spp that are in the CDM. note that it can contain species that are not in the
