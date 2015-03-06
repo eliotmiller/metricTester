@@ -37,16 +37,20 @@
 
 makeCDM <- function(single.simulation, no.quadrats, quadrat.length)
 {
-	bounds <- quadratPlacer(no.quadrats, max(single.simulation$dims), quadrat.length)
-	tempResults <- quadratContents(arena=single.simulation$arena, bounds)
+	#use the quadratPlacer function to get the bounds of quadrats (notice we do not get
+	#the dists here)
+	temp1 <- quadratPlacer(no.quadrats, max(single.simulation$dims), quadrat.length)
+	bounds <- temp1$quadrat.bounds
+	temp2 <- quadratContents(arena=single.simulation$arena, quadratPlacer.results=temp1)
 	if(is.null(single.simulation$regional.abundance))
 	{
-		regional.abundance <- abundanceVector(tempResults)
+		regional.abundance <- abundanceVector(temp2$cdm)
 	}
 	else
 	{
 		regional.abundance <- single.simulation$regional.abundance
 	}
-	results <- list("regional.abundance"=regional.abundance, "cdm"=tempResults)
+	results <- list("regional.abundance"=regional.abundance, "dists"=temp2$dists,
+		"cdm"=temp2$cdm)
 	results
 }

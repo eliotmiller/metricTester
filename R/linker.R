@@ -88,14 +88,16 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 	#derive CDMs. quadrats are placed in the same places across all spatial simulations
 	cdms <- multiCDM(arenas, no.quadrats, quadrat.length)
 	#calculate observed metrics for all three spatial simulations
-	observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x, metrics))
+	observed <- lapply(cdms, function(x) observedMetrics(tree=tree, 
+		picante.cdm=x$cdm, metrics))
 	#randomize all observed CDMs the desired number of times. this will generate a list of
 	#lists of data frames. first level of list is for each spatial simulation (e.g. 3 if
 	#there is random, habitat filtering and competitive exclusion). second level is for
 	#randomizations, one for each. third level is data frames, one per null model
 	allRandomizations <- lapply(1:length(cdms), function(x) metricsNnulls(tree=tree, 
-		picante.cdm=cdms[[x]], regional.abundance=arenas[[x]]$regional.abundance,
-		cores=cores, cluster, randomizations=randomizations, metrics, nulls=nulls))
+		picante.cdm=cdms[[x]]$cdm, regional.abundance=arenas[[x]]$regional.abundance,
+		distances.among=arenas[[x]]$dists, cores=cores, cluster, 
+		randomizations=randomizations, metrics, nulls=nulls))
 	#reduce the randomizations to a list of lists of (first order of lists is for each
 	#spatial simulation) data frames
 	reduced <- lapply(allRandomizations, reduceRandomizations)

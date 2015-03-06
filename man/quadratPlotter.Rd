@@ -43,7 +43,8 @@ positions <- filteringArena(prepped)
 plot(positions$arena$X, positions$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300),
 col=cols[positions$arena$individuals])
 
-bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300,
+	quadrat.length=50)$quadrat.bounds
 
 quadratPlotter(bounds)
 }

@@ -1,3 +1,79 @@
+head(test)
+?prepNulls
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+prepped <- prepNulls(tree, cdm)
+head(cdm)
+runNulls(prepped)
+Sys.time()
+prefix
+runif(10, 0, 10)
+round(runif(10, 0, 10))
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)
+prefix1
+?gsub
+?sub
+prefix1 <- gsub("[:]", "", prefix1)
+prefix1
+prefix2 <- round(runif(100, 1, 100))
+prefix2
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)
+prefix2
+prefix <- paste(prefix1, prefix2, sep="")
+prefix
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefix <- paste(prefix1, prefix2, sep="_")
+prefi
+prefix
+8*5
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")
+prefixBoth
+346395.6/60/60
+96/24
+96/20
+24*7
+168/4.8
+library(metricTester)
+defineMetrics()
+defineNulls()
+8*0.07
+4*1000
+4000/24
+library(metricTester)
+?dispersalNull
+expectations
+expectation
+library(metricTester)
+?metricsNnulls
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
+str(rawResults,2)
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE, nulls=list("dispersal"=metricTester:::dispersalNull), metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd))
 library(metricTester)
 defineMetrics()
 raoD
@@ -205,358 +281,199 @@ library(geiger)
 ?fitContinuousMCMC
 library(devtools)
 load_all()
-ses.null1 <- matrix(nrow=10, ncol=4)#
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+bounds
+apply(bounds[,1:2], 1, mean)
+temp <- apply(quadrat.bounds[,1:2], 1, mean)
+temp <- apply(bounds[,1:2], 1, mean)
+temp
+data.frame(temp, temp)
+x.centers <- apply(bounds[,1:2], 1, mean)#
+	y.centers <- apply(bounds[,3:4], 1, mean)#
+	centers <- data.frame(x.center=x.centers, y.center=y.centers)
+centers
+load_all()
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+bounds
+load_all()
+load_all()
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+bounds
+?multiCDM
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-ses.null1 <- as.data.frame(ses.null1)#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+	length.parameter=1000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+	competition.iterations=5)#
 #
-ses.null1[,1] <- 10:19#
-ses.null1[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1[,3] <- rnorm(n=10, mean=5, sd=1)#
-ses.null1[,4] <- rnorm(n=10, mean=-5, sd=1)#
+#run the spatial simulations#
+arenas <- runSimulations(prepped)
+cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+str(arenas)
+load_all()
+cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+?makeCDM
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-names(ses.null1) <- c("richness","metric1","metric2","metric3")#
+#prep the data for the simulation#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+competition.iterations=3)#
 #
-quadrat.null1 <- ses.null1#
+competition <- competitionArena(prepped)#
 #
-quadrat.null1[,2] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1[,3] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1[,4] <- sample(c(0,1,2), 10, replace=TRUE)#
+test <- makeCDM(competition, 15, 30)
+temp <- quadratPlacer(15, max(competition$dims), 30)
+temp
+load_all()
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-ses.null2 <- ses.null1#
-quadrat.null2 <- quadrat.null1#
+#prep the data for the simulation#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+competition.iterations=3)#
 #
-ses1 <- list("null1"=ses.null1, "null2"=ses.null2)#
-quadrat1 <- list("null1"=quadrat.null1, "null2"=quadrat.null2)#
+competition <- competitionArena(prepped)#
 #
-random1 <- list("ses"=ses1, "quadrat"=quadrat1)#
-#
-fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=random1)#
-#
-results <- list("iteration1"=fake.results1, "iteration2"=fake.results1)#
-#
-#now summarize these results#
-resultsSumm <- reduceResults(results, "richness")#
-#
-#generate some temporary results#
-failedTemp <- failed(results[[1]], "richness")#
-sesSingleTemp <- sesSingle(results[[1]], "richness")#
-sesIndivTemp <- sesIndiv(results, "richness")#
-sesOverallTemp <- sesOverall(resultsSumm$ses, test="wilcotest", concat.by="richness")
-warnings()
-sesSingleTemp
-?test
-test(filter="test_post_sim_analyses.R")
-test(filter="test_post_sim_analyses.R")
-test(filter="test_post_sim_analyses")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
+test <- makeCDM(competition, 15, 30)
 test
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+	length.parameter=1000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+	competition.iterations=5)#
+#
+#run the spatial simulations#
+arenas <- runSimulations(prepped)#
+#
+#derive CDMs. quadrats are placed in the same places across all spatial simulations#
+cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+cdms
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+	length.parameter=1000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+	competition.iterations=5)#
+#
+#run the spatial simulations#
+arenas <- runSimulations(prepped)#
+#
+#derive CDMs. quadrats are placed in the same places across all spatial simulations#
+cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+cdms
+load_all()
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+	length.parameter=1000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+	competition.iterations=5)#
+#
+#run the spatial simulations#
+arenas <- runSimulations(prepped)#
+#
+#derive CDMs. quadrats are placed in the same places across all spatial simulations#
+cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+cdms
+load_all()
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+prepped <- prepSimulations(tree=tree, arena.length=300, mean.log.individuals=2, length.parameter=5000, #
+		sd.parameter=50, max.distance=30, proportion.killed=0.2, competition.iterations=2)
+arenas <- runSimulations(prepped, simulations)
+simulations <- NULL
+arenas <- runSimulations(prepped, simulations)
+cdms <- multiCDM(arenas, no.quadrats=15, quadrat.length=30)
+cdms
+observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x, metrics))
+observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x$cdm, metrics))
+nulls <- NULL
+metrics <- NULL
+observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x$cdm, metrics))
+observed
+allRandomizations <- lapply(1:length(cdms), function(x) metricsNnulls(tree=tree, #
+		picante.cdm=cdms[[x]]$cdm, regional.abundance=arenas[[x]]$regional.abundance,#
+		cores=cores, cluster, randomizations=randomizations, metrics, nulls=nulls))
+centers
+dist(centers)
+load_all()
+cdms <- multiCDM(arenas, no.quadrats=15, quadrat.length=30)
+cdms
+observed <- lapply(cdms, function(x) observedMetrics(tree=tree, picante.cdm=x$cdm, metrics))
+observed
+allRandomizations <- lapply(1:length(cdms), function(x) metricsNnulls(tree=tree, #
+		picante.cdm=cdms[[x]]$cdm, regional.abundance=arenas[[x]]$regional.abundance,#
+		distances.among=arenas[[x]]$dists, cores=3, cluster=FALSE, #
+		randomizations=3, metrics, nulls=nulls))
+?metricsNnulls
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
+cdm
+cdms
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdms$competition$cdm, distances.among=cdms$competition$dists, randomizations=3, cores=1, cluster=FALSE)
+prepNulls(tree=tree, picante.cdm=cdms$competition$cdm, distances.among=cdms$competition$dists)
+cdms$competition$dists
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdms$competition$cdm, distances.among=cdms$competition$dists, randomizations=3, cores=1, cluster=FALSE)
+load_all()
+test <- makeCDM(competition, 15, 30)
 test
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-sesIndivTemp
-dim(sesIndivTemp)
-test(filter="post_sim")
-dim(sesIndivTemp)
-dim(sesIndivTemp)
-test(filter="post_sim")
-test(filter="post_sim")
-sesIndivTemp[1,"typeI"]
-sesIndivTemp
-sesIndivTemp[1,"typeII"]
-is.na(sesIndivTemp[1,"typeII"])
-is.na(sesIndivTemp[1,"typeII"])
-expect_true(is.na(sesIndivTemp[1,"typeII"]))
-test(filter="post_sim")
-test(filter="post_sim")
-sesOverallTemp
-dim(sesOverallTemp)
-test(filter="post_sim")
-test(filter="post_sim")
-temp <- readIn()
-str(temp,2)
-str(temp[[1]],2)
-str(temp[[1]][[1]],2)
-ses.null1.byrichness <- matrix(nrow=10, ncol=4)#
+load_all()
+?quadratContents
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-ses.null1.byrichness <- as.data.frame(ses.null1.byrichness)#
+temp <- evolveTraits(tree)#
 #
-ses.null1.byrichness[,1] <- 10:19#
-ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1.byrichness[,3] <- rnorm(n=10, mean=115, sd=1)#
-ses.null1.byrichness[,4] <- rnorm(n=10, mean=-115, sd=1)#
+phydistmatrix <- cophenetic(temp[[1]])#
 #
-names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
 #
-ses.null1.byquadrat <- ses.null1.byquadrat#
-ses.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(ses.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")
-ses.null1.byrichness <- matrix(nrow=10, ncol=4)#
+#prep the data for the simulation#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+competition.iterations=3)#
 #
-ses.null1.byrichness <- as.data.frame(ses.null1.byrichness)#
+singleArena <- filteringArena(prepped)
+load_all()
+?quadratContents
+document()
+?quadratContents
+?quadratContents
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
 #
-ses.null1.byrichness[,1] <- 10:19#
-ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1.byrichness[,3] <- rnorm(n=10, mean=115, sd=1)#
-ses.null1.byrichness[,4] <- rnorm(n=10, mean=-115, sd=1)#
+temp <- evolveTraits(tree)#
 #
-names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")#
+phydistmatrix <- cophenetic(temp[[1]])#
 #
-ses.null1.byquadrat <- ses.null1.byrichness#
-ses.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(ses.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")
-ses.null1.byquadrat
-str(temp[[1]][[1]][[1]],2)
-str(temp[[1]][[1]][[1]][[1]],2)
-str(temp[[1]][[1]][[1]],2)
-str(temp[[1]][[1]],2)
-ses.null1.byrichness <- matrix(nrow=10, ncol=4)#
+#define a color for each species#
+cols <- blue2green2red(nrow(phydistmatrix))#
 #
-ses.null1.byrichness <- as.data.frame(ses.null1.byrichness)#
+#prep the data for the simulation#
+prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,#
+length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,#
+competition.iterations=3)#
 #
-ses.null1.byrichness[,1] <- 10:19#
-ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1.byrichness[,3] <- rnorm(n=10, mean=115, sd=1)#
-ses.null1.byrichness[,4] <- rnorm(n=10, mean=-115, sd=1)#
+singleArena <- filteringArena(prepped)#
 #
-names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")#
+#plot the arena. don't close the window#
+plot(singleArena$arena$X, singleArena$arena$Y, pch=20, cex=0.5, xlim=c(0,300),#
+	ylim=c(0,300), col=cols[singleArena$arena$individuals])#
 #
-ses.null1.byquadrat <- ses.null1.byrichness#
-ses.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(ses.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")#
-#
-quadrat.null1.byrichness <- ses.null1.byrichness#
-#
-quadrat.null1.byrichness[,2] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1.byrichness[,3] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1.byrichness[,4] <- sample(c(0,1,2), 10, replace=TRUE)#
-#
-quadrat.null1.byquadrat <- quadrat.null1.byrichness#
-quadrat.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(quadrat.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")#
-#
-ses.null1 <- list("richness"=ses.null1.byrichness, "quadrat"=ses.null1.byquadrat)
-ses.null1
-quadrat.null1 <- list("richness"=quadrat.null1.byrichness,#
-	"quadrat"=quadrat.null1.byquadrat)
-quadrat.null1
-ses1
-str(temp[[1]])
-str(temp[[1]],2)
-#create a list of results like what you'd expect if concat.by = "both"#
-#
-ses.null1.byrichness <- matrix(nrow=10, ncol=4)#
-#
-ses.null1.byrichness <- as.data.frame(ses.null1.byrichness)#
-#
-ses.null1.byrichness[,1] <- 10:19#
-ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1.byrichness[,3] <- rnorm(n=10, mean=115, sd=1)#
-ses.null1.byrichness[,4] <- rnorm(n=10, mean=-115, sd=1)#
-#
-names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")#
-#
-ses.null1.byquadrat <- ses.null1.byrichness#
-ses.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(ses.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")#
-#
-quadrat.null1.byrichness <- ses.null1.byrichness#
-#
-quadrat.null1.byrichness[,2] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1.byrichness[,3] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1.byrichness[,4] <- sample(c(0,1,2), 10, replace=TRUE)#
-#
-quadrat.null1.byquadrat <- quadrat.null1.byrichness#
-quadrat.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(quadrat.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")#
-#
-ses.null1 <- list("richness"=ses.null1.byrichness, "quadrat"=ses.null1.byquadrat)#
-#
-ses1 <- list("null1"=ses.null1, "null2"= ses.null1)#
-#
-quadrat.null1 <- list("richness"=quadrat.null1.byrichness,#
-	"quadrat"=quadrat.null1.byquadrat)#
-#
-quadrat1 <- list("null1"=quadrat.null1, "null2"=quadrat.null1)#
-#
-random1 <- list("ses"=ses1, "quadrat"=quadrat1)#
-#
-fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=random1)#
-#
-results <- list("iteration1"=fake.results1, "iteration2"=fake.results1)#
-#
-#now summarize these results#
-resultsSumm <- reduceResults(results, "both")
-str(resultsSumm,2)
-str(results,2)
-str(results[[1]],2)
-failedTemp <- failed(results[[1]], "both")#
-sesSingleTemp <- sesSingle(results[[1]], "both")#
-sesIndivTemp <- sesIndiv(results, "both")#
-sesOverallTemp <- sesOverall(resultsSumm$ses, test="wilcotest", concat.by="both")
-failedTemp
-sesSingleTemp
-sesIndivTemp
-sesOverallTemop
-sesOverallTemp
-dim(sesSingleTemp)
-sesSingleTemp
-sesIndivTemp
-dim(sesIndivTemp)
-test(filter="post_sim")
-test(filter="post_sim")
-ses.null1 <- matrix(nrow=10, ncol=4)#
-#
-ses.null1 <- as.data.frame(ses.null1)#
-#
-ses.null1[,1] <- 10:19#
-ses.null1[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1[,3] <- rnorm(n=10, mean=115, sd=1)#
-ses.null1[,4] <- rnorm(n=10, mean=-115, sd=1)#
-#
-names(ses.null1) <- c("richness","metric1","metric2","metric3")#
-#
-quadrat.null1 <- ses.null1#
-#
-quadrat.null1[,2] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1[,3] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1[,4] <- sample(c(0,1,2), 10, replace=TRUE)#
-#
-ses.null2 <- ses.null1#
-quadrat.null2 <- quadrat.null1#
-#
-ses1 <- list("null1"=ses.null1, "null2"=ses.null2)#
-quadrat1 <- list("null1"=quadrat.null1, "null2"=quadrat.null2)#
-#
-random1 <- list("ses"=ses1, "quadrat"=quadrat1)#
-#
-fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=random1)#
-#
-results <- list("iteration1"=fake.results1, "iteration2"=fake.results1)#
-#
-#now summarize these results#
-resultsSumm <- reduceResults(results, "richness")#
-#
-#generate some temporary results#
-failedTemp <- failed(results[[1]], "richness")#
-sesSingleTemp <- sesSingle(results[[1]], "richness")#
-sesIndivTemp <- sesIndiv(results, "richness")#
-sesOverallTemp <- sesOverall(resultsSumm$ses, test="wilcotest", concat.by="richness")
-sesSingleTemp
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-c(rep("random",6), rep("filtering", 6),#
-		rep("competition", 6))
-sesSingleTemp[,"simulation"]
-sesSingleTemp[,"simulation"] == c(rep("random",6), rep("filtering", 6),#
-		rep("competition", 6))
-all(sesSingleTemp[,"simulation"] == c(rep("random",6), rep("filtering", 6),#
-		rep("competition", 6))))
-all(sesSingleTemp[,"simulation"] == c(rep("random",6), rep("filtering", 6),#
-		rep("competition", 6)))
-test(filter="post_sim")
-test(filter="post_sim")
-sesSingleTemp[,"metric"] == rep(c("metric1", "metric2"), 9))
-rep(c("metric1", "metric2"), 9)
-sesSingleTemp[,"metric"] == rep(c("metric1", "metric2"), 9))
-sesSingleTemp[,"metric"] == rep(c("metric1", "metric2"), 9)
-sesSingleTemp
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-ses.null1.byrichness <- matrix(nrow=10, ncol=4)#
-#
-ses.null1.byrichness <- as.data.frame(ses.null1.byrichness)#
-#
-ses.null1.byrichness[,1] <- 10:19#
-ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=1)#
-ses.null1.byrichness[,3] <- rnorm(n=10, mean=1115, sd=1)#
-ses.null1.byrichness[,4] <- rnorm(n=10, mean=-1115, sd=1)#
-#
-names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")#
-#
-ses.null1.byquadrat <- ses.null1.byrichness#
-ses.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(ses.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")#
-#
-quadrat.null1.byrichness <- ses.null1.byrichness#
-#
-quadrat.null1.byrichness[,2] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1.byrichness[,3] <- sample(c(0,1,2), 10, replace=TRUE)#
-quadrat.null1.byrichness[,4] <- sample(c(0,1,2), 10, replace=TRUE)#
-#
-quadrat.null1.byquadrat <- quadrat.null1.byrichness#
-quadrat.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")#
-names(quadrat.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")#
-#
-ses.null1 <- list("richness"=ses.null1.byrichness, "quadrat"=ses.null1.byquadrat)#
-#
-ses1 <- list("null1"=ses.null1, "null2"= ses.null1)#
-#
-quadrat.null1 <- list("richness"=quadrat.null1.byrichness,#
-	"quadrat"=quadrat.null1.byquadrat)#
-#
-quadrat1 <- list("null1"=quadrat.null1, "null2"=quadrat.null1)#
-#
-random1 <- list("ses"=ses1, "quadrat"=quadrat1)#
-#
-fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=random1)#
-#
-results <- list("iteration1"=fake.results1, "iteration2"=fake.results1)#
-#
-#now summarize these results#
-resultsSumm <- reduceResults(results, "both")#
-#
-#generate some temporary results#
-failedTemp <- failed(results[[1]], "both")#
-sesSingleTemp <- sesSingle(results[[1]], "both")#
-sesIndivTemp <- sesIndiv(results, "both")#
-sesOverallTemp <- sesOverall(resultsSumm$ses, test="wilcotest", concat.by="both")
-sesSingleTemp
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-sesSingleTemp
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
-test(filter="post_sim")
+boundResults <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+boundResults
+cdm <- quadratContents(singleArena$arena, boundResults)
+cdm
+load_all()
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300,#
+quadrat.length=50)$quadrat.bounds
+bounds
+bounds <- quadratPlacer(no.quadrats=10, arena.length=300,#
+quadrat.length=50)
+bounds

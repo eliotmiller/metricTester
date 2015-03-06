@@ -40,10 +40,9 @@
 
 multiCDM <- function(simulations.result, no.quadrats, quadrat.length)
 {
-	bounds <- quadratPlacer(no.quadrats, arena.length=max(simulations.result[[1]]$dims), 
-		quadrat.length)
 	results <- lapply(1:length(simulations.result), function(x)
-		quadratContents(arena=simulations.result[[x]]$arena, quadrat.bounds=bounds))
+		makeCDM(single.simulation=simulations.result[[x]], no.quadrats=no.quadrats,
+		quadrat.length=quadrat.length))
 	names(results) <- names(simulations.result)
 	results
 }

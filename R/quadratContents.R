@@ -4,7 +4,7 @@
 #' and the bounds of a series of quadrats, identifies the contents of each quadrat.
 #'
 #' @param arena Data frame of three columns: "individuals", "X", and "Y"
-#' @param quadrat.bounds Matrix of X Y coordinates of quadrats, usually returned from
+#' @param quadratPlacer.results$quadrat.bounds Matrix of X Y coordinates of quadrats, usually returned from
 #' quadratPlacer()
 #' 
 #' @details Takes a data frame like that returned from filteringArena(), and a matrix
@@ -42,24 +42,27 @@
 #' plot(singleArena$arena$X, singleArena$arena$Y, pch=20, cex=0.5, xlim=c(0,300), 
 #'	ylim=c(0,300), col=cols[singleArena$arena$individuals])
 #'
-#' bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+#' boundResults <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
 #'
-#' quadratPlotter(bounds)
+#' quadratPlotter(boundResults$quadrat.bounds)
 #'
 #' #return a CDM in picante format
-#' cdm <- quadratContents(singleArena$arena, bounds)
+#' cdm <- quadratContents(singleArena$arena, boundResults)
 
-quadratContents <- function(arena, quadrat.bounds)
+quadratContents <- function(arena, quadratPlacer.results)
 {
 	species <- unique(arena$individuals)
-	com.results <- matrix(0, ncol=dim(quadrat.bounds)[1], nrow=length(species))
+	com.results <- matrix(0, ncol=dim(quadratPlacer.results$quadrat.bounds)[1], 
+		nrow=length(species))
 	rownames(com.results) <- species
 
-	for (i in c(1:dim(quadrat.bounds)[1])) 
+	for (i in c(1:dim(quadratPlacer.results$quadrat.bounds)[1])) 
 	{
-		in_quadrat <- arena$individuals[arena$X >= quadrat.bounds[i,1] & 
-			arena$X <= quadrat.bounds[i,2] & arena$Y >= quadrat.bounds[i,3] 
-			& arena$Y <= quadrat.bounds[i,4]]
+		in_quadrat <- arena$individuals[arena$X >= 
+			quadratPlacer.results$quadrat.bounds[i,1] & 
+			arena$X <= quadratPlacer.results$quadrat.bounds[i,2] & 
+			arena$Y >= quadratPlacer.results$quadrat.bounds[i,3] & 
+			arena$Y <= quadratPlacer.results$quadrat.bounds[i,4]]
 
 		for (j in c(1:length(species)))
 		{
@@ -70,18 +73,34 @@ quadratContents <- function(arena, quadrat.bounds)
 	#CDM was NOT IN PICANTE FORMAT. Transpose to picante
 	com.results <- t(com.results)
 
-	#if a quadrat has fewer than 2 species in it, exclude from further analysis
+	#now give the same temporary names as quadratPlacer.results to CDM so you can see what
+	#needs to get cut from the distance matrix
+	row.names(com.results) <- row.names(quadratPlacer.results$dists)
 	
-	com.results <- com.results[apply(com.results, 1, lengthNonZeros) >= 2,]
+	#identify quadrats that have fewer than 2 species. pull their tempQuadrat ID.
+	toCut <- row.names(com.results)[apply(com.results, 1, lengthNonZeros) < 2]
 	
+	#pull these quadrats out of the CDM and out of the dists object
+	com.results <- com.results[!(row.names(com.results) %in% toCut),]
+	#first rows of distance object
+	quadratPlacer.results$dists <-
+		quadratPlacer.results$dists[!(row.names(quadratPlacer.results$dists) %in% toCut),]
+	#now columns of distance object
+	quadratPlacer.results$dists <-
+		quadratPlacer.results$dists[,!(colnames(quadratPlacer.results$dists) %in% toCut)]	
+		
 	#assign names to quadrats (note that this happens after removing quadrats with < 2 spp
 	#so i believe the regional null should not have any trouble accidentally creating 
 	#quadrats with different names. need to confirm and should make regional null require
 	#existing quadrat names to avoid any conflicts
-
+	
 	quadrat <- paste("quadrat",1:dim(com.results)[1], sep="")
-
 	dimnames(com.results)[[1]] <- quadrat
 
-	return(com.results)
+	#assign the same new names to the distance object
+	row.names(quadratPlacer.results$dists) <- quadrat
+	colnames(quadratPlacer.results$dists) <- quadrat
+	
+	results <- list("cdm"=com.results, "dists"=quadratPlacer.results$dists)
+	return(results)
 }

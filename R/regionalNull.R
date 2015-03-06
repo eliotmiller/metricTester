@@ -45,7 +45,7 @@
 #' bounds <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)
 #'
 #' #return a CDM in picante format
-#' cdm <- quadratContents(positions$arena, bounds)
+#' cdm <- quadratContents(positions$arena, bounds$quadrat.bounds)
 #'
 #' test <- regionalNull(cdm, tree, regional.abundance=abundanceVector(cdm))
 

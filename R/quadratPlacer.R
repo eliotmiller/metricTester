@@ -19,7 +19,8 @@
 #'
 #' @examples
 #'
-#' bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+#' bounds <- quadratPlacer(no.quadrats=10, arena.length=300,
+#'	quadrat.length=50)
 
 quadratPlacer <- function(no.quadrats, arena.length, quadrat.length)
 {
@@ -94,5 +95,17 @@ quadratPlacer <- function(no.quadrats, arena.length, quadrat.length)
 			}
 		}
 	}
-	return(quadrat.bounds)
+	x.centers <- apply(quadrat.bounds[,1:2], 1, mean)
+	y.centers <- apply(quadrat.bounds[,3:4], 1, mean)
+	
+	centers <- data.frame(x.center=x.centers, y.center=y.centers)
+
+	#give the centers names so you can later subset it to those that had sufficient
+	#individuals in based on quadratContents
+	row.names(centers) <- paste("tempQuadrat", 1:no.quadrats, sep="")
+	dists <- as.matrix(dist(centers, diag=TRUE, upper=TRUE))
+
+	output <- list("dists"=dists, "quadrat.bounds"=quadrat.bounds)
+
+	return(output)
 }

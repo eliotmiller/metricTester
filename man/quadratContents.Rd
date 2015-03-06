@@ -3,12 +3,12 @@
 \alias{quadratContents}
 \title{Identify individuals contained within a quadrat}
 \usage{
-quadratContents(arena, quadrat.bounds)
+quadratContents(arena, quadratPlacer.results)
 }
 \arguments{
 \item{arena}{Data frame of three columns: "individuals", "X", and "Y"}
 
-\item{quadrat.bounds}{Matrix of X Y coordinates of quadrats, usually returned from
+\item{quadratPlacer.results$quadrat.bounds}{Matrix of X Y coordinates of quadrats, usually returned from
 quadratPlacer()}
 }
 \value{
@@ -48,12 +48,12 @@ singleArena <- filteringArena(prepped)
 plot(singleArena$arena$X, singleArena$arena$Y, pch=20, cex=0.5, xlim=c(0,300),
 	ylim=c(0,300), col=cols[singleArena$arena$individuals])
 
-bounds <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
+boundResults <- quadratPlacer(no.quadrats=10, arena.length=300, quadrat.length=50)
 
-quadratPlotter(bounds)
+quadratPlotter(boundResults$quadrat.bounds)
 
 #return a CDM in picante format
-cdm <- quadratContents(singleArena$arena, bounds)
+cdm <- quadratContents(singleArena$arena, boundResults)
 }
 \references{
 Miller, Trisos and Farine.
