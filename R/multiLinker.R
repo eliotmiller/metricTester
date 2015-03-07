@@ -78,7 +78,8 @@ multiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.para
 		}
 		else
 		{
-			filename <- paste(prefix, "_", "iteration", i, "by_", concat.by, ".RDS", sep="")
+			filename <- paste(prefix, "_", "iteration", i, "by_", concat.by,
+				".RDS", sep="")
 		}
 		temp <- linker(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 

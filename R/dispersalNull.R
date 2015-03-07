@@ -162,7 +162,7 @@ dispersalNull <- function(cdm, tree, distances.among)
 	}
 	
 	#and sort into same species order as input cdm
-	newCDM <- newCDM[,names(cdm)]
+	newCDM <- newCDM[,colnames(cdm)]
 	
 	newCDM
 }
