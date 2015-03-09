@@ -36,9 +36,6 @@
 #'
 #' prepped <- prepNulls(tree, cdm)
 
-#this function creates an object of class metrics.input, which is used internally by 
-#metricTester to handle varying inputs for different metrics in different packages
-
 prepNulls <- function(tree, picante.cdm, regional.abundance=NULL, distances.among=NULL)
 {
 	spacodi.cdm <- suppressMessages(as.spacodi(picante.cdm))

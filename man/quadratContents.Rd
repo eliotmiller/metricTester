@@ -8,8 +8,9 @@ quadratContents(arena, quadratPlacer.results)
 \arguments{
 \item{arena}{Data frame of three columns: "individuals", "X", and "Y"}
 
-\item{quadratPlacer.results$quadrat.bounds}{Matrix of X Y coordinates of quadrats, usually returned from
-quadratPlacer()}
+\item{quadratPlacer.results}{The results of a call to quadratPlacer. A list with two
+elementers. The first is a matrix of X Y coordinates of quadrats. The second is a
+symmetrical distance matrix summarizing the distances among these quadrats.}
 }
 \value{
 A matrix with species as rows and quadrats as columns.

@@ -7,6 +7,9 @@ wilcoWrapLApply(null.list, alternative)
 }
 \arguments{
 \item{null.list}{A list of dataframes, one per null model, of observed metric scores.}
+
+\item{alternative}{Optional alternative hypothesis. Default is "two-sided". Use
+"greater" for competition; "less" for habitat filtering.}
 }
 \value{
 A dataframe, with one row for each metric. The first column is the mean of the

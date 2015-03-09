@@ -6,6 +6,7 @@
 #'
 #' @param cdm Picante-style community data matrix with communities/quadrats/plots/etc
 #' as rows and species as columns
+#' @param tree Phylo object
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
 #' quadrats from the cdm.
 #' 
@@ -74,7 +75,7 @@
 #'
 #' cdm[is.na(cdm)] <- 0
 #'
-#' newCDM <- dispersalNull(cdm, distances)
+#' newCDM <- dispersalNull(cdm, tree, distances)
 
 dispersalNull <- function(cdm, tree, distances.among)
 {

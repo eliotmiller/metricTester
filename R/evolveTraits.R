@@ -3,7 +3,8 @@
 #' Given a phylogeny, will generate associated trait data for two traits following a 
 #' Brownian motion evolution model.
 #'
-#' @param tree A phylogeny
+#' @param tree A phylogeny.
+#' @param sigma The Brownian motion rate parameter.
 #' 
 #' @details Evolves two traits independently up phylogeny with Brownian motion evolution 
 #' process. Sigma is currently set to 0.1 as default.

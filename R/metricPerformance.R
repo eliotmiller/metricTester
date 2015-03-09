@@ -1,3 +1,30 @@
+#' Summarize metric performance of a series of summarized simulation results
+#'
+#' Flexible function that summarizes metric performance after reading in and testing
+#' per-simulation results with a function like sesIndiv.
+#'
+#' @param summarized.results The results of a call to sesIndiv() or something similar.
+#' @param simulations Default is "all". Alternatively, can supply a vector of simulation
+#' names to summarize the results over.
+#' @param nulls Default is "all". Alternatively, can supply a vector of null model
+#' names to summarize the results over.
+#' @param concat.by Default is "both". Alternatively, can supply either "quadrat" or
+#' "richness".
+#' 
+#' @details 
+#'
+#' @return A data frame of summarized results
+#'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' #not run
+#' #results <- readIn()
+#' #summ <- sesIndiv(results)
+#' #examp <- metricPerformance(summ)
+
 metricPerformance <- function(summarized.results, simulations="all", nulls="all",
 	concat.by="both")
 {

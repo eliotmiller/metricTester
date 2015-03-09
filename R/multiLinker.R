@@ -23,6 +23,10 @@
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
+#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
+#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
+#' parallel processing on cluster. However, currently causing errors due to namespace
+#' issues with doParallel vs doMC.
 #' @param iterations The number of complete tests to be run. For instance, 1 iteration
 #' would be considered a complete cycle of running all spatial simulations, randomly
 #' placing quadrats in the arenas, sampling the contents, creating a community data

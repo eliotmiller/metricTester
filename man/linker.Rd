@@ -43,6 +43,11 @@ used to compare the significance of the observed metric scores.}
 
 \item{cores}{The number of cores to be used for parallel processing.}
 
+\item{cluster}{Default is FALSE. Was intended to be set to TRUE if running on a cluster
+computer. Invokes multicore processing on a single computer if FALSE, otherwise
+parallel processing on cluster. However, currently causing errors due to namespace
+issues with doParallel vs doMC.}
+
 \item{simulations}{Optional list of named spatial simulation functions to use. These
 must be defined in the defineSimulations function. If invoked, this option will likely
 be used to run a subset of the defined spatial simulations.}

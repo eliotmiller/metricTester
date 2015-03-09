@@ -42,7 +42,8 @@
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
 #' #run the metrics and nulls combo function
-#' rawResults <- metricsNnulls(tree, cdm)
+#' rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores=2,
+#' 	cluster=FALSE)
 #'
 #' #reduce the randomizations to a more manageable format
 #' reduced <- reduceRandomizations(rawResults)

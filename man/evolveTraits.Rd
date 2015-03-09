@@ -6,7 +6,9 @@
 evolveTraits(tree, sigma = 0.1)
 }
 \arguments{
-\item{tree}{A phylogeny}
+\item{tree}{A phylogeny.}
+
+\item{sigma}{The Brownian motion rate parameter.}
 }
 \value{
 A list where the first object is a phylogeny with the desired number of species

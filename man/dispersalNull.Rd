@@ -9,6 +9,8 @@ dispersalNull(cdm, tree, distances.among)
 \item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
 as rows and species as columns}
 
+\item{tree}{Phylo object}
+
 \item{distances.among}{A symmetric distance matrix, summarizing the distances among all
 quadrats from the cdm.}
 }
@@ -80,7 +82,7 @@ row.names(cdm) <- paste("cell", 1:100, sep="")
 
 cdm[is.na(cdm)] <- 0
 
-newCDM <- dispersalNull(cdm, distances)
+newCDM <- dispersalNull(cdm, tree, distances)
 }
 \references{
 Miller, Trisos and Farine.

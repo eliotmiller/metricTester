@@ -1,3 +1,30 @@
+#' Summarize null model performance of a series of summarized simulation results
+#'
+#' Flexible function that summarizes null model performance after reading in and testing
+#' per-simulation results with a function like sesIndiv.
+#'
+#' @param summarized.results The results of a call to sesIndiv() or something similar.
+#' @param simulations Default is "all". Alternatively, can supply a vector of simulation
+#' names to summarize the results over.
+#' @param metrics Default is "all". Alternatively, can supply a vector of metric
+#' names to summarize the results over.
+#' @param concat.by Default is "both". Alternatively, can supply either "quadrat" or
+#' "richness".
+#' 
+#' @details 
+#'
+#' @return A data frame of summarized results
+#'
+#' @export
+#'
+#' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' #not run
+#' #results <- readIn()
+#' #summ <- sesIndiv(results)
+#' #examp <- nullPerformance(summ)
+
 nullPerformance <- function(summarized.results, simulations="all", metrics="all",
 	concat.by="both")
 {

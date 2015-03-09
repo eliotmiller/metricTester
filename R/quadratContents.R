@@ -4,8 +4,9 @@
 #' and the bounds of a series of quadrats, identifies the contents of each quadrat.
 #'
 #' @param arena Data frame of three columns: "individuals", "X", and "Y"
-#' @param quadratPlacer.results$quadrat.bounds Matrix of X Y coordinates of quadrats, usually returned from
-#' quadratPlacer()
+#' @param quadratPlacer.results The results of a call to quadratPlacer. A list with two
+#' elementers. The first is a matrix of X Y coordinates of quadrats. The second is a
+#' symmetrical distance matrix summarizing the distances among these quadrats.
 #' 
 #' @details Takes a data frame like that returned from filteringArena(), and a matrix
 #' like that returned from quadratPlacer(), and returns the resulting community data

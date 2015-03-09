@@ -3,6 +3,8 @@
 #' lapplies wilcoWrapApply over a list of dataframes.
 #'
 #' @param null.list A list of dataframes, one per null model, of observed metric scores.
+#' @param alternative Optional alternative hypothesis. Default is "two-sided". Use 
+#' "greater" for competition; "less" for habitat filtering.
 #'
 #' @details lapplies wilcoWrapApply over a list of dataframes. 
 #'

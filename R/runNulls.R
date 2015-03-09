@@ -52,6 +52,15 @@ runNulls <- function(nulls.input, nulls)
 	}	
 	
 	nulls <- checkNulls(nulls)
-		
+
+	#finally, if no distances.among input was provided, the dispersalNull cannot be run.
+	#remove it here. if other nulls are defined later, either add them to this list, or
+	#do something more elegant so they are not run and errors are not thrown
+	
+	if(nulls.input$distances.among == "ignore")
+	{
+		nulls$dispersal <- NULL
+	}
+	
 	lapply(nulls, function(x) x(nulls.input))
 }
