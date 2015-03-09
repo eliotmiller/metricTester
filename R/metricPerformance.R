@@ -11,7 +11,9 @@
 #' @param concat.by Default is "both". Alternatively, can supply either "quadrat" or
 #' "richness".
 #' 
-#' @details 
+#' @details  If an overall picture of metric performance is desired, this function can
+#' provide it. It can also be used to summarize metric performance over a given set of
+#' simulations, null models, and concatenation options.
 #'
 #' @return A data frame of summarized results
 #'

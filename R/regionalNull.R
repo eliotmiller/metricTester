@@ -42,10 +42,10 @@
 #'
 #' positions <- competitionArena(prepped)
 #'
-#' bounds <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)
+#' boundResults <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)
 #'
 #' #return a CDM in picante format
-#' cdm <- quadratContents(positions$arena, bounds$quadrat.bounds)
+#' cdm <- quadratContents(positions$arena, boundResults)
 #'
 #' test <- regionalNull(cdm, tree, regional.abundance=abundanceVector(cdm))
 

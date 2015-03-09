@@ -101,7 +101,7 @@
 #'
 #' test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 #'	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
-#'	cluster=FALSE, nulls=list("dispersal"=metricTester:::my_dispersal), 
+#'	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull), 
 #'	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
 #'	concat.by="both", output.raw=FALSE)
 

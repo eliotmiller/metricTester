@@ -1,3 +1,8 @@
+head(phylocom)
+phylocom[1,] <- c("cell1",10,"sp1")
+phylocom[phylocom$plot=="cell1",]
+row.names(cdm)[1]
+row.names(cdm)[11]
 phylocom[phylocom$plot==row.names(cdm)[1],]$id
 phylocom[1,] <- c("cell1",10,"sp19")
 phylocom[phylocom$plot==row.names(cdm)[1],]$id
@@ -1090,10 +1095,23 @@ library(geiger)
 ?fitContinuousMCMC
 library(devtools)
 load_all()
-document()
-check()
-devtools::check()
-Sys.setenv(PATH=paste(Sys.getenv("PATH"),"/usr/texbin",sep=":"))
-devtools::check()
-document()
-devtools::check()
+system.time(multiLinker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=3.5, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=5, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="both", randomizations=5, cores=6, cluster=FALSE, iterations=1,#
+	prefix="test",#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("disperal"=metricTester:::my_dispersal)))
+system.time(multiLinker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=3.5, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=5, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="both", randomizations=5, cores=6, cluster=FALSE, iterations=1,#
+	prefix="test",#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("disperal"=metricTester:::my_dispersal)))

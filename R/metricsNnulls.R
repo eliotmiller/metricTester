@@ -55,7 +55,9 @@
 #'
 #' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE)
+#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE,
+#'	nulls=list("richness"=metricTester:::my_richnessNull,
+#'	"frequency"=metricTester:::my_frequency))
 
 metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
 	 distances.among=NULL, randomizations=2, cores=1, cluster=FALSE, nulls, metrics)
