@@ -19,7 +19,7 @@
 #'
 #' @examples
 #'
-#' bounds <- quadratPlacer(no.quadrats=10, arena.length=300,
+#' boundResults <- quadratPlacer(no.quadrats=10, arena.length=300,
 #'	quadrat.length=50)
 
 quadratPlacer <- function(no.quadrats, arena.length, quadrat.length)

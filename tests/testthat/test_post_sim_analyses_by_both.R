@@ -123,7 +123,7 @@ test_that("sesIndiv is correctly naming the summarized results",
 test_that("sesIndiv output makes sense for the different spatial simulations",
 {
 	#expecting two runs of each, so
-	expect_true(sum(sesIndivTemp[,"totalRuns"]) == 72)
+	expect_true(sum(sesIndivTemp[,"total.runs"]) == 72)
 	#both runs should have not thrown a type I error for metric 1 & should have for
 	#metrics 2 & 3 for random spatial sim.
 	expect_true(sesIndivTemp[1,"typeI"] == 0)

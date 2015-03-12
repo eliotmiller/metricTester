@@ -15,6 +15,11 @@
 #' @export
 #'
 #' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' #not run
+#' #results <- readIn()
+#' #summ <- reduceResults(results, "both")
 
 reduceResults <- function(results.list, concat.by)
 {

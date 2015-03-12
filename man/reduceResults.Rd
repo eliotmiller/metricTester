@@ -22,6 +22,11 @@ Given a list of results readIn() from multiLinker, this function will reduce
 those results into a manageable format like that expected for calls to quadratOverall
 and sesOverall.
 }
+\examples{
+#not run
+#results <- readIn()
+#summ <- reduceResults(results, "both")
+}
 \references{
 Miller, Trisos and Farine.
 }

@@ -44,17 +44,18 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 #prep the data for the simulation
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
-length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
-competition.iterations=3)
+	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+	competition.iterations=3)
 
 positions <- competitionArena(prepped)
 
 boundResults <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)
 
 #return a CDM in picante format
-cdm <- quadratContents(positions$arena, boundResuls)
+cdmTemp <- quadratContents(positions$arena, boundResults)
 
-test <- regionalNull(cdm, tree, regional.abundance=abundanceVector(cdm))
+test <- regionalNull(cdmTemp$cdm, tree,
+	regional.abundance=abundanceVector(cdmTemp$cdm))
 }
 \references{
 Miller, Trisos and Farine.

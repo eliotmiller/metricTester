@@ -37,7 +37,7 @@ competition, the test is two-sided, less and greater, respectively.
 #not run
 #results <- readIn()
 #summ <- reduceResults(results)
-#examp <- sesOverall(summ$ses)
+#examp <- sesOverall(summ$ses, "both")
 }
 \references{
 Miller, Trisos and Farine.

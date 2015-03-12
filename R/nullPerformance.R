@@ -78,15 +78,67 @@ nullPerformance <- function(summarized.results, simulations="all", metrics="all"
 	nulls <- unique(summarized.results$null.model)
 	typeI <- c()
 	typeII <- c()
-	for(i in 1:length(nulls))
+
+	if(names(summarized.results)[5] == "total.runs")
 	{
-		temp <- summarized.results[summarized.results$null.model %in% nulls[i]
-			& summarized.results$simulation %in% simulations
-			& summarized.results$concat.by %in% concat.by
-			& summarized.results$metric %in% metrics,]
-		typeI[i] <- mean(temp$typeIrate, na.rm=TRUE)
-		typeII[i] <- mean(temp$typeIIrate, na.rm=TRUE)
+		for(i in 1:length(nulls))
+		{
+			temp <- summarized.results[summarized.results$null.model %in% nulls[i]
+				& summarized.results$simulation %in% simulations
+				& summarized.results$concat.by %in% concat.by
+				& summarized.results$metric %in% metrics,]
+			temp$typeIrate <- 100 * temp$typeI/temp$total.runs
+			temp$typeIIrate <- 100 * temp$typeII/temp$total.runs
+			typeI[i] <- mean(temp$typeIrate, na.rm=TRUE)
+			typeII[i] <- mean(temp$typeIIrate, na.rm=TRUE)
+		}
 	}
+
+	else if(names(summarized.results)[5] == "clustered")
+	{
+		#generate some simulation-specific data frames
+		random <- summarized.results[summarized.results$metric %in% metrics
+			& summarized.results$simulation == "random"
+			& summarized.results$concat.by %in% concat.by
+			& summarized.results$null.model %in% nulls,]
+		filtering <- summarized.results[summarized.results$metric %in% metrics
+			& summarized.results$simulation == "filtering"
+			& summarized.results$concat.by %in% concat.by
+			& summarized.results$null.model %in% nulls,]
+		competition <- summarized.results[summarized.results$metric %in% metrics
+			& summarized.results$simulation == "competition"
+			& summarized.results$concat.by %in% concat.by
+			& summarized.results$null.model %in% nulls,]
+
+		#define typeI & II error rates for each of these
+		random$typeIrate <- 100 *
+			(random$clustered + random$overdispersed)/random$total.quadrats
+		random$typeIIrate <- NA
+
+		filtering$typeIrate <- 100 * filtering$overdispersed/filtering$total.quadrats
+		filtering$typeIIrate <- 100 * 
+			(filtering$total.quadrats - filtering$clustered)/filtering$total.quadrats
+
+		competition$typeIrate <- 100 *
+			competition$clustered/competition$total.quadrats
+		competition$typeIIrate <- 100 * 
+			(competition$total.quadrats -
+			competition$overdispersed)/competition$total.quadrats
+
+		#redefine summarized.results
+		summarized.results <- rbind(random, filtering, competition)
+
+		for(i in 1:length(nulls))
+		{
+			temp <- summarized.results[summarized.results$null.model %in% nulls[i]
+				& summarized.results$simulation %in% simulations
+				& summarized.results$concat.by %in% concat.by
+				& summarized.results$metric %in% metrics,]
+			typeI[i] <- mean(temp$typeIrate, na.rm=TRUE)
+			typeII[i] <- mean(temp$typeIIrate, na.rm=TRUE)
+		}
+	}
+
 	results <- data.frame(nulls, typeI, typeII)
 	results
 }

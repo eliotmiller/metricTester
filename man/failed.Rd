@@ -27,6 +27,11 @@ re-written. The main point of this function it to identify failed runs and later
 remove them from the results of a given iteration. This prevents errors further
 down the line when summarizing results.
 }
+\examples{
+#not run
+#results <- readIn()
+#summ <- failed(results[[1]], "both")
+}
 \references{
 Miller, Trisos and Farine.
 }

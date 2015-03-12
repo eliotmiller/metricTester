@@ -165,6 +165,10 @@ dispersalNull <- function(cdm, tree, distances.among)
 	#and sort into same species order as input cdm
 	newCDM <- newCDM[,colnames(cdm)]
 	
+	#for reasons that are not entirely clear to me, this is still returning as a DF
+	#convert to matrix
+	newCDM <- as.matrix(newCDM)
+	
 	newCDM
 }
 

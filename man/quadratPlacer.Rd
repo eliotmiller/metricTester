@@ -25,7 +25,7 @@ supplied. Because this would run indefinitely if unacceptable parameters were su
 a conservative check is implemented to "ensure" the function does not get stuck.
 }
 \examples{
-bounds <- quadratPlacer(no.quadrats=10, arena.length=300,
+boundResults <- quadratPlacer(no.quadrats=10, arena.length=300,
 	quadrat.length=50)
 }
 \references{

@@ -30,7 +30,7 @@
 #' #not run
 #' #results <- readIn()
 #' #summ <- reduceResults(results)
-#' #examp <- sesOverall(summ$ses)
+#' #examp <- sesOverall(summ$ses, "both")
 
 sesOverall <- function(simulation.list, test, concat.by)
 {
@@ -39,7 +39,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 		stop("concat.by must equal either both, richness, or quadrat")
 	}
 
-	#add a line to throw an error if from.node is not properly specified
+	#add a line to throw an error if test is not properly specified
 	if(test != "ttest" & test != "wilcotest")
 	{
 		stop("test must be set to one of 'ttest' or 'wilcotest'")

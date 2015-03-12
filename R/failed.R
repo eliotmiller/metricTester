@@ -20,6 +20,11 @@
 #' @export
 #'
 #' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' #not run
+#' #results <- readIn()
+#' #summ <- failed(results[[1]], "both")
 
 failed <- function(single.iteration, concat.by)
 {

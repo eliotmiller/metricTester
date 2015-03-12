@@ -35,7 +35,7 @@ exclusion simulation is greater than 0.05.
 \examples{
 #not run
 #results <- readIn()
-#summ <- sesIndiv(results)
+#summ <- sesIndiv(results, "both")
 }
 \references{
 Miller, Trisos and Farine.

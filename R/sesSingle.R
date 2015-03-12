@@ -25,7 +25,7 @@
 #' @examples
 #' #not run
 #' #results <- readIn()
-#' #summ <- sesSingle(results[[1]])
+#' #summ <- sesSingle(results[[1]], "richness")
 
 sesSingle <- function(single.iteration, concat.by)
 {

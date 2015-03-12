@@ -3,7 +3,7 @@
 #' Flexible function that summarizes metric performance after reading in and testing
 #' per-simulation results with a function like sesIndiv.
 #'
-#' @param summarized.results The results of a call to sesIndiv() or something similar.
+#' @param summarized.results The results of a call to sesIndiv() or quadratOverall()
 #' @param simulations Default is "all". Alternatively, can supply a vector of simulation
 #' names to summarize the results over.
 #' @param nulls Default is "all". Alternatively, can supply a vector of null model
@@ -11,9 +11,17 @@
 #' @param concat.by Default is "both". Alternatively, can supply either "quadrat" or
 #' "richness".
 #' 
-#' @details  If an overall picture of metric performance is desired, this function can
-#' provide it. It can also be used to summarize metric performance over a given set of
-#' simulations, null models, and concatenation options.
+#' @details If an overall picture of metric performance is desired, this function can
+#' provide it. It can also be used to summarize metric performance over a specific subset
+#' of simulations, null models, and concatenation options. If provided with the results
+#' of a call to quadratOverall, the options are more limited. Currently, if provided with
+#' such a result, the assumption is
+#' that there are three spatial simulations, "random", "filtering", and "competition". It
+#' then assumes that any clustered or overdispersed quadrats for the random simulation,
+#' or any overdispersed or clustered for the filtering or competition simulations,
+#' respectively, count as typeI errors. It assumes that any quadrats that are not
+#' clustered or overdispersed for the filtering or competition simulations, respectively,
+#' count as typeII errors.
 #'
 #' @return A data frame of summarized results
 #'
@@ -78,15 +86,72 @@ metricPerformance <- function(summarized.results, simulations="all", nulls="all"
 	metrics <- unique(summarized.results$metric)
 	typeI <- c()
 	typeII <- c()
-	for(i in 1:length(metrics))
+	
+	if(names(summarized.results)[5] == "total.runs")
 	{
-		temp <- summarized.results[summarized.results$metric %in% metrics[i]
-			& summarized.results$simulation %in% simulations
+		for(i in 1:length(metrics))
+		{
+			temp <- summarized.results[summarized.results$metric %in% metrics[i]
+				& summarized.results$simulation %in% simulations
+				& summarized.results$concat.by %in% concat.by
+				& summarized.results$null.model %in% nulls,]
+			temp$typeIrate <- 100 * temp$typeI/temp$total.runs
+			temp$typeIIrate <- 100 * temp$typeII/temp$total.runs
+			typeI[i] <- mean(temp$typeIrate, na.rm=TRUE)
+			typeII[i] <- mean(temp$typeIIrate, na.rm=TRUE)
+		}
+	}
+
+	else if(names(summarized.results)[5] == "clustered")
+	{
+		#generate some simulation-specific data frames
+		random <- summarized.results[summarized.results$metric %in% metrics
+			& summarized.results$simulation == "random"
 			& summarized.results$concat.by %in% concat.by
 			& summarized.results$null.model %in% nulls,]
-		typeI[i] <- mean(temp$typeIrate, na.rm=TRUE)
-		typeII[i] <- mean(temp$typeIIrate, na.rm=TRUE)
+		filtering <- summarized.results[summarized.results$metric %in% metrics
+			& summarized.results$simulation == "filtering"
+			& summarized.results$concat.by %in% concat.by
+			& summarized.results$null.model %in% nulls,]
+		competition <- summarized.results[summarized.results$metric %in% metrics
+			& summarized.results$simulation == "competition"
+			& summarized.results$concat.by %in% concat.by
+			& summarized.results$null.model %in% nulls,]
+
+		#define typeI & II error rates for each of these
+		random$typeIrate <- 100 *
+			(random$clustered + random$overdispersed)/random$total.quadrats
+		random$typeIIrate <- NA
+
+		filtering$typeIrate <- 100 * filtering$overdispersed/filtering$total.quadrats
+		filtering$typeIIrate <- 100 * 
+			(filtering$total.quadrats - filtering$clustered)/filtering$total.quadrats
+
+		competition$typeIrate <- 100 *
+			competition$clustered/competition$total.quadrats
+		competition$typeIIrate <- 100 * 
+			(competition$total.quadrats -
+			competition$overdispersed)/competition$total.quadrats
+
+		#redefine summarized.results
+		summarized.results <- rbind(random, filtering, competition)
+
+		for(i in 1:length(metrics))
+		{
+			temp <- summarized.results[summarized.results$metric %in% metrics[i]
+				& summarized.results$simulation %in% simulations
+				& summarized.results$concat.by %in% concat.by
+				& summarized.results$null.model %in% nulls,]
+			typeI[i] <- mean(temp$typeIrate, na.rm=TRUE)
+			typeII[i] <- mean(temp$typeIIrate, na.rm=TRUE)
+		}
 	}
+
+	else
+	{
+		stop("Unexpected function input")
+	}
+
 	results <- data.frame(metrics, typeI, typeII)
 	results
 }

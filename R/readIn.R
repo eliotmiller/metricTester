@@ -15,6 +15,10 @@
 #' @export
 #'
 #' @references Miller, Trisos and Farine.
+#'
+#' @examples
+#' #not run
+#' #results <- readIn()
 
 readIn <- function(working.directory)
 {

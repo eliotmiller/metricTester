@@ -3,11 +3,18 @@
 \alias{quadratOverall}
 \title{Overall per simulation-null-metric quadrat test}
 \usage{
-quadratOverall(simulation.list)
+quadratOverall(simulation.list, concat.by)
 }
 \arguments{
 \item{simulation.list}{A summarized results list such as one output from
 reduceResults(). See examples.}
+
+\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+}
+\value{
+A data frame summarizing the total number of quadrats tested and how many of
+these deviated above (significantly overdispersed) or below (significantly clustered)
+the 95% CI for each simulation, null, metric combination.
 }
 \description{
 This function provides one of many ways of summarizing and considering simulation
@@ -24,8 +31,8 @@ but not exported in this function.
 \examples{
 #not run
 #results <- readIn()
-#summ <- reduceResults(results)
-#test <- sesOverall(summ$ses)
+#summ <- reduceResults(results, "both")
+#test <- quadratOverall(summ$quadrat, "both")
 }
 \references{
 Miller, Trisos and Farine.

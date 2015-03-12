@@ -21,6 +21,10 @@ single list. This list is then summarized with additional functions.
 This function reads all .RDS files from the working directory (or another
 specified directory) into a single list.
 }
+\examples{
+#not run
+#results <- readIn()
+}
 \references{
 Miller, Trisos and Farine.
 }

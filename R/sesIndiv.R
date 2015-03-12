@@ -29,7 +29,7 @@
 #' @examples
 #' #not run
 #' #results <- readIn()
-#' #summ <- sesIndiv(results)
+#' #summ <- sesIndiv(results, "both")
 
 sesIndiv <- function(raw.results, concat.by)
 {
@@ -75,7 +75,7 @@ sesIndiv <- function(raw.results, concat.by)
 	}
 	
 	#bind the three vectors into the output and send out
-	output <- data.frame(output, totalRuns, typeI, typeII)
+	output <- data.frame(output, total.runs=totalRuns, typeI, typeII)
 	
 	output
 }
