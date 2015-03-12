@@ -18,7 +18,7 @@
 #' #create a basic input vector
 #' temp <- c(1,2,3,4,5,6,1)
 #'
-#' #use the compareMins function
+#' #here is an example of the compareMins function 
 #' compareMins(temp)
 
 compareMins <- function(x)
