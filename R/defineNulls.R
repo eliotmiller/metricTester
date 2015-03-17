@@ -74,7 +74,7 @@ my_richnessNull <- function(nulls.input)
 
 my_frequency <- function(nulls.input)
 {
-	new.matrix <- randomizeMatrix(nulls.input$picante.cdm, "richness")
+	new.matrix <- randomizeMatrix(nulls.input$picante.cdm, "frequency")
 }
 
 my_IS <- function(nulls.input)

@@ -79,6 +79,7 @@ nullPerformance <- function(summarized.results, simulations="all", metrics="all"
 	typeI <- c()
 	typeII <- c()
 
+	#use these for sesIndiv results	
 	if(names(summarized.results)[5] == "total.runs")
 	{
 		for(i in 1:length(nulls))
@@ -94,6 +95,7 @@ nullPerformance <- function(summarized.results, simulations="all", metrics="all"
 		}
 	}
 
+	#use this for quadratOverall results
 	else if(names(summarized.results)[5] == "clustered")
 	{
 		#generate some simulation-specific data frames
