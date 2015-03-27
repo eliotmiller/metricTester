@@ -48,7 +48,7 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 #simulate a community of varying richness
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
 #run the metrics and nulls combo function
 rawResults <- metricsNnulls(tree, cdm, randomizations=3)

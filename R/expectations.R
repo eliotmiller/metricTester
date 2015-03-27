@@ -77,10 +77,10 @@
 #' #you can use your simulateComm function and have it span a reasonable range of richness
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
-#' cdm1 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)
-#' cdm2 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)
-#' cdm3 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)
-#' cdm4 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)
+#' cdm1 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
+#' cdm2 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
+#' cdm3 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
+#' cdm4 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
 #'
 #' #bind these into a list and use dplyr rbind_all to bind together. recast as data frame
 #'

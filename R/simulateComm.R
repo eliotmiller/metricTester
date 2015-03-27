@@ -4,8 +4,7 @@
 #' species abundances, will generate a community data matrix with these characteristics.
 #'
 #' @param tree Phylo object
-#' @param min.rich Minimum richness of the resulting cdm
-#' @param max.rich Maximum richness of the resulting cdm
+#' @param richness.vector Vector of desired species richness, one for each desired quadrat
 #' @param abundances A vector of potential abundances, e.g. a log-normal distribution
 #' 
 #' @details There is currently no implementation to control the frequency with which a
@@ -27,22 +26,24 @@
 #'
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
-#' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+#' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-simulateComm <- function(tree, min.rich, max.rich, abundances)
+simulateComm <- function(tree, richness.vector, abundances)
 {
 	col.1 <- c()
 	col.2 <- c()
 	col.3 <- c()
-	for (i in seq(from=min.rich, to=max.rich))
+	for (i in 1:length(richness.vector))
 	{
-		#this generates a vector of community names by repeating 
-		#whatver the value of richness is (i) i times
-		rich <- rep(i, i) 
-		col.1 <- append(col.1, rich)
-		numbers <- sample(abundances, i)
+		#this generates a vector of community names by repeating i times whatever the
+		#value of richness.vector[i] is
+		temp.name <- rep(i, richness.vector[i]) 
+		col.1 <- append(col.1, temp.name)
+		numbers <- sample(abundances, richness.vector[i])
+		#this assigns abundances to species
 		col.2 <- append(col.2, numbers)
-		species <- sample(tree$tip.label, i)
+		#this assigns species names to those abundances
+		species <- sample(tree$tip.label, richness.vector[i])
 		col.3 <- append(col.3, species)
 	}
 		cdm.fake <- data.frame(col.1, col.2, col.3)

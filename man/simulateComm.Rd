@@ -3,14 +3,12 @@
 \alias{simulateComm}
 \title{Generate a simulated community data matrix}
 \usage{
-simulateComm(tree, min.rich, max.rich, abundances)
+simulateComm(tree, richness.vector, abundances)
 }
 \arguments{
 \item{tree}{Phylo object}
 
-\item{min.rich}{Minimum richness of the resulting cdm}
-
-\item{max.rich}{Maximum richness of the resulting cdm}
+\item{richness.vector}{Vector of desired species richness, one for each desired quadrat}
 
 \item{abundances}{A vector of potential abundances, e.g. a log-normal distribution}
 }
@@ -35,7 +33,7 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
-cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 }
 \references{
 Miller, Trisos and Farine.

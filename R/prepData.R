@@ -35,7 +35,7 @@
 #'
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
-#' cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)
+#' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
 #' prepped <- prepData(tree, cdm)
 
