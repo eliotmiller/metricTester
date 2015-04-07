@@ -1,13 +1,14 @@
 #' Return summary statistics from a data frame of randomized metric values
 #'
 #' Summarizes observed metric scores. Returns the mean, standard deviation and 
-#' 95% confidence intervals of each quadrat or observed richness. 
+#' 95\% confidence intervals of each quadrat or observed richness. 
 #'
-#' @param null.output Vector of numbers
+#' @param null.output Data frame of randomized metric values such as an element from a
+#' call to reduceRandomizations()
 #' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
 #' 
 #' @details Given a data frame of metric values, summarizes either by quadrat or richness.
-#' Outputs the mean, standard deviation and 95% confidence intervals of each quadrat or
+#' Outputs the mean, standard deviation and 95\% confidence intervals of each quadrat or
 #' observed richness. If provided with concat.by="both", outputs a list of two data
 #' frames, one for by richness and one for by quadrat. Otherwise, outputs a data frame.
 #'
@@ -18,10 +19,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(dplyr)
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

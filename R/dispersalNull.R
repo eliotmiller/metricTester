@@ -15,8 +15,9 @@
 #' likely needs additional checks to ensure that it doesn't get stuck in the while loop.
 #' For instance, if an observed quadrat contained more species than remained in the
 #' neighboring quadrats, this null would never run to completion. The argument 
-#' distances.among is flexible, and can relate to e.g., straight-line distances, great-
-#' circle distances, and ecological distances.
+#' distances.among is flexible, and can relate to e.g., straight-line distances,
+#' great-circle distances, and ecological distances. The performance of this null model
+#' has not yet been tested.
 #'
 #' @return A matrix with the same dimensions as the input cdm.
 #'
@@ -53,10 +54,10 @@
 #' #you can use your simulateComm function and have it span a reasonable range of richness
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
-#' cdm1 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
-#' cdm2 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
-#' cdm3 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
-#' cdm4 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
+#' cdm1 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+#' cdm2 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+#' cdm3 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+#' cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
 #'
 #' #bind these into a list and use dplyr rbind_all to bind together. recast as data frame
 #'

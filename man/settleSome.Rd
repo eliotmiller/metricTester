@@ -22,8 +22,6 @@ randomly draw from the regional abundance vector, then settles the individuals a
 random in the arena.
 }
 \examples{
-library(geiger)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

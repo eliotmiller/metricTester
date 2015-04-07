@@ -61,13 +61,11 @@ number of randomizations of the original CDMs.}
 must be defined in the defineSimulations function. If invoked, this option will likely
 be used to run a subset of the defined spatial simulations.}
 
-\item{nulls}{Optional list of named null model functions to use. These
-must be defined in the defineNulls function. If invoked, this option will likely
-be used to run a subset of the defined null models.}
+\item{nulls}{Optional list of named null model functions to use. If invoked, this
+option will likely be used to run a subset of the defined null models.}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of data frames. The first level of the output has one element
@@ -80,15 +78,10 @@ This function runs multiple iterations of the linker function, saving results to
 }
 \details{
 This function wraps a number of other wrapper functions into
-one big metric + null performance tester function. Only a single test is performed,
-with results saved into memory. To perform multiple complete tests, use the
-multiLinker function, which saves results to file.
+one big metric + null performance tester function. Unlike the basic linker function,
+multiple tests can be run, with results saved as RDS files.
 }
 \examples{
-library(dplyr)
-library(geiger)
-library(picante)
-
 system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,
 	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness",

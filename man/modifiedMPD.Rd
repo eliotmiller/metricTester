@@ -15,8 +15,8 @@ species as columns}
 "intraspecific", or "complete"}
 }
 \value{
-A vector of MPD values, calculated according to the abudance-weighted method
-specified
+A vector of MPD values, calculated according to the abundance-weighted method
+specified.
 }
 \description{
 Given a picante-style community data matrix (sites are rows, species are columns),
@@ -24,13 +24,11 @@ a phylogenetic distance matrix, and a desired method of abundance-weighting, wil
 calculate MPD.
 }
 \details{
-See accompanying publication for details. The guts of this function come
-directly from picante.
+See accompanying publication for details. Non-abundance-weighted and
+interspecific and intraspecific methods are equivalent to those previously described by
+Clarke & Warwick.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

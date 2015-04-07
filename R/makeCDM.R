@@ -1,4 +1,4 @@
-#' Wrapper for creating CDMs from spatial simulation results
+#' Wrapper for creating a CDM from a spatial simulation result
 #'
 #' Given the results of a single spatial simulation, and a desired number of quadrats
 #' and the length of one side of each quadrat, will place the quadrats down and output
@@ -22,8 +22,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #prep the data for the simulation

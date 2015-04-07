@@ -10,7 +10,7 @@
 #' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 #' Optional, will be generated from the input CDM if not provided.
 #' @param distances.among An optional symmetric distance matrix describing the distances
-#' among quadrats/cells/communities/etc, for use with null models like the dispersal null.
+#' among quadrats/etc, for use with null models like the dispersal null.
 #' 
 #' @details Returns a named list with four elements: the original phylogenetic tree,
 #' the original picante-style CDM, an ecoPD-style CDM, and a vector of regional abundance.
@@ -24,9 +24,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

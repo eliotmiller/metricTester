@@ -9,10 +9,10 @@
 #' @param quadrat.length Length of one side of desired quadrat
 #' 
 #' @details Both the size and number of quadrats
-#' are determined by the user. A conservative check (perhaply overly so) is in place to
+#' are determined by the user. A conservative check (perhaps overly so) is in place to
 #' ensure the function doesn't get stuck looking for solutions for how to randomly place
-#' non-overlapping quadrats down. Either decreasing the number of size of quadrats is
-#' necessary if this throws and error.
+#' non-overlapping quadrats. Either decreasing the number or size of quadrats is
+#' necessary if this throws an error.
 #'
 #' @return A list of data frames.
 #'
@@ -21,10 +21,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(dplyr)
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

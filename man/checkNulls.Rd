@@ -21,9 +21,6 @@ A few quick checks to confirm the null model functions are input in suitable
 format.
 }
 \examples{
-library(geiger)
-library(picante)
-
 checkNulls(defineNulls())
 }
 \references{

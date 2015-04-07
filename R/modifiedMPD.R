@@ -10,20 +10,18 @@
 #' @param abundance.weighted One of either "FALSE", "interspecific",
 #' "intraspecific", or "complete"
 #' 
-#' @details See accompanying publication for details. The guts of this function come
-#' directly from picante.
+#' @details See accompanying publication for details. Non-abundance-weighted and
+#' interspecific and intraspecific methods are equivalent to those previously described by
+#' Clarke & Warwick.
 #'
-#' @return A vector of MPD values, calculated according to the abudance-weighted method
-#' specified
+#' @return A vector of MPD values, calculated according to the abundance-weighted method
+#' specified.
 #'
 #' @export
 #'
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

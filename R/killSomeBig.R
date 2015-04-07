@@ -21,7 +21,7 @@
 #' arena (currently, the mean genetic relatedness of geographic neighborhoods, a vector of
 #' regional abundance [where each element is a species name, repeated as many times as is
 #' present in pool], and the dimensions of the arena). This function is invoked if the
-#' number of individuals in the arena exceeds 1000. It was originally intended only for 
+#' number of individuals in the arena exceeds 50,000. It was originally intended only for 
 #' arenas with large numbers of individuals, but it ends up being faster than the original
 #' version of the function for all but the smallest arenas. That said, if the local area
 #' within the arena that the function considers does not contain any individuals, then it
@@ -42,8 +42,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

@@ -19,9 +19,6 @@ calculate the species richness of that community.
 An internal function to calculate richness of a cdm.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

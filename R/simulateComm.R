@@ -1,6 +1,6 @@
 #' Generate a simulated community data matrix
 #'
-#' Given a phylo object, desired min and max species richnesses, and a vector of potential
+#' Given a phylo object, a vector of desired species richnesses, and a vector of potential
 #' species abundances, will generate a community data matrix with these characteristics.
 #'
 #' @param tree Phylo object
@@ -18,9 +18,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

@@ -6,7 +6,8 @@
 summaries(null.output, concat.by = "richness")
 }
 \arguments{
-\item{null.output}{Vector of numbers}
+\item{null.output}{Data frame of randomized metric values such as an element from a
+call to reduceRandomizations()}
 
 \item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 }
@@ -15,19 +16,15 @@ Either a list of or a data frame of summarized metric scores, see details.
 }
 \description{
 Summarizes observed metric scores. Returns the mean, standard deviation and
-95% confidence intervals of each quadrat or observed richness.
+95\% confidence intervals of each quadrat or observed richness.
 }
 \details{
 Given a data frame of metric values, summarizes either by quadrat or richness.
-Outputs the mean, standard deviation and 95% confidence intervals of each quadrat or
+Outputs the mean, standard deviation and 95\% confidence intervals of each quadrat or
 observed richness. If provided with concat.by="both", outputs a list of two data
 frames, one for by richness and one for by quadrat. Otherwise, outputs a data frame.
 }
 \examples{
-library(dplyr)
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

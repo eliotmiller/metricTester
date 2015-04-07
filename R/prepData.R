@@ -6,12 +6,11 @@
 #' @param tree Phylo object. 
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
-#' @param optional.dists A symmetric distance matrix describing the pairwise distances
-#' among species can be directly supplied. This option is
-#' experimental. Performance depends on the metric being used. If the metric in question
-#' relies on the dists element of the result of this function, then this optional distance
-#' matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still
-#' employ the tree data.
+#' @param optional.dists A symmetric distance matrix can be directly supplied. This option
+#' is experimental. Behavior depends on metric being used. If the metric in question
+#' relies on the phylogenetic distance matrix from a call to cophenetic(tree), then this 
+#' optional distance matrix will be inserted instead. But other metrics that rely on the 
+#' ecoPD.cdm object will still employ the phylogenetic distance matrix.
 #' 
 #' @details Returns a named list with four elements: the original phylogenetic tree
 #' phylogenetic distances among species, the original picante-style CDM, and
@@ -27,9 +26,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

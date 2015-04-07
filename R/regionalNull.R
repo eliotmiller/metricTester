@@ -1,8 +1,7 @@
 #' Randomize community data matrix with regional null model
 #'
-#' Entirely vectorized null model that maintains species richness (approximately only
-#' during this phase of the calculation, but we do so strictly later on), species
-#' occurrence frequency, and species abundance distributions.
+#' Null model that simulates community assembly where species probabilities of occurrence
+#' are proportional to their regional abundance.
 #'
 #' @param cdm Picante-style community data matrix with communities/quadrats/plots/etc
 #' as rows and species as columns
@@ -10,8 +9,8 @@
 #' @param regional.abundance Vector of species names, where each species' name is repeated
 #' the number of times necessary to accomodate its abundance in the regional species pool
 #' 
-#' @details Although not as fast as, e.g. randomizeMatrix, this function still runs 
-#' fairly quickly. It works by drawing the total number of
+#' @details Although nowhere near as fast as, e.g. randomizeMatrix, this function still
+#' runs fairly quickly (no for or while loops). It works by drawing the total number of
 #' individuals observed in the input plot from the regional abundance vector. Thus, while
 #' a randomized quadrat will not necessarily have the same number of species as the
 #' observed quadrat, over many iterations it will likely be sampled. We can then
@@ -30,9 +29,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(colorRamps)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #prep the data for the simulation

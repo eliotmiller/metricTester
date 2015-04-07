@@ -16,7 +16,7 @@ species as columns}
 Optional, will be generated from the input CDM if not provided.}
 
 \item{distances.among}{An optional symmetric distance matrix describing the distances
-among quadrats/cells/communities/etc, for use with null models like the dispersal null.}
+among quadrats/etc, for use with null models like the dispersal null.}
 }
 \value{
 A list of class nulls.input
@@ -31,9 +31,6 @@ Returns a named list with four elements: the original phylogenetic tree,
 the original picante-style CDM, an ecoPD-style CDM, and a vector of regional abundance.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

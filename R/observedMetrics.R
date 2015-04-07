@@ -1,14 +1,14 @@
 #' Wrapper for prepping and calculating observed metrics
 #'
-#' Given a cdm and phylogeny, this function preps the data and calculates all metrics that
-#' are defined in defineMetrics.
+#' Given a cdm and phylogeny, this function preps the data and calculates metrics of the
+#' user's choice
 #'
 #' @param tree Phylo object
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
-#' @param metrics Optional list of named metric functions to use. These
-#' must be defined in the defineMetrics function. If invoked, this option will likely
-#' be used to run a subset of the defined metrics.
+#' @param metrics Optional list of named metric functions to use. If invoked, this option
+#' will likely be used to run a subset of the defined metrics. Defaults to all metrics
+#' defined in defineMetrics()
 #'
 #' @details A simple wrapper function to quickly prep data and calculate observed metrics.
 #'
@@ -20,9 +20,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(colorRamps)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #prep the data for the simulation
@@ -40,7 +37,7 @@
 #' #richness). not run
 #'
 #' #results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm, 
-#' #metrics=list("richness"=my_richness,"PSV"=my_psv))
+#' #metrics=list("richness"=metricTester:::my_richness,"PSV"=metricTester:::my_psv))
 
 observedMetrics <- function(tree, picante.cdm, metrics)
 {

@@ -17,9 +17,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' checkSimulations(defineSimulations())
 
 checkSimulations <- function(x)

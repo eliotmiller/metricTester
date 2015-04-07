@@ -1,0 +1,822 @@
+library(geiger)
+?fitContinuousMCMC
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(metricTester)
+?metricsNnulls
+polarHistogram<-function(#
+  df,#
+  binSize=1,#
+  spaceItem=0.2,#
+  spaceFamily=1.2,#
+  innerRadius=0.3,#
+  outerRadius=1,#
+  guides=c(10,20,40,80),#
+  alphaStart=-0.3,#
+  circleProportion=0.8,#
+  direction="inwards",#
+  familyLabels=FALSE){#
+  # ordering#
+  df<-arrange(df,family,item,score)#
+  # summing up to one#
+  # TO DO: replace NA by 0 because cumsum doesn't ignore NA's.#
+  df<-ddply(df,.(family,item),transform,value=cumsum(value/(sum(value))))#
+  # getting previous value#
+  df<-ddply(df,.(family,item),transform,previous=c(0,head(value,length(value)-1)))#
+  # family and item indices. There must be a better way to do this#
+  df2<-ddply(df,.(family,item),summarise,indexItem=1)#
+  df2$indexItem<-cumsum(df2$indexItem)#
+  df3<-ddply(df,.(family),summarise,indexFamily=1)#
+  df3$indexFamily<-cumsum(df3$indexFamily)#
+  df<-merge(df,df2,by=c("family",'item'))#
+  df<-merge(df,df3,by="family")#
+  df<-arrange(df,family,item,score)#
+  # define the bins#
+  # linear projection  #
+  affine<-switch(direction,#
+                 'inwards'= function(y) (outerRadius-innerRadius)*y+innerRadius,#
+                 'outwards'=function(y) (outerRadius-innerRadius)*(1-y)+innerRadius,#
+                 stop(paste("Unknown direction")))#
+  df<-within(df,{#
+             xmin<-(indexItem-1)*binSize+(indexItem-1)*spaceItem+(indexFamily-1)*(spaceFamily-spaceItem)#
+             xmax<-xmin+binSize#
+             ymin<-affine(1-previous)#
+             ymax<-affine(1-value)#
+             }#
+             )#
+  # build the guides#
+  guidesDF<-data.frame(#
+    xmin=rep(df$xmin,length(guides)),#
+    y=rep(1-guides/100,1,each=nrow(df)))#
+  guidesDF<-within(guidesDF,{#
+    xend<-xmin+binSize#
+    y<-affine(y)#
+  })#
+  # Building the ggplot object#
+  totalLength<-tail(df$xmin+binSize+spaceFamily,1)/circleProportion-0#
+#
+  # histograms#
+  p<-ggplot(df)+geom_rect(#
+    aes(#
+      xmin=xmin,#
+      xmax=xmax,#
+      ymin=ymin,#
+      ymax=ymax,#
+      fill=score)#
+    )#
+  # item labels#
+  readableAngle<-function(x){#
+    angle<-x*(-360/totalLength)-alphaStart*180/pi+90#
+    angle+ifelse(sign(cos(angle*pi/180))+sign(sin(angle*pi/180))==-2,180,0)#
+  }#
+  readableJustification<-function(x){#
+    angle<-x*(-360/totalLength)-alphaStart*180/pi+90#
+    ifelse(sign(cos(angle*pi/180))+sign(sin(angle*pi/180))==-2,1,0)#
+  }#
+  dfItemLabels<-ddply(df,.(item),summarize,xmin=xmin[1])#
+  dfItemLabels<-within(dfItemLabels,{#
+    x<-xmin+binSize/2#
+    angle<-readableAngle(xmin+binSize/2)#
+    hjust<-readableJustification(xmin+binSize/2)#
+    })#
+#
+  p<-p+geom_text(#
+    aes(#
+      x=x,#
+      label=item,#
+      angle=angle,#
+      hjust=hjust),#
+    y=1.02,#
+    size=3,#
+    vjust=0.5,#
+    data=dfItemLabels)#
+  # guides  #
+  p<-p+geom_segment(#
+    aes(#
+      x=xmin,#
+      xend=xend,#
+      y=y,#
+      yend=y),#
+    colour="white",#
+    data=guidesDF)#
+  # label for guides#
+  guideLabels<-data.frame(#
+    x=0,#
+    y=affine(1-guides/100),#
+    label=paste(guides,"% ",sep='')#
+    )#
+  p<-p+geom_text(#
+    aes(x=x,y=y,label=label),#
+    data=guideLabels,#
+    angle=-alphaStart*180/pi,#
+    hjust=1,#
+    size=4)#
+  # family labels#
+  if(familyLabels){#
+#     familyLabelsDF<-ddply(df,.(family),summarise,x=mean(xmin+binSize),angle=mean(xmin+binSize)*(-360/totalLength)-alphaStart*180/pi)#
+    familyLabelsDF<-aggregate(xmin~family,data=df,FUN=function(s) mean(s+binSize))#
+    familyLabelsDF<-within(familyLabelsDF,{#
+      x<-xmin#
+      angle<-xmin*(-360/totalLength)-alphaStart*180/pi#
+    })#
+#
+    p<-p+geom_text(#
+      aes(#
+        x=x,#
+        label=family,#
+        angle=angle),#
+    data=familyLabelsDF,#
+    y=1.2)#
+  }  #
+#   # empty background and remove guide lines, ticks and labels#
+  p<-p+opts(#
+    panel.background=theme_blank(),#
+    axis.title.x=theme_blank(),#
+    axis.title.y=theme_blank(),#
+    panel.grid.major=theme_blank(),#
+    panel.grid.minor=theme_blank(),#
+    axis.text.x=theme_blank(),#
+    axis.text.y=theme_blank(),#
+    axis.ticks=theme_blank()#
+    )#
+  # x and y limits#
+  p<-p+xlim(0,tail(df$xmin+binSize+spaceFamily,1)/circleProportion)#
+  p<-p+ylim(0,outerRadius+0.2)#
+  # project to polar coordinates#
+  p<-p+coord_polar(start=alphaStart)#
+  # nice colour scale#
+  p<-p+scale_fill_brewer(palette='Set1',type='qual')#
+  p#
+}
+library(plyr)#
+library(ggplot2)#
+source("polarHistogram.R")#
+# a little helper that generates random names for families and items.#
+randomName<-function(n=1,syllables=3){#
+  vowels<-c("a","e","i","o","u","y")#
+  consonants<-setdiff(letters,vowels)#
+  replicate(n,#
+            paste(#
+              rbind(sample(consonants,syllables,replace=TRUE),#
+                    sample(vowels,syllables,replace=TRUE)),#
+              sep='',collapse='')#
+            )#
+}#
+  set.seed(42)#
+  nFamily<-20#
+  nItemPerFamily<-sample(1:6,nFamily,replace=TRUE)#
+  nValues<-3#
+  df<-data.frame(#
+    family=rep(randomName(nFamily),nItemPerFamily),#
+    item=randomName(sum(nItemPerFamily),2))#
+df<-cbind(df,as.data.frame(matrix(runif(nrow(df)*nValues),nrow=nrow(df),ncol=nValues)))#
+  df<-melt(df,c("family","item"),variable_name="score") # from wide to long#
+  p<-polarHistogram(df,familyLabel=FALSE)#
+  print(p)
+library(reshape2)
+library(plyr)#
+library(ggplot2)#
+source("polarHistogram.R")#
+# a little helper that generates random names for families and items.#
+randomName<-function(n=1,syllables=3){#
+  vowels<-c("a","e","i","o","u","y")#
+  consonants<-setdiff(letters,vowels)#
+  replicate(n,#
+            paste(#
+              rbind(sample(consonants,syllables,replace=TRUE),#
+                    sample(vowels,syllables,replace=TRUE)),#
+              sep='',collapse='')#
+            )#
+}#
+  set.seed(42)#
+  nFamily<-20#
+  nItemPerFamily<-sample(1:6,nFamily,replace=TRUE)#
+  nValues<-3#
+  df<-data.frame(#
+    family=rep(randomName(nFamily),nItemPerFamily),#
+    item=randomName(sum(nItemPerFamily),2))#
+df<-cbind(df,as.data.frame(matrix(runif(nrow(df)*nValues),nrow=nrow(df),ncol=nValues)))#
+  df<-melt(df,c("family","item"),variable_name="score") # from wide to long#
+  p<-polarHistogram(df,familyLabel=FALSE)#
+  print(p)
+df
+p
+polarHistogram<-function(#
+  df,#
+  binSize=1,#
+  spaceItem=0.2,#
+  spaceFamily=1.2,#
+  innerRadius=0.3,#
+  outerRadius=1,#
+  guides=c(10,20,40,80),#
+  alphaStart=-0.3,#
+  circleProportion=0.8,#
+  direction="inwards",#
+  familyLabels=FALSE){#
+  # ordering#
+  df<-arrange(df,family,item,score)#
+  # summing up to one#
+  # TO DO: replace NA by 0 because cumsum doesn't ignore NA's.#
+  df<-ddply(df,.(family,item),transform,value=cumsum(value/(sum(value))))#
+  # getting previous value#
+  df<-ddply(df,.(family,item),transform,previous=c(0,head(value,length(value)-1)))#
+  # family and item indices. There must be a better way to do this#
+  df2<-ddply(df,.(family,item),summarise,indexItem=1)#
+  df2$indexItem<-cumsum(df2$indexItem)#
+  df3<-ddply(df,.(family),summarise,indexFamily=1)#
+  df3$indexFamily<-cumsum(df3$indexFamily)#
+  df<-merge(df,df2,by=c("family",'item'))#
+  df<-merge(df,df3,by="family")#
+  df<-arrange(df,family,item,score)#
+  # define the bins#
+  # linear projection  #
+  affine<-switch(direction,#
+                 'inwards'= function(y) (outerRadius-innerRadius)*y+innerRadius,#
+                 'outwards'=function(y) (outerRadius-innerRadius)*(1-y)+innerRadius,#
+                 stop(paste("Unknown direction")))#
+  df<-within(df,{#
+             xmin<-(indexItem-1)*binSize+(indexItem-1)*spaceItem+(indexFamily-1)*(spaceFamily-spaceItem)#
+             xmax<-xmin+binSize#
+             ymin<-affine(1-previous)#
+             ymax<-affine(1-value)#
+             }#
+             )#
+  # build the guides#
+  guidesDF<-data.frame(#
+    xmin=rep(df$xmin,length(guides)),#
+    y=rep(1-guides/100,1,each=nrow(df)))#
+  guidesDF<-within(guidesDF,{#
+    xend<-xmin+binSize#
+    y<-affine(y)#
+  })#
+  # Building the ggplot object#
+  totalLength<-tail(df$xmin+binSize+spaceFamily,1)/circleProportion-0#
+#
+  # histograms#
+  p<-ggplot(df)+geom_rect(#
+    aes(#
+      xmin=xmin,#
+      xmax=xmax,#
+      ymin=ymin,#
+      ymax=ymax,#
+      fill=score)#
+    )#
+  # item labels#
+  readableAngle<-function(x){#
+    angle<-x*(-360/totalLength)-alphaStart*180/pi+90#
+    angle+ifelse(sign(cos(angle*pi/180))+sign(sin(angle*pi/180))==-2,180,0)#
+  }#
+  readableJustification<-function(x){#
+    angle<-x*(-360/totalLength)-alphaStart*180/pi+90#
+    ifelse(sign(cos(angle*pi/180))+sign(sin(angle*pi/180))==-2,1,0)#
+  }#
+  dfItemLabels<-ddply(df,.(item),summarize,xmin=xmin[1])#
+  dfItemLabels<-within(dfItemLabels,{#
+    x<-xmin+binSize/2#
+    angle<-readableAngle(xmin+binSize/2)#
+    hjust<-readableJustification(xmin+binSize/2)#
+    })#
+#
+  p<-p+geom_text(#
+    aes(#
+      x=x,#
+      label=item,#
+      angle=angle,#
+      hjust=hjust),#
+    y=1.02,#
+    size=3,#
+    vjust=0.5,#
+    data=dfItemLabels)#
+  # guides  #
+  p<-p+geom_segment(#
+    aes(#
+      x=xmin,#
+      xend=xend,#
+      y=y,#
+      yend=y),#
+    colour="white",#
+    data=guidesDF)#
+  # label for guides#
+  guideLabels<-data.frame(#
+    x=0,#
+    y=affine(1-guides/100),#
+    label=paste(guides,"% ",sep='')#
+    )#
+  p<-p+geom_text(#
+    aes(x=x,y=y,label=label),#
+    data=guideLabels,#
+    angle=-alphaStart*180/pi,#
+    hjust=1,#
+    size=4)#
+  # family labels#
+  if(familyLabels){#
+#     familyLabelsDF<-ddply(df,.(family),summarise,x=mean(xmin+binSize),angle=mean(xmin+binSize)*(-360/totalLength)-alphaStart*180/pi)#
+    familyLabelsDF<-aggregate(xmin~family,data=df,FUN=function(s) mean(s+binSize))#
+    familyLabelsDF<-within(familyLabelsDF,{#
+      x<-xmin#
+      angle<-xmin*(-360/totalLength)-alphaStart*180/pi#
+    })#
+#
+    p<-p+geom_text(#
+      aes(#
+        x=x,#
+        label=family,#
+        angle=angle),#
+    data=familyLabelsDF,#
+    y=1.2)#
+  }  #
+#   # empty background and remove guide lines, ticks and labels#
+  p<-p+opts(#
+    panel.background=theme_blank(),#
+    axis.title.x=theme_blank(),#
+    axis.title.y=theme_blank(),#
+    panel.grid.major=theme_blank(),#
+    panel.grid.minor=theme_blank(),#
+    axis.text.x=theme_blank(),#
+    axis.text.y=theme_blank(),#
+    axis.ticks=theme_blank()#
+    )#
+  # x and y limits#
+  p<-p+xlim(0,tail(df$xmin+binSize+spaceFamily,1)/circleProportion)#
+  p<-p+ylim(0,outerRadius+0.2)#
+  # project to polar coordinates#
+  p<-p+coord_polar(start=alphaStart)#
+  # nice colour scale#
+  p<-p+scale_fill_brewer(palette='Set1',type='qual')#
+  p#
+}
+p
+p<-polarHistogram(df,familyLabel=FALSE)
+head(df)
+names(df)[4]
+names(df)[4] <- "score"
+p<-polarHistogram(df,familyLabel=FALSE)
+library(phenotypicForest)
+?polarHistogram
+library(reshape2)#
+set.seed(42)#
+nFamily<-20#
+nItemPerFamily<-sample(1:6,nFamily,replace=TRUE)#
+nValues<-3#
+randomWord<-function(n,nLetters=5)#
+  replicate(n,paste(sample(letters,nLetters,replace=TRUE),sep='',collapse=''))#
+#
+df<-data.frame(#
+  family=rep(randomWord(nFamily),nItemPerFamily),#
+  item=randomWord(sum(nItemPerFamily),3))#
+#
+df<-cbind(df,as.data.frame(matrix(runif(nrow(df)*nValues),nrow=nrow(df),ncol=nValues)))#
+#
+df<-melt(df,c("family","item"),variable.name="score") # from wide to long#
+print(head(df))#
+p<-polarHistogram(df,familyLabel=FALSE)#
+print(p)
+1.5/12
+0.125*5.5
+rank(c(1,2,3))
+rank(c(100,100,100,90,88,80))
+?tukeyHSD
+?TukeyHSD
+require(graphics)#
+#
+summary(fm1 <- aov(breaks ~ wool + tension, data = warpbreaks))#
+TukeyHSD(fm1, "tension", ordered = TRUE)#
+plot(TukeyHSD(fm1, "tension"))
+library(metricTester)
+tree <- sim.bdtree(stop="taxa", n=20)
+?simulateComm
+simulateComm
+for (i in seq(from = min.rich, to = max.rich)) {#
+        rich <- rep(i, i)#
+        col.1 <- append(col.1, rich)#
+        numbers <- sample(abundances, i)#
+        col.2 <- append(col.2, numbers)#
+        species <- sample(tree$tip.label, i)#
+        col.3 <- append(col.3, species)
+)
+for (i in seq(from = 10, to = 14)) {#
+        print(rep(i, i))#
+        col.1 <- append(col.1, rich)#
+        numbers <- sample(abundances, i)#
+        col.2 <- append(col.2, numbers)#
+        species <- sample(tree$tip.label, i)#
+        col.3 <- append(col.3, species)
+)
+for (i in seq(from=10, to=12))#
+	{#
+		#this generates a vector of community names by repeating #
+		#whatver the value of richness is (i) i times#
+		print(rep(i, i))#
+	}
+rep(10,2)
+library(metricTester)
+?runNulls
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)#
+#
+prepped <- prepNulls(tree, cdm)#
+#
+results <- runNulls(prepped)
+temp <- results$twoS["quadrat9",]
+temp2 <- cdm["quadrat9",]
+temp
+temp2
+class(temp)
+class(temp2)
+temp2 <- as.numeric(temp2)
+temp2
+setdiff(temp, temp2)
+6*14
+5*14
+15*6
+22*9
+.14+267.76+279
+241.36+0.14
+library(ape)
+data(bird.families)
+ls()
+str(bird.families)
+plot(bird.families)
+extract.clade(bird.families, 10)
+extract.clade(bird.families, 100)
+extract.clade(bird.families, 200)
+temp <- c(200, 210)
+extract.clade(bird.families, 210)
+lapply(bird.families, extract.clade, temp)
+lapply(temp, extract.clade, bird.families)
+lapply(temp, extract.clade, tree=bird.families)
+lapply(temp, extract.clade, phy=bird.families)
+trees <- lapply(temp, extract.clade, phy=bird.families)
+trees
+taxonomy <- function(tree, nodes)#
+{#
+	trees <- lapply(nodes, extract.clade, phy=tree)#
+	names(trees) <- nodes#
+	tipNames <- list()#
+	for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+	}#
+	names(tipNames) <- nodes#
+	output <- Reduce(tipNames, rbind)#
+	output#
+}
+taxonomy(bird.families, temp)
+#function to make taxonomy from tree#
+#
+taxonomy <- function(tree, nodes)#
+{#
+	trees <- lapply(nodes, extract.clade, phy=tree)#
+	names(trees) <- nodes#
+	tipNames <- list()#
+	for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+	}#
+	names(tipNames) <- nodes#
+	output <- Reduce(rbind, tipNames)#
+	output#
+}
+taxonomy(bird.families, temp)
+ls()
+rm(trees)
+trees <- lapply(temp, extract.clade, phy=bird.families)
+tipNames <- list()
+for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+	}
+tipNames
+names(tipNames) <- nodes
+names(tipNames) <- temp
+tipNames
+Reduce(rbind, tipNames)
+as.data.frame(tipNames)
+tipNames
+names(tipNames[[1]])
+names(tipNames[[1]]) <- rep(temp[1], length(tipNames[[1]]))
+tipNames
+names(tipNames[[2]]) <- rep(temp[2], length(tipNames[[2]]))
+as.data.frame(tipNames[[1]])
+as.data.frame(tipNames)
+Reduce(rbind, tipNames)
+tips
+Reduce(tipNames, append)
+Reduce(append, tipNames)
+Reduce(append, tipNames)->test
+test
+as.data.frame(test)
+#function to make taxonomy from tree#
+#
+taxonomy <- function(tree, nodes)#
+{#
+	trees <- lapply(nodes, extract.clade, phy=tree)#
+	tipNames <- list()#
+	for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+		names(tipNames[[i]]) <- rep(nodes[i], length(tipNames[[i]]))#
+	}#
+	tips <- Reduce(append, tipNames)#
+	output <- as.data.frame(tempOutput)#
+	output$group <- names(tips)#
+}
+temp
+taxonomy(bird.families, temp)
+#function to make taxonomy from tree#
+#
+taxonomy <- function(tree, nodes)#
+{#
+	trees <- lapply(nodes, extract.clade, phy=tree)#
+	tipNames <- list()#
+	for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+		names(tipNames[[i]]) <- rep(nodes[i], length(tipNames[[i]]))#
+	}#
+	tips <- Reduce(append, tipNames)#
+	output <- as.data.frame(tips)#
+	output$group <- names(tips)#
+}
+taxonomy(bird.families, temp)
+#function to make taxonomy from tree#
+#
+taxonomy <- function(tree, nodes)#
+{#
+	trees <- lapply(nodes, extract.clade, phy=tree)#
+	tipNames <- list()#
+	for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+		names(tipNames[[i]]) <- rep(nodes[i], length(tipNames[[i]]))#
+	}#
+	tips <- Reduce(append, tipNames)#
+	output <- as.data.frame(tips)#
+	output$group <- names(tips)#
+	output#
+}
+taxonomy(bird.families, temp)
+library(ape)
+#function to make taxonomy from tree#
+#
+taxonomy <- function(tree, nodes)#
+{#
+	trees <- lapply(nodes, extract.clade, phy=tree)#
+	tipNames <- list()#
+	for(i in 1:length(trees))#
+	{#
+		tipNames[[i]] <- trees[[i]]$tip.label#
+		names(tipNames[[i]]) <- rep(nodes[i], length(tipNames[[i]]))#
+	}#
+	tips <- Reduce(append, tipNames)#
+	output <- as.data.frame(tips)#
+	output$group <- names(tips)#
+	output#
+}#
+#
+library(ape)#
+#
+data(bird.families)#
+#
+exampleNodes <- c(200, 210, 220)#
+#
+taxonomy(tree=bird.families, nodes=exampleNodes)
+library(geiger)
+?nodelabel.phylo
+453.10+82.45+252.69
+9500+788.24+546.9
+824.30-409.1
+10835.14-3786.04
+3786.04+415.12
+10835.14-4201.16
+(10835.14-4201.16)*0.1
+2053.40-663.40
+235+95
+235+95+1167.33
+1390+1497.33+2595.22+25
+6633.98-6200
+6633.98/11490
+6633.98*0.02/12
+6633.98*0.02
+133/12
+238.87-11
+217.18*10
+174*10
+2171.80-1740
+546.90+788.24
+604.05+387+431.80
+5500-1422.85
+2400.66+4806.53+2795.37
+10500-10002.56
+10500-10002.56+788.24
+788.24+241.50
+20000*0.9235
+20000*0.9235*0.29
+18470*0.124
+5356.3+2290.28
+20000-12600
+710-650
+125*4
+125*3
+4600+200+150+100+175+375+100+50
+6700-5750
+1587/200
+1587/175
+175*50
+200*50
+10000-1587
+?as.double
+a <- 1:1000
+b <- 1:1000
+plot(a~log(b))
+plot(log(a)~log(b))
+128/22
+library(picante)
+?randomizeMatrix
+data(phylocom)#
+randomizeMatrix(phylocom$sample, null.model="richness")
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap"))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=1e10))
+1e10
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=10))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=100))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=1000))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=10000))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=100000))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=10000000))
+data(phylocom)#
+system.time(randomizeMatrix(phylocom$sample, null.model="independentswap", iterations=1000000))
+50000/1000
+7*50
+library(metricTester)#
+#
+#create a custom CDM with 20 species and 12 quadrats of species richness either 5, 7 or 10#
+#
+tree <- sim.bdtree(stop="taxa", n=20)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, rep(c(5,7,10),4), sim.abundances)#
+#
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=NULL, randomizations=1000, cores=8,#
+	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull), #
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "intraMPD"=metricTester:::intra_mpd),#
+	concat.by="both", output.raw=TRUE))
+str(test)
+plot(test$richness$NAW_MPD~test$richness$richness)
+library(metricTester)#
+#
+#create a custom CDM with 20 species and 12 quadrats of species richness either 5, 7 or 10#
+#
+tree <- sim.bdtree(stop="taxa", n=20)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, 10:25, sim.abundances)#
+#
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=NULL, randomizations=1000, cores=8,#
+	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull), #
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "intraMPD"=metricTester:::intra_mpd),#
+	concat.by="both", output.raw=TRUE))
+plot(test$richness$NAW_MPD~test$richness$richness)
+cdm
+cdm <- simulateComm(tree, 10:25, sim.abundances)
+?simulateComm
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
+cdm
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
+cdm
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+regional.abundance=NULL, distances.among=NULL, randomizations=1000, cores=8,#
+cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull), #
+metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "intraMPD"=metricTester:::intra_mpd),#
+concat.by="both", output.raw=TRUE))
+plot(test$richness$NAW_MPD~test$richness$richness)
+plot(test$richness$intraMPD~test$richness$richness)
+str(test)
+plot(test$richness$NAW_MPD~test$richness$richness)
+1e3
+1e4
+10^4
+library(phytools)
+tree<-pbtree(n=1000)
+plot(tree)
+2676-744
+library(metricTester)
+?calcMetrics
+library(geiger)#
+library(picante)#
+#
+#simulate tree with birth-death process#
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1))#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+prepped <- prepData(tree, cdm)#
+#
+results <- calcMetrics(prepped)
+calcMetrics(prepped, metrics=list(metricTester:::my_psc))
+calcMetrics(prepped, metrics=list("PSC"=metricTester:::my_psc))
+str(prepped)
+prepped$picante.cdm
+metricTester:::my_psc
+example
+exampleMetric <- function(metrics.input)#
+{#
+	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)#
+	output#
+}
+exampleMetric(metrics.input$picante.cdm)
+exampleMetric(prepped$picante.cdm)
+prepped$picante.cdm
+exampleMetric(prepped)
+calcMetrics(prepped, metrics=exampleMetric)
+calcMetrics(prepped, metrics=list("example"=exampleMetric))
+coordDF <- matrix(ncol=2, nrow=100)    coordDF[,1] <- runif(n=100, min=40, max=50)    coordDF[,2] <- runif(n=100, min=-130, max=-120)    #convert to data frame, give column names. also give row names such as if the cells had    #names (as they should or there'd be no way to track them)    coordDF <- as.data.frame(coordDF)    row.names(coordDF) <- paste("cell", 1:100, sep="")    names(coordDF) <- c("latitude","longitude")    #calculate the distances among all of these points. in the real program you're going to    #want to calculate great arc distance or whatever it's called    distances <- dist(coordDF, diag=TRUE, upper=TRUE)    #turn it into a symmetric distance matrix    distances <- as.matrix(distances)    #simulate a regional phylogeny of 100 species    tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)    #simulate a community data matrix of 100 cells by 100 species. do it 4 times so that    #you can use your simulateComm function and have it span a reasonable range of richness    sim.ab
+undances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
+coordDF
+cdm1 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)    cdm2 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)    cdm3 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)    cdm4 <- simulateComm(tree, min.rich=10, max.rich=34, abundances=sim.abundances)    #bind these into a list and use dplyr rbind_all to bind together. recast as data frame    cdmList <- list(cdm1, cdm2, cdm3, cdm4)    cdm <- rbind_all(cdmList)    cdm <- as.data.frame(cdm)    #fix as necessary manually here (i.e. make sure dimensions are 100 x 100), seems to    #usually work. then give cell names    row.names(cdm) <- paste("cell", 1:100, sep="")    #fill NAs with 0s.    cdm[is.na(cdm)] <- 0
+cdm1 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)#
+cdm2 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)#
+ cdm3 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)#
+ cdm4 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
+cdm1 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm2 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+ cdm3 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+ cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+cdmList <- list(cdm1, cdm2, cdm3, cdm4)#
+#'#
+cdm <- rbind_all(cdmList)#
+#'#
+cdm <- as.data.frame(cdm)#
+#'#
+#' #fix as necessary manually here (i.e. make sure dimensions are 100 x 100), seems to #
+#' #usually work. then give cell names#
+#'#
+ row.names(cdm) <- paste("cell", 1:100, sep="")#
+#'#
+#' #fill NAs with 0s.#
+#'#
+ cdm[is.na(cdm)] <- 0
+cdm
+newCDM <- dispersalNull(cdm, tree, distances)
+library(dplyr)    library(geiger)    library(picante)    #simulate tree with birth-death process    tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)    #simulate a log normal abundance distribution    sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1    #simulate a community of varying richness    cdm <- simulateComm(tree, min.rich=10, max.rich=25, abundances=sim.abundances)    #run the metrics and nulls combo function    rawResults <- metricsNnulls(tree, cdm, randomizations=3)    #summarize the results    results <- reduceRandomizations(rawResults)    #calculate the observed metrics from the input CDM    observed <- observedMetrics(tree, cdm)    test <- errorChecker(observed, results, "richness")
+cdm
+library(dplyr)    library(geiger)    library(picante)    #simulate tree with birth-death process    tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)    #simulate a log normal abundance distribution    sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1    #simulate a community of varying richness    cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)    #run the metrics and nulls combo function    rawResults <- metricsNnulls(tree, cdm, randomizations=3)    #summarize the results    results <- reduceRandomizations(rawResults)    #calculate the observed metrics from the input CDM    observed <- observedMetrics(tree, cdm)    test <- errorChecker(observed, results, "richness")
+str(test)
+str(test,2)
+test$quadrat$twoX
+exampleMetrics
+exampleMetric
+test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,    regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,    cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),    metrics=list("richness"=metricTester:::my_richness, "test"=exampleMetric),    concat.by="both", output.raw=FALSE)
+test
+test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,    regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,    cluster=FALSE, nulls=list("freq"=metricTester:::my_frequency),    metrics=list("richness"=metricTester:::my_richness, "test"=exampleMetric),    concat.by="both", output.raw=FALSE)
+test
+test2 <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,#
+	cluster=FALSE, nulls=list("frequency"=metricTester:::my_frequency), #
+	metrics=list("richness"=metricTester:::my_richness, "exampleMetric"=exampleMetric),#
+	concat.by="both", output.raw=FALSE)
+test2
+library(metricTester)
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#'#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#'#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#'#
+rawResults <- metricsNnulls(tree, cdm)#
+#'#
+results <- reduceRandomizations(rawResults)
+str(results)
+head(results$frequency)
+summaries(results$frequency)
+results$frequency
+library(devtools)
+load_all()
+document()

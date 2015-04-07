@@ -21,9 +21,6 @@ A few quick checks to confirm the metric functions are input in suitable
 format.
 }
 \examples{
-library(geiger)
-library(picante)
-
 checkMetrics(defineMetrics())
 }
 \references{

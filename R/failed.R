@@ -6,8 +6,8 @@
 #' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
 #'
 #' @details It is possible that a given null model, e.g. regional, failed on a given run. 
-#' These failures, in my experience so far, can only occur if a given species richness is
-#' insufficiently sampled by the null model, then concat.by="richness". Otherwise, I
+#' These failures, in our experience so far, can only occur if a given species richness is
+#' insufficiently sampled by the null model when concat.by="richness". Otherwise, I
 #' believe the run will always succeed. Thus, to simplify coding, this function only
 #' evaluates the by "richness" runs for failure when concat.by="both". If it is possible
 #' for a null to fail if concatenating by quadrat then this function will need to be

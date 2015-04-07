@@ -19,13 +19,12 @@ A matrix with all species in the input tree in phylogenetic order, and the same
 number of randomized quadrats as used in the input community data matrix
 }
 \description{
-Entirely vectorized null model that maintains species richness (approximately only
-during this phase of the calculation, but we do so strictly later on), species
-occurrence frequency, and species abundance distributions.
+Null model that simulates community assembly where species probabilities of occurrence
+are proportional to their regional abundance.
 }
 \details{
-Although not as fast as, e.g. randomizeMatrix, this function still runs
-fairly quickly. It works by drawing the total number of
+Although nowhere near as fast as, e.g. randomizeMatrix, this function still
+runs fairly quickly (no for or while loops). It works by drawing the total number of
 individuals observed in the input plot from the regional abundance vector. Thus, while
 a randomized quadrat will not necessarily have the same number of species as the
 observed quadrat, over many iterations it will likely be sampled. We can then
@@ -37,9 +36,6 @@ would be possible to draw 1, 2, or 3 species, but in general, two species would 
 in the randomized quadrats.
 }
 \examples{
-library(geiger)
-library(colorRamps)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 #prep the data for the simulation

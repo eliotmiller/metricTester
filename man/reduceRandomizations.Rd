@@ -22,9 +22,6 @@ where each data frame contains all the results from a given null model from the 
 randomizations.list.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

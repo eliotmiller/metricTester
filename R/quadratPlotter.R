@@ -1,12 +1,13 @@
 #' Plot simulated quadrats in arena
 #'
 #' Given a matrix of quadrat bounds, plots the quadrats in an already plotted,
-#' simulated arena
+#' simulated arena.
 #'
 #' @param quadrat.bounds Matrix of quadrat bounds
 #' 
-#' @details Plots quadrats as defined by the supplied matrix, e.g. a call to quadratPlacer
-#' An active plot with the simulated arena needs to already be open, see example.
+#' @details Plots quadrats as defined by the supplied matrix, e.g. a call to
+#' quadratPlacer. An active plot with the simulated arena needs to already be open, 
+#' see example.
 #'
 #' @return Plotted quadrats
 #'
@@ -15,7 +16,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
 #' library(colorRamps)
 #'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)

@@ -15,9 +15,8 @@ the corresponding richness. If quadrat, observed scores (e.g. those from quadrat
 are compared to all randomized quadrat 1 scores. If both, both are run and each is
 saved as a separate data frame in a single list.}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A data frame of 0s, 1s, and 2s.
@@ -34,10 +33,6 @@ corresponding to not significant, significantly clustered, and significantly
 overdispersed.
 }
 \examples{
-library(dplyr)
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

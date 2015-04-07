@@ -23,8 +23,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 

@@ -40,8 +40,6 @@ regional abundance [where each element is a species name, repeated as many times
 present in pool], and the dimensions of the arena).
 }
 \examples{
-library(geiger)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

@@ -9,7 +9,9 @@
 #' 
 #' @details Places quadrats down in non-overlapping fashion according to parameters
 #' supplied. Because this would run indefinitely if unacceptable parameters were supplied,
-#' a conservative check is implemented to "ensure" the function does not get stuck.
+#' a conservative check is implemented to "ensure" the function does not get stuck. If
+#' unacceptable parameters are supplied, will return an arena and a smaller total sampling
+#' area will need to be defined.
 #'
 #' @return A matrix with the X & Y coordinates of the four corners of each quadrat placed
 #'

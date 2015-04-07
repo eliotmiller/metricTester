@@ -14,7 +14,7 @@ reduceResults(). See examples.}
 \value{
 A data frame summarizing the total number of quadrats tested and how many of
 these deviated above (significantly overdispersed) or below (significantly clustered)
-the 95% CI for each simulation, null, metric combination.
+the 95\% CI for each simulation, null, metric combination.
 }
 \description{
 This function provides one of many ways of summarizing and considering simulation
@@ -23,10 +23,10 @@ results.
 \details{
 This function provides one way of summarizing and considering simulation
 results. It takes as input a vector of 0s, 1s and 2s (corresponding to within, less,
-and greater than the 95% CIs, respectively) for all quadrats
+and greater than the 95\% CIs, respectively) for all quadrats
 from a given simulation-null-metric combination, and determines how many quadrats
-overall deviated beyond expectations. A number of utility functions are also defined
-but not exported in this function.
+overall deviated beyond expectations. A number of utility functions used for that goal
+are also defined but not exported in this function.
 }
 \examples{
 #not run

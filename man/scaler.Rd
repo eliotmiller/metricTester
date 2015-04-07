@@ -17,7 +17,7 @@ A scaled and named dataframe of species traits
 }
 \description{
 Given a matrix of two traits, and the minimum and maximum extent of the desired arena,
-will return a data frame of species' traits scaled to the new arena size.
+will return a data frame of species' traits scaled to the arena size.
 }
 \details{
 Scales a matrix of species' traits to a desired mininimum-maximum range.
@@ -25,8 +25,6 @@ Intended for use in a spatially explicit scenario with two traits, but could eas
 be co-opted.
 }
 \examples{
-library(geiger)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 temp <- evolveTraits(tree)

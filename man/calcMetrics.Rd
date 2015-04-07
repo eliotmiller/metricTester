@@ -6,11 +6,10 @@
 calcMetrics(metrics.input, metrics)
 }
 \arguments{
-\item{metrics.input}{metrics.input object}
+\item{metrics.input}{Prepped metrics.input object}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A data frame with the calculated metrics and the associated species richness
@@ -27,9 +26,6 @@ confirms that the metrics to be calculated are in a named list (via checkMetrics
 then lapplies all metric functions to the input metrics.input object.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
@@ -40,6 +36,16 @@ cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 prepped <- prepData(tree, cdm)
 
 results <- calcMetrics(prepped)
+
+#an example of how to define ones own metrics for use in the metricTester framework
+#this "metric" simply calculates the richness of each quadrat in the CDM
+exampleMetric <- function(metrics.input)
+{
+	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)
+	output
+}
+
+calcMetrics(prepped, metrics=list("example"=exampleMetric))
 }
 \references{
 Miller, Trisos and Farine.

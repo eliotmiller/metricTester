@@ -20,9 +20,6 @@ defineSimulations or a named list of simulation functions.
 A few quick checks to confirm the spatial simulations are in suitable format.
 }
 \examples{
-library(geiger)
-library(picante)
-
 checkSimulations(defineSimulations())
 }
 \references{

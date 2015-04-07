@@ -23,7 +23,7 @@ A data frame of summarized results
 }
 \description{
 Flexible function that summarizes metric performance after reading in and testing
-per-simulation results with a function like sesIndiv.
+simulation results with either sesIndiv or quadratOverall.
 }
 \details{
 If an overall picture of metric performance is desired, this function can

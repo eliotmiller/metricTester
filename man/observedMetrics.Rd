@@ -11,25 +11,22 @@ observedMetrics(tree, picante.cdm, metrics)
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
 species as columns}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics. Defaults to all metrics
+defined in defineMetrics()}
 }
 \value{
 A data frame with the species richness and calculated phylogenetic community
 structure metrics for all input quadrats from the CDM.
 }
 \description{
-Given a cdm and phylogeny, this function preps the data and calculates all metrics that
-are defined in defineMetrics.
+Given a cdm and phylogeny, this function preps the data and calculates metrics of the
+user's choice
 }
 \details{
 A simple wrapper function to quickly prep data and calculate observed metrics.
 }
 \examples{
-library(geiger)
-library(colorRamps)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 #prep the data for the simulation
@@ -47,7 +44,7 @@ results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm)
 #richness). not run
 
 #results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm,
-#metrics=list("richness"=my_richness,"PSV"=my_psv))
+#metrics=list("richness"=metricTester:::my_richness,"PSV"=metricTester:::my_psv))
 }
 \references{
 Miller, Trisos and Farine.

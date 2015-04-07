@@ -1,6 +1,6 @@
 #' Prep data for spatial simulations
 #'
-#' Given all required parameters for any of the spatial simulations, will prepare an
+#' Given the required parameters for defined spatial simulations, will prepare an
 #' object of class simulations.input for actual simulation.
 #'
 #' @param tree Phylo object
@@ -30,8 +30,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 

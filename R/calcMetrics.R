@@ -3,10 +3,9 @@
 #' Given a prepped metrics.input object, calculate all phylogenetic community structure
 #' metrics of interest.
 #'
-#' @param metrics.input metrics.input object
-#' @param metrics Optional list of named metric functions to use. These
-#' must be defined in the defineMetrics function. If invoked, this option will likely
-#' be used to run a subset of the defined metrics.
+#' @param metrics.input Prepped metrics.input object
+#' @param metrics Optional list of named metric functions to use. If invoked, this option
+#' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details Currently we are calculating 19 phylogenetic community structure metrics.
 #' This function first confirms that the input is of class metrics.input and, if so, then
@@ -23,9 +22,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
@@ -36,6 +32,16 @@
 #' prepped <- prepData(tree, cdm)
 #'
 #' results <- calcMetrics(prepped)
+#'
+#' #an example of how to define ones own metrics for use in the metricTester framework
+#' #this "metric" simply calculates the richness of each quadrat in the CDM
+#' exampleMetric <- function(metrics.input)
+#' {
+#'	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)
+#'	output
+#' }
+#'
+#' calcMetrics(prepped, metrics=list("example"=exampleMetric))
 
 calcMetrics <- function(metrics.input, metrics)
 {
@@ -59,7 +65,7 @@ calcMetrics <- function(metrics.input, metrics)
 	results <- as.data.frame(tempResults)
 	
 	#add quadrat names to data frame
-	results <- data.frame(quadrat=row.names(results), results)
+	results <- data.frame(quadrat=row.names(metrics.input$picante.cdm), results)
 	
 	#get rid of row names
 	row.names(results) <- NULL

@@ -1,9 +1,9 @@
 #' Summarize null model performance of a series of summarized simulation results
 #'
-#' Flexible function that summarizes null model performance after reading in and testing
-#' per-simulation results with a function like sesIndiv.
+#' Flexible function that summarizes null performance after reading in and testing
+#' simulation results with either sesIndiv or quadratOverall.
 #'
-#' @param summarized.results The results of a call to sesIndiv() or something similar.
+#' @param summarized.results The results of a call to sesIndiv() or quadratOverall()
 #' @param simulations Default is "all". Alternatively, can supply a vector of simulation
 #' names to summarize the results over.
 #' @param metrics Default is "all". Alternatively, can supply a vector of metric
@@ -11,9 +11,17 @@
 #' @param concat.by Default is "both". Alternatively, can supply either "quadrat" or
 #' "richness".
 #' 
-#' @details If an overall picture of null model performance is desired, this function can
-#' provide it. It can also be used to summarize null model performance over a given set of
-#' simulations, metrics, and concatenation options.
+#' @details If an overall picture of null performance is desired, this function can
+#' provide it. It can also be used to summarize null performance over a specific subset
+#' of simulations, metrics, and concatenation options. If provided with the results
+#' of a call to quadratOverall, the options are more limited. Currently, if provided with
+#' such a result, the assumption is
+#' that there are three spatial simulations, "random", "filtering", and "competition". It
+#' then assumes that any clustered or overdispersed quadrats for the random simulation,
+#' or any overdispersed or clustered for the filtering or competition simulations,
+#' respectively, count as typeI errors. It assumes that any quadrats that are not
+#' clustered or overdispersed for the filtering or competition simulations, respectively,
+#' count as typeII errors.
 #'
 #' @return A data frame of summarized results
 #'

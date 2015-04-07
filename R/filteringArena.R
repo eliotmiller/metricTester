@@ -5,9 +5,11 @@
 #'
 #' @param simulations.input A prepared simulations.input object from prepSimulations
 #' 
-#' @details This simulation is sensitive to parameter specifications. Because there are
-#' no "forces" deterring individuals from settling near each other, species clump near
-#' their spatial preferences.
+#' @details This simulation has been updated to avoid a previous consequence where
+#' individuals clumped near the center of the arena. Now, species' spatial preferences,
+#' which previously would have approximated a normal distribution around the center of the
+#' arena, are smoothed to a uniform distribution. Thus, individuals are more evenly
+#' distributed throughout the simulated arena.
 #'
 #' @return A list of 3 elements: the original input regional
 #' abundance vector, the new spatial arena, and the dimensions of that arena. 
@@ -17,8 +19,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 

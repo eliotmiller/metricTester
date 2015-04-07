@@ -5,7 +5,7 @@
 #'
 #' @param x A vector
 #' 
-#' @details Simple utility function
+#' @details Simple utility function, used in the competitive exclusion simulations.
 #'
 #' @return A logical vector of length input vector minus 1, corresponding to whether an
 #' element of the input vector equals the last element of the input vector.

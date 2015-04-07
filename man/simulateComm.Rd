@@ -17,7 +17,7 @@ A community data matrix (a data frame) with species as columns and sites as
 rows.
 }
 \description{
-Given a phylo object, desired min and max species richnesses, and a vector of potential
+Given a phylo object, a vector of desired species richnesses, and a vector of potential
 species abundances, will generate a community data matrix with these characteristics.
 }
 \details{
@@ -25,9 +25,6 @@ There is currently no implementation to control the frequency with which a
 given species is selected.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

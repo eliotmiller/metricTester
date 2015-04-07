@@ -13,9 +13,8 @@
 #' the corresponding richness. If quadrat, observed scores (e.g. those from quadrat 1)
 #' are compared to all randomized quadrat 1 scores. If both, both are run and each is
 #' saved as a separate data frame in a single list.
-#' @param metrics Optional list of named metric functions to use. These
-#' must be defined in the defineMetrics function. If invoked, this option will likely
-#' be used to run a subset of the defined metrics.
+#' @param metrics Optional list of named metric functions to use. If invoked, this option
+#' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details Given a table of results, where means, SDs, and CIs are bound to the observed
 #' scores at the corresponding richness or quadrat, this function calculates standardized
@@ -28,10 +27,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(dplyr)
-#' library(geiger)
-#' library(picante)
-#'
 #' #simulate tree with birth-death process
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'

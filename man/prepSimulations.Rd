@@ -34,7 +34,7 @@ simulations}
 A prepared simulations.input object
 }
 \description{
-Given all required parameters for any of the spatial simulations, will prepare an
+Given the required parameters for defined spatial simulations, will prepare an
 object of class simulations.input for actual simulation.
 }
 \details{
@@ -43,8 +43,6 @@ defineSimulations. If additional parameters are ever required for those simulati
 they would have to be added as additional arguments here.
 }
 \examples{
-library(geiger)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,

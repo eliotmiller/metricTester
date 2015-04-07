@@ -23,9 +23,6 @@ species are columns), calculated corrected phylogenetic species clustering
 Returns the inverse of psc as defined in picante
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

@@ -24,8 +24,6 @@ assign abundances to species in the tree. It then draws from this regional abund
 distribution to settle individuals at random in the landscape.
 }
 \examples{
-library(geiger)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,

@@ -28,8 +28,6 @@ the default version of the function, but will not use all memory and crash at la
 numbers of individuals.
 }
 \examples{
-library(geiger)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,

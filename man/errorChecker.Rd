@@ -13,34 +13,30 @@ reduceRandomizations()}
 
 \item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of data frames.
 }
 \description{
-Given a data frame of observed scores and a list of randomizations based on different
+Given a data frame of observed metrics and a list of randomizations based on different
 null models, returns a list of data frames summarizing the significance of observed
-scores both at the single quadrat and the entire arena level.
+metrics both at the single quadrat and the entire arena level.
 }
 \details{
 This function wraps a number of smaller functions into a useful type I and II
 error checker. It takes a reduced list of randomizations such as those reduced from
 metricsNnulls with reduceRandomizations, summarizes the mean,
 SD, and CI of each metric plus null model either at the richness or quadrat level,
-then compares the observed metric scores to those summarized scores. It return a list
+then compares the observed metric scores to those summarized metrics. It return a list
 with two elements. The first is a list of data frames, where each corresponds to the
 standardized effect scores of the observed metrics for a given null model. The second
-is a list of data frames, where each corresponds to whether each observed metric
-deviates beyond expectations.
+is a list of data frames, where each corresponds to whether a given quadrat deviates
+beyond CI. For the latter, 0 corresponds to within CI, 1 corresponds to less than the
+CI, and 2 corresponds to greater than the CI.
 }
 \examples{
-library(dplyr)
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

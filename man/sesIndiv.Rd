@@ -24,8 +24,8 @@ all iterations
 This function takes a raw list of results from multiple iterations from
 multiLinker, and runs sesSingle across each one. It then summarizes the results of
 those single runs as the number of sim/null/metrics that deviated beyond expectations
-and the number that were within expectations. A given unique sim/null/concat.by/metric
-combination iteration is considered as throwing a type I error only if p is less
+and the number that were within expectations. A single run from a given unique metric +
+null approach is considered as throwing a type I error only if p is less
 than or equal to 0.05 for the random spatial simulation. It would be possible to also
 assess whether such unique combinations throw the opposite signal than expected for
 habitat filtering and competitive exclusion. A unique combination iteration is

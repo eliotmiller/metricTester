@@ -14,10 +14,10 @@ species as columns}
 \item{tree}{Phylo object}
 
 \item{optional.dists}{A symmetric distance matrix can be directly supplied. This option
-is experimental. Performance depends on metric being used. If the metric in question
-relies on the dists element of the result of this function, then this optional distance
-matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still
-employ the tree data.}
+is experimental. Behavior depends on metric being used. If the metric in question
+relies on the phylogenetic distance matrix from a call to cophenetic(tree), then this
+optional distance matrix will be inserted instead. But other metrics that rely on the
+ecoPD.cdm object will still employ the phylogenetic distance matrix.}
 
 \item{regional.abundance}{A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 Optional, will be generated from the input CDM if not provided.}
@@ -36,18 +36,16 @@ computer. Invokes multicore processing on a single computer if FALSE, otherwise
 parallel processing on cluster. However, currently causing errors due to namespace
 issues with doParallel vs doMC.}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
 
-\item{nulls}{Optional list of named null model functions to use. These
-must be defined in the defineNulls function. If invoked, this option will likely
-be used to run a subset of the defined null models.}
+\item{nulls}{Optional list of named null model functions to use. If invoked, this
+option will likely be used to run a subset of the defined null models.}
 
 \item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
 
-\item{output.raw}{Default is FALSE. Set to TRUE if you prefer raw randomized values as
-opposed to summarized mean, SD, CI, etc.}
+\item{output.raw}{Default is FALSE. Set to TRUE if raw randomized values are preferred
+(as opposed to summarized mean, SD, CI, etc).}
 }
 \value{
 A list of data frames, where each data frame corresponds to a given null model,
@@ -93,10 +91,10 @@ tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)
 #you can use your simulateComm function and have it span a reasonable range of richness
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
-cdm1 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
-cdm2 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
-cdm3 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
-cdm4 <- simulateComm(tree, richness.vector=10:34,, abundances=sim.abundances)
+cdm1 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+cdm2 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+cdm3 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
+cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
 
 #bind these into a list and use dplyr rbind_all to bind together. recast as data frame
 
@@ -119,6 +117,20 @@ test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
 	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),
 	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
+	concat.by="both", output.raw=FALSE)
+
+#an example of how to explore behavior of a new metric in the metricTester framework
+#this "metric" simply calculates the richness of each quadrat in the CDM
+exampleMetric <- function(metrics.input)
+{
+	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)
+	output
+}
+
+test2 <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
+	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
+	cluster=FALSE, nulls=list("frequency"=metricTester:::my_frequency),
+	metrics=list("richness"=metricTester:::my_richness, "exampleMetric"=exampleMetric),
 	concat.by="both", output.raw=FALSE)
 }
 \references{

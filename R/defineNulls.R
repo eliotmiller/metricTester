@@ -3,10 +3,11 @@
 #' Creates a list of named functions, each of which accept a nulls.input object
 #'
 #' @details All of the null models we calculated for our manuscript are included in this
-#' function. To add additional functions, they need to be defined and included
-#' here. The function needs to be included with a name, and it must accept a nulls.input
-#' as input. If the function needs additional elements not included in that input, then
-#' the prepNulls function must also be revised.
+#' function. To add additional null model functions, they can either be defined on the fly
+#' or to permanently include a new model in all downstream simulations, it can be
+#' included here. The function needs to be included with a name, and it must accept a
+#' nulls.input object. If the function needs additional elements not included in that
+#' input, then the prepNulls function must also be revised.
 #'
 #' @return A list of named functions
 #'
@@ -17,9 +18,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' defineNulls()
 
 defineNulls <- function()

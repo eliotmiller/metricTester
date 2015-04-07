@@ -1,7 +1,7 @@
 #' Scale output of evolveTraits to arena size
 #'
 #' Given a matrix of two traits, and the minimum and maximum extent of the desired arena,
-#' will return a data frame of species' traits scaled to the new arena size.
+#' will return a data frame of species' traits scaled to the arena size.
 #'
 #' @param input.traits Second element of the results of a call to evolveTraits()
 #' @param min.arena Minimum size of arena, e.g. 0
@@ -18,8 +18,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' temp <- evolveTraits(tree)

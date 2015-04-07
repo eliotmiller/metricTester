@@ -1,7 +1,7 @@
 #' Summarize metric performance of a series of summarized simulation results
 #'
 #' Flexible function that summarizes metric performance after reading in and testing
-#' per-simulation results with a function like sesIndiv.
+#' simulation results with either sesIndiv or quadratOverall.
 #'
 #' @param summarized.results The results of a call to sesIndiv() or quadratOverall()
 #' @param simulations Default is "all". Alternatively, can supply a vector of simulation

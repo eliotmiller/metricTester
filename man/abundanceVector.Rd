@@ -21,9 +21,6 @@ Simple function to create a regional abundance vector given a "regional"
 community data matrix.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

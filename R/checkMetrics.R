@@ -18,9 +18,6 @@
 #' @references Miller, Trisos and Farine.
 #'
 #' @examples
-#' library(geiger)
-#' library(picante)
-#'
 #' checkMetrics(defineMetrics())
 
 checkMetrics <- function(x)

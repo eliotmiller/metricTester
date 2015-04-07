@@ -13,11 +13,11 @@ metricsNnulls(tree, picante.cdm, optional.dists = NULL,
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
 species as columns}
 
-\item{optional.dists}{A symmetric distance matrix can be directly supplied. This option is
-experimental. Performance depends on the metric being used. If the metric in question
-relies on the dists element of the result of this function, then this optional distance
-matrix will be inserted. But other metrics that rely on the ecoPD.cdm object will still
-employ the tree data.}
+\item{optional.dists}{A symmetric distance matrix can be directly supplied. This option
+is experimental. Behavior depends on metric being used. If the metric in question
+relies on the phylogenetic distance matrix from a call to cophenetic(tree), then this
+optional distance matrix will be inserted instead. But other metrics that rely on the
+ecoPD.cdm object will still employ the phylogenetic distance matrix.}
 
 \item{regional.abundance}{A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 Optional, will be generated from the input CDM if not provided.}
@@ -36,13 +36,11 @@ computer. Invokes multicore processing on a single computer if FALSE, otherwise
 parallel processing on cluster. However, currently causing errors due to namespace
 issues with doParallel vs doMC.}
 
-\item{nulls}{Optional list of named null model functions to use. These
-must be defined in the defineNulls function. If invoked, this option will likely
-be used to run a subset of the defined null models.}
+\item{nulls}{Optional list of named null model functions to use. If invoked, this
+option will likely be used to run a subset of the defined null models.}
 
-\item{metrics}{Optional list of named metric functions to use. These
-must be defined in the defineMetrics function. If invoked, this option will likely
-be used to run a subset of the defined metrics.}
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of vectors. The first level has as many elements as there
@@ -61,9 +59,6 @@ randomizes the input CDM according to all defined null models, then calculates e
 observed metric on each randomized matrix.
 }
 \examples{
-library(geiger)
-library(picante)
-
 #simulate tree with birth-death process
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 

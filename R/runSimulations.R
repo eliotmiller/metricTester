@@ -17,19 +17,13 @@
 #' @return A list of lists of simulation results, where each of the first-order elements
 #' in the list relates to a unique simulation as defined in defineSimulations.
 #'
-#' @export
-#'
 #' @import phylobase grid ecoPDcorr
 #'
 #' @references Miller, Trisos and Farine.
 #'
 #' @export
 #'
-#' @references Miller, Trisos and Farine.
-#'
 #' @examples
-#' library(geiger)
-#'
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 

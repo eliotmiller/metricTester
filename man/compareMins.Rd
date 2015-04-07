@@ -17,7 +17,7 @@ Given a vector where the last element is the minimum, identifies which elements 
 vector match the last element.
 }
 \details{
-Simple utility function
+Simple utility function, used in the competitive exclusion simulations.
 }
 \examples{
 #create a basic input vector

@@ -28,8 +28,6 @@ confirms that the simulations are in a named list (via checkSimulations),
 then lapplies all spatial simulation functions to the input object.
 }
 \examples{
-library(geiger)
-
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
@@ -39,8 +37,6 @@ competition.iterations=3)
 results <- runSimulations(prepped)
 }
 \references{
-Miller, Trisos and Farine.
-
 Miller, Trisos and Farine.
 }
 
