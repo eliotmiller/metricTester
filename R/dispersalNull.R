@@ -9,6 +9,15 @@
 #' @param tree Phylo object
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
 #' quadrats from the cdm.
+#' @param abundance.matters Default is TRUE. If FALSE, species are sampled from
+#' neighboring grid cells with equal probability.
+#' @param abundance.assigned Default is "directly". If set to "explore", rather than
+#' assigning species abundances equal to those in neighboring cells, a normal distribution
+#' of standard deviation 1 is created around that abundance, rounded to whole numbers,
+#' negative numbers are converted to 1, and then abundance is assigned from this
+#' distribution. If set to "overall", which may be preferable when abundance.matters is
+#' set to FALSE, species' are assigned abundances by drawing from the vector of non-zero
+#' abundances from the original cdm.
 #' 
 #' @details This function can run quite slowly, as it employs a while loop to discard
 #' selected species if they are already contained in the quadrat being simulated. It also
@@ -17,7 +26,9 @@
 #' neighboring quadrats, this null would never run to completion. The argument 
 #' distances.among is flexible, and can relate to e.g., straight-line distances,
 #' great-circle distances, and ecological distances. The performance of this null model
-#' has not yet been tested.
+#' has not yet been tested. If the argument abundance.matters is set to FALSE, then
+#' species' abundances in neighboring grid cells does not influence their probability of
+#' settling (only their proximity influences the probability of settling).
 #'
 #' @return A matrix with the same dimensions as the input cdm.
 #'
@@ -78,7 +89,8 @@
 #'
 #' newCDM <- dispersalNull(cdm, tree, distances)
 
-dispersalNull <- function(cdm, tree, distances.among)
+dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE, 
+	abundance.assigned="directly")
 {
 	#create a check to ensure that all species that occur in the cdm are also in the tree
 	if(length(setdiff(names(cdm),tree$tip.label))!=0)
@@ -108,6 +120,9 @@ dispersalNull <- function(cdm, tree, distances.among)
 	
 	richness <- apply(cdm, 1, lengthNonZeros)
 
+	#generate a vector of all non-zero abundances from the input CDM
+	overallAbundance <- cdm[cdm!=0]
+
 	#create a list that you will use to save vectors of species into (one list element
 	#per quadrat)
 	replacementList <- list()
@@ -131,14 +146,46 @@ dispersalNull <- function(cdm, tree, distances.among)
 			#the distance matrix
 			selectedQuadrat <- selectNear(distances.among[,i])
 			#select a species from that quadrat. probability proportional to abundance
-			temp <- sample(x=cdm[selectedQuadrat,], size=1, prob=cdm[selectedQuadrat,])
+			if(abundance.matters)
+			{
+				temp <- sample(x=cdm[selectedQuadrat,], size=1, 
+					prob=cdm[selectedQuadrat,])
+			}
+			#or where probability is not proportional to abundance in neighboring cell
+			else
+			{
+				temp <- sample(x=cdm[selectedQuadrat,], size=1)
+			}
 			#if the species selected is not found in that quadrat in the growing phylocom
 			#data frame, add the relevant info to that frame
 			if(!(names(temp) %in% phylocom[phylocom$plot==row.names(cdm)[i],]$id))
 			{
+				#move the row ID along
 				j <- j+1
+				#set the plot name to be correct
 				phylocom[j,1] <- row.names(cdm)[i]
-				phylocom[j,2] <- temp
+				#assign the species the abundance it had in the original CDM
+				if(abundance.assigned=="directly")
+				{
+					phylocom[j,2] <- temp
+				}
+				#or else create a normal distribution and sample from it
+				else if(abundance.assigned=="explore")
+				{
+					distribution <- round(rnorm(n=100, mean=as.numeric(temp), sd=1))
+					distribution[distribution < 0] <- 1
+					chosen <- sample(distribution, 1)
+					phylocom[j,2] <- chosen
+				}
+				else if(abundance.assigned=="overall")
+				{
+					chosen <- sample(overallAbundance, 1)
+					phylocom[j,2] <- chosen
+				}
+				else
+				{
+					stop("abundance.assigned argument set to unrecognized value")
+				}
 				phylocom[j,3] <- names(temp)
 			}
 		}
