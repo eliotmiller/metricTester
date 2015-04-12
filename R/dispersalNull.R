@@ -89,8 +89,8 @@
 #'
 #' newCDM <- dispersalNull(cdm, tree, distances)
 
-dispersalNull <- function(cdm, tree, distances.among, abundance.matters=FALSE, 
-	abundance.assigned="overall")
+dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE, 
+	abundance.assigned="directly")
 {
 	#create a check to ensure that all species that occur in the cdm are also in the tree
 	if(length(setdiff(names(cdm),tree$tip.label))!=0)
