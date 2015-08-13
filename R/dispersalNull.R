@@ -151,10 +151,16 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 				temp <- sample(x=cdm[selectedQuadrat,], size=1, 
 					prob=cdm[selectedQuadrat,])
 			}
-			#or where probability is not proportional to abundance in neighboring cell
+			#or where probability is not proportional to abundance in neighboring cell.
+			#note that you need to restricted the species from the selected quadrat to be
+			#those with non-zero abundances! previously did not, this was a bug
 			else
 			{
-				temp <- sample(x=cdm[selectedQuadrat,], size=1)
+				#note that this means the selected species lose their names, so add them
+				#back in
+				possible <- cdm[selectedQuadrat,][cdm[selectedQuadrat,] !=0 ]
+				names(possible) <- names(cdm[selectedQuadrat,])[cdm[selectedQuadrat,]!=0]
+				temp <- sample(x=possible, size=1)
 			}
 			#if the species selected is not found in that quadrat in the growing phylocom
 			#data frame, add the relevant info to that frame
