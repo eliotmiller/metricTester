@@ -15,7 +15,9 @@
 #' assigning species abundances equal to those in neighboring cells, a normal distribution
 #' of standard deviation 1 is created around that abundance, rounded to whole numbers,
 #' negative numbers are converted to 1, and then abundance is assigned from this
-#' distribution. If set to "overall", which may be preferable when abundance.matters is
+#' distribution. Note, importantly, that if the cdm is a relative abundance matrix, as
+#' opposed to an absolute abundance matrix, if "explore" is chosen, odd results are likely
+#' (don't do it). If set to "overall", which may be preferable when abundance.matters is
 #' set to FALSE, species' are assigned abundances by drawing from the vector of non-zero
 #' abundances from the original cdm.
 #' 
