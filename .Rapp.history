@@ -1,648 +1,272 @@
-isMonophyletic(tree, lookup)
-genera <- unique(lookup)
-genera
-genera <- unique(lookup$genus)
-genera
-genera[1]
-families <- unique(lookup$family)
-families
-genusResults <- c()#
-	familyResults <- c()
-temp <- lookup.table$species[lookup.table$genus == genera[1]]
-temp <- lookup$species[lookup$genus == genera[1]]
-temp
-plot(tree)
-genusResults[i] <- is.monophyletic(phy=tree, tips=temp)
-genusResults[1] <- is.monophyletic(phy=tree, tips=temp)
-genusResults
-temp[1:3]
-genusResults[1] <- is.monophyletic(phy=tree, tips=temp[1:3])
-genusResults
-plot(tree)
-plot(tree, cex=0.7)
-plot(tree, cex=0.4)
-genusResults[1] <- is.monophyletic(phy=tree, tips=as.character(temp[1:3]))
-genusResults
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-		names(genusResults[i]) <- genera[i]#
-	}#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-		names(familyResults[i]) <- families[i]#
-	}#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}
-isMonophyletic(tree, lookup)
-genusResults
-names(genusResults[i]) <- genera[i]
-names(genusResults[i]) <- genera[1]
-names(genusResults[1]) <- genera[1]
-genusResults
-class(genusResults)
-test <- as.character(genusResults)
-test
-names(test)[1] <- genera[1]
-test
-genera1
-genera[1]
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}
-isMonophyletic(tree, lookup)
-head(lookup)
-lookup$genus[1:3]
-lookup$genus[1:3] <- "genusE"
-head(lookup$genus)
-lookup$genus <- as.character(genus)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family)
-head(lookup)
-isMonophyletic(lookup)
-isMonophyletic(tree, lookup)
-lookup
-isMonophyletic(tree, lookup)
-temp <- tree$tip.label[1:25]
-temp
-is.monophyletic(tree, tips=temp)
-library(ape)
-?is.monophyletic
-data("bird.orders")
-plot(bird.order)
-plot(bird.orders)
-temp <- c("Passeriformes","Ciconiiformes","Gruiformes","Columbiformes")
-is.monophyletic(phy=bird.order, tips=temp)
-is.monophyletic(phy=bird.orders, tips=temp)
-temp2 <- c("Passeriformes","Ciconiiformes","Gruiformes","Columbiformes","Strigiformes")
-is.monophyletic(phy=bird.orders, tips=temp2)
-temp2 <- c("Passeriformes","Ciconiiformes","Gruiformes","Columbiformes","Strigiformes","Musophagiformes")
-is.monophyletic(phy=bird.orders, tips=temp2)
-library(geiger)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}
-isMonophyletic(tree, lookup)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}
-isMonophyletic(tree, lookup)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}
-isMonophyletic(tree, lookup)
-test <- lookup
-tree2 <- tree
-isMonophyletic(tree2, test)
-head(lookup)
-plot(tree)
-plot(tree,cex=0.4)
-lookup$genus[1:6]
-?data.frame
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)
-lookup$genus[1:6]
-isMonophyletic(tree, lookup)
-lookup$genus[1:6] <- "genusE"
-isMonophyletic(tree, lookup)
-set.seed(9)
-plot(sim.bdtree(stop="taxa",n=100))
-set.seed(9)
-quartz()
-plot(sim.bdtree(stop="taxa",n=100))
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}
-isMonophyletic(tree, lookup)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}#
-#
-isMonophyletic(tree, lookup)
-plot(tree)
-plot(tree, cex=0.5)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}#
-#
-isMonophyletic(tree, lookup)
-plot(tree, cex=0.5)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}#
-#
-isMonophyletic(tree, lookup)
-plot(tree)
-plot(tree, cex=0.4)
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}#
-#
-isMonophyletic(tree, lookup)->test
-test
-test$tt <- c("sp1","sp2")
-test
-tree <- sim.bdtree(stop="taxa", n=100)#
-#
-species <- as.character(tree$tip.label)#
-#
-genus <- as.character(c(rep("genusA", 25), rep("genusB", 25), #
-	rep("genusC", 25), rep("genusD", 25)))#
-#
-family <- as.character(c(rep("family1", 50), rep("family2", 50)))#
-#
-lookup <- data.frame(species, genus, family, stringsAsFactors=FALSE)#
-#
-isMonophyletic <- function(tree, lookup.table)#
-{#
-	genera <- unique(lookup.table$genus)#
-	families <- unique(lookup.table$family)#
-	genusResults <- c()#
-	familyResults <- c()#
-	for(i in 1:length(genera))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$genus == genera[i]])#
-		genusResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-	genusResults <- data.frame(genus=genera, monophyletic=genusResults)#
-	for(i in 1:length(families))#
-	{#
-		temp <- as.character(lookup.table$species[lookup.table$family == families[i]])#
-		familyResults[i] <- is.monophyletic(phy=tree, tips=temp)#
-	}#
-#
-	familyResults <- data.frame(family=families, monophyletic=familyResults)#
-	output <- list("genera" = genusResults, "family" = familyResults)#
-	output#
-}#
-#
-isMonophyletic(tree, lookup)->test
-test
-Reduce(rbind,test)
-?rnorm
-rnorm(n=100, mean=2)
-round(rnorm(n=100, mean=2))
-library(devtools)
-load_all()
-?multiLinker
-system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,#
-	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,#
-	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness",#
-	randomizations=3, cores=3, cluster=FALSE, iterations=2, prefix="test",#
-	nulls=list("richness"=metricTester:::my_richnessNull,#
-	"frequency"=metricTester:::my_frequency)))
-test <- readIn()
-test2 <- sesIndiv(test, "richness")
-warnings()
-test2
-explore
-load_all()
-load_all()
-load_all()
-tt <- TRUE
-tt
-if(tt)
-print(1)
-tt <- FALSE
-if(tt)
-print(1)
-cdm
-?simulateComm
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
-#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
-matrix2sample(cdm)
-head(matrix2sample(cdm))
-?dispersalNull
-#set up a matrix to simulate lat/long#
-coordDF <- matrix(ncol=2, nrow=100)#
-#
-coordDF[,1] <- runif(n=100, min=40, max=50)#
-coordDF[,2] <- runif(n=100, min=-130, max=-120)#
-#
-#convert to data frame, give column names. also give row names such as if the cells had#
-#names (as they should or there'd be no way to track them)#
-coordDF <- as.data.frame(coordDF)#
-#
-row.names(coordDF) <- paste("cell", 1:100, sep="")#
-#
-names(coordDF) <- c("latitude","longitude")#
-#
-#calculate the distances among all of these points. in the real program you're going to#
-#want to calculate great arc distance or whatever it's called#
-distances <- dist(coordDF, diag=TRUE, upper=TRUE)#
-#
-#turn it into a symmetric distance matrix#
-distances <- as.matrix(distances)#
-#
-#simulate a regional phylogeny of 100 species#
-tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)#
-#
-#simulate a community data matrix of 100 cells by 100 species. do it 4 times so that#
-#you can use your simulateComm function and have it span a reasonable range of richness#
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
-#
-cdm1 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
-cdm2 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
-cdm3 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
-cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
-#
-#bind these into a list and use dplyr rbind_all to bind together. recast as data frame#
-#
-cdmList <- list(cdm1, cdm2, cdm3, cdm4)#
-#
-cdm <- rbind_all(cdmList)#
-#
-cdm <- as.data.frame(cdm)#
-#
-#fix as necessary manually here (i.e. make sure dimensions are 100 x 100), seems to#
-#usually work. then give cell names#
-#
-row.names(cdm) <- paste("cell", 1:100, sep="")#
-#
-#fill NAs with 0s.#
-#
-cdm[is.na(cdm)] <- 0
-newCDM <- dispersalNull(cdm, tree, distances)
-newCDM
-head(newCDM)
-head(cdm)
-abundOrig <- apply(cdm, 2, lengthNonZeros)
-abundNew <- apply(newCDM, 2, lengthNonZeros)
-plot(abundOrig~abundNew)
-abundNew <- apply(newCDM, 2, sum)
-abundOrig <- apply(cdm, 2, sum)
-plot(abundOrig~abundNew)
-head(matrix2sample(cdm))
-distribution
-distribution <- rnorm(n=100, mean=7, sd=1)
-distribution
-round(distribution)
-distribution[5]
-distribution <- round(distribution)
-distribution[5] <- -1
-distribution[distribution < 0]
-load_all()
-newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE)
-head(newCDM)
-abundNew <- apply(newCDM, 2, sum)
-abundOrig <- apply(cdm, 2, sum)
-plot(abundNew~abundOrig)
-abundNew <- apply(newCDM, 2, lengthNonZeros)
-abundOrig <- apply(cdm, 2, lengthNonZeros)
-plot(abundNew~abundOrig)
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-load_all()
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-head(matrix2sample(cdm))
-temp <- sample(x=cdm[10,], size=1)
-temp
-rnorm(n=100, mean=temp, sd=1)
-as.numeric(temp)
-rnorm(n=100, mean=as.numeric(temp), sd=1)
-load_all()
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=TRUE))
-abundNew <- apply(newCDM, 2, sum)#
-abundOrig <- apply(cdm, 2, sum)#
-plot(abundNew~abundOrig)
-abundNew <- apply(newCDM, 2, lengthNonZeros)#
-abundOrig <- apply(cdm, 2, lengthNonZeros)#
-plot(abundNew~abundOrig)
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=TRUE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=TRUE))
-abundNew <- apply(newCDM, 2, lengthNonZeros)#
-abundOrig <- apply(cdm, 2, lengthNonZeros)#
-plot(abundNew~abundOrig)
-abundNew <- apply(newCDM, 2, sum)#
-abundOrig <- apply(cdm, 2, sum)#
-plot(abundNew~abundOrig)
-2.670/2.566
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore=FALSE))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, explore=FALSE))
-4.313/2.548
-2.548/4.313
-head(cdm)
-tt <- cdm[cdm!=0]
-tt
-hist(tt)
-sample(tt,1)
-load_all()
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, explore="directly"))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, abundance.assigned="directly"))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, abundance.assigned="explore"))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=TRUE, abundance.assigned="overall"))
-system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.matters=FALSE, abundance.assigned="overall"))
-122/8
-15.25*1300
-20000/60
-695*75
-333/60
-head(cdm)
-dim(cdmm)
-dim(cdm)
-length(10:34)
-?rlnorm
+4000-1700
+2300/4000
+1/16
+0.1/0.0625
+128/12
+0.1*5
+0.14/0.0625
+20.839/19.948
+14.162/13.237
+21.075/19.882
+165/2
+165/68
+165*2
+330/98
+330/91
+?comput
+library(CCA)
+?comput
+?cc
 ls()
-load_all()
-?dispersalNull
-basic
+phyl.cca.loadings
+ls()
+library(phytools)
+library(caper)#
+library(dplyr)#
+library(phytools)#
+library(candisc)#
+library(geomorph)
+temp2 <- phyl.cca(tree=pruned, X=morpho, Y=ecolReduced)
+temp2
+myLoadings
+test
+temp
+hackCCA
+temp
+myLoadings
+Wilks(temp)
+Wilks
+?getAnywhere("Wilks")
+getAnywhere("Wilks")
+methods(Wilks)
+getAnywhere("Wilks.cancor")
+getAnywhere("candisc.cancor")
+cancor
+methods(cancor)
+getAnywhere("cancor.default")
+str(fullCCA)
+cancor.default
+getAnywhere("cancor.default")
+phyloCCA
+hackCCA
+library(phytools)
+?phyl.cca
+2147-1993
+231.70+19.9+158.64+34.99+22.38+68+14
+-1993+2177
+library(fpc)
+install.packages("fpc", depedencies=TRUE)
+install.packages("fpc", dependencies=TRUE)
+set.seed(665544)      n <- 600      x <- cbind(runif(10, 0, 10)+rnorm(n, sd=0.2), runif(10, 0, 10)+rnorm(n,        sd=0.2))      par(bg="grey40")      ds <- dbscan(x, 0.2)
+library(fpc)
+set.seed(665544)      n <- 600      x <- cbind(runif(10, 0, 10)+rnorm(n, sd=0.2), runif(10, 0, 10)+rnorm(n,        sd=0.2))      par(bg="grey40")      ds <- dbscan(x, 0.2)
+x
+ds
+plot(ds, x)
+set.seed(665544)      n <- 600      x <- cbind(runif(10, 0, 10)+rnorm(n, sd=0.2), runif(10, 0, 10)+rnorm(n,        sd=0.2))      par(bg="grey40")      ds <- dbscan(x, 0.2)    # run with showplot=1 to see how dbscan works.      dsplot(ds, x)
+x2 <- matrix(0,nrow=4,ncol=2)    x2[1,] <- c(5,2)    x2[2,] <- c(8,3)    x2[3,] <- c(4,4)    x2[4,] <- c(9,9)    predict(ds, x, x2)    n <- 600    x <- cbind((1:3)+rnorm(n, sd=0.2), (1:3)+rnorm(n, sd=0.2))
+x
+options(digits=3)      set.seed(20000)      face <- rFace(50,dMoNo=2,dNoEy=0,p=2)      pk1 <- pamk(face,krange=1:5,criterion="asw",critout=TRUE)
+str(pk1)
+library(picante)
+?ses.mpd
+libary(picante)
+library(picante)
+?randomizeMatrix
+ses.mpd
+taxaShuffle
+library(metricTester)
+?expectations
+?ses.mpd
+?expectations
+data(phylocom)
+?ses.mpd
+tax.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="taxa.labels")
+tax.test
+tax.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="taxa.labels", runs=10000)
+tax.test
+rich.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="richness", runs=10000)
+rich.test
+rich.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="frequency", runs=10000)
+rich.test
+sample.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="sample.pool", runs=10000)
+rich.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="richness", runs=10000)
+sample.test
+rich.test
+phylo.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="phylogeny.pool", runs=10000)
+phylo.test
+tax.test
+phylo.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="phylogeny.pool", runs=50000)
+tax.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="taxa.labels", runs=50000)
+phylo.test
+tax.test
+plot(phylo.test$mpd.rand.mean~tax.test$mpd.rand.mean)
+6.6/5*1.035
+(6.6/5)*1.035
+88*5
+35*6.6
+6.682
+6.6*2
+13.2*35
+88*5.5
+9.9*35
+0.12*9
+346.5+46
+346.5+46-484
+484/35
+231/5.5/44
+231/35
+13.2*35
+13.2*36
+462/4
+10*1.2
+12*0.8
+8*1.2
+0.8*1.2
+1/-.8
+1/.8
+6.3*1.25
+190.9-184.5
+190.9-184.4
+191.6-184.4
+194-184.4
+6.5+7.2+9.6
+187.8-184.4
+190.3-184.4
+5.9+6.5+9.6
+20/5
+4*5.5
+189.6-184.4
+7.2-5.9
+1.3+5.2
+269+24.95+11.75
+install.packages("convevol",dependencies=TRUE)
+phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=2)
+library(convevol)
+phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=2)
+phyl
+phendata
+phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=4)
+phendata
+answer<-allmaxdist(phyl,phendata,mat=TRUE)
+answer
+answer<-allmaxdist(phyl,phendata,mat=F)
+answer
+class(answer)
+calcchanges(phyl,phendata)
+calcchanges
+calcchanges(phyl,phendata)
+test <- function (phyl, phendata) #
+{#
+    if (class(phyl) != "phylo") #
+        stop("your tree must be class 'phylo.'")#
+    if (nrow(phendata) != length(phyl$tip)) #
+        stop("your data matrix must have the same number of rows as tips in the tree.")#
+    if (is.null(rownames(phendata))) {#
+        warning("no row names for data.  Assuming that the rows are in the same order as tips.")#
+        rownames(X) <- phyl$tip.label#
+    }#
+    allvals <- multianc(phyl, phendata)#
+    pdims <- dim(phyl$edge)#
+    changes <- rep(0, pdims[1])#
+    j <- 1#
+    for (j in 1:pdims[1]) {#
+        ancnode <- phyl$edge[j, 1]#
+        desnode <- phyl$edge[j, 2]#
+        ancvals <- allvals[ancnode, ]#
+        desvals <- allvals[desnode, ]#
+        change <- (sum((ancvals - desvals)^2))^0.5#
+        changes[j] <- change#
+    }#
+    answer <- changes#
+    answer#
+}
+test(phyl,phendata)
+phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=5)    changes<-calcchanges(phyl,phendata)
+changes
+phyl
+phyl$edge
+test<-phyl$edge
+test2<-data.frame(test,changes)
+test2
+?multianc
+phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=2)    ancs<-multianc(phyl,phendata)
+ancs
+test2
+plot(phyl)
+?rtree
+phendata
+46+11+18+13+5+3+3+5+10+4+5+60+240+84
+?pbtree
+pbtree(n=19)
+plot(pbtree(n=19))
+tree<-plot(pbtree(n=19))
+tree<-plot(pbtree(n=10))
+tree<-pbtree(n=10))
+tree<-pbtree(n=10)
+tree
+plot(tree)
+phendata
+calcchanges(tree,phendata)
+calcchanges(tree,phendata)->temp
+temp
+temp[8,]
+phendata[8,]
+phendata[8,]<-1
+phendata[8,]
+phendata[9,]<-1
+phendata
+temp<-calcchanges(tree,phendata)
+temp
+temp2<-data.frame(phendata,temp)
+length(temp)
+multianc(tree,phendata)
+multianc(tree,phendata)->temp3
+temp3
+tree$edge
+?which.edge
+labelstonumbers(tree,"t7")
+labelstonumbers(tree,"t2")
+labelstonumbers(tree,"t3")
+str(tree)
+tree$edge.length
+plot(extract.clade(tree,10))
+plot(extract.clade(tree,11))
+library(geomorph)
+?physignal
+data(plethspecies)#
+Y.gpa<-gpagen(plethspecies$land)    #GPA-alignment
+Y.gpa$coords
+?phyl.cca
+?redundancy
+library(caper)#
+library(dplyr)#
+library(picante)#
+library(phytools)#
+library(candisc)#
+library(geomorph)#
+library(geiger)#
+library(plotrix)#
+library(simpleFDis)#
+library(fpc)#
 library(metricTester)#
-#
-#set up a matrix to simulate lat/long#
+library(convevol)
+?redundancy
+18927.1/750
+22712.5/750
+18927.1/12
+640/12
+128/16
+4000/12
+4000/3
+1675*12
+1600*12
+1600*11
+1550*12
+1525*12
+library(metricTester)
+dispersalNull
+?dispersalNull
 coordDF <- matrix(ncol=2, nrow=100)#
 #
 coordDF[,1] <- runif(n=100, min=40, max=50)#
@@ -692,68 +316,30 @@ row.names(cdm) <- paste("cell", 1:100, sep="")#
 #
 cdm[is.na(cdm)] <- 0#
 #
-basicOccurrences <- matrix(nrow=10, ncol=100)#
-basicAbundances <- matrix(nrow=10, ncol=100)#
-#
-for(i in 1:10)#
+newCDM <- dispersalNull(cdm, tree, distances)
+CDM
+cdm
+head(cdm)
+head(newCDM)
+quickFun <- function(vect)#
 {#
-	newCDM <- dispersalNull(cdm=cdm, tree=tree, distances.among=distances,#
-		abundance.matters=TRUE, abundance.assigned="directly")#
-	basicOccurrences[i,] <- apply(newCDM, 2, lengthNonZeros)#
-	basicAbundances[i,] <- apply(newCDM, 2, sum)#
-}
-basicOccurrences
-obsOccurrences <- apply(cdm, 2, lengthNonZeros)#
-obsAbundances <- apply(cdm, 2, sum)
-meanBO <- apply(basicOccurrences, 2, mean)#
-meanBA <- apply(basicAbundances, 2, mean)
-plot(obsOccurrences, meanBO)
-summary(lm(meanBO~obsOccurrences))
-summary(lm(meanBA~obsAbundances))
-plot(meanBA~obsAbundances)
-basicOccurrences <- matrix(nrow=10, ncol=100)#
-basicAbundances <- matrix(nrow=10, ncol=100)#
+	result <- vect/max(vect)#
+	result#
+}#
 #
-system.time(for(i in 1:20)#
-{#
-	newCDM <- dispersalNull(cdm=cdm, tree=tree, distances.among=distances,#
-		abundance.matters=TRUE, abundance.assigned="directly")#
-	basicOccurrences[i,] <- apply(newCDM, 2, lengthNonZeros)#
-	basicAbundances[i,] <- apply(newCDM, 2, sum)#
-})
-basicOccurrences <- matrix(nrow=20, ncol=100)#
-basicAbundances <- matrix(nrow=20, ncol=100)#
-#
-system.time(for(i in 1:20)#
-{#
-	newCDM <- dispersalNull(cdm=cdm, tree=tree, distances.among=distances,#
-		abundance.matters=TRUE, abundance.assigned="directly")#
-	basicOccurrences[i,] <- apply(newCDM, 2, lengthNonZeros)#
-	basicAbundances[i,] <- apply(newCDM, 2, sum)#
-})
-meanBO <- apply(basicOccurrences, 2, mean)#
-meanBA <- apply(basicAbundances, 2, mean)
-plot(meanBO~basicOccurrences)
-plot(meanBO~obsOccurrences)
-summary(lm(meanBO~obsOccurrences))
-plot(meanBA~obsAbundances)
-summary(lm(meanBA~obsAbundances))
-variantOccurrences <- matrix(nrow=20, ncol=100)#
-variantAbundances <- matrix(nrow=20, ncol=100)#
-#
-#takes about 90s for 20 randomizations#
-system.time(for(i in 1:20)#
-{#
-	newCDM <- dispersalNull(cdm=cdm, tree=tree, distances.among=distances,#
-		abundance.matters=FALSE, abundance.assigned="overall")#
-	variantOccurrences[i,] <- apply(newCDM, 2, lengthNonZeros)#
-	variantAbundances[i,] <- apply(newCDM, 2, sum)#
-})#
-#
-meanVO <- apply(variantOccurrences, 2, mean)#
-meanVA <- apply(variantAbundances, 2, mean)
-plot(meanVO~obsOccurrences)
-summary(lm(meanVO~obsOccurrences))
-summary(lm(meanVA~obsAbundances))
-plot(meanVA~obsAbundances)
-plot(meanVA~obsAbundances)
+CDM2 <- apply(cdm, 2, quickFun)
+head(CDM2)
+apply(cdm,2,mean)
+temp<-apply(cdm,2,mean)
+temp2<-apply(CDM2,2,mean)
+plot(temp~temp2)
+plot(cdm[,1]~CDM2[,1])
+plot(temp~temp2)
+temp2<-apply(CDM2,1,mean)
+temp<-apply(cdm,1,mean)
+plot(temp~temp2)
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+library(devtools)
+load_all()
+document()
