@@ -6,7 +6,7 @@
 \usage{
 expectations(picante.cdm, tree, optional.dists = NULL,
   regional.abundance = NULL, distances.among = NULL, randomizations, cores,
-  cluster = FALSE, metrics, nulls, concat.by, output.raw = FALSE)
+  metrics, nulls, concat.by, output.raw = FALSE)
 }
 \arguments{
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
@@ -31,11 +31,6 @@ metrics calculated across it.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
 specify the desired number of cores to utilize.}
-
-\item{cluster}{Default is FALSE. Was intended to be set to TRUE if running on a cluster
-computer. Invokes multicore processing on a single computer if FALSE, otherwise
-parallel processing on cluster. However, currently causing errors due to namespace
-issues with doParallel vs doMC.}
 
 \item{metrics}{Optional list of named metric functions to use. If invoked, this option
 will likely be used to run a subset of the defined metrics.}
@@ -116,7 +111,7 @@ cdm[is.na(cdm)] <- 0
 
 test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
-	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),
+	nulls=list("richness"=metricTester:::my_richnessNull),
 	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
 	concat.by="both", output.raw=FALSE)
 
@@ -130,7 +125,7 @@ exampleMetric <- function(metrics.input)
 
 test2 <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
-	cluster=FALSE, nulls=list("frequency"=metricTester:::my_frequency),
+	nulls=list("frequency"=metricTester:::my_frequency),
 	metrics=list("richness"=metricTester:::my_richness, "exampleMetric"=exampleMetric),
 	concat.by="both", output.raw=FALSE)
 }

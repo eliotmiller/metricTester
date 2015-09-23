@@ -6,8 +6,8 @@
 \usage{
 linker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
-  no.quadrats, quadrat.length, concat.by, randomizations, cores,
-  cluster = FALSE, simulations, nulls, metrics)
+  no.quadrats, quadrat.length, concat.by, randomizations, cores, simulations,
+  nulls, metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}
@@ -44,11 +44,6 @@ used to compare the significance of the observed metric scores.}
 
 \item{cores}{The number of cores to be used for parallel processing.}
 
-\item{cluster}{Default is FALSE. Was intended to be set to TRUE if running on a cluster
-computer. Invokes multicore processing on a single computer if FALSE, otherwise
-parallel processing on cluster. However, currently causing errors due to namespace
-issues with doParallel vs doMC.}
-
 \item{simulations}{Optional list of named spatial simulation functions to use. These
 must be defined in the defineSimulations function. If invoked, this option will likely
 be used to run a subset of the defined spatial simulations.}
@@ -79,7 +74,7 @@ multiLinker function, which saves results to file.
 system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2,
 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
 	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness",
-	randomizations=3, cores=3, cluster=FALSE,
+	randomizations=3, cores=3,
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency)))
 }

@@ -1,179 +1,3 @@
-plot(ds, x)
-set.seed(665544)      n <- 600      x <- cbind(runif(10, 0, 10)+rnorm(n, sd=0.2), runif(10, 0, 10)+rnorm(n,        sd=0.2))      par(bg="grey40")      ds <- dbscan(x, 0.2)    # run with showplot=1 to see how dbscan works.      dsplot(ds, x)
-x2 <- matrix(0,nrow=4,ncol=2)    x2[1,] <- c(5,2)    x2[2,] <- c(8,3)    x2[3,] <- c(4,4)    x2[4,] <- c(9,9)    predict(ds, x, x2)    n <- 600    x <- cbind((1:3)+rnorm(n, sd=0.2), (1:3)+rnorm(n, sd=0.2))
-x
-options(digits=3)      set.seed(20000)      face <- rFace(50,dMoNo=2,dNoEy=0,p=2)      pk1 <- pamk(face,krange=1:5,criterion="asw",critout=TRUE)
-str(pk1)
-library(picante)
-?ses.mpd
-libary(picante)
-library(picante)
-?randomizeMatrix
-ses.mpd
-taxaShuffle
-library(metricTester)
-?expectations
-?ses.mpd
-?expectations
-data(phylocom)
-?ses.mpd
-tax.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="taxa.labels")
-tax.test
-tax.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="taxa.labels", runs=10000)
-tax.test
-rich.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="richness", runs=10000)
-rich.test
-rich.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="frequency", runs=10000)
-rich.test
-sample.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="sample.pool", runs=10000)
-rich.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="richness", runs=10000)
-sample.test
-rich.test
-phylo.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="phylogeny.pool", runs=10000)
-phylo.test
-tax.test
-phylo.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="phylogeny.pool", runs=50000)
-tax.test <- ses.mpd(phylocom$sample, cophenetic(phylocom$phylo),null.model="taxa.labels", runs=50000)
-phylo.test
-tax.test
-plot(phylo.test$mpd.rand.mean~tax.test$mpd.rand.mean)
-6.6/5*1.035
-(6.6/5)*1.035
-88*5
-35*6.6
-6.682
-6.6*2
-13.2*35
-88*5.5
-9.9*35
-0.12*9
-346.5+46
-346.5+46-484
-484/35
-231/5.5/44
-231/35
-13.2*35
-13.2*36
-462/4
-10*1.2
-12*0.8
-8*1.2
-0.8*1.2
-1/-.8
-1/.8
-6.3*1.25
-190.9-184.5
-190.9-184.4
-191.6-184.4
-194-184.4
-6.5+7.2+9.6
-187.8-184.4
-190.3-184.4
-5.9+6.5+9.6
-20/5
-4*5.5
-189.6-184.4
-7.2-5.9
-1.3+5.2
-269+24.95+11.75
-install.packages("convevol",dependencies=TRUE)
-phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=2)
-library(convevol)
-phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=2)
-phyl
-phendata
-phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=4)
-phendata
-answer<-allmaxdist(phyl,phendata,mat=TRUE)
-answer
-answer<-allmaxdist(phyl,phendata,mat=F)
-answer
-class(answer)
-calcchanges(phyl,phendata)
-calcchanges
-calcchanges(phyl,phendata)
-test <- function (phyl, phendata) #
-{#
-    if (class(phyl) != "phylo") #
-        stop("your tree must be class 'phylo.'")#
-    if (nrow(phendata) != length(phyl$tip)) #
-        stop("your data matrix must have the same number of rows as tips in the tree.")#
-    if (is.null(rownames(phendata))) {#
-        warning("no row names for data.  Assuming that the rows are in the same order as tips.")#
-        rownames(X) <- phyl$tip.label#
-    }#
-    allvals <- multianc(phyl, phendata)#
-    pdims <- dim(phyl$edge)#
-    changes <- rep(0, pdims[1])#
-    j <- 1#
-    for (j in 1:pdims[1]) {#
-        ancnode <- phyl$edge[j, 1]#
-        desnode <- phyl$edge[j, 2]#
-        ancvals <- allvals[ancnode, ]#
-        desvals <- allvals[desnode, ]#
-        change <- (sum((ancvals - desvals)^2))^0.5#
-        changes[j] <- change#
-    }#
-    answer <- changes#
-    answer#
-}
-test(phyl,phendata)
-phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=5)    changes<-calcchanges(phyl,phendata)
-changes
-phyl
-phyl$edge
-test<-phyl$edge
-test2<-data.frame(test,changes)
-test2
-?multianc
-phyl<-rtree(10)    phendata<-fastBM(phyl,nsim=2)    ancs<-multianc(phyl,phendata)
-ancs
-test2
-plot(phyl)
-?rtree
-phendata
-46+11+18+13+5+3+3+5+10+4+5+60+240+84
-?pbtree
-pbtree(n=19)
-plot(pbtree(n=19))
-tree<-plot(pbtree(n=19))
-tree<-plot(pbtree(n=10))
-tree<-pbtree(n=10))
-tree<-pbtree(n=10)
-tree
-plot(tree)
-phendata
-calcchanges(tree,phendata)
-calcchanges(tree,phendata)->temp
-temp
-temp[8,]
-phendata[8,]
-phendata[8,]<-1
-phendata[8,]
-phendata[9,]<-1
-phendata
-temp<-calcchanges(tree,phendata)
-temp
-temp2<-data.frame(phendata,temp)
-length(temp)
-multianc(tree,phendata)
-multianc(tree,phendata)->temp3
-temp3
-tree$edge
-?which.edge
-labelstonumbers(tree,"t7")
-labelstonumbers(tree,"t2")
-labelstonumbers(tree,"t3")
-str(tree)
-tree$edge.length
-plot(extract.clade(tree,10))
-plot(extract.clade(tree,11))
-library(geomorph)
-?physignal
-data(plethspecies)#
-Y.gpa<-gpagen(plethspecies$land)    #GPA-alignment
-Y.gpa$coords
-?phyl.cca
 ?redundancy
 library(caper)#
 library(dplyr)#
@@ -275,67 +99,735 @@ temp2<-apply(CDM2,1,mean)
 temp<-apply(cdm,1,mean)
 plot(temp~temp2)
 library(devtools)
-load_all()
-tree <- read.tree("meli4.tre")
-tempCDM <- read.csv("meli_phylocom_format.csv")
-CDM <- sample2matrix(tempCDM)
-dispersalNull
-bothDistances <- readRDS("/Users/eliotmiller/Documents/Writing and Other Work/Post-doc Work/Dispersal null/meli_bothDistances.RDS")
-test <- dispersalNull(CDM, tree, bothDistances)
-head(bothDistances)
+install_github("metricTester", username="eliotmiller")
+125-11
+125-111
+125-111+109
+125-111+109+970
+125-111+109+970+328-265+40+352+639
+library(addTaxa)
+library(devtools)
+install_github("addTaxa",username="eliotmiller")
+68+34.99+231.70+14+19.90+22.38
+tempdir()
 head(CDM)
-CDM <- CDM[row.names(CDM)%in%row.names(bothDistances),]
 dim(CDM)
-dim(bothDistances)
-test <- dispersalNull(CDM, tree, bothDistances)
-test[695,]
-test <- dispersalNull(CDM, tree, bothDistances)
-test[695,]
-test <- dispersalNull(CDM, tree, bothDistances, abundance.matters=FALSE)
-test[695,]
-CDM[694,]
-CDM[693,]
-CDM[692,]
-CDM[691,]
-CDM[690,]
-CDM[689,]
-CDM[688,]
-CDM[687,]
-CDM[686,]
-CDM[685,]
-CDM[684,]
-CDM[683,]
-CDM[682,]
-CDM[681,]
-CDM[680,]
-CDM[679,]
-test <- dispersalNull(CDM, tree, bothDistances, abundance.matters=FALSE, abundance.assigned="overall")
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
-tree
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
-cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
-cdm
-setdiff(names(cdm),tree$tip.label)
-length(setdiff(names(cdm),tree$tip.label))
-warning()
+head(CDM2)
+dim(CDM2)
+library(phytools)
+??kurtosis
+library(moments)
+install.packages("moments")
+library(moments)
+absMeans <- apply(CDM, 2, mean)#
+absSD <- apply(CDM, 2, sd)#
+absSkew <- apply(CDM, 2, skewness)#
+absKurt <- apply(CDM, 2, kurtosis)
+absMeans
+absSD
+abdKurtosis
+abdKurt
+absKurt
+absSkew
+phylosig(tree, absMean)
+absMean <- apply(CDM, 2, mean)
+phylosig(tree, absMean)
+phylosig(tree, absMean, method="lambda", test=TRUE)
+phylosig(tree, absMean, method="K", test=TRUE)
+phylosig(tree, absMean, method="lambda", test=TRUE)
+absMean <- apply(CDM, 2, mean)#
+absSD <- apply(CDM, 2, sd)#
+absSkew <- apply(CDM, 2, skewness)#
+absKurt <- apply(CDM, 2, kurtosis)#
+#
+phylosig(tree, absMean, method="lambda", test=TRUE)#
+phylosig(tree, absSD, method="lambda", test=TRUE)#
+phylosig(tree, absSkew, method="lambda", test=TRUE)#
+phylosig(tree, absKurt, method="lambda", test=TRUE)#
+#
+relMean <- apply(CDM2, 2, mean)#
+relSD <- apply(CDM2, 2, sd)#
+relSkew <- apply(CDM2, 2, skewness)#
+relKurt <- apply(CDM2, 2, kurtosis)#
+#
+phylosig(tree, relMean, method="lambda", test=TRUE)#
+phylosig(tree, relSD, method="lambda", test=TRUE)#
+phylosig(tree, relSkew, method="lambda", test=TRUE)#
+phylosig(tree, relKurt, method="lambda", test=TRUE)
+relKurt
+contMap(tree, relKurt)
+contMap(tree, relMean)
+contMap(tree, relMean, fsize=0.5)
+contMap(tree, absMean, fsize=0.5)
+absMean
+hist(CDM[,1])
+option
+vector
+vect
+CDM[,1]!=0
+CDM[,1][CDM[,1]!=0]
+sillyFun <- function(vect, option)#
+{#
+	newVect <- vect[vect!=0]#
+	if(option=="mean")#
+	{#
+		result <- mean(newVect)#
+	}#
+	else if(option=="sd")#
+	{#
+		result <- sd(newVect)#
+	}#
+	else if(option=="kurtosis")#
+	{#
+		result <- kurtosis(newVect)#
+	}#
+	else if(option=="skewness")#
+	{#
+		result <- skewness(newVect)#
+	}#
+	else#
+	{#
+		stop("You're screwed")#
+	}#
+	result#
+}
+apply(CDM, 2, sillyFun, "kurtosis")
+apply(CDM, 2, sillyFun, "mean")
+absMean <- apply(CDM, 2, sillyFun, "mean")#
+absSD <- apply(CDM, 2, sillyFun, "sd")#
+absSkew <- apply(CDM, 2, sillyFun, "skewness")#
+absKurt <- apply(CDM, 2, sillyFun, "kurtosis")
+absMean
+phylosig(tree, absMean, method="lambda", test=TRUE)#
+phylosig(tree, absSD, method="lambda", test=TRUE)#
+phylosig(tree, absSkew, method="lambda", test=TRUE)#
+phylosig(tree, absKurt, method="lambda", test=TRUE)
+absSD
+relMean <- apply(CDM2, 2, sillyFun, "mean")#
+relSD <- apply(CDM2, 2, sillyFun, "sd")#
+relSkew <- apply(CDM2, 2, sillyFun, "skewness")#
+relKurt <- apply(CDM2, 2, sillyFun, "kurtosis")#
+#
+phylosig(tree, relMean, method="lambda", test=TRUE)#
+phylosig(tree, relSD, method="lambda", test=TRUE)#
+phylosig(tree, relSkew, method="lambda", test=TRUE)#
+phylosig(tree, relKurt, method="lambda", test=TRUE)
+contMap(tree, relSD)
+newTree <- drop.tip(tree, "Lichenostomus_hindwoodi")
+newTree
+contMap(newTree, relSD)
+length(relSD)
+relSD
+relSD[names(relSD)!="Lichenostomus_hindwoodi"]
+newSD <- relSD[names(relSD)!="Lichenostomus_hindwoodi"]
+contMap(newTree, newSD)
+contMap(newTree, newSD, fsize=0.5)
+newSD
+sort(newSD)
+hist(CDM2[,1][CDM[,1]!=0])
+contMap(newTree, newSD, fsize=0.5)
+head(relSD)
+relSD
+test <- data.frame(relMean, relSD, relSkew, relKurt)
+head(test)
+test[row.names(test) == "Lichenstomus_hindwoodi",]
+test[row.names(test) == "Lichenostomus_hindwoodi",]
+test[row.names(test) == "Lichenostomus_hindwoodi",][,2"4"]
+test[row.names(test) == "Lichenostomus_hindwoodi",][,2:4]
+test[row.names(test) == "Lichenostomus_hindwoodi",][,2:4] <- 0
+test[row.names(test) == "Lichenostomus_hindwoodi",][,2:4]
+test2 <- prcomp(test)
+test2
+summary(test2)
+test2$x
+head(test)
+?prcomp
+test2 <- prcomp(test, scale.=TRUE, center=TRUE)
+test2
+summary(test2)
+test3 <- test2$x[,1]
+test3
+sort(test3)
+contMap(tree, test3, fsize=0.5)
+phylosig(tree, test3, method="lambda",test=TRUE)
+test2
+library(metricTester)
+dispersalNull
+library(devtools)
+install_github("metricTester", username="eliotmiller")
+dispersalNull
+library(metricTester)
+dispersalNull
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+set.seed( as.integer((as.double(Sys.time())*1000+Sys.getpid()) %% 2^31) )#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")#
+#
+system.time(multiLinker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=3.5, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=60, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="both", randomizations=2, cores=4, cluster=FALSE, iterations=1,#
+	prefix=prefixBoth,#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("dispersal"=metricTester:::my_dispersal)))
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+set.seed( as.integer((as.double(Sys.time())*1000+Sys.getpid()) %% 2^31) )#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")#
+#
+system.time(multiLinker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=2, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=2, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="both", randomizations=2, cores=4, cluster=FALSE, iterations=1,#
+	prefix=prefixBoth,#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("dispersal"=metricTester:::my_dispersal)))
+prefix1 <- Sys.time()#
+prefix1 <- gsub(" ", "_", prefix1)#
+prefix1 <- gsub("[:]", "", prefix1)#
+set.seed( as.integer((as.double(Sys.time())*1000+Sys.getpid()) %% 2^31) )#
+prefix2 <- sample(round(runif(100, 1, 100)), size=1)#
+prefixBoth <- paste(prefix1, prefix2, sep="_")#
+#
+system.time(test <- multiLinker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=2, #
+ 	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
+	competition.iterations=2, no.quadrats=20, quadrat.length=sqrt(1000), #
+	concat.by="both", randomizations=2, cores=4, cluster=FALSE, iterations=1,#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
+	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
+	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
+	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
+	nulls=list("dispersal"=metricTester:::my_dispersal)))
+?multiLinker
+readIn()
+?readIn
+test <- readIn()
+linker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=2, #
++  	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
++ 	competition.iterations=2, no.quadrats=20, quadrat.length=sqrt(1000), #
++ 	concat.by="both", randomizations=2, cores=4, cluster=FALSE, iterations=1,#
++ 	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
++ 	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
++ 	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
++ 	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
++ 	nulls=list("dispersal"=metricTester:::my_dispersal)))
+linker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=2, #
++  	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
++ 	competition.iterations=2, no.quadrats=20, quadrat.length=sqrt(1000), #
++ 	concat.by="both", randomizations=2, cores=4, cluster=FALSE, iterations=1,#
++ 	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
++ 	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
++ 	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
++ 	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
++ 	nulls=list("dispersal"=metricTester:::my_dispersal))
+linker(no.taxa=100, arena.length=sqrt(100000), mean.log.individuals=2, #
++  	length.parameter=1000, sd.parameter=40, max.distance=20, proportion.killed=0.2, #
++ 	competition.iterations=2, no.quadrats=20, quadrat.length=sqrt(1000), #
++ 	concat.by="both", randomizations=2, cores=4, cluster=FALSE, iterations=1,#
++ 	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd, "inter_MPD"=metricTester:::inter_mpd, #
++ 	"intra_MPD"=metricTester:::intra_mpd, "complete_MPD"=metricTester:::complete_mpd, "NAW_MNTD"=metricTester:::naw_mntd,#
++ 	"AW_MNTD"=metricTester:::aw_mntd, "PSE"=metricTester:::my_pse, "PAE"=metricTester:::PAE, "IAC"=metricTester:::IAC, "Haed"=metricTester:::Haed, "Eaed"=metricTester:::Eaed,#
++ 	"Eed"=metricTester:::Eed, "Hed"=metricTester:::Hed, "PD"=metricTester:::my_PD, "PD_Cadotte"=metricTester:::my_PD_Cadotte),#
++ 	nulls=list("dispersal"=metricTester:::my_dispersal)
+readIn()
+test <- readIn()
+str(test)
+str(test,2)
+test$random
+test$iteration1$random
+20*25
+q()
+head(concat)
+concat[concat$species=="Myzomela_sanguinolenta",]
+library(metricTester)
+?dispersalNull
+#set up a matrix to simulate lat/long#
+coordDF <- matrix(ncol=2, nrow=100)#
+#
+coordDF[,1] <- runif(n=100, min=40, max=50)#
+coordDF[,2] <- runif(n=100, min=-130, max=-120)#
+#
+#convert to data frame, give column names. also give row names such as if the cells had#
+#names (as they should or there'd be no way to track them)#
+coordDF <- as.data.frame(coordDF)#
+#
+row.names(coordDF) <- paste("cell", 1:100, sep="")#
+#
+names(coordDF) <- c("latitude","longitude")#
+#
+#calculate the distances among all of these points. in the real program you're going to#
+#want to calculate great arc distance or whatever it's called#
+distances <- dist(coordDF, diag=TRUE, upper=TRUE)#
+#
+#turn it into a symmetric distance matrix#
+distances <- as.matrix(distances)#
+#
+#simulate a regional phylogeny of 100 species#
+tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)#
+#
+#simulate a community data matrix of 100 cells by 100 species. do it 4 times so that#
+#you can use your simulateComm function and have it span a reasonable range of richness#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm1 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm2 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm3 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+#
+#bind these into a list and use dplyr rbind_all to bind together. recast as data frame#
+#
+cdmList <- list(cdm1, cdm2, cdm3, cdm4)#
+#
+cdm <- rbind_all(cdmList)#
+#
+cdm <- as.data.frame(cdm)#
+#
+#fix as necessary manually here (i.e. make sure dimensions are 100 x 100), seems to#
+#usually work. then give cell names#
+#
+row.names(cdm) <- paste("cell", 1:100, sep="")#
+#
+#fill NAs with 0s.#
+#
+cdm[is.na(cdm)] <- 0
+head(cdm)
+system.time(newCDM <- dispersalNull(cdm, tree, distances))
+system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.assigned="explore"))
+long <- c(11.475, 11.911, 11.754)
+short <- c(11.338, 11.540, 11.414)
+long/short
+mean(long)/mean(short)
+system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.assigned="directly", abundance.matters=TRUE))
+dispersalNull
+system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.assigned="directly", abundance.matters=TRUE))
+system.time(newCDM <- dispersalNull(cdm, tree, distances, abundance.assigned="explore", abundance.matters=TRUE))
+3.907/3.662
+?multiLinker
+?expectations
+test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,#
+	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),#
+	concat.by="both", output.raw=FALSE)
+test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=16, cores=8,#
+	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),#
+	concat.by="both", output.raw=FALSE)
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=16, cores=8,#
+	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),#
+	concat.by="both", output.raw=FALSE))
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=16, cores=1,#
+	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull),#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),#
+	concat.by="both", output.raw=FALSE))
+warnings()
+test
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=16, cores=1,#
+	cluster=FALSE, nulls=list("dispersal"=metricTester:::dispersalNull),#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),#
+	concat.by="both", output.raw=FALSE))
+system.time(test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,#
+	regional.abundance=NULL, distances.among=distances, randomizations=16, cores=1,#
+	cluster=FALSE, nulls=list("dispersal"=metricTester:::my_dispersal),#
+	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),#
+	concat.by="both", output.raw=FALSE))
+#set up a matrix to simulate lat/long#
+coordDF <- matrix(ncol=2, nrow=100)#
+#
+coordDF[,1] <- runif(n=100, min=40, max=50)#
+coordDF[,2] <- runif(n=100, min=-130, max=-120)#
+#
+#convert to data frame, give column names. also give row names such as if the cells had#
+#names (as they should or there'd be no way to track them)#
+coordDF <- as.data.frame(coordDF)#
+#
+row.names(coordDF) <- paste("cell", 1:100, sep="")#
+#
+names(coordDF) <- c("latitude","longitude")#
+#
+#calculate the distances among all of these points. in the real program you're going to#
+#want to calculate great arc distance or whatever it's called#
+distances <- dist(coordDF, diag=TRUE, upper=TRUE)#
+#
+#turn it into a symmetric distance matrix#
+distances <- as.matrix(distances)#
+#
+#simulate a regional phylogeny of 100 species#
+tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)#
+#
+#simulate a community data matrix of 100 cells by 100 species. do it 4 times so that#
+#you can use your simulateComm function and have it span a reasonable range of richness#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm1 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm2 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm3 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)#
+#
+#bind these into a list and use dplyr rbind_all to bind together. recast as data frame#
+#
+cdmList <- list(cdm1, cdm2, cdm3, cdm4)#
+#
+cdm <- rbind_all(cdmList)#
+#
+cdm <- as.data.frame(cdm)#
+#
+#fix as necessary manually here (i.e. make sure dimensions are 100 x 100), seems to#
+#usually work. then give cell names#
+#
+row.names(cdm) <- paste("cell", 1:100, sep="")#
+#
+#fill NAs with 0s.#
+#
+cdm[is.na(cdm)] <- 0#
+#
+obsOccurrences <- apply(cdm, 2, lengthNonZeros)#
+obsAbundances <- apply(cdm, 2, sum)#
+#
+basicOccurrences <- matrix(nrow=20, ncol=100)#
+basicAbundances <- matrix(nrow=20, ncol=100)
+head(obsOccurrences)
+#takes about 90s for 20 randomizations#
+system.time(for(i in 1:20)#
+{#
+	newCDM <- dispersalNull(cdm=cdm, tree=tree, distances.among=distances,#
+		abundance.matters=TRUE, abundance.assigned="directly")#
+	basicOccurrences[i,] <- apply(newCDM, 2, lengthNonZeros)#
+	basicAbundances[i,] <- apply(newCDM, 2, sum)#
+})#
+#
+meanBO <- apply(basicOccurrences, 2, mean)#
+meanBA <- apply(basicAbundances, 2, mean)#
+#
+variantOccurrences <- matrix(nrow=20, ncol=100)#
+variantAbundances <- matrix(nrow=20, ncol=100)#
+#
+#takes about 50 for 20 randomizations#
+system.time(for(i in 1:20)#
+{#
+	newCDM <- dispersalNull(cdm=cdm, tree=tree, distances.among=distances,#
+		abundance.matters=FALSE, abundance.assigned="overall")#
+	variantOccurrences[i,] <- apply(newCDM, 2, lengthNonZeros)#
+	variantAbundances[i,] <- apply(newCDM, 2, sum)#
+})#
+#
+meanVO <- apply(variantOccurrences, 2, mean)#
+meanVA <- apply(variantAbundances, 2, mean)
+head(meanBO)
+head(obsOccurrences)
+meanBO
+obsOccurrences
+plot(meanBO~obsOccurrences)
+summary(lm(meanBO~obsOccurrences))
+summary(lm(meanBA~obsAbundances))
+summary(lm(meanVO~obsOccurrences))
+plot(meanVO~obsOccurrences)
+plot(meanVA~obsAbundances)
+summary(lm(meanVA~obsAbundances))
+library(fpc)#
+library(dplyr)#
+library(phytools)#
+#
+#load the data#
+rawMorpho <- read.csv("tobiasv4.csv")#
+#
+#load the hackett backbone tree that has all missing taxa added to it#
+tree <- read.tree("Stage2_Hackett_MCC_no_neg.tre")#
+#
+#use this tree if you want only taxa they had molecular data for#
+#tree <- read.tree("Stage1_Hackett_MCC_no_neg.tre")#
+#
+#add underscores to species' names in the new data file. #
+rawMorpho$Unique.Scientific.Name <- sub(" ", "_", rawMorpho$Unique.Scientific.Name)#
+rawMorpho$Jetz.name <- sub(" ", "_", rawMorpho$Jetz.name)#
+#
+#there are 378 species with values for Unique.Scientific.Name but none for Jetz name.#
+#I manually added NAs to Jetz name for these, since some had hidden characters in the#
+#original file. Could easily fix these with a lookup file, e.g. Accipiter hiogaster would#
+#become Accipter novaehollandiae. For now, first three such species I looked up did#
+#already have specimens measured of the correct species in there, so just drop these#
+#
+#take species averages and drop NAs#
+groupedMorpho <- group_by(rawMorpho, Jetz.name)#
+avMorpho <- summarize(groupedMorpho, bill.total.culmen=mean(Bill.TotalCulmen, na.rm=TRUE),#
+	bill.nares=mean(Bill.Nares, na.rm=TRUE), bill.width=mean(Bill.Width, na.rm=TRUE),#
+	bill.depth=mean(Bill.Depth, na.rm=TRUE), #
+	tarsus.length=mean(Tarsus.Length, na.rm=TRUE),#
+	kipps.distance=mean(Kipp.s.Distance, na.rm=TRUE), #
+	secondary=mean(Secondary1, na.rm=TRUE), wing.chord=mean(Wing.Chord, na.rm=TRUE),#
+	wing.index=mean(Hand.Wing.Index..Claramunt.2011., na.rm=TRUE),#
+	tail.length=mean(Tail.Length, na.rm=TRUE))#
+#
+#JOE MANUALLY ADDED EXTREMELY SMALL VALUES TO the tail of Anurolimnas castaneiceps and#
+#the wings and tails of all Apteryx species. Replace tails of Anurolimnas with closest#
+#relative of approximate same size. Apteryx don't have tails, like Cassowaries, so leave#
+#that value, but they do have hidden wings of approximately 3 cm (30 mm)#
+#
+#the 1 at the end of this line of script is because there are species with NA for Jetz#
+#name and so we only want the first value that gets returned, not the whole vector#
+avMorpho$tail.length[avMorpho$Jetz.name=="Anurolimnas_castaneiceps"] <-#
+	avMorpho$tail.length[avMorpho$Jetz.name=="Anurolimnas_viridis"][1]#
+#
+avMorpho$wing.chord[grep("Apteryx", avMorpho$Jetz.name)] <- 30#
+#
+#retain only the linear measurements you actually want, discard indices#
+morpho <- select(avMorpho, species=Jetz.name, bill.total.culmen, bill.width, bill.depth,#
+	tarsus.length, wing.chord, secondary, tail.length)#
+#subset to complete cases (you lose 36 species this way)#
+morpho <- morpho[complete.cases(morpho),]#
+#
+#hard to manipulate the dataset as a dplyr data frame so covert to a regular data frame#
+morpho <- as.data.frame(morpho)#
+#
+#in case you want to confirm that the secondary measurements are not messed up, as they#
+#were in the previous raw data, this can help (swifts, hummingbirds and terns should have#
+#the largest HWI values)#
+#morpho$HWI <- (morpho$wing.chord - morpho$secondary)/morpho$wing.chord * 100#
+#
+#log all the linear measurements#
+morpho[,2:dim(morpho)[2]] <- apply(morpho[,2:dim(morpho)[2]], 2, log)#
+#
+#even after modifying the kiwi wing measures above, they still stand way way out and drive#
+#the ordination. remove before ordination#
+morpho <- morpho[-grep("Apteryx", morpho$species),]#
+#
+row.names(morpho) <- morpho$species#
+#
+morpho$species <- NULL#
+#
+#run a scaled and centered PCA#
+morphoPCA <- prcomp(morpho[,1:dim(morpho)[2]], center=TRUE, .scale=TRUE)#
+#
+#determine the observed number of clusters in the dataset using the fdc package and the#
+#pamk function. chose criterion = multiasw based on R documentation, confirm this makes#
+#sense. already scaled and centered, so setting scaling to FALSE. chose alpha based on#
+#comments in dudahart2 function in same package#
+#
+test <- pamk(data=morphoPCA$x, krange=1:10, criterion="multiasw", usepam=FALSE,#
+	scaling=FALSE, alpha=0.001, diss=FALSE)#
+#
+test2 <- data.frame(morpho, cluster=test$pamobject$clustering)
+library(fpc)#
+library(dplyr)#
+library(phytools)
+tr1<-pbtree(n=26,tip.label=LETTERS)#
+tr2<-pbtree(n=26,tip.label=sample(LETTERS))#
+obj<-cophylo(tr1,tr2,rotate=FALSE)#
+plot(obj)
+??cophylo
+source("http://www.phytools.org/cophylo/v0.2/cophylo.R")
+tr1<-pbtree(n=26,tip.label=LETTERS)#
+tr2<-pbtree(n=26,tip.label=sample(LETTERS))#
+obj<-cophylo(tr1,tr2,rotate=FALSE)#
+plot(obj)
+#load the data#
+rawMorpho <- read.csv("tobiasv4.csv")#
+#
+#load the hackett backbone tree that has all missing taxa added to it#
+tree <- read.tree("Stage2_Hackett_MCC_no_neg.tre")#
+#
+#use this tree if you want only taxa they had molecular data for#
+#tree <- read.tree("Stage1_Hackett_MCC_no_neg.tre")#
+#
+#add underscores to species' names in the new data file. #
+rawMorpho$Unique.Scientific.Name <- sub(" ", "_", rawMorpho$Unique.Scientific.Name)#
+rawMorpho$Jetz.name <- sub(" ", "_", rawMorpho$Jetz.name)#
+#
+#there are 378 species with values for Unique.Scientific.Name but none for Jetz name.#
+#I manually added NAs to Jetz name for these, since some had hidden characters in the#
+#original file. Could easily fix these with a lookup file, e.g. Accipiter hiogaster would#
+#become Accipter novaehollandiae. For now, first three such species I looked up did#
+#already have specimens measured of the correct species in there, so just drop these#
+#
+#take species averages and drop NAs#
+groupedMorpho <- group_by(rawMorpho, Jetz.name)#
+avMorpho <- summarize(groupedMorpho, bill.total.culmen=mean(Bill.TotalCulmen, na.rm=TRUE),#
+	bill.nares=mean(Bill.Nares, na.rm=TRUE), bill.width=mean(Bill.Width, na.rm=TRUE),#
+	bill.depth=mean(Bill.Depth, na.rm=TRUE), #
+	tarsus.length=mean(Tarsus.Length, na.rm=TRUE),#
+	kipps.distance=mean(Kipp.s.Distance, na.rm=TRUE), #
+	secondary=mean(Secondary1, na.rm=TRUE), wing.chord=mean(Wing.Chord, na.rm=TRUE),#
+	wing.index=mean(Hand.Wing.Index..Claramunt.2011., na.rm=TRUE),#
+	tail.length=mean(Tail.Length, na.rm=TRUE))#
+#
+#JOE MANUALLY ADDED EXTREMELY SMALL VALUES TO the tail of Anurolimnas castaneiceps and#
+#the wings and tails of all Apteryx species. Replace tails of Anurolimnas with closest#
+#relative of approximate same size. Apteryx don't have tails, like Cassowaries, so leave#
+#that value, but they do have hidden wings of approximately 3 cm (30 mm)#
+#
+#the 1 at the end of this line of script is because there are species with NA for Jetz#
+#name and so we only want the first value that gets returned, not the whole vector#
+avMorpho$tail.length[avMorpho$Jetz.name=="Anurolimnas_castaneiceps"] <-#
+	avMorpho$tail.length[avMorpho$Jetz.name=="Anurolimnas_viridis"][1]#
+#
+avMorpho$wing.chord[grep("Apteryx", avMorpho$Jetz.name)] <- 30#
+#
+#retain only the linear measurements you actually want, discard indices#
+morpho <- select(avMorpho, species=Jetz.name, bill.total.culmen, bill.width, bill.depth,#
+	tarsus.length, wing.chord, secondary, tail.length)#
+#subset to complete cases (you lose 36 species this way)#
+morpho <- morpho[complete.cases(morpho),]#
+#
+#hard to manipulate the dataset as a dplyr data frame so covert to a regular data frame#
+morpho <- as.data.frame(morpho)#
+#
+#in case you want to confirm that the secondary measurements are not messed up, as they#
+#were in the previous raw data, this can help (swifts, hummingbirds and terns should have#
+#the largest HWI values)#
+#morpho$HWI <- (morpho$wing.chord - morpho$secondary)/morpho$wing.chord * 100#
+#
+#log all the linear measurements#
+morpho[,2:dim(morpho)[2]] <- apply(morpho[,2:dim(morpho)[2]], 2, log)#
+#
+#even after modifying the kiwi wing measures above, they still stand way way out and drive#
+#the ordination. remove before ordination#
+morpho <- morpho[-grep("Apteryx", morpho$species),]#
+#
+row.names(morpho) <- morpho$species#
+#
+morpho$species <- NULL#
+#
+#run a scaled and centered PCA#
+morphoPCA <- prcomp(morpho[,1:dim(morpho)[2]], center=TRUE, .scale=TRUE)#
+#
+#determine the observed number of clusters in the dataset using the fdc package and the#
+#pamk function. chose criterion = multiasw based on R documentation, confirm this makes#
+#sense. already scaled and centered, so setting scaling to FALSE. chose alpha based on#
+#comments in dudahart2 function in same package#
+#
+test <- pamk(data=morphoPCA$x, krange=1:10, criterion="multiasw", usepam=FALSE,#
+	scaling=FALSE, alpha=0.001, diss=FALSE)#
+#
+test2 <- data.frame(morpho, cluster=test$pamobject$clustering)#
+#
+#this is pretty stupid, always comes back with two clusters that don't really make any#
+#sense. can see that below if you want with a plot like this:#
+#
+###########################################################################################
+#
+#add underscores to data and then prune tree to match data and vice versa#
+test2$species <- sub(" ", "_", row.names(test2))#
+toDrop <- setdiff(test2$species, tree$tip.label)#
+#
+test2 <- test2[!(row.names(test2) %in% toDrop),]#
+#
+toPrune <- setdiff(tree$tip.label, row.names(test2))#
+#
+pruned <- drop.tip(tree, toPrune)#
+#
+toPlot <- test2$cluster#
+names(toPlot) <- row.names(test2)#
+#
+#phenogram(pruned, toPlot, spread.labels=FALSE)
+1.5/2.5
+13.6*35/5
+6.5*0.9
+6.5-6.5*.1
+5.85*0.12
+46*0.702
+46*0.702/5
+2.5*1.027/5
+27*2.5/5
+1.0952+0.0135+0.064584
+128*5
+640/12
+2825/30
+95*2.6
+315-149
+1182*0.25
+13-2
+1181 - 295.5 + (30*12) + (2885/10 * 2.5) + 175
+(2885/10 * 2.5)
+(2885/30 * 2.5)
+(2885/30 * 2.5) + 50 + 4324
+4615-2142
+11/12
+library(metricTester)
+?metricsNnulls
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3, cluster=FALSE,#
+	nulls=list("richness"=metricTester:::my_richnessNull,#
+	"frequency"=metricTester:::my_frequency))
+str(rawResults,2)
+rawResults[[1]]
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3, cluster=TRUE,#
+	nulls=list("richness"=metricTester:::my_richnessNull,#
+	"frequency"=metricTester:::my_frequency))
+rawResults[[1]]
+?foreach
+yes
+install.packages(c("phylobase","geiger","spacodiR","doMC","foreach","doParallel","testthat"))
+library(devtools)
 load_all()
-load_all()
-documents()
+ls()
 document()
-cdm
-relativeCDM(cdm)
-relativeCDM(cdm, tree)
-relativeCDM(t(cdm), tree)
-length(setdiff(names(t(cdm)),tree$tip.label)) > 0)
-length(setdiff(t(names(cdm)),tree$tip.label)) > 0)
-length(setdiff(names(cdm),tree$tip.label)) > 0)
-length(setdiff(names(cdm),tree$tip.label)) > 0
-length(setdiff(names(t(cdm)),tree$tip.label)) > 0
-setdiff(names(t(cdm)),tree$tip.label))
-setdiff(names(t(cdm)),tree$tip.label)
-names(t(cdm))
-colnames(t(cdm))
+?makeCluster
 load_all()
-document()
-relativeCDM(t(cdm), tree)
-relativeCDM(cdm, tree)
+metricsNnulls
+load_all()
+?metricsNnulls
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,#
+	nulls=list("richness"=metricTester:::my_richnessNull,#
+	"frequency"=metricTester:::my_frequency))
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=3,#
+	nulls=list("richness"=metricTester:::my_richnessNull,#
+	"frequency"=metricTester:::my_frequency))
+rawResults[[1]]
+rawResults[[2]]
+rawResults[[3]]
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=8, cores=8,#
+	nulls=list("richness"=metricTester:::my_richnessNull,#
+	"frequency"=metricTester:::my_frequency)))
+tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)#
+#
+sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1#
+#
+cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)#
+#
+system.time(rawResults <- metricsNnulls(tree, cdm, randomizations=8, cores=1,#
+	nulls=list("richness"=metricTester:::my_richnessNull,#
+	"frequency"=metricTester:::my_frequency)))

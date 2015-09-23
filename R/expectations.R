@@ -18,10 +18,6 @@
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
 #' specify the desired number of cores to utilize.
-#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
-#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
-#' parallel processing on cluster. However, currently causing errors due to namespace
-#' issues with doParallel vs doMC.
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
 #' will likely be used to run a subset of the defined metrics.
 #' @param nulls Optional list of named null model functions to use. If invoked, this 
@@ -99,7 +95,7 @@
 #'
 #' test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 #'	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
-#'	cluster=FALSE, nulls=list("richness"=metricTester:::my_richnessNull), 
+#'	nulls=list("richness"=metricTester:::my_richnessNull), 
 #'	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
 #'	concat.by="both", output.raw=FALSE)
 #'
@@ -113,19 +109,19 @@
 #'
 #' test2 <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 #'	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
-#'	cluster=FALSE, nulls=list("frequency"=metricTester:::my_frequency), 
+#'	nulls=list("frequency"=metricTester:::my_frequency), 
 #'	metrics=list("richness"=metricTester:::my_richness, "exampleMetric"=exampleMetric),
 #'	concat.by="both", output.raw=FALSE)
 
 expectations <- function(picante.cdm, tree, optional.dists=NULL, regional.abundance=NULL, 
-	distances.among=NULL, randomizations, cores, cluster=FALSE, metrics, nulls, concat.by,
+	distances.among=NULL, randomizations, cores, metrics, nulls, concat.by,
 	output.raw=FALSE)
 {
 	#calculate the raw randomized results across whatever metrics and nulls are called
 	rawResults <- metricsNnulls(picante.cdm=picante.cdm, tree=tree, 
 		optional.dists=optional.dists, regional.abundance=regional.abundance, 
 		distances.among=distances.among, randomizations=randomizations, cores=cores,
-		cluster=cluster, metrics=metrics, nulls=nulls)
+		metrics=metrics, nulls=nulls)
 	#reduce these randomizations into more managable results
 	results <- reduceRandomizations(rawResults)
 	#if the user wants the raw data, provide that

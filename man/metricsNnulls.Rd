@@ -6,7 +6,7 @@
 \usage{
 metricsNnulls(tree, picante.cdm, optional.dists = NULL,
   regional.abundance = NULL, distances.among = NULL, randomizations = 2,
-  cores = 1, cluster = FALSE, nulls, metrics)
+  cores = 1, nulls, metrics)
 }
 \arguments{
 \item{tree}{Phylo object}
@@ -31,11 +31,6 @@ metrics calculated across it.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
 specify the desired number of cores to utilize.}
-
-\item{cluster}{Default is FALSE. Was intended to be set to TRUE if running on a cluster
-computer. Invokes multicore processing on a single computer if FALSE, otherwise
-parallel processing on cluster. However, currently causing errors due to namespace
-issues with doParallel vs doMC.}
 
 \item{nulls}{Optional list of named null model functions to use. If invoked, this
 option will likely be used to run a subset of the defined null models.}
@@ -67,7 +62,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE,
+rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency))
 }

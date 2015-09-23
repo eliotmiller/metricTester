@@ -20,10 +20,6 @@
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
 #' specify the desired number of cores to utilize.
-#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
-#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
-#' parallel processing on cluster. However, currently causing errors due to namespace
-#' issues with doParallel vs doMC.
 #' @param nulls Optional list of named null model functions to use. If invoked, this 
 #' option will likely be used to run a subset of the defined null models.
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
@@ -50,12 +46,12 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1, cluster=FALSE,
+#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency))
 
 metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
-	 distances.among=NULL, randomizations=2, cores=1, cluster=FALSE, nulls, metrics)
+	 distances.among=NULL, randomizations=2, cores=1, nulls, metrics)
 {
 	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
 	#which case all metrics will be calculated
@@ -71,52 +67,20 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 		nulls <- NULL
 	}	
 
-	if(cluster==FALSE)
-	{
-		registerDoMC(cores)
-	}
-	else if(cluster==TRUE)
-	{
-		cl <- makeCluster(cores)
-		registerDoParallel(cl)
-	}
-	else
-	{
-		stop("'cluster' must be set to either TRUE OR FALSE")
-	}
+	registerDoParallel(cores)
+
 	#prep the inputs for parallel randomizations
 	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance, distances.among)
-	#set up a list to save results into (might not be necessary)
-	randomResults <- list()
 	#call the parallel for loop. each iteration, save a new list of lists, where each
 	#inner element are the metrics for a given null model
-	if(cluster==FALSE)
+	randomResults <- foreach(i = 1:randomizations) %dopar%
 	{
-		foreach(i = 1:randomizations) %dopar%
-		{
-			#run the nulls across the prepped data. this randomizes the CDMs all at once
-			randomMatrices <- runNulls(nullsPrepped, nulls)
-			#prep the randomized CDMs to calculate the metrics across them
-			randomPrepped <- lapply(randomMatrices, function(x) 
-				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
-			#calculate the metrics
-			randomResults[[i]] <- lapply(randomPrepped, calcMetrics, metrics)
-		}
-	}
-	else
-	{
-		foreach(i = 1:randomizations,
-			.export=c("runNulls","prepData","calcMetrics","errorChecker",
-				"arenaTest","quadratTest")) %dopar%
-		{
-			#run the nulls across the prepped data. this randomizes the CDMs all at once
-			randomMatrices <- runNulls(nullsPrepped, nulls)
-			#prep the randomized CDMs to calculate the metrics across them
-			randomPrepped <- lapply(randomMatrices, function(x) 
-				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
-			#calculate the metrics
-			randomResults[[i]] <- lapply(randomPrepped, calcMetrics, metrics)
-		}
-		stopCluster(cl)
+		#run the nulls across the prepped data. this randomizes the CDMs all at once
+		randomMatrices <- runNulls(nullsPrepped, nulls)
+		#prep the randomized CDMs to calculate the metrics across them
+		randomPrepped <- lapply(randomMatrices, function(x) 
+			prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
+		#calculate the metrics
+		lapply(randomPrepped, calcMetrics, metrics)
 	}
 }

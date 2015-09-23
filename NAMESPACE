@@ -3,6 +3,7 @@
 export(abundanceVector)
 export(arenaTest)
 export(calcMetrics)
+export(checkCDM)
 export(checkMetrics)
 export(checkNulls)
 export(checkSimulations)

@@ -4,8 +4,8 @@
 \alias{dispersalNull}
 \title{Randomize community data matrix with dispersal null model}
 \usage{
-dispersalNull(cdm, tree, distances.among, abundance.matters = FALSE,
-  abundance.assigned = "overall")
+dispersalNull(cdm, tree, distances.among, abundance.matters = TRUE,
+  abundance.assigned = "directly")
 }
 \arguments{
 \item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
@@ -39,15 +39,16 @@ question.
 }
 \details{
 This function can run quite slowly, as it employs a while loop to discard
-selected species if they are already contained in the quadrat being simulated. It also
-likely needs additional checks to ensure that it doesn't get stuck in the while loop.
-For instance, if an observed quadrat contained more species than remained in the
-neighboring quadrats, this null would never run to completion. The argument
-distances.among is flexible, and can relate to e.g., straight-line distances,
-great-circle distances, and ecological distances. The performance of this null model
-has not yet been tested. If the argument abundance.matters is set to FALSE, then
-species' abundances in neighboring grid cells does not influence their probability of
-settling (only their proximity influences the probability of settling).
+selected species if they are already contained in the quadrat being simulated. The
+function contains an internal check to ensure that it doesn't get stuck in an
+indefinite while loop. Specifically, it checks that an observed quadrat does not
+contain more species than the sum of unique species in the remaining quadrats. The
+argument distances.among is flexible, and can relate to e.g., straight-line distances,
+great-circle distances, and ecological distances. If the argument abundance.matters is
+set to FALSE, then species' abundances in neighboring grid cells does not influence
+their probability of settling (only their proximity influences the probability of
+settling). If this is the case, it is recommended that the argument abundance.assigned
+be set to "overall".
 }
 \examples{
 #set up a matrix to simulate lat/long

@@ -6,8 +6,8 @@
 \usage{
 multiLinker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
-  no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster,
-  iterations, prefix, simulations, nulls, metrics)
+  no.quadrats, quadrat.length, concat.by, randomizations, cores, iterations,
+  prefix, simulations, nulls, metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}
@@ -43,11 +43,6 @@ simulations}
 used to compare the significance of the observed metric scores.}
 
 \item{cores}{The number of cores to be used for parallel processing.}
-
-\item{cluster}{Default is FALSE. Was intended to be set to TRUE if running on a cluster
-computer. Invokes multicore processing on a single computer if FALSE, otherwise
-parallel processing on cluster. However, currently causing errors due to namespace
-issues with doParallel vs doMC.}
 
 \item{iterations}{The number of complete tests to be run. For instance, 1 iteration
 would be considered a complete cycle of running all spatial simulations, randomly
@@ -86,7 +81,7 @@ multiple tests can be run, with results saved as RDS files.
 system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,
 	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness",
-	randomizations=3, cores=3, cluster=FALSE, iterations=2, prefix="test",
+	randomizations=3, cores=3, iterations=2, prefix="test",
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency)))
 }

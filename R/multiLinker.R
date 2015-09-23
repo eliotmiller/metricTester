@@ -23,10 +23,6 @@
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
-#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
-#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
-#' parallel processing on cluster. However, currently causing errors due to namespace
-#' issues with doParallel vs doMC.
 #' @param iterations The number of complete tests to be run. For instance, 1 iteration
 #' would be considered a complete cycle of running all spatial simulations, randomly
 #' placing quadrats in the arenas, sampling the contents, creating a community data
@@ -59,13 +55,13 @@
 #' system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3, 
 #'	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness", 
-#'	randomizations=3, cores=3, cluster=FALSE, iterations=2, prefix="test",
+#'	randomizations=3, cores=3, iterations=2, prefix="test",
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
 
 multiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, cluster, iterations, prefix,
+	quadrat.length, concat.by, randomizations, cores, iterations, prefix,
 	simulations, nulls, metrics)
 {
 	#create a simple file name, specify whether concatenating by quadrat or richness
@@ -82,7 +78,7 @@ multiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.para
 		}
 		temp <- linker(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 
-			no.quadrats, quadrat.length, concat.by, randomizations, cores, cluster,
+			no.quadrats, quadrat.length, concat.by, randomizations, cores,
 			simulations, nulls, metrics)
 		saveRDS(temp, file=filename)
 	}

@@ -24,10 +24,6 @@
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
-#' @param cluster Default is FALSE. Was intended to be set to TRUE if running on a cluster
-#' computer. Invokes multicore processing on a single computer if FALSE, otherwise
-#' parallel processing on cluster. However, currently causing errors due to namespace
-#' issues with doParallel vs doMC.
 #' @param simulations Optional list of named spatial simulation functions to use. These
 #' must be defined in the defineSimulations function. If invoked, this option will likely
 #' be used to run a subset of the defined spatial simulations.
@@ -54,14 +50,13 @@
 #' system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
 #'	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness", 
-#'	randomizations=3, cores=3, cluster=FALSE,
+#'	randomizations=3, cores=3,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
 
 linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, cluster=FALSE, simulations, nulls,
-	metrics)
+	quadrat.length, concat.by, randomizations, cores, simulations, nulls, metrics)
 {
 	#set these things to NULL if they are not passed in, meaning that all defined sims,
 	#nulls and metrics will be calculated
@@ -96,7 +91,7 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 	#randomizations, one for each. third level is data frames, one per null model
 	allRandomizations <- lapply(1:length(cdms), function(x) metricsNnulls(tree=tree, 
 		picante.cdm=cdms[[x]]$cdm, regional.abundance=cdms[[x]]$regional.abundance,
-		distances.among=cdms[[x]]$dists, cores=cores, cluster=cluster, 
+		distances.among=cdms[[x]]$dists, cores=cores, 
 		randomizations=randomizations, metrics=metrics, nulls=nulls))
 	#reduce the randomizations to a list of lists of (first order of lists is for each
 	#spatial simulation) data frames
