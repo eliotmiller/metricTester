@@ -4,8 +4,8 @@
 \alias{dispersalNull}
 \title{Randomize community data matrix with dispersal null model}
 \usage{
-dispersalNull(cdm, tree, distances.among, abundance.matters = TRUE,
-  abundance.assigned = "directly")
+dispersalNull(cdm, tree, distances.among, abundance.matters = FALSE,
+  abundance.assigned = "overall")
 }
 \arguments{
 \item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
