@@ -45,7 +45,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
 #run the metrics and nulls combo function
-rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores=2)
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores=1)
 
 #reduce the randomizations to a more manageable format
 reduced <- reduceRandomizations(rawResults)

@@ -81,7 +81,7 @@ multiple tests can be run, with results saved as RDS files.
 system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,
 	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness",
-	randomizations=3, cores=3, iterations=2, prefix="test",
+	randomizations=3, cores=1, iterations=2, prefix="test",
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency)))
 }

@@ -50,7 +50,7 @@
 #' system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
 #'	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness", 
-#'	randomizations=3, cores=3,
+#'	randomizations=3, cores=1,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
 

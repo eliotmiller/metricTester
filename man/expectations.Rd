@@ -110,7 +110,7 @@ row.names(cdm) <- paste("cell", 1:100, sep="")
 cdm[is.na(cdm)] <- 0
 
 test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
-	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
+	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=1,
 	nulls=list("richness"=metricTester:::my_richnessNull),
 	metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
 	concat.by="both", output.raw=FALSE)
@@ -124,7 +124,7 @@ exampleMetric <- function(metrics.input)
 }
 
 test2 <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
-	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=3,
+	regional.abundance=NULL, distances.among=distances, randomizations=3, cores=1,
 	nulls=list("frequency"=metricTester:::my_frequency),
 	metrics=list("richness"=metricTester:::my_richness, "exampleMetric"=exampleMetric),
 	concat.by="both", output.raw=FALSE)
