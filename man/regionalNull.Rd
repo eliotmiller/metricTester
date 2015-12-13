@@ -4,11 +4,11 @@
 \alias{regionalNull}
 \title{Randomize community data matrix with regional null model}
 \usage{
-regionalNull(cdm, tree, regional.abundance)
+regionalNull(picante.cdm, tree, regional.abundance)
 }
 \arguments{
-\item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
-as rows and species as columns}
+\item{picante.cdm}{Picante-style community data matrix with
+communities/quadrats/plots/etc as rows and species as columns}
 
 \item{tree}{Ape-style phylogeny}
 
@@ -55,6 +55,8 @@ test <- regionalNull(cdmTemp$cdm, tree,
 	regional.abundance=abundanceVector(cdmTemp$cdm))
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

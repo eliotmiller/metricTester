@@ -40,6 +40,8 @@ results <- reduceRandomizations(rawResults)
 test <- summaries(results$frequency, concat.by="richness")
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

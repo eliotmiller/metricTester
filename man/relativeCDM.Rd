@@ -4,11 +4,11 @@
 \alias{relativeCDM}
 \title{Convert absolute abundance matrix to relative abundance}
 \usage{
-relativeCDM(cdm, tree = NULL)
+relativeCDM(picante.cdm, tree = NULL)
 }
 \arguments{
-\item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
-as rows and species as columns}
+\item{picante.cdm}{Picante-style community data matrix with
+communities/quadrats/plots/etc as rows and species as columns}
 
 \item{tree}{Optional phylo object}
 }
@@ -35,6 +35,8 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

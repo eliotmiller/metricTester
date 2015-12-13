@@ -34,6 +34,7 @@ cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 results <- pscCorr(samp=cdm, tree=tree)
 }
 \references{
-Helmus et al 2007
+Helmus, M.R., T.J. Bland, C.K. Williams, & A.R. Ives. 2007. Phylogenetic
+measures of biodiversity. The American Naturalist. 169:E69-E83.
 }
 

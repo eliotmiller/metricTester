@@ -4,12 +4,12 @@
 \alias{dispersalNull}
 \title{Randomize community data matrix with dispersal null model}
 \usage{
-dispersalNull(cdm, tree, distances.among, abundance.matters = TRUE,
+dispersalNull(picante.cdm, tree, distances.among, abundance.matters = TRUE,
   abundance.assigned = "directly")
 }
 \arguments{
-\item{cdm}{Picante-style community data matrix with communities/quadrats/plots/etc
-as rows and species as columns}
+\item{picante.cdm}{Picante-style community data matrix with
+communities/quadrats/plots/etc as rows and species as columns}
 
 \item{tree}{Phylo object}
 
@@ -104,6 +104,7 @@ cdm[is.na(cdm)] <- 0
 newCDM <- dispersalNull(cdm, tree, distances)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T. In revision. A new dispersal-informed null model for
+community ecology shows strong performance.
 }
 

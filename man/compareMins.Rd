@@ -28,6 +28,8 @@ temp <- c(1,2,3,4,5,6,1)
 compareMins(temp)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

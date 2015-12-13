@@ -67,6 +67,8 @@ rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,
 	"frequency"=metricTester:::my_frequency))
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

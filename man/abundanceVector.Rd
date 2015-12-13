@@ -4,10 +4,10 @@
 \alias{abundanceVector}
 \title{Generate regional abundance vector}
 \usage{
-abundanceVector(cdm)
+abundanceVector(picante.cdm)
 }
 \arguments{
-\item{cdm}{Community data matrix in picante format}
+\item{picante.cdm}{Community data matrix in picante format}
 }
 \value{
 A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
@@ -29,9 +29,11 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-abund <- abundanceVector(cdm)
+abund <- abundanceVector(picante.cdm)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

@@ -4,7 +4,7 @@
 #' total number of individuals of each species) and expand to create a regional abundance
 #' vector.
 #'
-#' @param cdm Community data matrix in picante format
+#' @param picante.cdm Community data matrix in picante format
 #' 
 #' @details Simple function to create a regional abundance vector given a "regional"
 #' community data matrix.
@@ -13,7 +13,9 @@
 #'
 #' @export
 #'
-#' @references Miller, Trisos and Farine.
+#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+#' structure metrics and null models: a review with new methods and software.
+#' bioRxiv 025726.
 #'
 #' @examples
 #' #simulate tree with birth-death process
@@ -23,11 +25,11 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' abund <- abundanceVector(cdm)
+#' abund <- abundanceVector(picante.cdm)
 
-abundanceVector <- function(cdm)
+abundanceVector <- function(picante.cdm)
 {
-	temp <- apply(cdm, 2, sum)
+	temp <- apply(picante.cdm, 2, sum)
 	abundances <- rep(names(temp), temp)
 	return(abundances)
 }

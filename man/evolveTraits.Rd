@@ -29,6 +29,8 @@ tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 results <- evolveTraits(tree)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

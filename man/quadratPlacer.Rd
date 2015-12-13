@@ -32,6 +32,8 @@ boundResults <- quadratPlacer(no.quadrats=10, arena.length=300,
 	quadrat.length=50)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

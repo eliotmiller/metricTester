@@ -130,6 +130,8 @@ test2 <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 	concat.by="both", output.raw=FALSE)
 }
 \references{
-Miller, Trisos and Farine.
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+structure metrics and null models: a review with new methods and software.
+bioRxiv 025726.
 }
 

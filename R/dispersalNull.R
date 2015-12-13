@@ -4,8 +4,8 @@
 #' with a probability proportional to their abundance in and distance from the quadrat in
 #' question.
 #'
-#' @param cdm Picante-style community data matrix with communities/quadrats/plots/etc
-#' as rows and species as columns
+#' @param picante.cdm Picante-style community data matrix with
+#' communities/quadrats/plots/etc as rows and species as columns
 #' @param tree Phylo object
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
 #' quadrats from the cdm.
@@ -37,7 +37,8 @@
 #'
 #' @export
 #'
-#' @references Miller, Trisos and Farine.
+#' @references Miller, E. T. In revision. A new dispersal-informed null model for
+#' community ecology shows strong performance.
 #'
 #' @examples
 #' #set up a matrix to simulate lat/long
@@ -92,26 +93,26 @@
 #'
 #' newCDM <- dispersalNull(cdm, tree, distances)
 
-dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE, 
+dispersalNull <- function(picante.cdm, tree, distances.among, abundance.matters=TRUE, 
 	abundance.assigned="directly")
 {
 	#create a check to ensure that no cell in the CDM contains more species than are found
 	#in the sum of the remaining cells
-	tempCheck <- checkCDM(cdm)
+	tempCheck <- checkCDM(picante.cdm)
 	if(tempCheck == "fail")
 	{
 		stop("CDM incompatible with dispersalNull model. See 'checkCDM' for details")
 	}
 
 	#create a check to ensure that all species that occur in the cdm are also in the tree
-	if(length(setdiff(names(cdm),tree$tip.label))!=0)
+	if(length(setdiff(names(picante.cdm),tree$tip.label))!=0)
 	{
 		stop("You have included species in your cdm that are not in your phylogeny")
 	}
 	
 	#create a check to ensure that cdm and distances.among contain the same exact cells
-	if(length(setdiff(row.names(cdm), row.names(distances.among))) != 0 &
-		length(setdiff(row.names(distances.among), row.names(cdm))) != 0)
+	if(length(setdiff(row.names(picante.cdm), row.names(distances.among))) != 0 &
+		length(setdiff(row.names(distances.among), row.names(picante.cdm))) != 0)
 	{
 		stop("Your cdm quadrat names and distance matrix names do no match")
 	}
@@ -129,16 +130,16 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 	#per quadrat while the length of replacement species is < the observed richness for
 	#that quadrat
 	
-	richness <- apply(cdm, 1, lengthNonZeros)
+	richness <- apply(picante.cdm, 1, lengthNonZeros)
 
 	#generate a vector of all non-zero abundances from the input CDM
-	overallAbundance <- cdm[cdm!=0]
+	overallAbundance <- picante.cdm[picante.cdm!=0]
 
 	#create a list that you will use to save vectors of species into (one list element
 	#per quadrat)
 	replacementList <- list()
 	
-	for(i in 1:dim(cdm)[1])
+	for(i in 1:dim(picante.cdm)[1])
 	{
 		#create a temporary empty data frame in phylocom format. make it just long enough
 		#for the quadrat in question
@@ -151,7 +152,7 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 		#phylocom df. the while loop continues while the length of species for a given
 		#quadrat remains less than the richness of the observed quadrat
 		j <- 0
-		while(length(phylocom[phylocom$plot==row.names(cdm)[i],]$id) < richness[i])
+		while(length(phylocom[phylocom$plot==row.names(picante.cdm)[i],]$id) < richness[i])
 		{
 			#select the quadrat you will sample from. give your selectNear a column from
 			#the distance matrix
@@ -159,8 +160,8 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 			#select a species from that quadrat. probability proportional to abundance
 			if(abundance.matters)
 			{
-				temp <- sample(x=cdm[selectedQuadrat,], size=1, 
-					prob=cdm[selectedQuadrat,])
+				temp <- sample(x=picante.cdm[selectedQuadrat,], size=1, 
+					prob=picante.cdm[selectedQuadrat,])
 			}
 			#or where probability is not proportional to abundance in neighboring cell.
 			#note that you need to restricted the species from the selected quadrat to be
@@ -169,18 +170,18 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 			{
 				#note that this means the selected species lose their names, so add them
 				#back in
-				possible <- cdm[selectedQuadrat,][cdm[selectedQuadrat,] !=0 ]
-				names(possible) <- names(cdm[selectedQuadrat,])[cdm[selectedQuadrat,]!=0]
+				possible <- picante.cdm[selectedQuadrat,][picante.cdm[selectedQuadrat,] !=0 ]
+				names(possible) <- names(picante.cdm[selectedQuadrat,])[picante.cdm[selectedQuadrat,]!=0]
 				temp <- sample(x=possible, size=1)
 			}
 			#if the species selected is not found in that quadrat in the growing phylocom
 			#data frame, add the relevant info to that frame
-			if(!(names(temp) %in% phylocom[phylocom$plot==row.names(cdm)[i],]$id))
+			if(!(names(temp) %in% phylocom[phylocom$plot==row.names(picante.cdm)[i],]$id))
 			{
 				#move the row ID along
 				j <- j+1
 				#set the plot name to be correct
-				phylocom[j,1] <- row.names(cdm)[i]
+				phylocom[j,1] <- row.names(picante.cdm)[i]
 				#assign the species the abundance it had in the original CDM
 				if(abundance.assigned=="directly")
 				{
@@ -215,7 +216,7 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 	newCDM <- sample2matrix(newCDM)
 	
 	#it comes out in a weird order, so sort back to same quadrat order as input CDM
-	newCDM <- newCDM[row.names(cdm),]
+	newCDM <- newCDM[row.names(picante.cdm),]
 	
 	#add columns for species that were not recorded in any quadrats
 	notFound <- setdiff(tree$tip.label, names(newCDM))
@@ -228,7 +229,7 @@ dispersalNull <- function(cdm, tree, distances.among, abundance.matters=TRUE,
 	}
 	
 	#and sort into same species order as input cdm
-	newCDM <- newCDM[,colnames(cdm)]
+	newCDM <- newCDM[,colnames(picante.cdm)]
 	
 	#for reasons that are not entirely clear to me, this is still returning as a DF
 	#convert to matrix

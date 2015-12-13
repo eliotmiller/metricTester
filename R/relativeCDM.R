@@ -3,8 +3,8 @@
 #' Simple utility function to convert an absolute abundance matrix to a relative abundance
 #' matrix.
 #'
-#' @param cdm Picante-style community data matrix with communities/quadrats/plots/etc
-#' as rows and species as columns
+#' @param picante.cdm Picante-style community data matrix with
+#' communities/quadrats/plots/etc as rows and species as columns
 #' @param tree Optional phylo object
 #' 
 #' @details This function converts species' absolute abundances in a given community (a
@@ -17,7 +17,9 @@
 #'
 #' @export
 #'
-#' @references Miller, Trisos and Farine.
+#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+#' structure metrics and null models: a review with new methods and software.
+#' bioRxiv 025726.
 #'
 #' @examples
 #' #simulate tree with birth-death process
@@ -27,7 +29,7 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-relativeCDM <- function(cdm, tree=NULL)
+relativeCDM <- function(picante.cdm, tree=NULL)
 {
 	if(is.null(tree))
 	{
@@ -35,13 +37,13 @@ relativeCDM <- function(cdm, tree=NULL)
 	}
 	else
 	{
-		if(length(setdiff(colnames(cdm),tree$tip.label)) > 0)
+		if(length(setdiff(colnames(picante.cdm),tree$tip.label)) > 0)
 		{
 			stop("your cdm must have species as columns, sites as rows")
 		}
 	}
 	
-	newCDM <- t(apply(cdm, 1, relative))
+	newCDM <- t(apply(picante.cdm, 1, relative))
 	newCDM
 }
 

@@ -14,7 +14,8 @@
 #'
 #' @export
 #'
-#' @references Helmus et al 2007
+#' @references Helmus, M.R., T.J. Bland, C.K. Williams, & A.R. Ives. 2007. Phylogenetic
+#' measures of biodiversity. The American Naturalist. 169:E69-E83.
 #'
 #' @examples
 #' #simulate tree with birth-death process

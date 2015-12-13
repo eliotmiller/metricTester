@@ -3,8 +3,8 @@
 #' Null model that simulates community assembly where species probabilities of occurrence
 #' are proportional to their regional abundance.
 #'
-#' @param cdm Picante-style community data matrix with communities/quadrats/plots/etc
-#' as rows and species as columns
+#' @param picante.cdm Picante-style community data matrix with
+#' communities/quadrats/plots/etc as rows and species as columns
 #' @param tree Ape-style phylogeny
 #' @param regional.abundance Vector of species names, where each species' name is repeated
 #' the number of times necessary to accomodate its abundance in the regional species pool
@@ -26,7 +26,9 @@
 #'
 #' @export
 #'
-#' @references Miller, Trisos and Farine.
+#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+#' structure metrics and null models: a review with new methods and software.
+#' bioRxiv 025726.
 #'
 #' @examples
 #' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
@@ -46,10 +48,10 @@
 #' test <- regionalNull(cdmTemp$cdm, tree, 
 #'	regional.abundance=abundanceVector(cdmTemp$cdm))
 
-regionalNull <- function(cdm, tree, regional.abundance)
+regionalNull <- function(picante.cdm, tree, regional.abundance)
 {
 	#find the total number of individuals in each quadrat
-	sums <- apply(cdm, 1, sum)
+	sums <- apply(picante.cdm, 1, sum)
 
 	#this command works well, lucky guess on how to write it. it ends up sampling
 	#the required number of individuals (the sum of all individuals in a quadrat) 
