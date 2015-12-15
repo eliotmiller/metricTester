@@ -33,7 +33,10 @@ neighboring grid cells with equal probability. For use with the dispersal null.}
 specify the desired number of cores to utilize.}
 }
 \value{
-Named vector of standardized effect sizes of species' trait fields.
+Data frame of standardized effect sizes of species' phylogenetic fields. Table
+includes the observed phylogenetic field, the mean and standard deviation of the
+species' trait field after randomization with the chosen null model, and the resulting
+species-specific standarized effect size.
 }
 \description{
 Calculate the null-model standardized effect size of a species' trait field.

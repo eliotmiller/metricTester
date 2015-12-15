@@ -24,7 +24,10 @@
 #' The function could be improved by tapping into any of the metrics and nulls defined
 #' in defineMetrics and defineNulls.
 #'
-#' @return Named vector of standardized effect sizes of species' trait fields. 
+#' @return Data frame of standardized effect sizes of species' phylogenetic fields. Table
+#' includes the observed phylogenetic field, the mean and standard deviation of the
+#' species' trait field after randomization with the chosen null model, and the resulting
+#' species-specific standarized effect size.
 #'
 #' @export
 #'
