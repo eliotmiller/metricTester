@@ -103,6 +103,6 @@ quadratContents <- function(arena, quadratPlacer.results)
 	row.names(quadratPlacer.results$dists) <- quadrat
 	colnames(quadratPlacer.results$dists) <- quadrat
 	
-	results <- list("cdm"=com.results, "dists"=quadratPlacer.results$dists)
+	results <- list("picante.cdm"=com.results, "dists"=quadratPlacer.results$dists)
 	return(results)
 }

@@ -44,13 +44,13 @@ makeCDM <- function(single.simulation, no.quadrats, quadrat.length)
 	temp2 <- quadratContents(arena=single.simulation$arena, quadratPlacer.results=temp1)
 	if(is.null(single.simulation$regional.abundance))
 	{
-		regional.abundance <- abundanceVector(temp2$cdm)
+		regional.abundance <- abundanceVector(temp2$picante.cdm)
 	}
 	else
 	{
 		regional.abundance <- single.simulation$regional.abundance
 	}
 	results <- list("regional.abundance"=regional.abundance, "dists"=temp2$dists,
-		"cdm"=temp2$cdm)
+		"picante.cdm"=temp2$picante.cdm)
 	results
 }

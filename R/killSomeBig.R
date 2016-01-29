@@ -87,7 +87,7 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 	{
 		temp <- makeCDM(single.simulation=arena.output, no.quadrats=noQuadrats,
 			quadrat.length=max.distance)
-		avRelatedness[[i]] <- modifiedMPD(samp=temp$cdm, dis=genDists, 
+		avRelatedness[[i]] <- modifiedMPD(samp=temp$picante.cdm, dis=genDists, 
 			abundance.weighted="interspecific")
 	}
 
@@ -247,7 +247,7 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 		quadrat.length=max.distance)
 	
 	#calculate the interspecific MPD for these quadrats
-	tempRelated <- modifiedMPD(samp=tempCDM$cdm, dis=genDists, 
+	tempRelated <- modifiedMPD(samp=tempCDM$picante.cdm, dis=genDists, 
 		abundance.weighted="interspecific")
 	
 	#calculate the mean interspecific MPD for the quadrats, and append to vector in output

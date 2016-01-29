@@ -63,7 +63,7 @@ my_2s <- function(nulls.input)
 
 my_regional <- function(nulls.input)
 {
-	new.matrix <- regionalNull(cdm=nulls.input$picante.cdm, tree=nulls.input$tree, 
+	new.matrix <- regionalNull(picante.cdm=nulls.input$picante.cdm, tree=nulls.input$tree, 
 		regional.abundance=nulls.input$regional.abundance)
 }
 

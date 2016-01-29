@@ -33,12 +33,12 @@
 #'
 #' tempCDM <- makeCDM(positions, 15, 30)
 #'
-#' results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm)
+#' results <- observedMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm)
 #'
 #' #example of how to pass specific metrics to be calculated (always use at least 
 #' #richness). not run
 #'
-#' #results <- observedMetrics(tree=tree, picante.cdm=tempCDM$cdm, 
+#' #results <- observedMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm, 
 #' #metrics=list("richness"=metricTester:::my_richness,"PSV"=metricTester:::my_psv))
 
 observedMetrics <- function(tree, picante.cdm, metrics)

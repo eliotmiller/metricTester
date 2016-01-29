@@ -45,8 +45,8 @@
 #' #return a CDM in picante format
 #' cdmTemp <- quadratContents(positions$arena, boundResults)
 #'
-#' test <- regionalNull(cdmTemp$cdm, tree, 
-#'	regional.abundance=abundanceVector(cdmTemp$cdm))
+#' test <- regionalNull(cdmTemp$picante.cdm, tree, 
+#'	regional.abundance=abundanceVector(cdmTemp$picante.cdm))
 
 regionalNull <- function(picante.cdm, tree, regional.abundance)
 {
