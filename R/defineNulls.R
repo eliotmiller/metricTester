@@ -91,6 +91,6 @@ my_TS <- function(nulls.input)
 
 my_dispersal <- function(nulls.input)
 {
-	new.matrix <- dispersalNull(cdm=nulls.input$picante.cdm, tree=nulls.input$tree,
-		distances.among=nulls.input$distances.among)
+	new.matrix <- dispersalNull(picante.cdm=nulls.input$picante.cdm,
+		tree=nulls.input$tree, distances.among=nulls.input$distances.among)
 }

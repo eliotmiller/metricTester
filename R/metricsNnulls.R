@@ -55,8 +55,6 @@
 metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
 	 distances.among=NULL, randomizations=2, cores=1, nulls, metrics)
 {
-	print(picante.cdm)
-
 	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
 	#which case all metrics will be calculated
 	if(missing(metrics))
@@ -75,18 +73,18 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 
 	#prep the inputs for parallel randomizations
 	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance, distances.among)
+	
 	#call the parallel for loop. each iteration, save a new list of lists, where each
 	#inner element are the metrics for a given null model
 	randomResults <- foreach(i = 1:randomizations) %dopar%
 	{
 		#run the nulls across the prepped data. this randomizes the CDMs all at once
 		randomMatrices <- runNulls(nullsPrepped, nulls)
-		
-		print(randomMatrices)
 		#prep the randomized CDMs to calculate the metrics across them
 		randomPrepped <- lapply(randomMatrices, function(x) 
 			prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
 		#calculate the metrics
 		lapply(randomPrepped, calcMetrics, metrics)
 	}
+	randomResults
 }

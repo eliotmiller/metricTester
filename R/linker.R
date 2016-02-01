@@ -85,8 +85,6 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 	#derive CDMs. quadrats are placed in the same places across all spatial simulations
 	cdms <- multiCDM(arenas, no.quadrats, quadrat.length)
 	
-	#print(cdm)[[1]]$picante.cdm
-	
 	#calculate observed metrics for all three spatial simulations
 	observed <- lapply(cdms, function(x) observedMetrics(tree=tree, 
 		picante.cdm=x$picante.cdm, metrics))

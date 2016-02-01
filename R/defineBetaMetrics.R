@@ -29,7 +29,11 @@ defineBetaMetrics <- function()
 	"Ist"=my_Ist,
 	"Pst"=my_Pst,
 	"Bst"=my_Bst,
-	"PIst"=my_PIst
+	"PIst"=my_PIst,
+	"meanNAW_MPD"=mean_naw_mpd,
+	"meanInter_MPD"=mean_inter_mpd,
+	"meanIntra_MPD"=mean_intra_mpd,
+	"meanComplete_MPD"=mean_complete_mpd
 	)
 }
 
@@ -53,3 +57,19 @@ my_Bst <- function(metrics.input)
 
 my_PIst <- function(metrics.input)
 	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree)$PIst
+
+mean_naw_mpd <- function(metrics.input)
+	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,
+	abundance.weighted=FALSE))
+
+mean_inter_mpd <- function(metrics.input)
+	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,
+	abundance.weighted="interspecific"))
+
+mean_intra_mpd <- function(metrics.input)
+	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,
+	abundance.weighted="intraspecific"))
+
+mean_complete_mpd <- function(metrics.input)
+	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,
+	abundance.weighted="complete"))

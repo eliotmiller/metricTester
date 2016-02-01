@@ -118,7 +118,7 @@ dispersalNull <- function(picante.cdm, tree, distances.among, abundance.matters=
 	}
 	
 	#create a check to ensure that cdm and distances.among are in the same order cell-wise
-	if(any(row.names(cdm)!=row.names(distances.among)))
+	if(any(row.names(picante.cdm)!=row.names(distances.among)))
 	{
 		stop("Your cdm and distance matrix are not in the same quadrat order")
 	}

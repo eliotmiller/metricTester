@@ -84,7 +84,6 @@ betaLinker <- function(no.taxa, arena.length, mean.log.individuals, length.param
 	arenas <- runSimulations(prepped, simulations)
 	#derive CDMs. quadrats are placed in the same places across all spatial simulations
 	cdms <- multiCDM(arenas, no.quadrats, quadrat.length)
-	print(cdms$picante.cdm)
 	#calculate observed metrics for all three spatial simulations
 	observed <- lapply(cdms, function(x) observedBetaMetrics(tree=tree, 
 		picante.cdm=x$picante.cdm, metrics))

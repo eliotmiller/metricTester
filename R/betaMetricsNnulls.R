@@ -86,4 +86,5 @@ betaMetricsNnulls <- function(tree, picante.cdm, optional.dists=NULL,
 		#calculate the metrics
 		lapply(randomPrepped, calcBetaMetrics, metrics)
 	}
+	randomResults
 }
