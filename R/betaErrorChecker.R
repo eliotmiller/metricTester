@@ -11,7 +11,9 @@
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
 #' will likely be used to run a subset of the defined metrics.
 #' 
-#' @details This function wraps a number of smaller functions into a useful type I and II
+#' @details DOCUMENTATION FOR THIS FUNCTION NEEDS TO BE UPDATED. THE FUNCTION IS IN PROGRESS
+#'
+#'This function wraps a number of smaller functions into a useful type I and II
 #' error checker. It takes a reduced list of randomizations such as those reduced from
 #' metricsNnulls with reduceRandomizations, summarizes the mean,
 #' SD, and CI of each metric plus null model either at the richness or quadrat level,

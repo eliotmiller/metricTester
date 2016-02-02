@@ -1,4 +1,4 @@
-#' Calculate phylogenetic community structure beta-metrics
+#' Calculate phylogenetic community structure beta metrics
 #'
 #' Given a prepped metrics.input object, calculate all phylogenetic community structure
 #' metrics of interest.
@@ -7,13 +7,12 @@
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
 #' will likely be used to run a subset of the defined metrics.
 #' 
-#' @details Currently we are calculating 19 phylogenetic community structure metrics.
-#' This function first confirms that the input is of class metrics.input and, if so, then
-#' confirms that the metrics to be calculated are in a named list (via checkMetrics),
-#' then lapplies all metric functions to the input metrics.input object.
+#' @details This function first confirms that the input is of class metrics.input and,
+#' if so, then confirms that the metrics to be calculated are in a named list (via
+#' checkMetrics), then lapplies all metric functions to the input metrics.input object.
 #'
 #' @return A data frame with the calculated metrics and the associated species richness
-#' of all input "communities".
+#' and total abundance of all input "communities".
 #'
 #' @export
 #'
@@ -33,17 +32,17 @@
 #'
 #' prepped <- prepData(tree, cdm)
 #'
-#' results <- calcMetrics(prepped)
+#' results <- calcBetaMetrics(prepped)
 #'
 #' #an example of how to define ones own metrics for use in the metricTester framework
 #' #this "metric" simply calculates the richness of each quadrat in the CDM
 #' exampleMetric <- function(metrics.input)
 #' {
-#'	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)
+#'	output <- mean(apply(metrics.input$picante.cdm, 1, lengthNonZeros))
 #'	output
 #' }
 #'
-#' calcMetrics(prepped, metrics=list("example"=exampleMetric))
+#' calcBetaMetrics(prepped, metrics=list("example"=exampleMetric))
 
 calcBetaMetrics <- function(metrics.input, metrics)
 {

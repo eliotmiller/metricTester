@@ -20,7 +20,7 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' checkMetrics(defineMetrics())
+#' checkBetaMetrics(defineBetaMetrics())
 
 checkBetaMetrics <- function(x)
 {

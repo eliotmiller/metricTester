@@ -1,19 +1,20 @@
-#' Wrapper for prepping and calculating observed metrics
+#' Wrapper for prepping and calculating observed beta metrics
 #'
-#' Given a cdm and phylogeny, this function preps the data and calculates metrics of the
-#' user's choice
+#' Given a cdm and phylogeny, this function preps the data and calculates beta metrics of
+#' thee user's choice
 #'
 #' @param tree Phylo object
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
 #' will likely be used to run a subset of the defined metrics. Defaults to all metrics
-#' defined in defineMetrics()
+#' defined in defineBetaMetrics()
 #'
 #' @details A simple wrapper function to quickly prep data and calculate observed metrics.
 #'
-#' @return A data frame with the species richness and calculated phylogenetic community
-#' structure metrics for all input quadrats from the CDM.
+#' @return A data frame with the species richness, total abundance from the CDM, and
+#' calculated phylogenetic community structure beta metrics for all input quadrats from 
+#' the CDM.
 #'
 #' @export
 #'
@@ -33,13 +34,13 @@
 #'
 #' tempCDM <- makeCDM(positions, 15, 30)
 #'
-#' results <- observedMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm)
+#' results <- observedBetaMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm)
 #'
-#' #example of how to pass specific metrics to be calculated (always use at least 
-#' #richness). not run
+#' #example of how to pass specific metrics to be calculated. not run
 #'
-#' #results <- observedMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm, 
-#' #metrics=list("richness"=metricTester:::my_richness,"PSV"=metricTester:::my_psv))
+#' #results <- observedBetaMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm, 
+#' #metrics=list("richness"=metricTester:::my_betaRichness,
+#' #"Ist"=metricTester:::my_Ist))
 
 observedBetaMetrics <- function(tree, picante.cdm, metrics)
 {

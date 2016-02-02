@@ -2,7 +2,7 @@
 #'
 #' Creates a list of named functions, each of which accept a metrics.input object
 #'
-#' @details All of the functions we calculated for our manuscript are included in this
+#' @details All of the beta metrics we calculated for our manuscript are included in this
 #' function. To add additional functions, they can either be defined on the fly or, to 
 #' permanently include a new metric in all downstream simulations, it can be included
 #' here. The function needs to be included with a name, and it must accept a metrics.input
@@ -20,7 +20,7 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' defineMetrics()
+#' defineBetaMetrics()
 
 defineBetaMetrics <- function()
 {

@@ -53,12 +53,15 @@ runNulls <- function(nulls.input, nulls)
 
 	#finally, if no distances.among input was provided, the dispersalNull cannot be run.
 	#remove it here. if other nulls are defined later, either add them to this list, or
-	#do something more elegant so they are not run and errors are not thrown
+	#do something more elegant so they are not run and errors are not thrown. this used to
+	#check whether distances.among == ignore, but that was throwing lots of warnings if it
+	#did not equal ignore. now it checks whether it is a matrix. if its not it removes
+	#the dispersal null. it does not have to say ignore specifically anymore.
 	
-	if(nulls.input$distances.among == "ignore")
+	if(!is.matrix(nulls.input$distances.among))
 	{
 		nulls$dispersal <- NULL
 	}
-	
+
 	lapply(nulls, function(x) x(nulls.input))
 }

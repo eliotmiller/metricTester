@@ -1,8 +1,8 @@
-#' Parallelized function that calculates metrics on randomized matrices
+#' Parallelized function that calculates beta metrics on randomized matrices
 #'
 #' This function sends out jobs to as many cores as are specified. Each randomizes the
-#' input CDM according to all defined null models, then calculates each observed metric on
-#' each randomized matrix.
+#' input CDM according to all defined null models, then calculates each observed beta
+#' metric on each randomized matrix.
 #'
 #' @param tree Phylo object
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
@@ -48,7 +48,7 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,
+#' rawResults <- betaMetricsNnulls(tree, cdm, randomizations=3, cores=1,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency))
 

@@ -51,8 +51,8 @@ boundResults <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=3
 #return a CDM in picante format
 cdmTemp <- quadratContents(positions$arena, boundResults)
 
-test <- regionalNull(cdmTemp$cdm, tree,
-	regional.abundance=abundanceVector(cdmTemp$cdm))
+test <- regionalNull(cdmTemp$picante.cdm, tree,
+	regional.abundance=abundanceVector(cdmTemp$picante.cdm))
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

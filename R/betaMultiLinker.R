@@ -1,4 +1,4 @@
-#' Run multiple simulations and calculations to test metric + null performance
+#' Run multiple simulations and calculations to test beta metric + null performance
 #'
 #' This function runs multiple iterations of the linker function, saving results to file.
 #'
@@ -19,7 +19,6 @@
 #' simulations
 #' @param no.quadrats Number of quadrats to place
 #' @param quadrat.length Length of one side of desired quadrat
-#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
@@ -39,13 +38,10 @@
 #' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details This function wraps a number of other wrapper functions into
-#' one big metric + null performance tester function. Unlike the basic linker function,
-#' multiple tests can be run, with results saved as RDS files.
+#' one big beta metric + null performance tester function. Unlike the basic betaLinker
+#' function, multiple tests can be run, with results saved as RDS files.
 #'
-#' @return A list of lists of data frames. The first level of the output has one element 
-#' for each simulation. The second level has one element for each null model. Each of
-#' these elements is a list of two data frames, one that summarizes the quadrat-level
-#' significance and another and arena-level significance.
+#' @return Multiple iterations of the the betaLinker function.
 #'
 #' @export
 #'
@@ -54,9 +50,9 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' system.time(multiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2, 
+#' system.time(betaMultiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3, 
-#'	competition.iterations=2, no.quadrats=20, quadrat.length=30, concat.by="richness", 
+#'	competition.iterations=2, no.quadrats=20, quadrat.length=30,
 #'	randomizations=3, cores=1, iterations=2, prefix="test",
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
