@@ -64,9 +64,10 @@ betaErrorChecker <- function(single.iteration)
 	#that are not phylo measures
 	usedMetrics <- usedMetrics[usedMetrics != "richness" & usedMetrics!="total_abundance"]
 	
-	reversed <- c("Ist", "Pst", "Bst", "PIst")
+	reversed <- c("Ist", "Pst", "Bst", "PIst", "Ist_unpruned", "Pst_unpruned",
+		"Bst_unpruned", "PIst_unpruned")
 	
-	standard <- usedMetrics[usedMetrics != reversed]
+	standard <- usedMetrics[!(usedMetrics %in% reversed)]
 	
 	usedNulls <- names(single.iteration$randomized[[1]])
 
