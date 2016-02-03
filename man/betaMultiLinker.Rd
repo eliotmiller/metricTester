@@ -6,8 +6,8 @@
 \usage{
 betaMultiLinker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
-  no.quadrats, quadrat.length, concat.by, randomizations, cores, iterations,
-  prefix, simulations, nulls, metrics)
+  no.quadrats, quadrat.length, randomizations, cores, iterations, prefix,
+  simulations, nulls, metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}

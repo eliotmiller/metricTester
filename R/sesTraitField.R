@@ -45,7 +45,7 @@
 #' traits <- evolveTraits(tree)
 #'
 #' #calculate the distances betweeen species
-#' dists <- as.matrix(dist(traits[[2]], diag=T, upper=T))
+#' dists <- as.matrix(dist(traits[[2]], diag=TRUE, upper=TRUE))
 #'
 #' #simulate log-normal abundances
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1

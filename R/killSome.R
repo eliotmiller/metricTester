@@ -137,7 +137,7 @@ killSome <- function(tree, arena.output, max.distance, proportion.killed)
 	final.matrix[final.matrix==FALSE] <- NA
 	
 	#then identify who the most closely related individual is to every other individual
-	closest.table <- which(!is.na(final.matrix), arr.ind=T)
+	closest.table <- which(!is.na(final.matrix), arr.ind=TRUE)
 	
 	#subset this table to only those individuals that were in genetically clustered 
 	#geographic neighborhoods

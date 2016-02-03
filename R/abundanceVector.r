@@ -25,7 +25,7 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' abund <- abundanceVector(picante.cdm)
+#' abund <- abundanceVector(cdm)
 
 abundanceVector <- function(picante.cdm)
 {

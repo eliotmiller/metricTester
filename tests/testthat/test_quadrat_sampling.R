@@ -39,11 +39,11 @@ for(i in 1:dim(bounds$quadrat.bounds)[1])
 test_that("Quadrats are sampled and returned in appropriate format",
 {
 	#cdm should be in matrix format
-	expect_is(cdm$cdm, "matrix")
+	expect_is(cdm$picante.cdm, "matrix")
 	#quadrats without any species are cut, so just confirm there are at least some rows
 	#species that do not occur are still in cdm, so there should be fifty columns
-	expect_true(dim(cdm$cdm)[1] > 1)
-	expect_true(dim(cdm$cdm)[2] == 50)
+	expect_true(dim(cdm$picante.cdm)[1] > 1)
+	expect_true(dim(cdm$picante.cdm)[2] == 50)
 })
 
 test_that("Quadrats are non-overlapping",

@@ -2,27 +2,19 @@
 % Please edit documentation in R/betaErrorChecker.R
 \name{betaErrorChecker}
 \alias{betaErrorChecker}
-\title{Wrapper for summarizing randomizations and testing significance of observed metrics}
+\title{Wrapper for summarizing error rates of beta metric randomizations}
 \usage{
 betaErrorChecker(single.iteration)
 }
 \arguments{
-\item{observed}{Data frame of observed metric scores, such as from observedMetrics()}
-
-\item{reduced.randomizations}{List of random, reduced results, such as those from
-reduceRandomizations()}
-
-\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
-
-\item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
+\item{single.iteration}{}
 }
 \value{
 A list of lists of data frames.
 }
 \description{
-Given a data frame of observed metrics and a list of randomizations based on different
-null models, returns a list of data frames summarizing the significance of observed
+Given the results of a single iteration of the linker function, returns a list of data
+frames summarizing the type I and II error rates of
 metrics both at the single quadrat and the entire arena level.
 }
 \details{

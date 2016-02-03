@@ -1,15 +1,10 @@
-#' Wrapper for summarizing randomizations and testing significance of observed metrics
+#' Wrapper for summarizing error rates of beta metric randomizations
 #'
-#' Given a data frame of observed metrics and a list of randomizations based on different
-#' null models, returns a list of data frames summarizing the significance of observed 
+#' Given the results of a single iteration of the linker function, returns a list of data
+#' frames summarizing the type I and II error rates of 
 #' metrics both at the single quadrat and the entire arena level.
 #'
-#' @param observed Data frame of observed metric scores, such as from observedMetrics()
-#' @param reduced.randomizations List of random, reduced results, such as those from
-#' reduceRandomizations()
-#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
+#' @param single.iteration
 #' 
 #' @details DOCUMENTATION FOR THIS FUNCTION NEEDS TO BE UPDATED. THE FUNCTION IS IN PROGRESS
 #'
@@ -55,10 +50,23 @@
 
 betaErrorChecker <- function(single.iteration)
 {
-	#this is a pretty lame way to define what metricsNnulls got used, but it is a hack
-	#for now. if we add other beta metrics they likely will need a new significance
-	#test and we should re-write this whole function
-	usedMetrics <- c("Ist", "Pst", "Bst", "PIst")
+	#this is a cheap hack to figure out which metrics (and below which nulls) got used.
+	#we need to ensure that all metrics used have an expectation. for instance, it
+	#is possible to define your own beta metric and use that, but it would not have an
+	#expectation here. Metrics like Ist signify clustering when the observed value is
+	#greater than the randomized values, while metrics like MPD signify overdispersion
+	#when the observed value is greater than the randomized values. to be able to use the
+	#same greater or less than code below, flip the expectations for Ist and any other
+	#metrics where greater than the randomized values equals filtering.
+	
+	usedMetrics <- names(single.iteration$observed[[1]])
+	#pull out richness, total abundance, and any other functions (like skewness)
+	#that are not phylo measures
+	usedMetrics <- usedMetrics[usedMetrics != "richness" & usedMetrics!="total_abundance"]
+	
+	reversed <- c("Ist", "Pst", "Bst", "PIst")
+	
+	standard <- usedMetrics[usedMetrics != reversed]
 	
 	usedNulls <- names(single.iteration$randomized[[1]])
 
@@ -102,7 +110,7 @@ betaErrorChecker <- function(single.iteration)
 					}
 					rownames(resultMatrix) <- "typeI"
 				}
-				else if(names(single.iteration$observed)[i]=="filtering")
+				else if(names(single.iteration$observed)[i]=="filtering" & usedMetrics[k] %in% reversed)
 				{
 					if(single.iteration$observed[[i]][usedMetrics[k]] <
 						quantile(single.iteration$randomized[[i]][[usedNulls[j]]][,usedMetrics[k]], 0.95))
@@ -115,10 +123,36 @@ betaErrorChecker <- function(single.iteration)
 					}
 					rownames(resultMatrix) <- "typeII"
 				}
-				else if(names(single.iteration$observed)[i]=="competition")
+				else if(names(single.iteration$observed)[i]=="filtering" & usedMetrics[k] %in% standard)
 				{
 					if(single.iteration$observed[[i]][usedMetrics[k]] >
 						quantile(single.iteration$randomized[[i]][[usedNulls[j]]][,usedMetrics[k]], 0.05))
+					{
+						resultMatrix[1, k] <- 1
+					}
+					else
+					{
+						resultMatrix[1, k] <- 0
+					}
+					rownames(resultMatrix) <- "typeII"
+				}
+				else if(names(single.iteration$observed)[i]=="competition" & usedMetrics[k] %in% reversed)
+				{
+					if(single.iteration$observed[[i]][usedMetrics[k]] >
+						quantile(single.iteration$randomized[[i]][[usedNulls[j]]][,usedMetrics[k]], 0.05))
+					{
+						resultMatrix[1, k] <- 1
+					}
+					else
+					{
+						resultMatrix[1, k] <- 0
+					}
+					rownames(resultMatrix) <- "typeII"
+				}
+				else if(names(single.iteration$observed)[i]=="competition" & usedMetrics[k] %in% standard)
+				{
+					if(single.iteration$observed[[i]][usedMetrics[k]] <
+						quantile(single.iteration$randomized[[i]][[usedNulls[j]]][,usedMetrics[k]], 0.95))
 					{
 						resultMatrix[1, k] <- 1
 					}

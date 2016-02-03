@@ -59,24 +59,23 @@
 
 betaMultiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, iterations, prefix,
+	quadrat.length, randomizations, cores, iterations, prefix,
 	simulations, nulls, metrics)
 {
-	#create a simple file name, specify whether concatenating by quadrat or richness
+	#create a simple file name
 	for(i in 1:iterations)
 	{
 		if(is.null(prefix))
 		{
-			filename <- paste("iteration", i, "by_", concat.by, ".RDS", sep="")
+			filename <- paste("iteration", i, ".RDS", sep="")
 		}
 		else
 		{
-			filename <- paste(prefix, "_", "iteration", i, "by_", concat.by,
-				".RDS", sep="")
+			filename <- paste(prefix, "_", "iteration", i, ".RDS", sep="")
 		}
 		temp <- betaLinker(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 
-			no.quadrats, quadrat.length, concat.by, randomizations, cores,
+			no.quadrats, quadrat.length, randomizations, cores,
 			simulations, nulls, metrics)
 		saveRDS(temp, file=filename)
 	}

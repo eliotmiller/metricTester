@@ -30,10 +30,16 @@ defineBetaMetrics <- function()
 	"Pst"=my_Pst,
 	"Bst"=my_Bst,
 	"PIst"=my_PIst,
+	"Ist_unpruned"=my_Ist_unpruned,
+	"Pst_unpruned"=my_Pst_unpruned,
+	"Bst_unpruned"=my_Bst_unpruned,
+	"PIst_unpruned"=my_PIst_unpruned,
 	"meanNAW_MPD"=mean_naw_mpd,
 	"meanInter_MPD"=mean_inter_mpd,
 	"meanIntra_MPD"=mean_intra_mpd,
-	"meanComplete_MPD"=mean_complete_mpd
+	"meanComplete_MPD"=mean_complete_mpd,
+	"meanNAW_MNTD"=mean_naw_mntd,
+	"meanAW_MNTD"=mean_aw_mntd
 	)
 }
 
@@ -58,6 +64,22 @@ my_Bst <- function(metrics.input)
 my_PIst <- function(metrics.input)
 	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree)$PIst
 
+my_Ist_unpruned <- function(metrics.input)
+	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
+	prune=FALSE)$Ist
+
+my_Pst_unpruned <- function(metrics.input)
+	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
+	prune=FALSE)$Pst
+
+my_Bst_unpruned <- function(metrics.input)
+	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
+	prune=FALSE)$Bst
+
+my_PIst_unpruned <- function(metrics.input)
+	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
+	prune=FALSE)$PIst
+
 mean_naw_mpd <- function(metrics.input)
 	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,
 	abundance.weighted=FALSE))
@@ -73,3 +95,11 @@ mean_intra_mpd <- function(metrics.input)
 mean_complete_mpd <- function(metrics.input)
 	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,
 	abundance.weighted="complete"))
+
+mean_naw_mntd <- function(metrics.input)
+	mean(mntd(metrics.input$picante.cdm, metrics.input$dists,
+	abundance.weighted=FALSE))
+
+mean_aw_mntd <- function(metrics.input)
+	mean(mntd(metrics.input$picante.cdm, metrics.input$dists,
+	abundance.weighted=TRUE))
