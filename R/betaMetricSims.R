@@ -1,7 +1,7 @@
-#' Calculate alpha metrics under specified tree and community parameters
+#' Calculate beta metrics under specified tree and community parameters
 #'
 #' Takes a specified set of tree size, shape, community richness and abundance parameters,
-#' and calculates the alpha-level phylogenetic community structure metrics.
+#' and calculates the beta-level phylogenetic community structure metrics.
 #'
 #' @param tree.size Number of species desired in the total tree.
 #' @param richness.vector Number of species to be placed in each quadrat. See details.
@@ -10,6 +10,11 @@
 #' events closer to the tips. See details for particularly low delta values.
 #' @param abundances Vector of abundances, e.g. a repeated series of 1s for a presence/absence
 #' community data matrix, a log-normal distribution, etc. See examples.
+#' @param beta.iterations Because the type of beta-level phylogenetic community structure
+#' metrics used here return a single value per community data matrix, it is not possible
+#' to look for inter-metric correlations with only a single matrix and tree. To deal with
+#' this, the same tree can be used with different community data matrices. This argument
+#' specifies the number of matrices to be used per tree.
 #' 
 #' @details The richness.vector (number of species to be placed into each quadrat) is
 #' flexible. For instance, one might want give it 10:19, which would create 10 quadrats
@@ -31,10 +36,10 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' test <- alphaMetricSims(tree.size=50, richness.vector=30:40, delta=1,
-#'	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1) 
+#' test <- betaMetricSims(tree.size=50, richness.vector=30:40, delta=1,
+#'	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, beta.iterations=10)
 
-alphaMetricSims <- function(tree.size, richness.vector, delta, abundances)
+betaMetricSims <- function(tree.size, richness.vector, delta, abundances, beta.iterations)
 {
 	#simulate tree with birth-death process
 	tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=tree.size)
@@ -53,12 +58,19 @@ alphaMetricSims <- function(tree.size, richness.vector, delta, abundances)
 		ok <- is.ultrametric(newTree)
 	}
 
-	cdm <- simulateComm(newTree, richness.vector=richness.vector,
-		abundances=abundances)
-
-	prepped <- prepData(newTree, cdm)
+	#results <- list()
+	results <- matrix(nrow=beta.iterations, ncol=length(defineBetaMetrics()))
 	
-	results <- calcMetrics(prepped)
+	for(i in 1:beta.iterations)
+	{
+		cdm <- simulateComm(newTree, richness.vector=richness.vector,
+			abundances=abundances)
+		prepped <- prepData(newTree, cdm)
+		results[i,] <- as.matrix(calcBetaMetrics(prepped)[1,])
+	}
+	
+	colnames(results) <- names(defineBetaMetrics())
+	rownames(results) <- paste("beta.iteration", 1:beta.iterations, sep="")
 	
 	results
 }

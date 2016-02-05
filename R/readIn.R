@@ -4,8 +4,7 @@
 #' single list. This list is then summarized with additional functions.
 #'
 #' @param working.directory Optional character string specifying the working directory.
-#' If missing, the current working directory will be used. This argument seems to be
-#' broken and needs attention. Setting the wd manually does work still.
+#' If missing, the current working directory will be used. 
 #' 
 #' @details This function reads all .RDS files from the working directory (or another
 #' specified directory) into a single list.
