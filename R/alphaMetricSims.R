@@ -8,8 +8,8 @@
 #' @param delta A value for the delta transformation (Pagel 1999). Values greater than 1
 #' push the branching events towards the root, while values less than 1 push the branching
 #' events closer to the tips. See details for particularly low delta values.
-#' @param abundances Vector of abundances, e.g. a repeated series of 1s for a presence/absence
-#' community data matrix, a log-normal distribution, etc. See examples.
+#' @param abundances Vector of abundances, e.g. a repeated series of 1s for a
+#' presence/absence community data matrix, a log-normal distribution, etc. See examples.
 #' 
 #' @details The richness.vector (number of species to be placed into each quadrat) is
 #' flexible. For instance, one might want give it 10:19, which would create 10 quadrats

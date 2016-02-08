@@ -15,8 +15,8 @@ alphaMetricSims(tree.size, richness.vector, delta, abundances)
 push the branching events towards the root, while values less than 1 push the branching
 events closer to the tips. See details for particularly low delta values.}
 
-\item{abundances}{Vector of abundances, e.g. a repeated series of 1s for a presence/absence
-community data matrix, a log-normal distribution, etc. See examples.}
+\item{abundances}{Vector of abundances, e.g. a repeated series of 1s for a
+presence/absence community data matrix, a log-normal distribution, etc. See examples.}
 }
 \value{
 A data frame of calculated alpha metrics, and the associated species richness

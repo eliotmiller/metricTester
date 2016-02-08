@@ -72,5 +72,7 @@ betaMetricSims <- function(tree.size, richness.vector, delta, abundances, beta.i
 	colnames(results) <- names(defineBetaMetrics())
 	rownames(results) <- paste("beta.iteration", 1:beta.iterations, sep="")
 	
+	results <- as.data.frame(results)
+	
 	results
 }
