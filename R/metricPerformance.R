@@ -128,14 +128,18 @@ metricPerformance <- function(summarized.results, simulations="all", nulls="all"
 		random$typeIIrate <- NA
 
 		filtering$typeIrate <- 100 * filtering$overdispersed/filtering$total.quadrats
+		#notice this important revision. the typeII rate is not simply the number of
+		#quadrats that were not clustered. if the quadrat was overdispersed than it
+		#already counted as a typeI error. revising here and below to incorporate that 
 		filtering$typeIIrate <- 100 * 
-			(filtering$total.quadrats - filtering$clustered)/filtering$total.quadrats
+			(filtering$total.quadrats - filtering$clustered -
+			filtering$overdispersed)/filtering$total.quadrats
 
 		competition$typeIrate <- 100 *
 			competition$clustered/competition$total.quadrats
 		competition$typeIIrate <- 100 * 
 			(competition$total.quadrats -
-			competition$overdispersed)/competition$total.quadrats
+			competition$overdispersed - competition$clustered)/competition$total.quadrats
 
 		#redefine summarized.results
 		summarized.results <- rbind(random, filtering, competition)
