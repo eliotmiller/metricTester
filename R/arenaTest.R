@@ -1,23 +1,23 @@
 #' Calculate SES of each observed metric + null model combination
 #'
 #' Given a table of results, where means, SDs, and CIs are bound to the observed scores at
-#' the corresponding richness or quadrat, this function calculates standardized effect
+#' the corresponding richness or plot, this function calculates standardized effect
 #' scores for each observed metric + null model combination. This is intended to be used
 #' to test whether observed values deviate beyond expectations based on the distribution
 #' of SES per arena.
 #'
 #' @param results.table Data frame of observed metrics with expected mean, SD and CI bound
 #' in. See example.
-#' @param concat.by Whether to concatenate results by richness, quadrat or both. If
-#' richness, observed scores are compared to all randomized scores where the quadrat had
-#' the corresponding richness. If quadrat, observed scores (e.g. those from quadrat 1)
-#' are compared to all randomized quadrat 1 scores. If both, both are run and each is
+#' @param concat.by Whether to concatenate results by richness, plot or both. If
+#' richness, observed scores are compared to all randomized scores where the plot had
+#' the corresponding richness. If plot, observed scores (e.g. those from plot 1)
+#' are compared to all randomized plot 1 scores. If both, both are run and each is
 #' saved as a separate data frame in a single list.
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
 #' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details Given a table of results, where means, SDs, and CIs are bound to the observed
-#' scores at the corresponding richness or quadrat, this function calculates standardized
+#' scores at the corresponding richness or plot, this function calculates standardized
 #' effect scores for each observed metric + null model combination. 
 #'
 #' @return A data frame of standardized effect scores.
@@ -94,11 +94,11 @@ arenaTest <- function(results.table, concat.by, metrics)
 		names(ses) <- metricNames
 		ses <- data.frame(richness=results.table$richness, ses)
 	}
-	else if(concat.by=="quadrat")
+	else if(concat.by=="plot")
 	{
 		ses <- as.data.frame(ses)
 		names(ses) <- metricNames
-		ses <- data.frame(quadrat=results.table$quadrat, ses)
+		ses <- data.frame(plot=results.table$plot, ses)
 	}
 	ses
 }

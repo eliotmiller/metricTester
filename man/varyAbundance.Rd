@@ -13,7 +13,7 @@ metrics. Default is TRUE. Set to FALSE for beta metrics.}
 
 \item{tree.size}{Number of species desired in the total tree.}
 
-\item{richness.vector}{Number of species to be placed in each quadrat. See details.}
+\item{richness.vector}{Number of species to be placed in each plot. See details.}
 
 \item{delta}{A value for the delta transformation (Pagel 1999). Values greater than 1
 push the branching events towards the root, while values less than 1 push the branching
@@ -46,10 +46,10 @@ Takes a specified set of tree size, shape, and community richness, and takes a l
 multiple vectors of abundances, and calculates the community structure metrics.
 }
 \details{
-The richness.vector (number of species to be placed into each quadrat) is
-flexible. For instance, one might want give it 10:19, which would create 10 quadrats
+The richness.vector (number of species to be placed into each plot) is
+flexible. For instance, one might want give it 10:19, which would create 10 plots
 of species richness 10, 11, ... 19. But one could also provide rep(10, 10) to create 10
-quadrats of 10 species each. If given a small value, e.g. 0.1, the delta parameter
+plots of 10 species each. If given a small value, e.g. 0.1, the delta parameter
 (tree shape) can occasionally result in oddly formatted trees that would cause errors.
 To deal with this, there is an internal check that will recreate a new tree and
 re-scale it with the desired delta. This has not been tested at delta < 0.1, and is
@@ -60,8 +60,8 @@ indefinite loop at delta values even lower than 0.1
 temp <- list(rep(2,5000), (round(rnorm(5000, 50, 15)) + 1),
 	(round(rlnorm(5000, meanlog=2, sdlog=1)) + 1))
 
-system.time(vAbundances <- varyAbundance(alpha=T, tree.size=50, richness.vector=40:45,
-	delta=1, multi.abundances=temp, iterations=2, cores=1))
+system.time(vAbundances <- varyAbundance(alpha=TRUE, tree.size=50,
+	richness.vector=40:45, delta=1, multi.abundances=temp, iterations=2, cores=1))
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

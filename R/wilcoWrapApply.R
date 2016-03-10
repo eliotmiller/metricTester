@@ -27,8 +27,8 @@
 
 wilcoWrapApply <- function(dataframe, alternative)
 {
-	#exclude "richness" and "quadrat" columns
-	exclude <- c("richness", "quadrat")
+	#exclude "richness" and "plot" columns
+	exclude <- c("richness", "plot")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
 
 	#apply wilcoWrap over data frame of metric SES scores for a given null and spatial sim

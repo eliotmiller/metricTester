@@ -10,7 +10,7 @@ sesIndiv(raw.results, concat.by)
 \item{raw.results}{A list of lists of lists of dataframes; the results of a call to
 readIn.}
 
-\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+\item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
 }
 \value{
 A data frame summarizing the total number of runs per spatial simulation, null,

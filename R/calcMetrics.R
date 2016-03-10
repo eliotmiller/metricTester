@@ -36,7 +36,7 @@
 #' results <- calcMetrics(prepped)
 #'
 #' #an example of how to define ones own metrics for use in the metricTester framework
-#' #this "metric" simply calculates the richness of each quadrat in the CDM
+#' #this "metric" simply calculates the richness of each plot in the CDM
 #' exampleMetric <- function(metrics.input)
 #' {
 #'	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)
@@ -66,8 +66,8 @@ calcMetrics <- function(metrics.input, metrics)
 	#convert the list to a data frame
 	results <- as.data.frame(tempResults)
 	
-	#add quadrat names to data frame
-	results <- data.frame(quadrat=row.names(metrics.input$picante.cdm), results)
+	#add plot names to data frame
+	results <- data.frame(plot=row.names(metrics.input$picante.cdm), results)
 	
 	#get rid of row names
 	row.names(results) <- NULL

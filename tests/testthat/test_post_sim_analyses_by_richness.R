@@ -14,19 +14,19 @@ ses.null1[,4] <- rnorm(n=10, mean=-1000, sd=1)
 
 names(ses.null1) <- c("richness","metric1","metric2","metric3")
 
-quadrat.null1 <- ses.null1
+plot.null1 <- ses.null1
 
-quadrat.null1[,2] <- sample(c(0,1,2), 10, replace=TRUE)
-quadrat.null1[,3] <- sample(c(0,1,2), 10, replace=TRUE)
-quadrat.null1[,4] <- sample(c(0,1,2), 10, replace=TRUE)
+plot.null1[,2] <- sample(c(0,1,2), 10, replace=TRUE)
+plot.null1[,3] <- sample(c(0,1,2), 10, replace=TRUE)
+plot.null1[,4] <- sample(c(0,1,2), 10, replace=TRUE)
 
 ses.null2 <- ses.null1
-quadrat.null2 <- quadrat.null1
+plot.null2 <- plot.null1
 
 ses1 <- list("null1"=ses.null1, "null2"=ses.null2)
-quadrat1 <- list("null1"=quadrat.null1, "null2"=quadrat.null2)
+plot1 <- list("null1"=plot.null1, "null2"=plot.null2)
 
-random1 <- list("ses"=ses1, "quadrat"=quadrat1)
+random1 <- list("ses"=ses1, "plot"=plot1)
 
 fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=random1)
 

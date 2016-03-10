@@ -24,7 +24,7 @@ ecoPD.cdm object will still employ the phylogenetic distance matrix.}
 Optional, will be generated from the input CDM if not provided.}
 
 \item{distances.among}{A symmetric distance matrix, summarizing the distances among all
-quadrats from the cdm. Optional, only used by some null models.}
+plots from the cdm. Optional, only used by some null models.}
 
 \item{randomizations}{The number of times the input CDM should be randomized and the
 metrics calculated across it.}
@@ -38,7 +38,7 @@ will likely be used to run a subset of the defined metrics.}
 \item{nulls}{Optional list of named null model functions to use. If invoked, this
 option will likely be used to run a subset of the defined null models.}
 
-\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
+\item{concat.by}{Whether to concatenate the randomizations by richness, plot or both}
 
 \item{output.raw}{Default is FALSE. Set to TRUE if raw randomized values are preferred
 (as opposed to summarized mean, SD, CI, etc).}
@@ -116,7 +116,7 @@ test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
 	concat.by="both", output.raw=FALSE)
 
 #an example of how to explore behavior of a new metric in the metricTester framework
-#this "metric" simply calculates the richness of each quadrat in the CDM
+#this "metric" simply calculates the richness of each plot in the CDM
 exampleMetric <- function(metrics.input)
 {
 	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)

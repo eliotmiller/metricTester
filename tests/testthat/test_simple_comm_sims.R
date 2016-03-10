@@ -23,7 +23,7 @@ test_that("cdm properly filled",
 
 test_that("row and column names are correct",
 {
-	expect_true(sum(row.names(cdm) == paste("quadrat",1:dim(cdm)[1], sep=""))==16)
+	expect_true(sum(row.names(cdm) == paste("plot",1:dim(cdm)[1], sep=""))==16)
 	expect_true(sum(names(cdm) == tree$tip.label)==50)
 })
 

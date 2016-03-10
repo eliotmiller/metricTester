@@ -6,7 +6,7 @@
 #' @param alpha Whether to calculate alpha or beta phylogenetic community structure
 #' metrics. Default is TRUE. Set to FALSE for beta metrics.
 #' @param tree.size Number of species desired in the total tree.
-#' @param richness.vector Number of species to be placed in each quadrat. See details.
+#' @param richness.vector Number of species to be placed in each plot. See details.
 #' @param deltas List of delta values for the delta transformation (Pagel 1999). Can be
 #' provided as a vector, and will be coerced to a list. Values greater than 1
 #' push the branching events towards the root, while values less than 1 push the branching
@@ -43,7 +43,7 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' system.time(vShape <- varyTreeShape(alpha=T, tree.size=50, richness.vector=40:50,
+#' system.time(vShape <- varyTreeShape(alpha=TRUE, tree.size=50, richness.vector=40:50,
 #'	deltas=c(0.1,10),
 #'	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 

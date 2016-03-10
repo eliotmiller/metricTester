@@ -1,15 +1,15 @@
-#' Plot simulated quadrats in arena
+#' Plot simulated plots in arena
 #'
-#' Given a matrix of quadrat bounds, plots the quadrats in an already plotted,
+#' Given a matrix of plot bounds, plots the plots in an already plotted,
 #' simulated arena.
 #'
-#' @param quadrat.bounds Matrix of quadrat bounds
+#' @param plot.bounds Matrix of plot bounds
 #' 
-#' @details Plots quadrats as defined by the supplied matrix, e.g. a call to
-#' quadratPlacer. An active plot with the simulated arena needs to already be open, 
+#' @details Plots plots as defined by the supplied matrix, e.g. a call to
+#' plotPlacer. An active plot with the simulated arena needs to already be open, 
 #' see example.
 #'
-#' @return Plotted quadrats
+#' @return Plotted plots
 #'
 #' @export
 #'
@@ -40,17 +40,17 @@
 #' plot(positions$arena$X, positions$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
 #' col=cols[positions$arena$individuals])
 #'
-#' bounds <- quadratPlacer(no.quadrats=10, arena.length=300,
-#'	quadrat.length=50)$quadrat.bounds
+#' bounds <- plotPlacer(no.plots=10, arena.length=300,
+#'	plot.length=50)$plot.bounds
 #'
-#' quadratPlotter(bounds)
+#' plotPlotter(bounds)
 
-quadratPlotter <- function(quadrat.bounds)
+plotPlotter <- function(plot.bounds)
 {
-	for(i in 1:dim(quadrat.bounds)[1])
+	for(i in 1:dim(plot.bounds)[1])
 	{
-		polygon(c(quadrat.bounds[i,1],quadrat.bounds[i,2],quadrat.bounds[i,2],
-		quadrat.bounds[i,1]),c(quadrat.bounds[i,3],quadrat.bounds[i,3],
-		quadrat.bounds[i,4],quadrat.bounds[i,4]))
+		polygon(c(plot.bounds[i,1],plot.bounds[i,2],plot.bounds[i,2],
+		plot.bounds[i,1]),c(plot.bounds[i,3],plot.bounds[i,3],
+		plot.bounds[i,4],plot.bounds[i,4]))
 	}
 }

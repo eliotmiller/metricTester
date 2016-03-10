@@ -1,20 +1,20 @@
-#' Overall per simulation-null-metric quadrat test
+#' Overall per simulation-null-metric plot test
 #'
 #' This function provides one of many ways of summarizing and considering simulation
 #' results.
 #'
 #' @param simulation.list A summarized results list such as one output from
 #' reduceResults(). See examples.
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
+#' @param concat.by Whether randomizations were concatenated by richness, plot or both.
 #'
 #' @details This function provides one way of summarizing and considering simulation
 #' results. It takes as input a vector of 0s, 1s and 2s (corresponding to within, less,
-#' and greater than the 95\% CIs, respectively) for all quadrats
-#' from a given simulation-null-metric combination, and determines how many quadrats
+#' and greater than the 95\% CIs, respectively) for all plots
+#' from a given simulation-null-metric combination, and determines how many plots
 #' overall deviated beyond expectations. A number of utility functions used for that goal
 #' are also defined but not exported in this function. 
 #'
-#' @return A data frame summarizing the total number of quadrats tested and how many of
+#' @return A data frame summarizing the total number of plots tested and how many of
 #' these deviated above (significantly overdispersed) or below (significantly clustered)
 #' the 95\% CI for each simulation, null, metric combination. 
 #'
@@ -28,11 +28,11 @@
 #' #not run
 #' #results <- readIn()
 #' #summ <- reduceResults(results, "both")
-#' #test <- quadratOverall(summ$quadrat, "both")
+#' #test <- plotOverall(summ$plot, "both")
 
-quadratOverall <- function(simulation.list, concat.by)
+plotOverall <- function(simulation.list, concat.by)
 {
-	if(concat.by=="richness" | concat.by=="quadrat")
+	if(concat.by=="richness" | concat.by=="plot")
 	{
 		#lapply all ones, twos and length LApply functions over the entire simulation list
 		tempOnes <- lapply(simulation.list, onesLApply)
@@ -55,7 +55,7 @@ quadratOverall <- function(simulation.list, concat.by)
 		output <- cbind(betterNames, temp)
 
 		names(output) <- c("simulation", "null.model", "metric", "concat.by",
-			"clustered", "overdispersed", "total.quadrats")
+			"clustered", "overdispersed", "total.plots")
 	
 		row.names(output) <- NULL
 	}
@@ -78,7 +78,7 @@ quadratOverall <- function(simulation.list, concat.by)
 		ones <- unlist(ones)
 		twos <- unlist(twos)
 		lengths <- unlist(lengths)
-		#now come up with better names, like you did when concat was richness or quadrat
+		#now come up with better names, like you did when concat was richness or plot
 		#however, the by.richness or q will mess things up, so will need to delete those
 		betterNames <- suppressWarnings(data.frame(Reduce(rbind, 
 			strsplit(names(ones), split="[.]"))))
@@ -87,13 +87,13 @@ quadratOverall <- function(simulation.list, concat.by)
 		output <- data.frame(betterNames, ones, twos, lengths)
 
 		names(output) <- c("simulation", "null.model", "concat.by", "metric",
-			"clustered", "overdispersed", "total.quadrats")
+			"clustered", "overdispersed", "total.plots")
 		row.names(output) <- NULL
 	}
 
 	else
 	{
-		stop("concat.by must equal either both, richness, or quadrat")
+		stop("concat.by must equal either both, richness, or plot")
 	}
 	
 	output
@@ -102,8 +102,8 @@ quadratOverall <- function(simulation.list, concat.by)
 lengthApply <- function(dataframe)
 {
 	#this utility function will tell you how many of each simulation got run
-	#exclude "richness" and "quadrat" columns
-	exclude <- c("richness", "quadrat")
+	#exclude "richness" and "plot" columns
+	exclude <- c("richness", "plot")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
 
 	#apply length
@@ -141,8 +141,8 @@ lengthTwos <- function(input.vector)
 
 onesApply <- function(dataframe)
 {
-	#exclude "richness" and "quadrat" columns
-	exclude <- c("richness", "quadrat")
+	#exclude "richness" and "plot" columns
+	exclude <- c("richness", "plot")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
 
 	#apply tWrap over a data frame of metric SES scores for a given null and spatial sim
@@ -166,8 +166,8 @@ onesLApply <- function(null.list)
 
 twosApply <- function(dataframe)
 {
-	#exclude "richness" and "quadrat" columns
-	exclude <- c("richness", "quadrat")
+	#exclude "richness" and "plot" columns
+	exclude <- c("richness", "plot")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
 
 	#apply lengthTwos over a df of metric SES scores for a given null and spatial sim

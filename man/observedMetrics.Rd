@@ -18,7 +18,7 @@ defined in defineMetrics()}
 }
 \value{
 A data frame with the species richness and calculated phylogenetic community
-structure metrics for all input quadrats from the CDM.
+structure metrics for all input plots from the CDM.
 }
 \description{
 Given a cdm and phylogeny, this function preps the data and calculates metrics of the

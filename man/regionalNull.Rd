@@ -8,7 +8,7 @@ regionalNull(picante.cdm, tree, regional.abundance)
 }
 \arguments{
 \item{picante.cdm}{Picante-style community data matrix with
-communities/quadrats/plots/etc as rows and species as columns}
+communities/plots/plots/etc as rows and species as columns}
 
 \item{tree}{Ape-style phylogeny}
 
@@ -17,7 +17,7 @@ the number of times necessary to accomodate its abundance in the regional specie
 }
 \value{
 A matrix with all species in the input tree in phylogenetic order, and the same
-number of randomized quadrats as used in the input community data matrix
+number of randomized plots as used in the input community data matrix
 }
 \description{
 Null model that simulates community assembly where species probabilities of occurrence
@@ -27,14 +27,14 @@ are proportional to their regional abundance.
 Although nowhere near as fast as, e.g. randomizeMatrix, this function still
 runs fairly quickly (no for or while loops). It works by drawing the total number of
 individuals observed in the input plot from the regional abundance vector. Thus, while
-a randomized quadrat will not necessarily have the same number of species as the
-observed quadrat, over many iterations it will likely be sampled. We can then
+a randomized plot will not necessarily have the same number of species as the
+observed plot, over many iterations it will likely be sampled. We can then
 concatenate the results by richness at the end, which will only compare observed values
-to random quadrats of the same richness. As an example, an observed quadrat might have
+to random plots of the same richness. As an example, an observed plot might have
 two individuals of speciesA and two of speciesB. If the regional abundance vector is
 c("spA","spA","spA","spA","spB","spB","spB","spC"), and we draw four individuals, it
 would be possible to draw 1, 2, or 3 species, but in general, two species would be seen
-in the randomized quadrats.
+in the randomized plots.
 }
 \examples{
 tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
@@ -46,10 +46,10 @@ prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
 
 positions <- competitionArena(prepped)
 
-boundResults <- quadratPlacer(no.quadrats=15, arena.length=300, quadrat.length=30)
+boundResults <- plotPlacer(no.plots=15, arena.length=300, plot.length=30)
 
 #return a CDM in picante format
-cdmTemp <- quadratContents(positions$arena, boundResults)
+cdmTemp <- plotContents(positions$arena, boundResults)
 
 test <- regionalNull(cdmTemp$picante.cdm, tree,
 	regional.abundance=abundanceVector(cdmTemp$picante.cdm))

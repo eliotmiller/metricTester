@@ -13,7 +13,7 @@
 #' @details A simple wrapper function to quickly prep data and calculate observed metrics.
 #'
 #' @return A data frame with the species richness, total abundance from the CDM, and
-#' calculated phylogenetic community structure beta metrics for all input quadrats from 
+#' calculated phylogenetic community structure beta metrics for all input plots from 
 #' the CDM.
 #'
 #' @export

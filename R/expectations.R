@@ -13,7 +13,7 @@
 #' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 #' Optional, will be generated from the input CDM if not provided.
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
-#' quadrats from the cdm. Optional, only used by some null models.
+#' plots from the cdm. Optional, only used by some null models.
 #' @param randomizations The number of times the input CDM should be randomized and the
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
@@ -22,7 +22,7 @@
 #' will likely be used to run a subset of the defined metrics.
 #' @param nulls Optional list of named null model functions to use. If invoked, this 
 #' option will likely be used to run a subset of the defined null models.
-#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
+#' @param concat.by Whether to concatenate the randomizations by richness, plot or both
 #' @param output.raw Default is FALSE. Set to TRUE if raw randomized values are preferred
 #' (as opposed to summarized mean, SD, CI, etc).
 #'
@@ -102,7 +102,7 @@
 #'	concat.by="both", output.raw=FALSE)
 #'
 #' #an example of how to explore behavior of a new metric in the metricTester framework
-#' #this "metric" simply calculates the richness of each quadrat in the CDM
+#' #this "metric" simply calculates the richness of each plot in the CDM
 #' exampleMetric <- function(metrics.input)
 #' {
 #'	output <- apply(metrics.input$picante.cdm, 1, lengthNonZeros)

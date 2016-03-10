@@ -4,17 +4,17 @@
 #' and calculates the alpha-level phylogenetic community structure metrics.
 #'
 #' @param tree.size Number of species desired in the total tree.
-#' @param richness.vector Number of species to be placed in each quadrat. See details.
+#' @param richness.vector Number of species to be placed in each plot. See details.
 #' @param delta A value for the delta transformation (Pagel 1999). Values greater than 1
 #' push the branching events towards the root, while values less than 1 push the branching
 #' events closer to the tips. See details for particularly low delta values.
 #' @param abundances Vector of abundances, e.g. a repeated series of 1s for a
 #' presence/absence community data matrix, a log-normal distribution, etc. See examples.
 #' 
-#' @details The richness.vector (number of species to be placed into each quadrat) is
-#' flexible. For instance, one might want give it 10:19, which would create 10 quadrats
+#' @details The richness.vector (number of species to be placed into each plot) is
+#' flexible. For instance, one might want give it 10:19, which would create 10 plots
 #' of species richness 10, 11, ... 19. But one could also provide rep(10, 10) to create 10
-#' quadrats of 10 species each. If given a small value, e.g. 0.1, the delta parameter
+#' plots of 10 species each. If given a small value, e.g. 0.1, the delta parameter
 #' (tree shape) can occasionally result in oddly formatted trees that would cause errors.
 #' To deal with this, there is an internal check that will recreate a new tree and
 #' re-scale it with the desired delta. This has not been tested at delta < 0.1, and is
@@ -22,7 +22,7 @@
 #' indefinite loop at delta values even lower than 0.1
 #'
 #' @return A data frame of calculated alpha metrics, and the associated species richness
-#' of each quadrat.
+#' of each plot.
 #'
 #' @export
 #'

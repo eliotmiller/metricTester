@@ -1,20 +1,20 @@
 #' Summary of results from a single iteration
 #'
-#' Use Wilcoxon signed rank test to determine whether quadrats from a SINGLE iteration 
+#' Use Wilcoxon signed rank test to determine whether plots from a SINGLE iteration 
 #' differ from expectations
 #'
 #' @param single.iteration The results of a single iteration from multiLinker.
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
+#' @param concat.by Whether randomizations were concatenated by richness, plot or both.
 #'
 #' @details This function uses a Wilcoxon signed rank test to determine whether the
-#' quadrats from a spatial simulation/null/metric from a SINGLE iteration differ from
+#' plots from a spatial simulation/null/metric from a SINGLE iteration differ from
 #' expectations. Assuming there are three spatial simulations named random, filtering, and
 #' competition, this function will use two.sided, lesser and greater Wilcoxon tests,
 #' respectively.
 #'
 #' @return A data frame summarizing the mean of standardized effect sizes and the
 #' significance of those devations from expectations for a given iteration (e.g. the 
-#' quadrats from a given arena). It does consider all spatial simulations, nulls and 
+#' plots from a given arena). It does consider all spatial simulations, nulls and 
 #' metrics from that iteration. This test works across a single iteration, and will
 #' generally not be used by itself; it is called by sesIndiv.
 #'
@@ -31,9 +31,9 @@
 
 sesSingle <- function(single.iteration, concat.by)
 {
-	if(!(concat.by %in% c("both","quadrat","richness")))
+	if(!(concat.by %in% c("both","plot","richness")))
 	{
-		stop("concat.by must equal either both, richness, or quadrat")
+		stop("concat.by must equal either both, richness, or plot")
 	}
 
 	#identify any null model/spatial sim combos that failed. 
@@ -47,7 +47,7 @@ sesSingle <- function(single.iteration, concat.by)
 		{
 			sim <- problems[i,"simulation"]
 			null <- problems[i,"null"]
-			if(concat.by=="richness" | concat.by=="quadrat")
+			if(concat.by=="richness" | concat.by=="plot")
 			{
 				single.iteration[[sim]]$ses[[null]] <- NULL
 			}
@@ -75,7 +75,7 @@ sesSingle <- function(single.iteration, concat.by)
 		toFeed <- rep("two.sided", 3)
 	}
 	
-	if(concat.by=="richness" | concat.by=="quadrat")
+	if(concat.by=="richness" | concat.by=="plot")
 	{
 		temp <- lapply(seq_along(toFeed), function(x)
 			wilcoWrapLApply(single.iteration[[x]]$ses, alternative=toFeed[x]))
@@ -114,7 +114,7 @@ sesSingle <- function(single.iteration, concat.by)
 			tempNull <- list()
 			for(j in 1:length(single.iteration[[1]]$ses))
 			{
-				#k refers either to concatenating by richness or by quadrat
+				#k refers either to concatenating by richness or by plot
 				for(k in 1:length(single.iteration[[1]]$ses[[1]]))
 				{
 					temp <- wilcoWrapLApply(single.iteration[[i]]$ses[[j]],

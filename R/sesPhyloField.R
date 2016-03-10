@@ -10,7 +10,7 @@
 #' @param randomizations The number of times the input CDM should be randomized and the
 #' metrics calculated across it.
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
-#' quadrats from the cdm. For use with the dispersal null.
+#' plots from the cdm. For use with the dispersal null.
 #' @param abundance.matters Default is TRUE. If FALSE, species are sampled from
 #' neighboring grid cells with equal probability. For use with the dispersal null.
 #' @param abundance.assigned For use with the dispersal null. See details there. 

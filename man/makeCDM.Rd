@@ -4,24 +4,24 @@
 \alias{makeCDM}
 \title{Wrapper for creating a CDM from a spatial simulation result}
 \usage{
-makeCDM(single.simulation, no.quadrats, quadrat.length)
+makeCDM(single.simulation, no.plots, plot.length)
 }
 \arguments{
 \item{single.simulation}{The results of a single spatial simulation, e.g. a call to
 randomArena}
 
-\item{no.quadrats}{The desired number of quadrats in the final CDM}
+\item{no.plots}{The desired number of plots in the final CDM}
 
-\item{quadrat.length}{The length of one side of each quadrat}
+\item{plot.length}{The length of one side of each plot}
 }
 \value{
 A list with the regional abundance from the single simulation result, if it
 included such a result, or the results of a call to abundanceVector() if not. The list
-also includes the CDM based on the parameters (number and size of quadrats) provided.
+also includes the CDM based on the parameters (number and size of plots) provided.
 }
 \description{
-Given the results of a single spatial simulation, and a desired number of quadrats
-and the length of one side of each quadrat, will place the quadrats down and output
+Given the results of a single spatial simulation, and a desired number of plots
+and the length of one side of each plot, will place the plots down and output
 a CDM. Importantly, also carries along the regional abundance vector from the
 spatial simulation results if one was included.
 }

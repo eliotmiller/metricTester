@@ -6,8 +6,8 @@
 \usage{
 betaMultiLinker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
-  no.quadrats, quadrat.length, randomizations, cores, iterations, prefix,
-  simulations, nulls, metrics)
+  no.plots, plot.length, randomizations, cores, iterations, prefix, simulations,
+  nulls, metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}
@@ -33,9 +33,9 @@ considered (as a proportion, e.g. 0.5 = half)}
 \item{competition.iterations}{Number of generations over which to run competition
 simulations}
 
-\item{no.quadrats}{Number of quadrats to place}
+\item{no.plots}{Number of plots to place}
 
-\item{quadrat.length}{Length of one side of desired quadrat}
+\item{plot.length}{Length of one side of desired plot}
 
 \item{randomizations}{The number of randomized CDMs, per null, to generate. These are
 used to compare the significance of the observed metric scores.}
@@ -44,7 +44,7 @@ used to compare the significance of the observed metric scores.}
 
 \item{iterations}{The number of complete tests to be run. For instance, 1 iteration
 would be considered a complete cycle of running all spatial simulations, randomly
-placing quadrats in the arenas, sampling the contents, creating a community data
+placing plots in the arenas, sampling the contents, creating a community data
 matrix, calculating observed metric scores, then comparing these to the specified
 number of randomizations of the original CDMs.}
 
@@ -75,7 +75,7 @@ function, multiple tests can be run, with results saved as RDS files.
 \examples{
 system.time(betaMultiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3,
-	competition.iterations=2, no.quadrats=20, quadrat.length=30,
+	competition.iterations=2, no.plots=20, plot.length=30,
 	randomizations=3, cores=1, iterations=2, prefix="test",
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency)))

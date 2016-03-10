@@ -10,20 +10,20 @@ summaries(null.output, concat.by = "richness")
 \item{null.output}{Data frame of randomized metric values such as an element from a
 call to reduceRandomizations()}
 
-\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
+\item{concat.by}{Whether to concatenate the randomizations by richness, plot or both}
 }
 \value{
 Either a list of or a data frame of summarized metric scores, see details.
 }
 \description{
 Summarizes observed metric scores. Returns the mean, standard deviation and
-95\% confidence intervals of each quadrat or observed richness.
+95\% confidence intervals of each plot or observed richness.
 }
 \details{
-Given a data frame of metric values, summarizes either by quadrat or richness.
-Outputs the mean, standard deviation and 95\% confidence intervals of each quadrat or
+Given a data frame of metric values, summarizes either by plot or richness.
+Outputs the mean, standard deviation and 95\% confidence intervals of each plot or
 observed richness. If provided with concat.by="both", outputs a list of two data
-frames, one for by richness and one for by quadrat. Otherwise, outputs a data frame.
+frames, one for by richness and one for by plot. Otherwise, outputs a data frame.
 }
 \examples{
 #simulate tree with birth-death process

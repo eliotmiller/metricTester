@@ -14,30 +14,30 @@ ses.null1.byrichness[,4] <- rnorm(n=10, mean=-1115, sd=1)
 
 names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")
 
-ses.null1.byquadrat <- ses.null1.byrichness
-ses.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")
-names(ses.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")
+ses.null1.byplot <- ses.null1.byrichness
+ses.null1.byplot[,1] <- paste("plot", 10:19, sep="")
+names(ses.null1.byplot) <- c("plot","metric1","metric2","metric3")
 
-quadrat.null1.byrichness <- ses.null1.byrichness
+plot.null1.byrichness <- ses.null1.byrichness
 
-quadrat.null1.byrichness[,2] <- sample(c(0,1,2), 10, replace=TRUE)
-quadrat.null1.byrichness[,3] <- sample(c(0,1,2), 10, replace=TRUE)
-quadrat.null1.byrichness[,4] <- sample(c(0,1,2), 10, replace=TRUE)
+plot.null1.byrichness[,2] <- sample(c(0,1,2), 10, replace=TRUE)
+plot.null1.byrichness[,3] <- sample(c(0,1,2), 10, replace=TRUE)
+plot.null1.byrichness[,4] <- sample(c(0,1,2), 10, replace=TRUE)
 
-quadrat.null1.byquadrat <- quadrat.null1.byrichness
-quadrat.null1.byquadrat[,1] <- paste("quadrat", 10:19, sep="")
-names(quadrat.null1.byquadrat) <- c("quadrat","metric1","metric2","metric3")
+plot.null1.byplot <- plot.null1.byrichness
+plot.null1.byplot[,1] <- paste("plot", 10:19, sep="")
+names(plot.null1.byplot) <- c("plot","metric1","metric2","metric3")
 
-ses.null1 <- list("richness"=ses.null1.byrichness, "quadrat"=ses.null1.byquadrat)
+ses.null1 <- list("richness"=ses.null1.byrichness, "plot"=ses.null1.byplot)
 
 ses1 <- list("null1"=ses.null1, "null2"= ses.null1)
 
-quadrat.null1 <- list("richness"=quadrat.null1.byrichness,
-	"quadrat"=quadrat.null1.byquadrat)
+plot.null1 <- list("richness"=plot.null1.byrichness,
+	"plot"=plot.null1.byplot)
 
-quadrat1 <- list("null1"=quadrat.null1, "null2"=quadrat.null1)
+plot1 <- list("null1"=plot.null1, "null2"=plot.null1)
 
-random1 <- list("ses"=ses1, "quadrat"=quadrat1)
+random1 <- list("ses"=ses1, "plot"=plot1)
 
 fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=random1)
 
@@ -76,7 +76,7 @@ test_that("sesSingle is correctly naming the summarized results",
 	expect_true(all(sesSingleTemp[,"null.model"] == rep(c(rep("null1",6),
 		rep("null2", 6)),6)))
 	expect_true(all(sesSingleTemp[,"concat.by"] == rep(c(rep("richness", 3),
-		rep("quadrat",3)),6)))
+		rep("plot",3)),6)))
 	expect_true(all(sesSingleTemp[,"metric"] == rep(c("metric1", "metric2","metric3"),
 		12)))
 })
@@ -115,7 +115,7 @@ test_that("sesIndiv is correctly naming the summarized results",
 	expect_true(all(sesIndivTemp[,"null.model"] == rep(c(rep("null1",6),
 		rep("null2", 6)),6)))
 	expect_true(all(sesIndivTemp[,"concat.by"] == rep(c(rep("richness", 3),
-		rep("quadrat",3)),6)))
+		rep("plot",3)),6)))
 	expect_true(all(sesIndivTemp[,"metric"] == rep(c("metric1", "metric2","metric3"),
 		12)))
 })

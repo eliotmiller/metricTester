@@ -1,21 +1,21 @@
 #' Calculate if single, observed metrics deviate beyond expectations
 #'
 #' Given a table of results, where means, SDs, and CIs are bound to the observed scores at
-#' the corresponding richness or quadrat, this function calculates whether each observed
-#' score is significantly less or ore than expected at that quadrat or richness.
+#' the corresponding richness or plot, this function calculates whether each observed
+#' score is significantly less or ore than expected at that plot or richness.
 #'
 #' @param results.table Data frame of observed metrics with expected mean, SD and CI bound
 #' in. See example
-#' @param concat.by Whether to concatenate results by richness, quadrat or both. If
-#' richness, observed scores are compared to all randomized scores where the quadrat had
-#' the corresponding richness. If quadrat, observed scores (e.g. those from quadrat 1)
-#' are compared to all randomized quadrat 1 scores. If both, both are run and each is
+#' @param concat.by Whether to concatenate results by richness, plot or both. If
+#' richness, observed scores are compared to all randomized scores where the plot had
+#' the corresponding richness. If plot, observed scores (e.g. those from plot 1)
+#' are compared to all randomized plot 1 scores. If both, both are run and each is
 #' saved as a separate data frame in a single list.
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
 #' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details Given a table of results, where means, SDs, and CIs are bound to the observed
-#' scores at the corresponding richness or quadrat, this function returns 0, 1, or 2,
+#' scores at the corresponding richness or plot, this function returns 0, 1, or 2,
 #' corresponding to not significant, significantly clustered, and significantly
 #' overdispersed. 
 #'
@@ -55,12 +55,12 @@
 #'
 #' #calculate the standardized scores of each observed metric as compared to the richness
 #' #null model randomization
-#' quadratTest(merged$richness, "richness")
+#' plotTest(merged$richness, "richness")
 #'
 #' #do the same as above but across all null models
-#' temp <- lapply(1:length(merged), function(x) quadratTest(merged[[x]], "richness"))
+#' temp <- lapply(1:length(merged), function(x) plotTest(merged[[x]], "richness"))
 
-quadratTest <- function(results.table, concat.by, metrics)
+plotTest <- function(results.table, concat.by, metrics)
 {
 	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
 	#which case all length of all metrics will be used
@@ -92,11 +92,11 @@ quadratTest <- function(results.table, concat.by, metrics)
 		names(significance) <- metricNames
 		significance <- data.frame(richness=results.table$richness, significance)
 	}
-	else if(concat.by=="quadrat")
+	else if(concat.by=="plot")
 	{
 		significance <- as.data.frame(significance)
 		names(significance) <- metricNames
-		significance <- data.frame(quadrat=results.table$quadrat, significance)
+		significance <- data.frame(plot=results.table$plot, significance)
 	}
 	significance
 }

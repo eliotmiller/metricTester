@@ -5,7 +5,7 @@
 #'
 #' @param vary.results Results from any of the varyX (e.g., varyAbundance) functions.
 #' @param exclude Results columns to exclude from correlation. For instance, with alpha
-#' metrics, one would want to, at the minimum, exclude the quadrat name column.
+#' metrics, one would want to, at the minimum, exclude the plot name column.
 #' @param return.raw Default is FALSE. Whether to return the raw correlation coefficients
 #' between the metrics for each element from vary.results, or whether to summarize the
 #' correlations by their mean per parameter set from vary.results.
@@ -28,11 +28,11 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' system.time(vSize <- varyTreeSize(alpha=T, tree.sizes=c(59, 100),
+#' system.time(vSize <- varyTreeSize(alpha=TRUE, tree.sizes=c(59, 100),
 #'	richness.vector=40:59, delta=1,
 #'	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 #'
-#' test <- summCorrs(vSize, exclude=c("quadrat", "richness"))
+#' test <- summCorrs(vSize, exclude=c("plot", "richness"))
 
 summCorrs <- function(vary.results, exclude, return.raw=FALSE, cor.method="spearman")
 {

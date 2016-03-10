@@ -5,7 +5,7 @@
 #'
 #' @param raw.results A list of lists of lists of dataframes; the results of a call to
 #' readIn.
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
+#' @param concat.by Whether randomizations were concatenated by richness, plot or both.
 #'
 #' @details This function takes a raw list of results from multiple iterations from
 #' multiLinker, and runs sesSingle across each one. It then summarizes the results of

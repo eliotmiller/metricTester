@@ -4,7 +4,7 @@
 #' matrix.
 #'
 #' @param picante.cdm Picante-style community data matrix with
-#' communities/quadrats/plots/etc as rows and species as columns
+#' communities/plots/plots/etc as rows and species as columns
 #' @param tree Optional phylo object
 #' 
 #' @details This function converts species' absolute abundances in a given community (a

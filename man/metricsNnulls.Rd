@@ -24,7 +24,7 @@ ecoPD.cdm object will still employ the phylogenetic distance matrix.}
 Optional, will be generated from the input CDM if not provided.}
 
 \item{distances.among}{A symmetric distance matrix, summarizing the distances among all
-quadrats from the cdm. Optional, only used by some null models.}
+plots from the cdm. Optional, only used by some null models.}
 
 \item{randomizations}{The number of times the input CDM should be randomized and the
 metrics calculated across it.}
@@ -42,7 +42,7 @@ will likely be used to run a subset of the defined metrics.}
 A list of lists of vectors. The first level has as many elements as there
 are randomizations. The second level has one list for each null model. Each element of
 this second level is a named vector corresponding to the calculated metric at each
-quadrat.
+plot.
 }
 \description{
 This function sends out jobs to as many cores as are specified. Each randomizes the

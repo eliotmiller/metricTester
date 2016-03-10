@@ -18,8 +18,8 @@
 #' considered (as a proportion, e.g. 0.5 = half)
 #' @param competition.iterations Number of generations over which to run competition 
 #' simulations
-#' @param no.quadrats Number of quadrats to place
-#' @param quadrat.length Length of one side of desired quadrat
+#' @param no.plots Number of plots to place
+#' @param plot.length Length of one side of desired plot
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
@@ -54,14 +54,14 @@
 #' @examples
 #' system.time(test <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
-#'	competition.iterations=3, no.quadrats=15, quadrat.length=30,
+#'	competition.iterations=3, no.plots=15, plot.length=30,
 #'	randomizations=3, cores=1,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
 
 betaLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
-	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, randomizations, cores, simulations, nulls, metrics)
+	sd.parameter, max.distance, proportion.killed, competition.iterations, no.plots, 
+	plot.length, randomizations, cores, simulations, nulls, metrics)
 {
 	#set these things to NULL if they are not passed in, meaning that all defined sims,
 	#nulls and metrics will be calculated
@@ -85,8 +85,8 @@ betaLinker <- function(no.taxa, arena.length, mean.log.individuals, length.param
 		sd.parameter, max.distance, proportion.killed, competition.iterations)
 	#run the spatial simulations
 	arenas <- runSimulations(prepped, simulations)
-	#derive CDMs. quadrats are placed in the same places across all spatial simulations
-	cdms <- multiCDM(arenas, no.quadrats, quadrat.length)
+	#derive CDMs. plots are placed in the same places across all spatial simulations
+	cdms <- multiCDM(arenas, no.plots, plot.length)
 	#calculate observed metrics for all three spatial simulations
 	observed <- lapply(cdms, function(x) observedBetaMetrics(tree=tree, 
 		picante.cdm=x$picante.cdm, metrics))

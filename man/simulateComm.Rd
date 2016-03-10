@@ -9,7 +9,7 @@ simulateComm(tree, richness.vector, abundances)
 \arguments{
 \item{tree}{Phylo object}
 
-\item{richness.vector}{Vector of desired species richness, one for each desired quadrat}
+\item{richness.vector}{Vector of desired species richness, one for each desired plot}
 
 \item{abundances}{A vector of potential abundances, e.g. a log-normal distribution}
 }

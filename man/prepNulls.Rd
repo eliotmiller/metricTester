@@ -17,7 +17,7 @@ species as columns}
 Optional, will be generated from the input CDM if not provided.}
 
 \item{distances.among}{An optional symmetric distance matrix describing the distances
-among quadrats/etc, for use with null models like the dispersal null.}
+among plots/etc, for use with null models like the dispersal null.}
 }
 \value{
 A list of class nulls.input

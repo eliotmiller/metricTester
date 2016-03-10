@@ -4,7 +4,7 @@
 #' species abundances, will generate a community data matrix with these characteristics.
 #'
 #' @param tree Phylo object
-#' @param richness.vector Vector of desired species richness, one for each desired quadrat
+#' @param richness.vector Vector of desired species richness, one for each desired plot
 #' @param abundances A vector of potential abundances, e.g. a log-normal distribution
 #' 
 #' @details There is currently no implementation to control the frequency with which a
@@ -59,9 +59,9 @@ simulateComm <- function(tree, richness.vector, abundances)
 
 		cdm <- cdm[drop.tree$tip.label]
 
-		quadrat <- paste("quadrat",1:dim(cdm)[1], sep="")
+		plot <- paste("plot",1:dim(cdm)[1], sep="")
 
-		dimnames(cdm)[[1]] <- quadrat
+		dimnames(cdm)[[1]] <- plot
 
 		return(cdm)
 }

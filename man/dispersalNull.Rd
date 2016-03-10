@@ -9,12 +9,12 @@ dispersalNull(picante.cdm, tree, distances.among, abundance.matters = TRUE,
 }
 \arguments{
 \item{picante.cdm}{Picante-style community data matrix with
-communities/quadrats/plots/etc as rows and species as columns}
+communities/plots/plots/etc as rows and species as columns}
 
 \item{tree}{Phylo object}
 
 \item{distances.among}{A symmetric distance matrix, summarizing the distances among all
-quadrats from the cdm.}
+plots from the cdm.}
 
 \item{abundance.matters}{Default is TRUE. If FALSE, species are sampled from
 neighboring grid cells with equal probability.}
@@ -33,16 +33,16 @@ abundances from the original cdm.}
 A matrix with the same dimensions as the input cdm.
 }
 \description{
-Null model that maintains species richness and settles species in simulated quadrats
-with a probability proportional to their abundance in and distance from the quadrat in
+Null model that maintains species richness and settles species in simulated plots
+with a probability proportional to their abundance in and distance from the plot in
 question.
 }
 \details{
 This function can run quite slowly, as it employs a while loop to discard
-selected species if they are already contained in the quadrat being simulated. The
+selected species if they are already contained in the plot being simulated. The
 function contains an internal check to ensure that it doesn't get stuck in an
-indefinite while loop. Specifically, it checks that an observed quadrat does not
-contain more species than the sum of unique species in the remaining quadrats. The
+indefinite while loop. Specifically, it checks that an observed plot does not
+contain more species than the sum of unique species in the remaining plots. The
 argument distances.among is flexible, and can relate to e.g., straight-line distances,
 great-circle distances, and ecological distances. If the argument abundance.matters is
 set to FALSE, then species' abundances in neighboring grid cells does not influence

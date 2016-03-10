@@ -17,14 +17,14 @@
 #' considered (as a proportion, e.g. 0.5 = half)
 #' @param competition.iterations Number of generations over which to run competition 
 #' simulations
-#' @param no.quadrats Number of quadrats to place
-#' @param quadrat.length Length of one side of desired quadrat
+#' @param no.plots Number of plots to place
+#' @param plot.length Length of one side of desired plot
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
 #' @param iterations The number of complete tests to be run. For instance, 1 iteration
 #' would be considered a complete cycle of running all spatial simulations, randomly
-#' placing quadrats in the arenas, sampling the contents, creating a community data
+#' placing plots in the arenas, sampling the contents, creating a community data
 #' matrix, calculating observed metric scores, then comparing these to the specified
 #' number of randomizations of the original CDMs. 
 #' @param prefix Optional character vector to affix to the output RData file names, e.g.
@@ -52,14 +52,14 @@
 #' @examples
 #' system.time(betaMultiLinker(no.taxa=50, arena.length=300, mean.log.individuals=3.2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3, 
-#'	competition.iterations=2, no.quadrats=20, quadrat.length=30,
+#'	competition.iterations=2, no.plots=20, plot.length=30,
 #'	randomizations=3, cores=1, iterations=2, prefix="test",
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
 
 betaMultiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
-	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, randomizations, cores, iterations, prefix,
+	sd.parameter, max.distance, proportion.killed, competition.iterations, no.plots, 
+	plot.length, randomizations, cores, iterations, prefix,
 	simulations, nulls, metrics)
 {
 	#create a simple file name
@@ -75,7 +75,7 @@ betaMultiLinker <- function(no.taxa, arena.length, mean.log.individuals, length.
 		}
 		temp <- betaLinker(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 			sd.parameter, max.distance, proportion.killed, competition.iterations, 
-			no.quadrats, quadrat.length, randomizations, cores,
+			no.plots, plot.length, randomizations, cores,
 			simulations, nulls, metrics)
 		saveRDS(temp, file=filename)
 	}

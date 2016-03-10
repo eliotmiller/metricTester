@@ -7,50 +7,41 @@
 betaErrorChecker(single.iteration)
 }
 \arguments{
-\item{single.iteration}{}
+\item{single.iteration}{Results of a run of the betaLinker function.}
 }
 \value{
-A list of lists of data frames.
+A list of lists of matrices. The first element of the lists refers to the
+results from a spatial simulation. Within each of these elements is a list of matrices,
+where each matrix tabulates the error rate of all tested beta diversity metrics with
+a given null model.
 }
 \description{
-Given the results of a single iteration of the linker function, returns a list of data
+Given the results of a single iteration of the betaLinker function, returns a list of data
 frames summarizing the type I and II error rates of
-metrics both at the single quadrat and the entire arena level.
+metrics both at the single plot and the entire arena level.
 }
 \details{
-DOCUMENTATION FOR THIS FUNCTION NEEDS TO BE UPDATED. THE FUNCTION IS IN PROGRESS
-
 This function wraps a number of smaller functions into a useful type I and II
 error checker. It takes a reduced list of randomizations such as those reduced from
 metricsNnulls with reduceRandomizations, summarizes the mean,
-SD, and CI of each metric plus null model either at the richness or quadrat level,
+SD, and CI of each metric plus null model either at the richness or plot level,
 then compares the observed metric scores to those summarized metrics. It return a list
 with two elements. The first is a list of data frames, where each corresponds to the
 standardized effect scores of the observed metrics for a given null model. The second
-is a list of data frames, where each corresponds to whether a given quadrat deviates
+is a list of data frames, where each corresponds to whether a given plot deviates
 beyond CI. For the latter, 0 corresponds to within CI, 1 corresponds to less than the
 CI, and 2 corresponds to greater than the CI.
 }
 \examples{
-#simulate tree with birth-death process
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#run the betaLinker function
+system.time(ex <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2,
+	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
+	competition.iterations=3, no.plots=15, plot.length=30,
+	randomizations=3, cores=1,
+	nulls=list("richness"=metricTester:::my_richnessNull,
+	"frequency"=metricTester:::my_frequency)))
 
-#simulate a log normal abundance distribution
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
-
-#simulate a community of varying richness
-cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
-
-#run the metrics and nulls combo function
-rawResults <- metricsNnulls(tree, cdm, randomizations=3)
-
-#summarize the results
-results <- reduceRandomizations(rawResults)
-
-#calculate the observed metrics from the input CDM
-observed <- observedMetrics(tree, cdm)
-
-test <- errorChecker(observed, results, "richness")
+test <- betaErrorChecker(ex)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

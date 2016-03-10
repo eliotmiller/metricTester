@@ -11,7 +11,7 @@ summCorrs(vary.results, exclude, return.raw = FALSE,
 \item{vary.results}{Results from any of the varyX (e.g., varyAbundance) functions.}
 
 \item{exclude}{Results columns to exclude from correlation. For instance, with alpha
-metrics, one would want to, at the minimum, exclude the quadrat name column.}
+metrics, one would want to, at the minimum, exclude the plot name column.}
 
 \item{return.raw}{Default is FALSE. Whether to return the raw correlation coefficients
 between the metrics for each element from vary.results, or whether to summarize the
@@ -36,11 +36,11 @@ metrics, returning either the raw or summarized correlations.
 Not a well tested function.
 }
 \examples{
-system.time(vSize <- varyTreeSize(alpha=T, tree.sizes=c(59, 100),
+system.time(vSize <- varyTreeSize(alpha=TRUE, tree.sizes=c(59, 100),
 	richness.vector=40:59, delta=1,
 	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 
-test <- summCorrs(vSize, exclude=c("quadrat", "richness"))
+test <- summCorrs(vSize, exclude=c("plot", "richness"))
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

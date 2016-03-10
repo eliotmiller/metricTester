@@ -13,7 +13,7 @@ reduceResults(). See examples.}
 \item{test}{Either "ttest" or "wilcotest", depending on whether the user wants to run
 a two-sided t-test or a Wilcoxon signed rank test.}
 
-\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+\item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
 }
 \value{
 A data frame summarizing the mean, overall standardized effect sizes and the
@@ -27,7 +27,7 @@ results.
 }
 \details{
 This function provides one way of summarizing and considering simulation
-results. It takes as input a vector of all standardized effect sizes for all quadrats
+results. It takes as input a vector of all standardized effect sizes for all plots
 from a given simulation-null-metric combination, and calculates the mean of the vector
 and whether it differs significantly from a mean of zero. It does this either with a
 simple two-sided t-test, or with a Wilcoxon signed rank test. If the latter, and if

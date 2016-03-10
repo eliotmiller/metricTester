@@ -9,7 +9,7 @@ failed(single.iteration, concat.by)
 \arguments{
 \item{single.iteration}{The results of a single iteration of multiLinker}
 
-\item{concat.by}{Whether randomizations were concatenated by richness, quadrat or both.}
+\item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
 }
 \value{
 A data frame summarizing which simulation/null runs failed.
@@ -23,7 +23,7 @@ These failures, in our experience so far, can only occur if a given species rich
 insufficiently sampled by the null model when concat.by="richness". Otherwise, I
 believe the run will always succeed. Thus, to simplify coding, this function only
 evaluates the by "richness" runs for failure when concat.by="both". If it is possible
-for a null to fail if concatenating by quadrat then this function will need to be
+for a null to fail if concatenating by plot then this function will need to be
 re-written. The main point of this function it to identify failed runs and later
 remove them from the results of a given iteration. This prevents errors further
 down the line when summarizing results.

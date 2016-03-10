@@ -9,7 +9,7 @@ alphaMetricSims(tree.size, richness.vector, delta, abundances)
 \arguments{
 \item{tree.size}{Number of species desired in the total tree.}
 
-\item{richness.vector}{Number of species to be placed in each quadrat. See details.}
+\item{richness.vector}{Number of species to be placed in each plot. See details.}
 
 \item{delta}{A value for the delta transformation (Pagel 1999). Values greater than 1
 push the branching events towards the root, while values less than 1 push the branching
@@ -20,17 +20,17 @@ presence/absence community data matrix, a log-normal distribution, etc. See exam
 }
 \value{
 A data frame of calculated alpha metrics, and the associated species richness
-of each quadrat.
+of each plot.
 }
 \description{
 Takes a specified set of tree size, shape, community richness and abundance parameters,
 and calculates the alpha-level phylogenetic community structure metrics.
 }
 \details{
-The richness.vector (number of species to be placed into each quadrat) is
-flexible. For instance, one might want give it 10:19, which would create 10 quadrats
+The richness.vector (number of species to be placed into each plot) is
+flexible. For instance, one might want give it 10:19, which would create 10 plots
 of species richness 10, 11, ... 19. But one could also provide rep(10, 10) to create 10
-quadrats of 10 species each. If given a small value, e.g. 0.1, the delta parameter
+plots of 10 species each. If given a small value, e.g. 0.1, the delta parameter
 (tree shape) can occasionally result in oddly formatted trees that would cause errors.
 To deal with this, there is an internal check that will recreate a new tree and
 re-scale it with the desired delta. This has not been tested at delta < 0.1, and is

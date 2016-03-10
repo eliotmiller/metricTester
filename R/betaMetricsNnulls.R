@@ -15,7 +15,7 @@
 #' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 #' Optional, will be generated from the input CDM if not provided.
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
-#' quadrats from the cdm. Optional, only used by some null models.
+#' plots from the cdm. Optional, only used by some null models.
 #' @param randomizations The number of times the input CDM should be randomized and the
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
@@ -32,7 +32,7 @@
 #' @return A list of lists of vectors. The first level has as many elements as there
 #' are randomizations. The second level has one list for each null model. Each element of
 #' this second level is a named vector corresponding to the calculated metric at each
-#' quadrat.
+#' plot.
 #'
 #' @export
 #'

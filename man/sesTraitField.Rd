@@ -24,7 +24,7 @@ species as columns.}
 metrics calculated across it.}
 
 \item{distances.among}{A symmetric distance matrix, summarizing the distances among all
-quadrats from the cdm. For use with the dispersal null.}
+plots from the cdm. For use with the dispersal null.}
 
 \item{abundance.matters}{Default is TRUE. If FALSE, species are sampled from
 neighboring grid cells with equal probability. For use with the dispersal null.}

@@ -19,12 +19,12 @@ prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
 	length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 	competition.iterations=3)
 simulationResults <- runSimulations(prepped)
-noQuadrats <- dim(cdm)[1]
+noPlots <- dim(cdm)[1]
 noSp <- length(tree$tip.label)
 
 test_that("metric result dataframe has correct dimensions",
 {
-	expect_true(dim(metricResults)[1] == noQuadrats)
+	expect_true(dim(metricResults)[1] == noPlots)
 	expect_true(dim(metricResults)[2] == theEnd)
 })
 
@@ -43,7 +43,7 @@ test_that("null results list is same length as number of null models",
 test_that("each null result is a matrix of appropriate dimensions",
 {
 	expect_true(all(lapply(nullResults, class)=="matrix"))
-	expect_true(all(as.data.frame(lapply(nullResults, dim))[1,]==noQuadrats))
+	expect_true(all(as.data.frame(lapply(nullResults, dim))[1,]==noPlots))
 	expect_true(all(as.data.frame(lapply(nullResults, dim))[2,]==noSp))
 })
 

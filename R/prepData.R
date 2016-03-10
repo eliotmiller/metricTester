@@ -55,8 +55,8 @@ prepData <- function(tree, picante.cdm, optional.dists=NULL)
 		dists <- cophenetic(tree)
 	}
 		
-	#you have a check in quadratContents to exclude quadrats w < 2 spp, but after
-	#randomizations it is possible to end up with quadrats that include < 2 spp. exclude
+	#you have a check in plotContents to exclude plots w < 2 spp, but after
+	#randomizations it is possible to end up with plots that include < 2 spp. exclude
 	#these. note that dplyr does not need even sample sizes or anything like that, so
 	#this should hopefully work
 	picante.cdm <- picante.cdm[apply(picante.cdm, 1, lengthNonZeros) >= 2,]

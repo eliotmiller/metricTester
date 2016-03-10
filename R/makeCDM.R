@@ -1,21 +1,21 @@
 #' Wrapper for creating a CDM from a spatial simulation result
 #'
-#' Given the results of a single spatial simulation, and a desired number of quadrats
-#' and the length of one side of each quadrat, will place the quadrats down and output
+#' Given the results of a single spatial simulation, and a desired number of plots
+#' and the length of one side of each plot, will place the plots down and output
 #' a CDM. Importantly, also carries along the regional abundance vector from the
 #' spatial simulation results if one was included.
 #'
 #' @param single.simulation The results of a single spatial simulation, e.g. a call to
 #' randomArena
-#' @param no.quadrats The desired number of quadrats in the final CDM
-#' @param quadrat.length The length of one side of each quadrat
+#' @param no.plots The desired number of plots in the final CDM
+#' @param plot.length The length of one side of each plot
 #'
 #' @details Just a simple wrapper function to quickly turn spatial simulations into CDMs
 #' for subsequent analysis.
 #'
 #' @return A list with the regional abundance from the single simulation result, if it
 #' included such a result, or the results of a call to abundanceVector() if not. The list
-#' also includes the CDM based on the parameters (number and size of quadrats) provided.
+#' also includes the CDM based on the parameters (number and size of plots) provided.
 #'
 #' @export
 #'
@@ -35,13 +35,13 @@
 #'
 #' test <- makeCDM(competition, 15, 30)
 
-makeCDM <- function(single.simulation, no.quadrats, quadrat.length)
+makeCDM <- function(single.simulation, no.plots, plot.length)
 {
-	#use the quadratPlacer function to get the bounds of quadrats (notice we do not get
+	#use the plotPlacer function to get the bounds of plots (notice we do not get
 	#the dists here)
-	temp1 <- quadratPlacer(no.quadrats, max(single.simulation$dims), quadrat.length)
-	bounds <- temp1$quadrat.bounds
-	temp2 <- quadratContents(arena=single.simulation$arena, quadratPlacer.results=temp1)
+	temp1 <- plotPlacer(no.plots, max(single.simulation$dims), plot.length)
+	bounds <- temp1$plot.bounds
+	temp2 <- plotContents(arena=single.simulation$arena, plotPlacer.results=temp1)
 	if(is.null(single.simulation$regional.abundance))
 	{
 		regional.abundance <- abundanceVector(temp2$picante.cdm)

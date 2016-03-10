@@ -18,9 +18,9 @@
 #' considered (as a proportion, e.g. 0.5 = half)
 #' @param competition.iterations Number of generations over which to run competition 
 #' simulations
-#' @param no.quadrats Number of quadrats to place
-#' @param quadrat.length Length of one side of desired quadrat
-#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
+#' @param no.plots Number of plots to place
+#' @param plot.length Length of one side of desired plot
+#' @param concat.by Whether to concatenate the randomizations by richness, plot or both
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
@@ -39,7 +39,7 @@
 #'
 #' @return A list of lists of data frames. The first level of the output has one element 
 #' for each simulation. The second level has one element for each null model. Each of
-#' these elements is a list of two data frames, one that summarizes the quadrat-level
+#' these elements is a list of two data frames, one that summarizes the plot-level
 #' significance and another and arena-level significance.
 #'
 #' @export
@@ -51,14 +51,14 @@
 #' @examples
 #' system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
 #' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
-#'	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness", 
+#'	competition.iterations=3, no.plots=15, plot.length=30, concat.by="richness", 
 #'	randomizations=3, cores=1,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency)))
 
 linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
-	sd.parameter, max.distance, proportion.killed, competition.iterations, no.quadrats, 
-	quadrat.length, concat.by, randomizations, cores, simulations, nulls, metrics)
+	sd.parameter, max.distance, proportion.killed, competition.iterations, no.plots, 
+	plot.length, concat.by, randomizations, cores, simulations, nulls, metrics)
 {
 	#set these things to NULL if they are not passed in, meaning that all defined sims,
 	#nulls and metrics will be calculated
@@ -82,8 +82,8 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 		sd.parameter, max.distance, proportion.killed, competition.iterations)
 	#run the spatial simulations
 	arenas <- runSimulations(prepped, simulations)
-	#derive CDMs. quadrats are placed in the same places across all spatial simulations
-	cdms <- multiCDM(arenas, no.quadrats, quadrat.length)
+	#derive CDMs. plots are placed in the same places across all spatial simulations
+	cdms <- multiCDM(arenas, no.plots, plot.length)
 	
 	#calculate observed metrics for all three spatial simulations
 	observed <- lapply(cdms, function(x) observedMetrics(tree=tree, 
@@ -102,7 +102,7 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 	#now lapply the errorChecker over each spatial simulation
 	#the output of this is similar to above. list of lists of
 	#data frames. first level for each simulation. second level for each null model.
-	#the two data frames per second level summarizing the quadrat and arena-level
+	#the two data frames per second level summarizing the plot and arena-level
 	#significance results
 	results <- lapply(1:length(reduced), function(x) 
 		errorChecker(observed=observed[[x]], reduced.randomizations=reduced[[x]],

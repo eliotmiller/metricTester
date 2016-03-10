@@ -6,8 +6,8 @@
 \usage{
 linker(no.taxa, arena.length, mean.log.individuals, length.parameter,
   sd.parameter, max.distance, proportion.killed, competition.iterations,
-  no.quadrats, quadrat.length, concat.by, randomizations, cores, simulations,
-  nulls, metrics)
+  no.plots, plot.length, concat.by, randomizations, cores, simulations, nulls,
+  metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}
@@ -33,11 +33,11 @@ considered (as a proportion, e.g. 0.5 = half)}
 \item{competition.iterations}{Number of generations over which to run competition
 simulations}
 
-\item{no.quadrats}{Number of quadrats to place}
+\item{no.plots}{Number of plots to place}
 
-\item{quadrat.length}{Length of one side of desired quadrat}
+\item{plot.length}{Length of one side of desired plot}
 
-\item{concat.by}{Whether to concatenate the randomizations by richness, quadrat or both}
+\item{concat.by}{Whether to concatenate the randomizations by richness, plot or both}
 
 \item{randomizations}{The number of randomized CDMs, per null, to generate. These are
 used to compare the significance of the observed metric scores.}
@@ -57,7 +57,7 @@ will likely be used to run a subset of the defined metrics.}
 \value{
 A list of lists of data frames. The first level of the output has one element
 for each simulation. The second level has one element for each null model. Each of
-these elements is a list of two data frames, one that summarizes the quadrat-level
+these elements is a list of two data frames, one that summarizes the plot-level
 significance and another and arena-level significance.
 }
 \description{
@@ -73,7 +73,7 @@ multiLinker function, which saves results to file.
 \examples{
 system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2,
 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
-	competition.iterations=3, no.quadrats=15, quadrat.length=30, concat.by="richness",
+	competition.iterations=3, no.plots=15, plot.length=30, concat.by="richness",
 	randomizations=3, cores=1,
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency)))

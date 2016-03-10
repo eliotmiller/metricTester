@@ -7,10 +7,10 @@
 #' reduceResults(). See examples.
 #' @param test Either "ttest" or "wilcotest", depending on whether the user wants to run
 #' a two-sided t-test or a Wilcoxon signed rank test.
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
+#' @param concat.by Whether randomizations were concatenated by richness, plot or both.
 #'
 #' @details This function provides one way of summarizing and considering simulation
-#' results. It takes as input a vector of all standardized effect sizes for all quadrats
+#' results. It takes as input a vector of all standardized effect sizes for all plots
 #' from a given simulation-null-metric combination, and calculates the mean of the vector
 #' and whether it differs significantly from a mean of zero. It does this either with a
 #' simple two-sided t-test, or with a Wilcoxon signed rank test. If the latter, and if
@@ -36,9 +36,9 @@
 
 sesOverall <- function(simulation.list, test, concat.by)
 {
-	if(!(concat.by %in% c("both","quadrat","richness")))
+	if(!(concat.by %in% c("both","plot","richness")))
 	{
-		stop("concat.by must equal either both, richness, or quadrat")
+		stop("concat.by must equal either both, richness, or plot")
 	}
 
 	#add a line to throw an error if test is not properly specified
@@ -48,7 +48,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 	}
 
 	#if test is set to ttest, just do a simple t.test to see if mean differs from 0.
-	if(test=="ttest" & (concat.by=="richness" | concat.by=="quadrat"))
+	if(test=="ttest" & (concat.by=="richness" | concat.by=="plot"))
 	{
 		#lapply tWrapLApply over simulation.list
 		tempAll <- lapply(simulation.list, tWrapLApply)
@@ -60,7 +60,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 	}
 	
 	#more probably people will use the wilcoxon signed rank test. go into that here
-	else if(test=="wilcotest" & (concat.by=="richness" | concat.by=="quadrat"))
+	else if(test=="wilcotest" & (concat.by=="richness" | concat.by=="plot"))
 	{
 		#if the names of the spatial simulations are "random" "competition" and 
 		#"filtering", create a character vector of expected alternative hypotheses to feed
@@ -108,7 +108,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 			tempNull <- list()
 			for(j in 1:length(simulation.list[[1]]))
 			{
-				#k refers either to concatenating by richness or by quadrat
+				#k refers either to concatenating by richness or by plot
 				for(k in 1:length(simulation.list[[1]][[1]]))
 				{
 					temp <- wilcoWrapLApply(simulation.list[[i]][[j]],
@@ -136,7 +136,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 	#reduce the output list into a single data frame
 	output <- Reduce(rbind, tempAll)
 	
-	if(concat.by=="richness" | concat.by=="quadrat")
+	if(concat.by=="richness" | concat.by=="plot")
 	{
 		#create a vector of expanded simulation names. note that this code is sensitive to
 		#changes. for instance, if one simulation tests certain nulls that another does

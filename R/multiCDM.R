@@ -1,17 +1,17 @@
 #' Wrapper for deriving CDMs from the results of multiple spatial simulations
 #'
-#' Given the results of a call to runSimulations(), this function places quadrats down
+#' Given the results of a call to runSimulations(), this function places plots down
 #' randomly (though identically across simulations). 
 #'
 #' @param simulations.result List of data frames of three columns: 
 #' "individuals", "X", and "Y"
-#' @param no.quadrats Number of quadrats to place
-#' @param quadrat.length Length of one side of desired quadrat
+#' @param no.plots Number of plots to place
+#' @param plot.length Length of one side of desired plot
 #' 
-#' @details Both the size and number of quadrats
+#' @details Both the size and number of plots
 #' are determined by the user. A conservative check (perhaps overly so) is in place to
 #' ensure the function doesn't get stuck looking for solutions for how to randomly place
-#' non-overlapping quadrats. Either decreasing the number or size of quadrats is
+#' non-overlapping plots. Either decreasing the number or size of plots is
 #' necessary if this throws an error.
 #'
 #' @return A list of data frames.
@@ -33,14 +33,14 @@
 #' #run the spatial simulations
 #' arenas <- runSimulations(prepped)
 #'
-#' #derive CDMs. quadrats are placed in the same places across all spatial simulations
-#' cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+#' #derive CDMs. plots are placed in the same places across all spatial simulations
+#' cdms <- multiCDM(arenas, no.plots=10, plot.length=20)
 
-multiCDM <- function(simulations.result, no.quadrats, quadrat.length)
+multiCDM <- function(simulations.result, no.plots, plot.length)
 {
 	results <- lapply(1:length(simulations.result), function(x)
-		makeCDM(single.simulation=simulations.result[[x]], no.quadrats=no.quadrats,
-		quadrat.length=quadrat.length))
+		makeCDM(single.simulation=simulations.result[[x]], no.plots=no.plots,
+		plot.length=plot.length))
 	names(results) <- names(simulations.result)
 	results
 }

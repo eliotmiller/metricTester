@@ -8,7 +8,7 @@ metricPerformance(summarized.results, simulations = "all", nulls = "all",
   concat.by = "both")
 }
 \arguments{
-\item{summarized.results}{The results of a call to sesIndiv() or quadratOverall()}
+\item{summarized.results}{The results of a call to sesIndiv() or plotOverall()}
 
 \item{simulations}{Default is "all". Alternatively, can supply a vector of simulation
 names to summarize the results over.}
@@ -16,7 +16,7 @@ names to summarize the results over.}
 \item{nulls}{Default is "all". Alternatively, can supply a vector of null model
 names to summarize the results over.}
 
-\item{concat.by}{Default is "both". Alternatively, can supply either "quadrat" or
+\item{concat.by}{Default is "both". Alternatively, can supply either "plot" or
 "richness".}
 }
 \value{
@@ -24,18 +24,18 @@ A data frame of summarized results
 }
 \description{
 Flexible function that summarizes metric performance after reading in and testing
-simulation results with either sesIndiv or quadratOverall.
+simulation results with either sesIndiv or plotOverall.
 }
 \details{
 If an overall picture of metric performance is desired, this function can
 provide it. It can also be used to summarize metric performance over a specific subset
 of simulations, null models, and concatenation options. If provided with the results
-of a call to quadratOverall, the options are more limited. Currently, if provided with
+of a call to plotOverall, the options are more limited. Currently, if provided with
 such a result, the assumption is
 that there are three spatial simulations, "random", "filtering", and "competition". It
-then assumes that any clustered or overdispersed quadrats for the random simulation,
+then assumes that any clustered or overdispersed plots for the random simulation,
 or any overdispersed or clustered for the filtering or competition simulations,
-respectively, count as typeI errors. It assumes that any quadrats that are not
+respectively, count as typeI errors. It assumes that any plots that are not
 clustered or overdispersed for the filtering or competition simulations, respectively,
 count as typeII errors.
 }

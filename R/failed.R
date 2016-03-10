@@ -3,14 +3,14 @@
 #' This identifies spatial sim/null model runs that failed
 #'
 #' @param single.iteration The results of a single iteration of multiLinker
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both.
+#' @param concat.by Whether randomizations were concatenated by richness, plot or both.
 #'
 #' @details It is possible that a given null model, e.g. regional, failed on a given run. 
 #' These failures, in our experience so far, can only occur if a given species richness is
 #' insufficiently sampled by the null model when concat.by="richness". Otherwise, I
 #' believe the run will always succeed. Thus, to simplify coding, this function only
 #' evaluates the by "richness" runs for failure when concat.by="both". If it is possible
-#' for a null to fail if concatenating by quadrat then this function will need to be
+#' for a null to fail if concatenating by plot then this function will need to be
 #' re-written. The main point of this function it to identify failed runs and later
 #' remove them from the results of a given iteration. This prevents errors further
 #' down the line when summarizing results.
@@ -60,7 +60,7 @@ failed <- function(single.iteration, concat.by)
 			#pull the relevant name for the null model
 			temp[rowID,2] <- names(single.iteration[[i]]$ses)[j]
 			#find the dimensions of the null model
-			if(concat.by=="richness" | concat.by=="quadrat")
+			if(concat.by=="richness" | concat.by=="plot")
 			{
 				dims <- dim(single.iteration[[i]]$ses[[j]])
 			}
@@ -70,7 +70,7 @@ failed <- function(single.iteration, concat.by)
 			}
 			else
 			{
-				stop("concat.by must equal either both, richness, or quadrat")
+				stop("concat.by must equal either both, richness, or plot")
 			}
 			#set the relevant row equal to the dimensions
 			temp[rowID,3:4] <- dims
@@ -82,7 +82,7 @@ failed <- function(single.iteration, concat.by)
 			}
 			#otherwise go into the remainder of the for loop
 			#determine the length of each column and of NAs per column
-			if(concat.by=="richness" | concat.by=="quadrat")
+			if(concat.by=="richness" | concat.by=="plot")
 			{
 				lengthNA <- apply(apply(single.iteration[[i]]$ses[[j]], 2, is.na), 2, sum)
 				lengthCol <- apply(single.iteration[[i]]$ses[[j]], 2, length)

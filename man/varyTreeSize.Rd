@@ -14,7 +14,7 @@ metrics. Default is TRUE. Set to FALSE for beta metrics.}
 \item{tree.sizes}{List of numbers of species desired in each total tree. If
 provided as a vector of numbers, will be coerced to a list.}
 
-\item{richness.vector}{Number of species to be placed in each quadrat. See details.}
+\item{richness.vector}{Number of species to be placed in each plot. See details.}
 
 \item{delta}{A value for the delta transformation (Pagel 1999). Values greater than 1
 push the branching events towards the root, while values less than 1 push the branching
@@ -55,7 +55,7 @@ currently programmed with a while loop. Care should be taken not to get R stuck 
 indefinite loop at delta values even lower than 0.1
 }
 \examples{
-system.time(vSize <- varyTreeSize(alpha=T, tree.sizes=c(59, 100),
+system.time(vSize <- varyTreeSize(alpha=TRUE, tree.sizes=c(59, 100),
 	richness.vector=40:59, delta=1,
 	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 }

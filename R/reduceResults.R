@@ -4,10 +4,10 @@
 #' combine these results into a more manageable format.
 #'
 #' @param results.list The results of a call to readIn()
-#' @param concat.by Whether randomizations were concatenated by richness, quadrat or both
+#' @param concat.by Whether randomizations were concatenated by richness, plot or both
 #'
 #' @details Given a list of results readIn() from multiLinker, this function will reduce
-#' those results into a manageable format like that expected for calls to quadratOverall
+#' those results into a manageable format like that expected for calls to plotOverall
 #' and sesOverall.
 #'
 #' @return A list of data frames. 
@@ -25,9 +25,9 @@
 
 reduceResults <- function(results.list, concat.by)
 {
-	if(!(concat.by %in% c("both","quadrat","richness")))
+	if(!(concat.by %in% c("both","plot","richness")))
 	{
-		stop("concat.by must equal either both, richness, or quadrat")
+		stop("concat.by must equal either both, richness, or plot")
 	}
 
 	#assume that all iterations have same dimensions. should ultimately write a check here
@@ -40,11 +40,11 @@ reduceResults <- function(results.list, concat.by)
 	#into a list where each element from the first level of the list corresponds to a
 	#spatial simulation. each second level are the combined results of a single iteration
 	#from multiLinker. this second level is a matrix of lists, where the first
-	#column relates to the ses, the second to the quadrat significance. there are as many
+	#column relates to the ses, the second to the plot significance. there are as many
 	#rows in the matrix as there are iterations from multiLinker
 	firstLevel <- reduceRandomizations(results.list)
 	
-	#pull the arena and quadratTest results out separately
+	#pull the arena and plotTest results out separately
 	ses <- list()
 	
 	for(i in 1:length(firstLevel))
@@ -52,26 +52,26 @@ reduceResults <- function(results.list, concat.by)
 		ses[[i]] <- firstLevel[[i]][,1]
 	}
 	
-	quadrat <- list()
+	plot <- list()
 	
 	for(i in 1:length(firstLevel))
 	{
-		quadrat[[i]] <- firstLevel[[i]][,2]
+		plot[[i]] <- firstLevel[[i]][,2]
 	}
 	
 	#give those separate results names for the simulations
 	names(ses) <- sims
-	names(quadrat) <- sims
+	names(plot) <- sims
 
-	secondLevel <- list("ses"=ses, "quadrat"=quadrat)
+	secondLevel <- list("ses"=ses, "plot"=plot)
 	
 	#if concat.by=both, just brute force the results into an acceptable order
 	if(concat.by=="both")
 	{
-		#set up an empty list 2 long, one for ses one for quadrat
+		#set up an empty list 2 long, one for ses one for plot
 		results <- vector("list", 2)
-		names(results) <- c("ses", "quadrat")
-		#i elements refer to either ses or quadrat
+		names(results) <- c("ses", "plot")
+		#i elements refer to either ses or plot
 		for(i in 1:length(secondLevel))
 		{
 			#set up an empty list as long as the number of spatial sims
@@ -85,23 +85,23 @@ reduceResults <- function(results.list, concat.by)
 				names(kTemp) <- nulls
 				for(k in 1:length(nulls))
 				{
-					#set up two empty lists to pull each iteration of richness and quadrat
+					#set up two empty lists to pull each iteration of richness and plot
 					#from a given null in as a data frame
 					richnessTemp <- vector("list", length(nulls))
-					quadratTemp <- vector("list", length(nulls))
+					plotTemp <- vector("list", length(nulls))
 					
 					#l elements refer to the number of iterations
 					for(l in 1:length(iterations))
 					{
-						#pull all the richness and quadrat data frames for a given null
+						#pull all the richness and plot data frames for a given null
 						#out and make each into a new element in a list
 						richnessTemp[[k]][[l]] <- secondLevel[[i]][[j]][[l]][[k]]$richness
-						quadratTemp[[k]][[l]] <- secondLevel[[i]][[j]][[l]][[k]]$quadrat
+						plotTemp[[k]][[l]] <- secondLevel[[i]][[j]][[l]][[k]]$plot
 					}
 					richnessReduced <- Reduce(rbind, richnessTemp[[k]])
-					quadratReduced <- Reduce(rbind, quadratTemp[[k]])
+					plotReduced <- Reduce(rbind, plotTemp[[k]])
 					kTemp[[k]] <- list("by.richness"=richnessReduced,
-						"by.quadrat"=quadratReduced)
+						"by.plot"=plotReduced)
 				}
 			jTemp[[j]] <- kTemp
 			}

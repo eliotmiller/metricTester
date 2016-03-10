@@ -1,16 +1,16 @@
 #' Return summary statistics from a data frame of randomized metric values
 #'
 #' Summarizes observed metric scores. Returns the mean, standard deviation and 
-#' 95\% confidence intervals of each quadrat or observed richness. 
+#' 95\% confidence intervals of each plot or observed richness. 
 #'
 #' @param null.output Data frame of randomized metric values such as an element from a
 #' call to reduceRandomizations()
-#' @param concat.by Whether to concatenate the randomizations by richness, quadrat or both
+#' @param concat.by Whether to concatenate the randomizations by richness, plot or both
 #' 
-#' @details Given a data frame of metric values, summarizes either by quadrat or richness.
-#' Outputs the mean, standard deviation and 95\% confidence intervals of each quadrat or
+#' @details Given a data frame of metric values, summarizes either by plot or richness.
+#' Outputs the mean, standard deviation and 95\% confidence intervals of each plot or
 #' observed richness. If provided with concat.by="both", outputs a list of two data
-#' frames, one for by richness and one for by quadrat. Otherwise, outputs a data frame.
+#' frames, one for by richness and one for by plot. Otherwise, outputs a data frame.
 #'
 #' @return Either a list of or a data frame of summarized metric scores, see details.
 #'
@@ -44,36 +44,36 @@ summaries <- function(null.output, concat.by="richness")
 		results <- matrix(ncol=4 * (dim(null.output)[2]-2) + 1, 
 			nrow=length(unique(null.output$richness)), 0)
 	}
-	#set up the results table to be the appropriate size if concat.by = quadrat
-	else if(concat.by=="quadrat")
+	#set up the results table to be the appropriate size if concat.by = plot
+	else if(concat.by=="plot")
 	{
 		results <- matrix(ncol=4 * (dim(null.output)[2]-2) + 1, 
-			nrow=length(unique(null.output$quadrat)), 0)
+			nrow=length(unique(null.output$plot)), 0)
 	}
 	else if(concat.by=="both")
 	{
 		results <- list()
 		results$richness <- matrix(ncol=4 * (dim(null.output)[2]-2) + 1, 
 			nrow=length(unique(null.output$richness)), 0)
-		results$quadrat <- matrix(ncol=4 * (dim(null.output)[2]-2) + 1, 
-			nrow=length(unique(null.output$quadrat)), 0)
+		results$plot <- matrix(ncol=4 * (dim(null.output)[2]-2) + 1, 
+			nrow=length(unique(null.output$plot)), 0)
 	}
 	#throw an error if none of above options
 	else
 	{
-		stop("Argument concat.by must be 'richness', 'quadrat', or 'both'")
+		stop("Argument concat.by must be 'richness', 'plot', or 'both'")
 	}
 	
 	if(concat.by=="richness")
 	{
-		#start the for loop at i=3 to skip the richness and quadrat columns
+		#start the for loop at i=3 to skip the richness and plot columns
 		for(i in 3:dim(null.output)[2])
 		{
 			#create a temporary data frame because difficult to use dplyr over big tables
 			temp <- data.frame(richness=null.output$richness, metric=null.output[,i])
 			grouped <- group_by(temp, richness)
 			#note that we want to start the last column at 5, to leave the first blank for
-			#either quadrat or richness names
+			#either plot or richness names
 			lastCol <- (4*(i-2))+1
 			results[,lastCol-3] <- as.data.frame(summarize(grouped, 
 				mean(metric, na.rm = TRUE)))[,2]
@@ -87,16 +87,16 @@ summaries <- function(null.output, concat.by="richness")
 		#dplyr automatically creates title for summarized columns, so just pull last used
 		rows <- summarize(grouped, mean(metric, na.rm = TRUE))[,1]
 	}
-	else if(concat.by=="quadrat")
+	else if(concat.by=="plot")
 	{
-		#start the for loop at i=3 to skip the richness and quadrat columns
+		#start the for loop at i=3 to skip the richness and plot columns
 		for(i in 3:dim(null.output)[2])
 		{
 			#create a temporary data frame because difficult to use dplyr over big tables
-			temp <- data.frame(quadrat=null.output$quadrat, metric=null.output[,i])
-			grouped <- group_by(temp, quadrat)
+			temp <- data.frame(plot=null.output$plot, metric=null.output[,i])
+			grouped <- group_by(temp, plot)
 			#note that we want to start the last column at 5, to leave the first blank for
-			#either quadrat or richness names
+			#either plot or richness names
 			lastCol <- (4*(i-2))+1
 			results[,lastCol-3] <- as.data.frame(summarize(grouped, 
 				mean(metric, na.rm = TRUE)))[,2]
@@ -119,7 +119,7 @@ summaries <- function(null.output, concat.by="richness")
 			temp <- data.frame(richness=null.output$richness, metric=null.output[,i])
 			grouped <- group_by(temp, richness)
 			#note that we want to start the last column at 5, to leave the first blank for
-			#either quadrat or richness names
+			#either plot or richness names
 			lastCol <- (4*(i-2))+1
 			results$richness[,lastCol-3] <- as.data.frame(summarize(grouped, 
 				mean(metric, na.rm = TRUE)))[,2]
@@ -133,68 +133,68 @@ summaries <- function(null.output, concat.by="richness")
 		#dplyr automatically creates title for summarized columns, so just pull last used
 		rowsRichness <- summarize(grouped, mean(metric, na.rm = TRUE))[,1]
 		
-		#run the quadrat loop now
-		#start the for loop at i=3 to skip the richness and quadrat columns
+		#run the plot loop now
+		#start the for loop at i=3 to skip the richness and plot columns
 		for(i in 3:dim(null.output)[2])
 		{
 			#create a temporary data frame because difficult to use dplyr over big tables
-			temp <- data.frame(quadrat=null.output$quadrat, metric=null.output[,i])
-			grouped <- group_by(temp, quadrat)
+			temp <- data.frame(plot=null.output$plot, metric=null.output[,i])
+			grouped <- group_by(temp, plot)
 			#note that we want to start the last column at 5, to leave the first blank for
-			#either quadrat or richness names
+			#either plot or richness names
 			lastCol <- (4*(i-2))+1
-			results$quadrat[,lastCol-3] <- as.data.frame(summarize(grouped, 
+			results$plot[,lastCol-3] <- as.data.frame(summarize(grouped, 
 				mean(metric, na.rm = TRUE)))[,2]
-			results$quadrat[,lastCol-2] <- as.data.frame(summarize(grouped, 
+			results$plot[,lastCol-2] <- as.data.frame(summarize(grouped, 
 				sd(metric, na.rm = TRUE)))[,2]
-			results$quadrat[,lastCol-1] <- as.data.frame(summarize(grouped, 
+			results$plot[,lastCol-1] <- as.data.frame(summarize(grouped, 
 				quantile(metric, 0.025, na.rm=TRUE)))[,2]
-			results$quadrat[,lastCol] <- as.data.frame(summarize(grouped, 
+			results$plot[,lastCol] <- as.data.frame(summarize(grouped, 
 				quantile(metric, 0.975, na.rm=TRUE)))[,2]
 		}
 		#dplyr automatically creates title for summarized columns, so just pull last used
-		rowsQuadrat <- summarize(grouped, mean(metric, na.rm = TRUE))[,1]
+		rowsPlot <- summarize(grouped, mean(metric, na.rm = TRUE))[,1]
 	}
 
 	#add in the first column info
-	if(concat.by == "richness" | concat.by== "quadrat")
+	if(concat.by == "richness" | concat.by== "plot")
 	{
-		#set the results to dataframe so it can have a column with quadrat names if needed
+		#set the results to dataframe so it can have a column with plot names if needed
 		results <- as.data.frame(results)
 		results[,1] <- rows
 	}
 	else if(concat.by == "both")
 	{
-		#set the results to dataframe so it can have a column with quadrat names if needed
+		#set the results to dataframe so it can have a column with plot names if needed
 		results$richness <- as.data.frame(results$richness)
-		results$quadrat <- as.data.frame(results$quadrat)
+		results$plot <- as.data.frame(results$plot)
 		results$richness[,1] <- rowsRichness
-		results$quadrat[,1] <- rowsQuadrat
+		results$plot[,1] <- rowsPlot
 	}
 	#create column names
 	metricNames <- names(null.output)[names(null.output)!="richness" & 
-		names(null.output)!="quadrat"]
+		names(null.output)!="plot"]
 	summaryNames <- c("average", "sd", "lower", "upper")
 	#this last set of names is the metric name plus each of the different summaries
 	comboNames <- paste(rep(metricNames, each = length(summaryNames)), 
 		rep(summaryNames, length(metricNames)), sep = ".")
-	#bind this to either "richness" or "quadrat" for name of first column
+	#bind this to either "richness" or "plot" for name of first column
 	if(concat.by=="richness")
 	{
 		comboNames <- c("richness", comboNames)
 		names(results) <- comboNames
 	}
-	else if(concat.by=="quadrat")
+	else if(concat.by=="plot")
 	{
-		comboNames <- c("quadrat", comboNames)
+		comboNames <- c("plot", comboNames)
 		names(results) <- comboNames
 	}
 	else if(concat.by=="both")
 	{
 		comboNamesRichness <- c("richness", comboNames)
-		comboNamesQuadrat <- c("quadrat", comboNames)
+		comboNamesPlot <- c("plot", comboNames)
 		names(results$richness) <- comboNamesRichness
-		names(results$quadrat) <- comboNamesQuadrat
+		names(results$plot) <- comboNamesPlot
 	}
 	return(results)
 }

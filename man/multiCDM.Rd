@@ -4,28 +4,28 @@
 \alias{multiCDM}
 \title{Wrapper for deriving CDMs from the results of multiple spatial simulations}
 \usage{
-multiCDM(simulations.result, no.quadrats, quadrat.length)
+multiCDM(simulations.result, no.plots, plot.length)
 }
 \arguments{
 \item{simulations.result}{List of data frames of three columns:
 "individuals", "X", and "Y"}
 
-\item{no.quadrats}{Number of quadrats to place}
+\item{no.plots}{Number of plots to place}
 
-\item{quadrat.length}{Length of one side of desired quadrat}
+\item{plot.length}{Length of one side of desired plot}
 }
 \value{
 A list of data frames.
 }
 \description{
-Given the results of a call to runSimulations(), this function places quadrats down
+Given the results of a call to runSimulations(), this function places plots down
 randomly (though identically across simulations).
 }
 \details{
-Both the size and number of quadrats
+Both the size and number of plots
 are determined by the user. A conservative check (perhaps overly so) is in place to
 ensure the function doesn't get stuck looking for solutions for how to randomly place
-non-overlapping quadrats. Either decreasing the number or size of quadrats is
+non-overlapping plots. Either decreasing the number or size of plots is
 necessary if this throws an error.
 }
 \examples{
@@ -39,8 +39,8 @@ prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
 #run the spatial simulations
 arenas <- runSimulations(prepped)
 
-#derive CDMs. quadrats are placed in the same places across all spatial simulations
-cdms <- multiCDM(arenas, no.quadrats=10, quadrat.length=20)
+#derive CDMs. plots are placed in the same places across all spatial simulations
+cdms <- multiCDM(arenas, no.plots=10, plot.length=20)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

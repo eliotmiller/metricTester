@@ -8,7 +8,7 @@ relativeCDM(picante.cdm, tree = NULL)
 }
 \arguments{
 \item{picante.cdm}{Picante-style community data matrix with
-communities/quadrats/plots/etc as rows and species as columns}
+communities/plots/plots/etc as rows and species as columns}
 
 \item{tree}{Optional phylo object}
 }

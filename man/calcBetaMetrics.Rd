@@ -38,7 +38,7 @@ prepped <- prepData(tree, cdm)
 results <- calcBetaMetrics(prepped)
 
 #an example of how to define ones own metrics for use in the metricTester framework
-#this "metric" simply calculates the richness of each quadrat in the CDM
+#this "metric" simply calculates the richness of each plot in the CDM
 exampleMetric <- function(metrics.input)
 {
 	output <- mean(apply(metrics.input$picante.cdm, 1, lengthNonZeros))

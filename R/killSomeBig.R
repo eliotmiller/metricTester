@@ -72,21 +72,21 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 	genDists <- cophenetic(tree)
 
 	#repeatedly sample local neighborhoods to determine what distribution of genetic
-	#distances among geographic neighbors is. first figure out how many quadrats you will
+	#distances among geographic neighbors is. first figure out how many plots you will
 	#place each iteration of this scheme. the math from this comes from the guestimate in
-	#quadratPlacer(). basically, solve for what the number of quadrats would be if you
+	#plotPlacer(). basically, solve for what the number of plots would be if you
 	#wanted to sample an area that was 40% of the total arena, then round down
 	
-	noQuadrats <- 0.4 * ((max(arena.output$dims)^2)/(max.distance^2))
-	noQuadrats <- floor(noQuadrats)
+	noPlots <- 0.4 * ((max(arena.output$dims)^2)/(max.distance^2))
+	noPlots <- floor(noPlots)
 	
 	avRelatedness <- list()
 	
 	#arbitrarily choose 10 loops of sampling and calculating MPD	
 	for(i in 1:10)
 	{
-		temp <- makeCDM(single.simulation=arena.output, no.quadrats=noQuadrats,
-			quadrat.length=max.distance)
+		temp <- makeCDM(single.simulation=arena.output, no.plots=noPlots,
+			plot.length=max.distance)
 		avRelatedness[[i]] <- modifiedMPD(samp=temp$picante.cdm, dis=genDists, 
 			abundance.weighted="interspecific")
 	}
@@ -243,14 +243,14 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 	tempArena2$arena <- tempArena
 	tempArena2$dims <- arena.output$dims
 	
-	tempCDM <- makeCDM(single.simulation=tempArena2, no.quadrats=noQuadrats, 
-		quadrat.length=max.distance)
+	tempCDM <- makeCDM(single.simulation=tempArena2, no.plots=noPlots, 
+		plot.length=max.distance)
 	
-	#calculate the interspecific MPD for these quadrats
+	#calculate the interspecific MPD for these plots
 	tempRelated <- modifiedMPD(samp=tempCDM$picante.cdm, dis=genDists, 
 		abundance.weighted="interspecific")
 	
-	#calculate the mean interspecific MPD for the quadrats, and append to vector in output
+	#calculate the mean interspecific MPD for the plots, and append to vector in output
 	related <- mean(tempRelated)
 	
 	output$related <- append(arena.output$related, related)
