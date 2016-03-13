@@ -35,21 +35,29 @@
 
 phyloField <- function(tree, picante.cdm, metric)
 {
+	dists <- cophenetic(tree)
+
 	#calculate the metric for each cell in the cdm
 	if(metric=="naw.mpd")
 	{
-		dists <- cophenetic(tree)
 		cellResults <- modifiedMPD(samp=picante.cdm, dis=dists, abundance.weighted=FALSE)
 	}
 	else if(metric=="interspecific")
 	{
-		dists <- cophenetic(tree)
 		cellResults <- modifiedMPD(samp=picante.cdm, dis=dists,
 			abundance.weighted="interspecific")
 	}
+	else if(metric=="naw.mntd")
+	{
+		cellResults <- mntd(samp=picante.cdm, dis=dists, abundance.weighted=FALSE)
+	}
+	else if(metric=="aw.mntd")
+	{		
+		cellResults <- mntd(samp=picante.cdm, dis=dists, abundance.weighted=TRUE)
+	}
 	else
 	{
-		stop("metric currently must be either 'naw.mpd' or 'interspecific'")
+		stop("metric must be one of 'naw.mpd', 'interspecific', 'naw.mntd' or 'aw.mntd'")
 	}
 
 	#go into a simple for loop that for each species, takes a weighted mean of the vector
@@ -59,7 +67,7 @@ phyloField <- function(tree, picante.cdm, metric)
 	results <- c()
 	for(i in 1:length(tree$tip.label))
 	{
-		if(metric=="naw.mpd")
+		if(metric=="naw.mpd" | metric=="naw.mntd")
 		{
 			#derive a quick vector of presence-absence style weights so that if the metric
 			#is not abundance-weighted it treats a presence as a 1, otherwise a 0.
@@ -68,7 +76,7 @@ phyloField <- function(tree, picante.cdm, metric)
 
 			results[i] <- weighted.mean(x=cellResults, w=naWeights, na.rm=TRUE)
 		}
-		else if(metric=="interspecific")
+		else if(metric=="interspecific" | metric=="aw.mntd")
 		{
 			results[i] <- weighted.mean(x=cellResults, w=picante.cdm[,i], na.rm=TRUE)
 		}
