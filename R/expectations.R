@@ -37,8 +37,6 @@
 #'
 #' @export
 #'
-#' @import grid
-#'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
 #' bioRxiv 025726.
@@ -66,7 +64,7 @@
 #' distances <- as.matrix(distances)
 #'
 #' #simulate a regional phylogeny of 100 species
-#' tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)
+#' tree <- geiger::sim.bdtree(b=1, d=0, stop="taxa", n=100)
 #'
 #' #simulate a community data matrix of 100 cells by 100 species. do it 4 times so that
 #' #you can use your simulateComm function and have it span a reasonable range of richness

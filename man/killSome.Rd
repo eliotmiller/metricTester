@@ -42,7 +42,7 @@ present in pool], and the dimensions of the arena).
 }
 \examples{
 #simulate tree with birth-death process
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 #prep the data for the simulation
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,

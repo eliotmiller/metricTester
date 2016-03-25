@@ -24,6 +24,8 @@
 #'
 #' @export
 #'
+#' @importFrom dplyr select
+#'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
 #' bioRxiv 025726.
@@ -36,6 +38,13 @@
 
 sesOverall <- function(simulation.list, test, concat.by)
 {
+	#dumb hack to pass R CMD check
+	simulation <- "hack"
+	null.model <- "hack"
+	metric <- "hack"
+	estimate <- "hack"
+	p.value <- "hack"
+
 	if(!(concat.by %in% c("both","plot","richness")))
 	{
 		stop("concat.by must equal either both, richness, or plot")
@@ -148,13 +157,13 @@ sesOverall <- function(simulation.list, test, concat.by)
 	
 		output <- cbind(output, concat.by=rep(concat.by, dim(output)[1]))
 	
-		output <- dplyr::select(output, simulation, null.model, metric, concat.by,
+		output <- select(output, simulation, null.model, metric, concat.by,
 			estimate, p.value)		
 	}
 	
 	else if(concat.by=="both")
 	{
-		output <- dplyr::select(output, simulation, null.model, metric, concat.by,
+		output <- select(output, simulation, null.model, metric, concat.by,
 			estimate, p.value)
 	}
 	

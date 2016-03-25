@@ -37,6 +37,8 @@
 #'
 #' @export
 #'
+#' @importFrom picante sample2matrix
+#'
 #' @references Miller, E. T. In revision. A new dispersal-informed null model for
 #' community ecology shows strong performance.
 #'
@@ -63,7 +65,7 @@
 #' distances <- as.matrix(distances)
 #'
 #' #simulate a regional phylogeny of 100 species
-#' tree <- sim.bdtree(b=1, d=0, stop="taxa", n=100)
+#' tree <- geiger::sim.bdtree(b=1, d=0, stop="taxa", n=100)
 #'
 #' #simulate a community data matrix of 100 cells by 100 species. do it 4 times so that
 #' #you can use your simulateComm function and have it span a reasonable range of richness

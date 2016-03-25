@@ -24,7 +24,7 @@ Evolves two traits independently up phylogeny with Brownian motion evolution
 process. Sigma is currently set to 0.1 as default.
 }
 \examples{
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 results <- evolveTraits(tree)
 }

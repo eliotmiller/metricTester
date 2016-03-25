@@ -17,8 +17,6 @@
 #' @return A list of lists of simulation results, where each of the first-order elements
 #' in the list relates to a unique simulation as defined in defineSimulations.
 #'
-#' @import grid
-#'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
 #' bioRxiv 025726.
@@ -26,7 +24,7 @@
 #' @export
 #'
 #' @examples
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
 #' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,

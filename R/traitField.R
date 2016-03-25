@@ -23,7 +23,7 @@
 #'
 #' @examples
 #' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #simulate trait evolution up the tree. Make 2-d trait space and find distances between
 #' #species in that space

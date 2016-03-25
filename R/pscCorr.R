@@ -14,12 +14,15 @@
 #'
 #' @export
 #'
+#' @importFrom ape compute.brlen vcv
+#' @importFrom picante prune.sample
+#'
 #' @references Helmus, M.R., T.J. Bland, C.K. Williams, & A.R. Ives. 2007. Phylogenetic
 #' measures of biodiversity. The American Naturalist. 169:E69-E83.
 #'
 #' @examples
 #' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
@@ -44,7 +47,7 @@ pscCorr<-function(samp,tree){
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv.phylo(tree,cor=TRUE)
+    Cmatrix<-vcv(phy=tree,corr=TRUE)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)

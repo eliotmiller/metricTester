@@ -31,7 +31,8 @@
 #'
 #' @export
 #'
-#' @import doParallel
+#' @importFrom foreach foreach %dopar%
+#' @importFrom doParallel registerDoParallel
 #'
 #' @references Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of
 #' character: closely related, morphologically similar, co-occurring honeyeaters have
@@ -39,7 +40,7 @@
 #'
 #' @examples
 #' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #simulate log-normal abundances
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1

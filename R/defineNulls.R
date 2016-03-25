@@ -13,7 +13,8 @@
 #'
 #' @export
 #'
-#' @import grid
+#' @importFrom picante randomizeMatrix
+#' @importFrom spacodiR as.picante resamp.2x resamp.3x resamp.1s resamp.2s
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.

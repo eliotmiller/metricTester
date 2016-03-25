@@ -26,7 +26,7 @@ Intended for use in a spatially explicit scenario with two traits, but could eas
 be co-opted.
 }
 \examples{
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 temp <- evolveTraits(tree)
 

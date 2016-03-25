@@ -6,11 +6,14 @@ Version: 3.1
 Author: Eliot Miller, Chris Trisos & Damien Farine
 Maintainer: Eliot Miller <eliot.isaac@gmail.com>
 Depends:
-    R (>= 3.1.1),
-    geiger,
+    R (>= 3.1.1)
+Imports:
+	ape,
+	geiger,
     spacodiR,
     dplyr,
     picante,
+    foreach,
     doParallel
 Suggests:
     testthat

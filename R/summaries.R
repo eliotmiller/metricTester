@@ -16,13 +16,15 @@
 #'
 #' @export
 #'
+#' @importFrom dplyr group_by summarize
+#'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
 #' bioRxiv 025726.
 #'
 #' @examples
 #' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #'
@@ -36,6 +38,10 @@
 
 summaries <- function(null.output, concat.by="richness")
 {
+	#dumb hack to pass R CMD check
+	richness <- "hack"
+	metric <- "hack"
+
 	#set up the results table to be the appropriate size if concat.by = richness
 	#you want the table to have one row for every richness value and four columns for each
 	#metric plus an additional column for the richness

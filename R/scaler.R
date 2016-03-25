@@ -20,7 +20,7 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' temp <- evolveTraits(tree)
 #'

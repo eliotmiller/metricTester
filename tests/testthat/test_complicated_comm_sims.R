@@ -1,7 +1,7 @@
 library(metricTester)
 context("Complicated community simulations and component functions for final sims")
 
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 abund <- abundanceVector(cdm)

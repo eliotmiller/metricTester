@@ -30,7 +30,7 @@
 #'
 #' @examples
 #' #simulate tree with birth-death process
-#' tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
 #' #simulate a log normal abundance distribution
 #' sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1

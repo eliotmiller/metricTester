@@ -37,7 +37,7 @@ would be possible to draw 1, 2, or 3 species, but in general, two species would 
 in the randomized plots.
 }
 \examples{
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 #prep the data for the simulation
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,

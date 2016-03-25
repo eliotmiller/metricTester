@@ -29,7 +29,7 @@ thee user's choice
 A simple wrapper function to quickly prep data and calculate observed metrics.
 }
 \examples{
-tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 #prep the data for the simulation
 prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
