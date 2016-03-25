@@ -31,6 +31,8 @@
 #'
 #' @export
 #'
+#' @import doParallel
+#'
 #' @references Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of
 #' character: closely related, morphologically similar, co-occurring honeyeaters have
 #' diverged ecologically.
@@ -53,7 +55,7 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	distances.among=NULL, abundance.matters=TRUE, abundance.assigned="directly", cores=2)
 {
 	#register parallel backend
-	registerDoMC(cores)
+	registerDoParallel(cores)
 	
 	#calculate the observed phylo field
 	observed <- phyloField(tree, picante.cdm, metric)

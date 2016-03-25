@@ -9,19 +9,16 @@
 #' @param optional.dists A symmetric distance matrix can be directly supplied. This option
 #' is experimental. Behavior depends on metric being used. If the metric in question
 #' relies on the phylogenetic distance matrix from a call to cophenetic(tree), then this 
-#' optional distance matrix will be inserted instead. But other metrics that rely on the 
-#' ecoPD.cdm object will still employ the phylogenetic distance matrix.
+#' optional distance matrix will be inserted instead. 
 #' 
-#' @details Returns a named list with four elements: the original phylogenetic tree
-#' phylogenetic distances among species, the original picante-style CDM, and
-#' an ecoPD-style CDM. This is used internally by metricTester to handle varying inputs 
-#' for different metrics in different packages.
+#' @details Returns a named list with three elements: the original phylogenetic tree
+#' phylogenetic distances among species, and the original picante-style CDM.
 #'
 #' @return An object of class metrics.input
 #'
 #' @export
 #'
-#' @import phylobase ecoPDcorr geiger spacodiR dplyr picante doMC foreach doParallel
+#' @import geiger spacodiR dplyr picante doParallel
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
@@ -60,8 +57,7 @@ prepData <- function(tree, picante.cdm, optional.dists=NULL)
 	#these. note that dplyr does not need even sample sizes or anything like that, so
 	#this should hopefully work
 	picante.cdm <- picante.cdm[apply(picante.cdm, 1, lengthNonZeros) >= 2,]
-	ecoPD.cdm <- suppressWarnings(phylo4com(tree, t(picante.cdm)))
-	dat   <- list("tree"=tree, "dists"=dists, "picante.cdm"=picante.cdm, "ecoPD.cdm"=ecoPD.cdm)
+	dat   <- list("tree"=tree, "dists"=dists, "picante.cdm"=picante.cdm)
 	class(dat) <- c("list", "metrics.input")
 	dat
 }

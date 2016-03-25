@@ -29,7 +29,7 @@ randomizations.
 }
 \details{
 Returns a named list with four elements: the original phylogenetic tree,
-the original picante-style CDM, an ecoPD-style CDM, and a vector of regional abundance.
+the original picante-style CDM, a spacodi-style CDM, and vector of regional abundance.
 }
 \examples{
 #simulate tree with birth-death process

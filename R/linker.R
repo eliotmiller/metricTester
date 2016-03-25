@@ -49,12 +49,13 @@
 #' bioRxiv 025726.
 #'
 #' @examples
-#' system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
-#' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
-#'	competition.iterations=3, no.plots=15, plot.length=30, concat.by="richness", 
-#'	randomizations=3, cores=1,
-#'	nulls=list("richness"=metricTester:::my_richnessNull,
-#'	"frequency"=metricTester:::my_frequency)))
+#' #not run
+#' #system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
+#' 	#length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
+#'	#competition.iterations=3, no.plots=15, plot.length=30, concat.by="richness", 
+#'	#randomizations=3, cores=1,
+#'	#nulls=list("richness"=metricTester:::my_richnessNull,
+#'	#"frequency"=metricTester:::my_frequency)))
 
 linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.plots, 

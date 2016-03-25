@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-#' @import phylobase grid ecoPDcorr
+#' @import grid
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
@@ -30,10 +30,6 @@ defineBetaMetrics <- function()
 	"Pst"=my_Pst,
 	"Bst"=my_Bst,
 	"PIst"=my_PIst,
-	"Ist_unpruned"=my_Ist_unpruned,
-	"Pst_unpruned"=my_Pst_unpruned,
-	"Bst_unpruned"=my_Bst_unpruned,
-	"PIst_unpruned"=my_PIst_unpruned,
 	"meanNAW_MPD"=mean_naw_mpd,
 	"meanInter_MPD"=mean_inter_mpd,
 	"meanIntra_MPD"=mean_intra_mpd,
@@ -63,22 +59,6 @@ my_Bst <- function(metrics.input)
 
 my_PIst <- function(metrics.input)
 	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree)$PIst
-
-my_Ist_unpruned <- function(metrics.input)
-	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
-	prune=FALSE)$Ist
-
-my_Pst_unpruned <- function(metrics.input)
-	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
-	prune=FALSE)$Pst
-
-my_Bst_unpruned <- function(metrics.input)
-	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
-	prune=FALSE)$Bst
-
-my_PIst_unpruned <- function(metrics.input)
-	spacodi.calc(sp.plot=t(metrics.input$picante.cdm), phy=metrics.input$tree,
-	prune=FALSE)$PIst
 
 mean_naw_mpd <- function(metrics.input)
 	mean(modifiedMPD(metrics.input$picante.cdm, metrics.input$dists,

@@ -72,12 +72,13 @@ with results saved into memory. To perform multiple complete tests, use the
 multiLinker function, which saves results to file.
 }
 \examples{
-system.time(test <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2,
-	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
-	competition.iterations=3, no.plots=15, plot.length=30,
-	randomizations=3, cores=1,
-	nulls=list("richness"=metricTester:::my_richnessNull,
-	"frequency"=metricTester:::my_frequency)))
+#not run
+#system.time(test <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2,
+	#length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
+	#competition.iterations=3, no.plots=15, plot.length=30,
+	#randomizations=3, cores=1,
+	#nulls=list("richness"=metricTester:::my_richnessNull,
+	#"frequency"=metricTester:::my_frequency)))
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

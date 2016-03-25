@@ -17,7 +17,7 @@
 #' @return A list of lists of simulation results, where each of the first-order elements
 #' in the list relates to a unique simulation as defined in defineSimulations.
 #'
-#' @import phylobase grid ecoPDcorr
+#' @import grid
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
@@ -32,6 +32,7 @@
 #' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
 #' competition.iterations=3)
 #'
+#' #not run
 #' results <- runSimulations(prepped)
 
 runSimulations <- function(simulations.input, simulations)

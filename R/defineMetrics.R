@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-#' @import phylobase grid ecoPDcorr
+#' @import grid
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
@@ -34,13 +34,6 @@ defineMetrics <- function()
 	"PSV"=my_psv,
 	"PSC"=my_psc,
 	"PSE"=my_pse,
-	"PAE"=PAE,
-	"IAC"=IAC,
-	"Haed"=Haed,
-	"Eaed"=Eaed,
-	"Eed"=Eed,
-	"Hed"=Hed,
-	"SimpsonsPhy"=SimpsonsPhy,
 	"PD"=my_PD,
 	"PD_Cadotte"=my_PD_Cadotte,
 	"QE"=my_QE
@@ -88,34 +81,6 @@ my_pse <- function(metrics.input)
 	PSE <- PSE$PSEs
 	PSE
 }
-
-PAE <- function(metrics.input)
-	pae(metrics.input$ecoPD.cdm)
-
-#CRITICAL STEP RIGHT HERE. NOTE THAT YOU ARE REVERSING THE DIRECTIONALITY OF IAC FROM WHAT
-#IT IS DEFINED AS, AND ALSO DIFFERENTLY THAN YOUR ORIGINAL SUBMISSION. THIS MEANS YOU DONT
-#NEED TO DO ANY SWITCHING OF EXPECTATIONS DOWNSTREAM, BUT REMEMBER TO REMOVE PRE-EXISTING
-#CODE THAT ACCOUNTS FOR WHAT YOU FIXED HERE
-IAC <- function(metrics.input)
-{
-	iac <- iac(metrics.input$ecoPD.cdm) * -1
-	iac
-}
-
-Haed <- function(metrics.input)
-	haed(metrics.input$ecoPD.cdm)
-
-Eaed <- function(metrics.input)
-	eaed(metrics.input$ecoPD.cdm)
-
-Eed <- function(metrics.input)
-	eed(metrics.input$ecoPD.cdm)
-
-Hed <- function(metrics.input)
-	hed(metrics.input$ecoPD.cdm)
-
-SimpsonsPhy <- function(metrics.input)
-	simpson(metrics.input$ecoPD.cdm, method="phylogenetic")
 
 my_PD <- function(metrics.input)
 {

@@ -1,6 +1,6 @@
-#' lapply wrapper for the wilcoWrapApply function
+#' lapply wrapper for Wilcoxon-signed rank tests
 #'
-#' lapplies wilcoWrapApply over a list of dataframes.
+#' Just a utility function. lapplies wilco.test functions over a list of dataframes.
 #'
 #' @param null.list A list of dataframes, one per null model, of observed metric scores.
 #' @param alternative Optional alternative hypothesis. Default is "two-sided". Use 
@@ -42,6 +42,53 @@ wilcoWrapLApply <- function(null.list, alternative)
 	nullNames <- expand.grid(temp[[1]]$metric, names(null.list))[,2]
 	
 	output$null.model <- nullNames
+	
+	output
+}
+
+wilcoWrapApply <- function(dataframe, alternative)
+{
+	#exclude "richness" and "plot" columns
+	exclude <- c("richness", "plot")
+	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
+
+	#apply wilcoWrap over data frame of metric SES scores for a given null and spatial sim
+	output <- apply(temp, 2, wilcoWrap, mu=0, alternative)
+	
+	#transform the table, convert to a data frame, save the row names as an actual column,
+	#exclude "richness" as a metric. output a data frame with three columns
+	output <- t(output)
+
+	#convert to data frame
+	output <- as.data.frame(output)
+	
+	#add column names
+	names(output) <- c("estimate", "p.value")
+	
+	#get rid of row names
+	output$metric <- row.names(output)
+	
+	row.names(output) <- NULL
+
+	output
+}
+
+wilcoWrap <- function(vect, mu=0, alternative)
+{
+	if(missing(alternative))
+	{
+		alternative <- "two.sided"
+	}
+
+	#set up a blank matrix to save results into
+	output <- matrix(nrow=1, ncol=2)
+	
+	#run a quick t.test on the vector
+	temp <- wilcox.test(x=vect, mu=mu, alternative=alternative)
+
+	#pull out the observed mean and p.value from temp and retain these
+	output[1,1] <- mean(vect, na.rm=TRUE)
+	output[1,2] <- temp$p.value
 	
 	output
 }

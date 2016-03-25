@@ -17,8 +17,7 @@ species as columns}
 \item{optional.dists}{A symmetric distance matrix can be directly supplied. This option
 is experimental. Behavior depends on metric being used. If the metric in question
 relies on the phylogenetic distance matrix from a call to cophenetic(tree), then this
-optional distance matrix will be inserted instead. But other metrics that rely on the
-ecoPD.cdm object will still employ the phylogenetic distance matrix.}
+optional distance matrix will be inserted instead.}
 
 \item{regional.abundance}{A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
 Optional, will be generated from the input CDM if not provided.}

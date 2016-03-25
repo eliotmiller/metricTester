@@ -2,7 +2,7 @@
 % Please edit documentation in R/tWrapLApply.R
 \name{tWrapLApply}
 \alias{tWrapLApply}
-\title{lapply wrapper for the tWrapApply function}
+\title{lapply wrapper for t-tests}
 \usage{
 tWrapLApply(null.list)
 }
@@ -15,7 +15,7 @@ vector of metric values, the second is the p.value of whether it differs from mu
 and the third is the name of the metric.
 }
 \description{
-lapplies tWrapApply over a list of dataframes.
+Just a utility function. lapplies t-tests over lists of data frames
 }
 \details{
 lapplies tWrapApply over a list of dataframes. There is currently no easy

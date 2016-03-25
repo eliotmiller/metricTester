@@ -1,6 +1,6 @@
-#' lapply wrapper for the tWrapApply function
+#' lapply wrapper for t-tests
 #'
-#' lapplies tWrapApply over a list of dataframes.
+#' Just a utility function. lapplies t-tests over lists of data frames
 #'
 #' @param null.list A list of dataframes, one per null model, of observed metric scores.
 #'
@@ -40,6 +40,48 @@ tWrapLApply <- function(null.list)
 	nullNames <- expand.grid(temp[[1]]$metric, names(null.list))[,2]
 	
 	output$null.model <- nullNames
+	
+	output
+}
+
+tWrapApply <- function(dataframe)
+{
+	#exclude "richness" and "plot" columns
+	exclude <- c("richness", "plot")
+	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
+
+	#apply tWrap over a data frame of metric SES scores for a given null and spatial sim
+	output <- apply(temp, 2, tWrap)
+	
+	#transform the table, convert to a data frame, save the row names as an actual column,
+	#exclude "richness" as a metric. output a data frame with three columns
+	output <- t(output)
+
+	#convert to data frame
+	output <- as.data.frame(output)
+	
+	#add column names
+	names(output) <- c("estimate", "p.value")
+	
+	#get rid of row names
+	output$metric <- row.names(output)
+	
+	row.names(output) <- NULL
+
+	output
+}
+
+tWrap <- function(vect, mu=0)
+{
+	#set up a blank matrix to save results into
+	output <- matrix(nrow=1, ncol=2)
+	
+	#run a quick t.test on the vector
+	temp <- t.test(x=vect, mu=mu)
+	
+	#pull out the observed mean and p.value from temp and retain these
+	output[1,1] <- temp$estimate
+	output[1,2] <- temp$p.value
 	
 	output
 }

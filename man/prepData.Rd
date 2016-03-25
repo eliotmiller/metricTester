@@ -15,8 +15,7 @@ species as columns}
 \item{optional.dists}{A symmetric distance matrix can be directly supplied. This option
 is experimental. Behavior depends on metric being used. If the metric in question
 relies on the phylogenetic distance matrix from a call to cophenetic(tree), then this
-optional distance matrix will be inserted instead. But other metrics that rely on the
-ecoPD.cdm object will still employ the phylogenetic distance matrix.}
+optional distance matrix will be inserted instead.}
 }
 \value{
 An object of class metrics.input
@@ -26,10 +25,8 @@ Given a phylo object, and a picante-style community data matrix (sites are rows,
 species are columns), prepare data for analysis.
 }
 \details{
-Returns a named list with four elements: the original phylogenetic tree
-phylogenetic distances among species, the original picante-style CDM, and
-an ecoPD-style CDM. This is used internally by metricTester to handle varying inputs
-for different metrics in different packages.
+Returns a named list with three elements: the original phylogenetic tree
+phylogenetic distances among species, and the original picante-style CDM.
 }
 \examples{
 #simulate tree with birth-death process

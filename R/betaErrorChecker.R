@@ -30,14 +30,15 @@
 #'
 #' @examples
 #' #run the betaLinker function
-#' system.time(ex <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
-#' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
-#'	competition.iterations=3, no.plots=15, plot.length=30,
-#'	randomizations=3, cores=1,
-#'	nulls=list("richness"=metricTester:::my_richnessNull,
-#'	"frequency"=metricTester:::my_frequency)))
+#' #not run
+#' #system.time(ex <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
+#' #length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
+#'	#competition.iterations=3, no.plots=15, plot.length=30,
+#'	#randomizations=3, cores=1,
+#'	#nulls=list("richness"=metricTester:::my_richnessNull,
+#'	#"frequency"=metricTester:::my_frequency)))
 #'
-#' test <- betaErrorChecker(ex)
+#' #test <- betaErrorChecker(ex)
 
 betaErrorChecker <- function(single.iteration)
 {

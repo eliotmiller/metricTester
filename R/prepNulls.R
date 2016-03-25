@@ -13,13 +13,13 @@
 #' among plots/etc, for use with null models like the dispersal null.
 #' 
 #' @details Returns a named list with four elements: the original phylogenetic tree,
-#' the original picante-style CDM, an ecoPD-style CDM, and a vector of regional abundance.
+#' the original picante-style CDM, a spacodi-style CDM, and vector of regional abundance.
 #'
 #' @return A list of class nulls.input
 #'
 #' @export
 #'
-#' @import phylobase grid ecoPDcorr
+#' @import grid
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.

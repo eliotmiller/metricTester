@@ -2,7 +2,7 @@
 % Please edit documentation in R/wilcoWrapLApply.R
 \name{wilcoWrapLApply}
 \alias{wilcoWrapLApply}
-\title{lapply wrapper for the wilcoWrapApply function}
+\title{lapply wrapper for Wilcoxon-signed rank tests}
 \usage{
 wilcoWrapLApply(null.list, alternative)
 }
@@ -18,7 +18,7 @@ vector of metric values, the second is the p.value of whether it differs from mu
 and the third is the name of the metric.
 }
 \description{
-lapplies wilcoWrapApply over a list of dataframes.
+Just a utility function. lapplies wilco.test functions over a list of dataframes.
 }
 \details{
 lapplies wilcoWrapApply over a list of dataframes.
