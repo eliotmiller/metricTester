@@ -8,9 +8,12 @@ ses.null1.byrichness <- matrix(nrow=10, ncol=4)
 ses.null1.byrichness <- as.data.frame(ses.null1.byrichness)
 
 ses.null1.byrichness[,1] <- 10:19
-ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=1)
-ses.null1.byrichness[,3] <- rnorm(n=10, mean=1115, sd=1)
-ses.null1.byrichness[,4] <- rnorm(n=10, mean=-1115, sd=1)
+set.seed(0)
+ses.null1.byrichness[,2] <- rnorm(n=10, mean=0, sd=0.5)
+set.seed(0)
+ses.null1.byrichness[,3] <- rnorm(n=10, mean=1115, sd=0.5)
+set.seed(0)
+ses.null1.byrichness[,4] <- rnorm(n=10, mean=-1115, sd=0.5)
 
 names(ses.null1.byrichness) <- c("richness","metric1","metric2","metric3")
 

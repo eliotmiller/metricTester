@@ -69,7 +69,7 @@ killSomeBig <- function(tree, arena.output, max.distance, proportion.killed)
 	output <- list()
 
 	#create a genetic distance matrix
-	genDists <- cophenetic(tree)
+	genDists <- ape::cophenetic.phylo(tree)
 
 	#repeatedly sample local neighborhoods to determine what distribution of genetic
 	#distances among geographic neighbors is. first figure out how many plots you will

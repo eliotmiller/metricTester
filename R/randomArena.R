@@ -62,7 +62,7 @@ randomArena <- function(simulations.input)
 	
 	#create and return the output
 	
-	output <- list(related=mean(cophenetic(simulations.input$tree)),
+	output <- list(related=mean(ape::cophenetic.phylo(simulations.input$tree)),
 		regional.abundance=individuals, arena=arena, 
 		dims=c(x.min, x.max, y.min, y.max))
 	

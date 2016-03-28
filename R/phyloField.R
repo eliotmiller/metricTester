@@ -45,7 +45,7 @@ phyloField <- function(tree, picante.cdm, metric)
 	{
 		print("Pruning tree to include only species in picante.cdm")
 		tree <- drop.tip(tree,
-			tip=tree$tip.label[!(tree$tip.label %in% names(picante.cdm))])
+			tip=tree$tip.label[!(tree$tip.label %in% colnames(picante.cdm))])
 	}
 	
 	#if user passes a cdm that contains species that are not in the tree, throw an error
@@ -54,7 +54,7 @@ phyloField <- function(tree, picante.cdm, metric)
 		stop("You have species in your picante.cdm that are not in your tree")
 	}
 	
-	dists <- cophenetic(tree)
+	dists <- ape::cophenetic.phylo(tree)
 
 	#calculate the metric for each cell in the cdm
 	if(metric=="naw.mpd")

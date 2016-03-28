@@ -47,7 +47,7 @@ prepData <- function(tree, picante.cdm, optional.dists=NULL)
 	}
 	else
 	{
-		dists <- cophenetic(tree)
+		dists <- ape::cophenetic.phylo(tree)
 	}
 		
 	#you have a check in plotContents to exclude plots w < 2 spp, but after

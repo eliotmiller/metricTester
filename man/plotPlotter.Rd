@@ -26,7 +26,7 @@ tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 
 temp <- evolveTraits(tree)
 
-phydistmatrix <- cophenetic(temp[[1]])
+phydistmatrix <- ape::cophenetic.phylo(temp[[1]])
 
 #define a color for each species
 cols <- colorRamps::blue2green2red(nrow(phydistmatrix))

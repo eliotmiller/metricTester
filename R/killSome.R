@@ -62,7 +62,7 @@ killSome <- function(tree, arena.output, max.distance, proportion.killed)
 	individual.identities <- arena.output$arena$individuals
 
 	#create a genetic distance matrix
-	gen.dist <- cophenetic(tree)
+	gen.dist <- ape::cophenetic.phylo(tree)
 	
 	#create a matrix of individuals for use in geographic distance calculations. obviously 
 	#very similar to the input data frame, but dist doesn't work right with data frames

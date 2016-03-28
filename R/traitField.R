@@ -53,14 +53,14 @@ traitField <- function(trait.distance, picante.cdm, metric)
 	if(length(setdiff(rownames(trait.distance), colnames(picante.cdm))) > 0)
 	{
 		print("Pruning distance matrix to include only species in picante.cdm")
-		trait.distance <- trait.distance[rownames(trait.distance) %in% names(picante.cdm),
-			colnames(trait.distance) %in% names(picante.cdm)]
+		trait.distance <- trait.distance[rownames(trait.distance) %in% colnames(picante.cdm),
+			colnames(trait.distance) %in% colnames(picante.cdm)]
 	}
 	
 	#if user passes cdm that contains species that are not in trait.distance, throw error
 	if(length(setdiff(colnames(picante.cdm), rownames(trait.distance))) > 0)
 	{
-		stop("You have species in your picante.cdm that are not in your tree")
+		stop("You have species in your picante.cdm that are not in your distance matrix")
 	}
 	
 	#calculate the metric for each cell in the cdm

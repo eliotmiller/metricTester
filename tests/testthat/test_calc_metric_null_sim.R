@@ -2,9 +2,12 @@ library(metricTester)
 context("Ensure metrics, nulls and simulations return correct values")
 
 tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+set.seed(0)
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
+set.seed(0)
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 abund <- abundanceVector(cdm)
+set.seed(0)
 coords <- data.frame(lat=rnorm(n=16, mean=20, sd=1), long=rnorm(16, mean=100, sd=1))
 dists <- as.matrix(dist(coords, diag=T, upper=T))
 row.names(dists) <- row.names(cdm)

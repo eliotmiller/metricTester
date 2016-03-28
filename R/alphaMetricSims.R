@@ -26,6 +26,7 @@
 #'
 #' @export
 #'
+#' @importFrom methods is
 #' @importFrom ape is.ultrametric
 #' @importFrom geiger sim.bdtree rescale
 #'

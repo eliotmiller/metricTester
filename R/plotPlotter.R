@@ -13,6 +13,7 @@
 #'
 #' @export
 #'
+#' @importFrom graphics plot polygon
 #' @importFrom colorRamps blue2green2red
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
@@ -25,7 +26,7 @@
 #'
 #' temp <- evolveTraits(tree)
 #'
-#' phydistmatrix <- cophenetic(temp[[1]])
+#' phydistmatrix <- ape::cophenetic.phylo(temp[[1]])
 #'
 #' #define a color for each species
 #' cols <- colorRamps::blue2green2red(nrow(phydistmatrix))
