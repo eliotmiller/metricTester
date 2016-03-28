@@ -84,7 +84,7 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 		tempMatrix <-
 		foreach(i=1:randomizations, .combine='rbind') %dopar%
 		{
-			tempCDM <- randomizeMatrix(samp=picante.cdm, null.model="richness")
+			tempCDM <- picante::randomizeMatrix(samp=picante.cdm, null.model="richness")
 			phyloField(tree, tempCDM, metric)
 		}
 	}

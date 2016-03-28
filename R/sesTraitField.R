@@ -92,7 +92,7 @@ sesTraitField <- function(trait.distance, tree, picante.cdm, metric, null, rando
 		tempMatrix <-
 		foreach(i=1:randomizations, .combine='rbind') %dopar%
 		{
-			tempCDM <- randomizeMatrix(samp=picante.cdm, null.model="richness")
+			tempCDM <- picante::randomizeMatrix(samp=picante.cdm, null.model="richness")
 			traitField(trait.distance, tempCDM, metric)
 		}
 	}

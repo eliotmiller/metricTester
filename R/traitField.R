@@ -2,7 +2,8 @@
 #'
 #' Calculate the similarity in trait space of a species to those it occurs with.
 #'
-#' @param trait.distance Symmetrical matrix summarizing pairwise trait distances
+#' @param trait.distance Symmetrical matrix summarizing pairwise trait distances. If
+#' it contains 
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
 #' @param metric Phylogenetic metric of choice (see details)
@@ -10,8 +11,12 @@
 #' @details The trait distance matrix should be symmetrical and "complete". See example.
 #' Currently this is only programmed to use either non-abundance-weighted mean
 #' pairwise or interspecific abundance-weighted mean pairwise phylogenetic distance.
-#' The function could be improved by tapping into any of the phylogenetic metrics defined
-#' in defineMetrics.
+#' Importantly, we are in the process of generalizing the phylo & trait
+#' field functions, so they operate more like the calcMetrics functions. In other words,
+#' the user will prep their data first, then choose which metrics to calculate and the
+#' function will detect whether to calculate phylo or trait fields based on the inputs.
+#' Take note of this, as code using the current forms of these functions is liable to
+#' break when these updates are made.
 #'
 #' @return Named vector of species' trait fields. 
 #'
@@ -43,6 +48,21 @@
 
 traitField <- function(trait.distance, picante.cdm, metric)
 {
+	#if user passes a trait.distance matrix that contains species that are not in the cdm,
+	#prune the tree down to those species
+	if(length(setdiff(rownames(trait.distance), colnames(picante.cdm))) > 0)
+	{
+		print("Pruning distance matrix to include only species in picante.cdm")
+		trait.distance <- trait.distance[rownames(trait.distance) %in% names(picante.cdm),
+			colnames(trait.distance) %in% names(picante.cdm)]
+	}
+	
+	#if user passes cdm that contains species that are not in trait.distance, throw error
+	if(length(setdiff(colnames(picante.cdm), rownames(trait.distance))) > 0)
+	{
+		stop("You have species in your picante.cdm that are not in your tree")
+	}
+	
 	#calculate the metric for each cell in the cdm
 	if(metric=="naw.mpd")
 	{

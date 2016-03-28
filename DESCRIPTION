@@ -14,7 +14,8 @@ Imports:
     dplyr,
     picante,
     foreach,
-    doParallel
+    doParallel,
+    colorRamps
 Suggests:
     testthat
 License: GPL-3

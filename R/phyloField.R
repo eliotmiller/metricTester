@@ -2,15 +2,19 @@
 #'
 #' Calculate the phylogenetic relatedness of a species to those it occurs with.
 #'
-#' @param tree Phylo object
+#' @param tree Phylo object. Will be pruned to species actually in the cdm.
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
 #' @param metric Phylogenetic metric of choice (see details)
 #' 
 #' @details Currently this is only programmed to use either non-abundance-weighted mean
 #' pairwise or interspecific abundance-weighted mean pairwise phylogenetic distance.
-#' The function could be improved by tapping into any of the phylogenetic metrics defined
-#' in defineMetrics.
+#' Importantly, we are in the process of generalizing the phylo & trait
+#' field functions, so they operate more like the calcMetrics functions. In other words,
+#' the user will prep their data first, then choose which metrics to calculate and the
+#' function will detect whether to calculate phylo or trait fields based on the inputs.
+#' Take note of this, as code using the current forms of these functions is liable to
+#' break when these updates are made.
 #'
 #' @return Named vector of species' phylogenetic fields. 
 #'
@@ -35,6 +39,21 @@
 
 phyloField <- function(tree, picante.cdm, metric)
 {
+	#if user passes a tree that contains species that are not in the cdm, prune the tree
+	#down to those species
+	if(length(setdiff(tree$tip.label, colnames(picante.cdm))) > 0)
+	{
+		print("Pruning tree to include only species in picante.cdm")
+		tree <- drop.tip(tree,
+			tip=tree$tip.label[!(tree$tip.label %in% names(picante.cdm))])
+	}
+	
+	#if user passes a cdm that contains species that are not in the tree, throw an error
+	if(length(setdiff(colnames(picante.cdm), tree$tip.label)) > 0)
+	{
+		stop("You have species in your picante.cdm that are not in your tree")
+	}
+	
 	dists <- cophenetic(tree)
 
 	#calculate the metric for each cell in the cdm

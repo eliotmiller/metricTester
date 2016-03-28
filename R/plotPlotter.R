@@ -13,38 +13,38 @@
 #'
 #' @export
 #'
+#' @importFrom colorRamps blue2green2red
+#'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
 #' bioRxiv 025726.
 #'
 #' @examples
-#' #not run
-#' #library(colorRamps)
 #'
-#' #tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+#' tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 #'
-#' #temp <- evolveTraits(tree)
+#' temp <- evolveTraits(tree)
 #'
-#' #phydistmatrix <- cophenetic(temp[[1]])
+#' phydistmatrix <- cophenetic(temp[[1]])
 #'
 #' #define a color for each species
-#' #cols <- blue2green2red(nrow(phydistmatrix))
+#' cols <- colorRamps::blue2green2red(nrow(phydistmatrix))
 #'
 #' #prep the data for the simulation
-#' #prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
-#' #length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
-#' #competition.iterations=3)
+#' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
+#' length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.2,
+#' competition.iterations=3)
 #'
-#' #positions <- filteringArena(prepped)
+#' positions <- filteringArena(prepped)
 #'
 #' #plot the arena. don't close the window
-#' #plot(positions$arena$X, positions$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
-#' #col=cols[positions$arena$individuals])
+#' plot(positions$arena$X, positions$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
+#' col=cols[positions$arena$individuals])
 #'
-#' #bounds <- plotPlacer(no.plots=10, arena.length=300,
-#'	#plot.length=50)$plot.bounds
+#' bounds <- plotPlacer(no.plots=10, arena.length=300,
+#'	plot.length=50)$plot.bounds
 #'
-#' #plotPlotter(bounds)
+#' plotPlotter(bounds)
 
 plotPlotter <- function(plot.bounds)
 {

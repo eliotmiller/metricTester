@@ -7,7 +7,7 @@
 phyloField(tree, picante.cdm, metric)
 }
 \arguments{
-\item{tree}{Phylo object}
+\item{tree}{Phylo object. Will be pruned to species actually in the cdm.}
 
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
 species as columns}
@@ -23,8 +23,12 @@ Calculate the phylogenetic relatedness of a species to those it occurs with.
 \details{
 Currently this is only programmed to use either non-abundance-weighted mean
 pairwise or interspecific abundance-weighted mean pairwise phylogenetic distance.
-The function could be improved by tapping into any of the phylogenetic metrics defined
-in defineMetrics.
+Importantly, we are in the process of generalizing the phylo & trait
+field functions, so they operate more like the calcMetrics functions. In other words,
+the user will prep their data first, then choose which metrics to calculate and the
+function will detect whether to calculate phylo or trait fields based on the inputs.
+Take note of this, as code using the current forms of these functions is liable to
+break when these updates are made.
 }
 \examples{
 #simulate tree with birth-death process

@@ -8,9 +8,9 @@ ses.null1 <- matrix(nrow=10, ncol=4)
 ses.null1 <- as.data.frame(ses.null1)
 
 ses.null1[,1] <- 10:19
-ses.null1[,2] <- rnorm(n=10, mean=0, sd=1)
-ses.null1[,3] <- rnorm(n=10, mean=1000, sd=1)
-ses.null1[,4] <- rnorm(n=10, mean=-1000, sd=1)
+ses.null1[,2] <- rnorm(n=10, mean=0, sd=0.5)
+ses.null1[,3] <- rnorm(n=10, mean=1000, sd=0.5)
+ses.null1[,4] <- rnorm(n=10, mean=-1000, sd=0.5)
 
 names(ses.null1) <- c("richness","metric1","metric2","metric3")
 
