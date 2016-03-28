@@ -2,7 +2,7 @@
 % Please edit documentation in R/lengthNonZeros.R
 \name{lengthNonZeros}
 \alias{lengthNonZeros}
-\title{Calculate the species richness of a community}
+\title{Calculate the species richness of a vector from a CDM}
 \usage{
 lengthNonZeros(input.vector)
 }
@@ -14,7 +14,7 @@ A named vector of species richness.
 }
 \description{
 Given a vector of abundances or presence/absences from a community data matrix, will
-calculate the species richness of that community.
+calculate the species richness of that vector.
 }
 \details{
 An internal function to calculate richness of a cdm.

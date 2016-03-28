@@ -44,7 +44,7 @@ alphaMetricSims <- function(tree.size, richness.vector, delta, abundances)
 
 	newTree <- rescale(tree, "delta", delta)
 
-	ok <- is.ultrametric(newTree)
+	ok <- ape::is.ultrametric(newTree)
 
 	#was having trouble with some trees and delta parameters making trees that were not
 	#ultrametric and would throw errors when trying to use. this will make a new tree
@@ -53,7 +53,7 @@ alphaMetricSims <- function(tree.size, richness.vector, delta, abundances)
 	{
 		tree <- sim.bdtree(b=0.1, d=0, stop="taxa", n=tree.size)
 		newTree <- rescale(tree, "delta", delta)
-		ok <- is.ultrametric(newTree)
+		ok <- ape::is.ultrametric(newTree)
 	}
 
 	cdm <- simulateComm(newTree, richness.vector=richness.vector,

@@ -14,7 +14,7 @@
 #'
 #' @export
 #'
-#' @importFrom ape compute.brlen vcv
+#' @importFrom ape vcv compute.brlen
 #' @importFrom picante prune.sample
 #'
 #' @references Helmus, M.R., T.J. Bland, C.K. Williams, & A.R. Ives. 2007. Phylogenetic
@@ -42,12 +42,12 @@ pscCorr<-function(samp,tree){
 
   if(is(tree)[1]=="phylo")
   {
-    if(is.null(tree$edge.length)){tree<-compute.brlen(tree, 1)}  #If phylo has no given branch lengths
+    if(is.null(tree$edge.length)){tree<-ape::compute.brlen(tree, 1)}  #If phylo has no given branch lengths
     tree<-prune.sample(samp,tree)
     # Make sure that the species line up
     samp<-samp[,tree$tip.label]
     # Make a correlation matrix of the species pool phylogeny
-    Cmatrix<-vcv(phy=tree,corr=TRUE)
+    Cmatrix<-ape::vcv(phy=tree,corr=TRUE)
   } else {
     Cmatrix<-tree
     species<-colnames(samp)

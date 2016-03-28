@@ -6,9 +6,9 @@ Version: 3.1
 Author: Eliot Miller, Chris Trisos & Damien Farine
 Maintainer: Eliot Miller <eliot.isaac@gmail.com>
 Depends:
-    R (>= 3.1.1)
+    R (>= 3.1.1),
+    ape
 Imports:
-	ape,
 	geiger,
     spacodiR,
     dplyr,

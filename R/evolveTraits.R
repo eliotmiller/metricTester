@@ -27,8 +27,8 @@
 
 evolveTraits <- function(tree, sigma=0.1)
 {
-	trait1 <- rTraitCont(tree, model="BM", sigma=sigma)
-	trait2 <- rTraitCont(tree, model="BM", sigma=sigma)
+	trait1 <- ape::rTraitCont(tree, model="BM", sigma=sigma)
+	trait2 <- ape::rTraitCont(tree, model="BM", sigma=sigma)
 
 	traits <- cbind(trait1, trait2)
 

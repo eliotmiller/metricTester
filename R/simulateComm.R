@@ -57,7 +57,7 @@ simulateComm <- function(tree, richness.vector, abundances)
 
 		dropped <- setdiff(tree$tip.label, colnames(cdm))
 		
-		drop.tree <- drop.tip(tree, dropped)
+		drop.tree <- ape::drop.tip(tree, dropped)
 
 		cdm <- cdm[drop.tree$tip.label]
 

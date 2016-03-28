@@ -79,7 +79,7 @@
 #'
 #' cdmList <- list(cdm1, cdm2, cdm3, cdm4)
 #'
-#' cdm <- rbind_all(cdmList)
+#' cdm <- dplyr::rbind_all(cdmList)
 #'
 #' cdm <- as.data.frame(cdm)
 #'

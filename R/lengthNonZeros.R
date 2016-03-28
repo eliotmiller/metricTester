@@ -1,7 +1,7 @@
-#' Calculate the species richness of a community
+#' Calculate the species richness of a vector from a CDM
 #'
 #' Given a vector of abundances or presence/absences from a community data matrix, will
-#' calculate the species richness of that community.
+#' calculate the species richness of that vector.
 #'
 #' @param input.vector A vector from a community data matrix of abundances.
 #' 
