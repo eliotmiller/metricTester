@@ -1,8 +1,6 @@
 # metricTester
 ## A package to explore and test phylogenetic community structure metrics and null models
 
-##### This package contains functions written by Eliot Miller, Damien Farine, and Chris Trisos
-
 Many of these functions are detailed in [our Ecography paper](http://onlinelibrary.wiley.com/doi/10.1111/ecog.02070/abstract) that reviews phylogenetic community structure metrics and null models.
 
 metricTester allows users to define their own spatial simulations, null models, and metrics. A variety of functions then allow users to explore the behavior of these methods (e.g., across varying species richness), and their statistical performance (e.g., ability to detect a pattern in the spatial simulations). Although originally programmed specifically for phylogenetic community structure methods, the package is flexible enough that simulations, models, and metrics can be defined on the fly, and it can harness multiple cores to quickly generate expectations. Thus, beyond phylogenetic community structure methods, some may find this package useful for exploring the behavior of any user-defined row- or column-wise matrix calculations as the matrix is repeatedly shuffled according to any user-defined algorithm.
