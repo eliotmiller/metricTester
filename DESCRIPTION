@@ -3,8 +3,11 @@ Title: Test Metric and Null Model Statistical Performance
 Description: Explore the behavior and performance of phylogenetic metrics and
     null models.
 Version: 1.0.0
+Date: 2016-3-28
 Author: Eliot Miller, Chris Trisos & Damien Farine
 Maintainer: Eliot Miller <eliot.isaac@gmail.com>
+URL: https://github.com/eliotmiller/metricTester
+BugReports: https://github.com/eliotmiller/metricTester/issues
 Depends:
     R (>= 3.1.1),
     ape
