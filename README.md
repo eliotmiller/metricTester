@@ -48,12 +48,13 @@ dummyNull <- function(nulls.input)
 	colnames(results) <- names(nulls.input$picante.cdm)
 	results
 }
-```
+
 #see what we expect plot-level total abundance to be after repeatedly randomizing the
 #matrix 100 times
 expectations(tree=tree, picante.cdm=cdm, nulls=list("fullShuffle"=dummyNull),
 metrics=list("richness"=metricTester:::my_richness, "totalAbund"=dummyMetric),
 randomizations=100, concat.by="plot")
+```
 
 #### How do I get it?
 metricTester will soon be available on CRAN. Updates may also be available more frequently/sooner via the [GitHub site](https://github.com/eliotmiller/metricTester/). See above for how to install directly from GitHub.
