@@ -59,7 +59,8 @@ dummyNull <- function(nulls.input)
 }
 
 #see what we expect plot-level total abundance to be after repeatedly randomizing the
-#matrix 100 times
+#matrix 100 times. note that metricTester always expects richness to be included, so this
+#example wouldn't work if we did not include it as a metric.
 expectations(tree=tree, picante.cdm=cdm, nulls=list("fullShuffle"=dummyNull),
 metrics=list("richness"=metricTester:::my_richness, "totalAbund"=dummyMetric),
 randomizations=100, concat.by="plot")
