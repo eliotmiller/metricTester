@@ -66,7 +66,7 @@ randomizations=100, concat.by="plot")
 ```
 
 #### How do I get metricTester?
-metricTester will soon be available on CRAN. Updates may also be available more frequently/sooner via the [GitHub site](https://github.com/eliotmiller/metricTester/). See above for how to install directly from GitHub.
+metricTester is available on [CRAN](https://cran.r-project.org/web/packages/metricTester/index.html). Updates may also be available more frequently/sooner via the [GitHub site](https://github.com/eliotmiller/metricTester/). See above for how to install directly from GitHub.
 
 #### The software DOI released in conjunction with our Ecography paper is available [here](https://zenodo.org/badge/latestdoi/21050/eliotmiller/metricTester).
 
