@@ -104,7 +104,7 @@ cdm[is.na(cdm)] <- 0
 newCDM <- dispersalNull(cdm, tree, distances)
 }
 \references{
-Miller, E. T. In revision. A new dispersal-informed null model for
-community ecology shows strong performance.
+Miller, E. T. 2016. A new dispersal-informed null model for
+community ecology shows strong performance. biorxiv.
 }
 
