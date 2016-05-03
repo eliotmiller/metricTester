@@ -85,5 +85,8 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 		#calculate the metrics
 		lapply(randomPrepped, calcMetrics, metrics)
 	}
+
+	doParallel::stopImplicitCluster()
+
 	randomResults
 }

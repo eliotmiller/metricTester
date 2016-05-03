@@ -38,28 +38,30 @@
 #' #simulate a community of varying richness
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
+#' #below not run for example timing issues on CRAN
+#'
 #' #run the metrics and nulls combo function
-#' rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores=1)
+#' #rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores=1)
 #'
 #' #reduce the randomizations to a more manageable format
-#' reduced <- reduceRandomizations(rawResults)
+#' #reduced <- reduceRandomizations(rawResults)
 #'
 #' #calculate the observed metrics from the input CDM
-#' observed <- observedMetrics(tree, cdm)
+#' #observed <- observedMetrics(tree, cdm)
 #'
 #' #summarize the means, SD and CI of the randomizations
-#' summarized <- lapply(reduced, summaries, concat.by="richness")
+#' #summarized <- lapply(reduced, summaries, concat.by="richness")
 #'
 #' #merge the observations and the summarized randomizations to facilitate significance
 #' #testing
-#' merged <- lapply(summarized, merge, observed)
+#' #merged <- lapply(summarized, merge, observed)
 #'
 #' #calculate the standardized scores of each observed metric as compared to the richness
-#' #null model randomization
-#' arenaTest(merged$richness, "richness")
+#' #null model randomization.
+#' #arenaTest(merged$richness, "richness")
 #'
-#' #do the same as above but across all null models
-#' temp <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], "richness"))
+#' #do the same as above but across all null models. not run
+#' #temp <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], "richness"))
 
 arenaTest <- function(results.table, concat.by, metrics)
 {

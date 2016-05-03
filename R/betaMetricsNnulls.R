@@ -36,7 +36,7 @@
 #' @export
 #'
 #' @importFrom foreach foreach %dopar%
-#' @importFrom doParallel registerDoParallel
+#' @importFrom doParallel registerDoParallel stopImplicitCluster
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
@@ -88,5 +88,8 @@ betaMetricsNnulls <- function(tree, picante.cdm, optional.dists=NULL,
 		#calculate the metrics
 		lapply(randomPrepped, calcBetaMetrics, metrics)
 	}
+
+	doParallel::stopImplicitCluster()
+
 	randomResults
 }

@@ -3,9 +3,6 @@
 * local OS X install, R 3.2.4
 * win-builder (devel and release)
 
-## First submission
-This is my first submission of this package
-
 ## R CMD check results
 There were no ERRORs, WARNINGs or NOTEs
 

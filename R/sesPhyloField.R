@@ -100,5 +100,8 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	#bind these to the observed values, calculate SES values and return a data frame
 	results <- data.frame(observed, metric.mean, metric.sd)
 	results$SES <- (results$observed-results$metric.mean)/results$metric.sd
+
+	doParallel::stopImplicitCluster()
+
 	results
 }

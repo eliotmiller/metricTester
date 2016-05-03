@@ -101,7 +101,8 @@ row.names(cdm) <- paste("cell", 1:100, sep="")
 
 cdm[is.na(cdm)] <- 0
 
-newCDM <- dispersalNull(cdm, tree, distances)
+#not run
+#newCDM <- dispersalNull(cdm, tree, distances)
 }
 \references{
 Miller, E. T. 2016. A new dispersal-informed null model for

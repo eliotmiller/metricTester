@@ -56,7 +56,8 @@ results <- reduceRandomizations(rawResults)
 #calculate the observed metrics from the input CDM
 observed <- observedMetrics(tree, cdm)
 
-test <- errorChecker(observed, results, "richness")
+#not run
+#test <- errorChecker(observed, results, "richness")
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

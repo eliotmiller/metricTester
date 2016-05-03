@@ -37,28 +37,30 @@
 #' #simulate a community of varying richness
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
+#' #below not run for example timing issues on CRAN
+#'
 #' #run the metrics and nulls combo function
-#' rawResults <- metricsNnulls(tree, cdm)
+#' #rawResults <- metricsNnulls(tree, cdm)
 #'
 #' #reduce the randomizations to a more manageable format
-#' reduced <- reduceRandomizations(rawResults)
+#' #reduced <- reduceRandomizations(rawResults)
 #'
 #' #calculate the observed metrics from the input CDM
-#' observed <- observedMetrics(tree, cdm)
+#' #observed <- observedMetrics(tree, cdm)
 #'
 #' #summarize the means, SD and CI of the randomizations
-#' summarized <- lapply(reduced, summaries, concat.by="richness")
+#' #summarized <- lapply(reduced, summaries, concat.by="richness")
 #'
 #' #merge the observations and the summarized randomizations to facilitate significance
 #' #testing
-#' merged <- lapply(summarized, merge, observed)
+#' #merged <- lapply(summarized, merge, observed)
 #'
 #' #calculate the standardized scores of each observed metric as compared to the richness
 #' #null model randomization
-#' plotTest(merged$richness, "richness")
+#' #plotTest(merged$richness, "richness")
 #'
 #' #do the same as above but across all null models
-#' temp <- lapply(1:length(merged), function(x) plotTest(merged[[x]], "richness"))
+#' #temp <- lapply(1:length(merged), function(x) plotTest(merged[[x]], "richness"))
 
 plotTest <- function(results.table, concat.by, metrics)
 {

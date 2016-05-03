@@ -63,9 +63,10 @@ indefinite loop at delta values even lower than 0.1
 }
 \examples{
 #example of how to vary tree size
-system.time(temp <- varyX(alpha=TRUE, tree.size=c(59, 100),
-	richness=40:59, delta=1,
-	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+#not run
+#system.time(temp <- varyX(alpha=TRUE, tree.size=c(59, 100),
+	#richness=40:59, delta=1,
+	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 
 #example of how to vary richness
 #not run

@@ -54,9 +54,10 @@
 #'
 #' @examples
 #' #example of how to vary tree size
-#' system.time(temp <- varyX(alpha=TRUE, tree.size=c(59, 100),
-#'	richness=40:59, delta=1,
-#'	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+#' #not run
+#' #system.time(temp <- varyX(alpha=TRUE, tree.size=c(59, 100),
+#'	#richness=40:59, delta=1,
+#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 #'
 #' #example of how to vary richness
 #' #not run
@@ -168,6 +169,8 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 	}
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
+
+	doParallel::stopCluster()
 	
 	results
 }
@@ -214,6 +217,8 @@ varyRichness <- function(alpha=TRUE, tree.size, richness.vectors, delta, abundan
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
+	doParallel::stopCluster()
+
 	results
 }
 
@@ -257,6 +262,8 @@ varyTreeShape <- function(alpha=TRUE, tree.size, richness.vector, deltas, abunda
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
+	doParallel::stopImplicitCluster()
+
 	results
 }
 
@@ -300,5 +307,7 @@ varyAbundance <- function(alpha=TRUE, tree.size, richness.vector, delta, multi.a
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
+	doParallel::stopImplicitCluster()
+
 	results
 }

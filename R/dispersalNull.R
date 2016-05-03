@@ -93,7 +93,8 @@
 #'
 #' cdm[is.na(cdm)] <- 0
 #'
-#' newCDM <- dispersalNull(cdm, tree, distances)
+#' #not run
+#' #newCDM <- dispersalNull(cdm, tree, distances)
 
 dispersalNull <- function(picante.cdm, tree, distances.among, abundance.matters=TRUE, 
 	abundance.assigned="directly")

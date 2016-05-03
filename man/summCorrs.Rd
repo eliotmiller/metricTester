@@ -36,7 +36,7 @@ metrics, returning either the raw or summarized correlations.
 Not a well tested function.
 }
 \examples{
-system.time(vSize <- varyX(alpha=TRUE, tree.size=c(59, 100), richness=40:59, delta=1,
+system.time(vSize <- varyX(alpha=TRUE, tree.size=c(40, 50), richness=20:30, delta=1,
 	abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
 
 test <- summCorrs(vSize, exclude=c("plot", "richness"))
