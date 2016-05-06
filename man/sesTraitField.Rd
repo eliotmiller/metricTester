@@ -32,7 +32,8 @@ neighboring grid cells with equal probability. For use with the dispersal null.}
 \item{abundance.assigned}{For use with the dispersal null. See details there.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
-specify the desired number of cores to utilize.}
+specify the desired number of cores to utilize. The default is "seq", which runs the
+calculations sequentially.}
 }
 \value{
 Data frame of standardized effect sizes of species' trait fields. Table
@@ -68,9 +69,10 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #simulate a community data matrix with these inputs
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
+#below not run for timing issues on CRAN
 #example trait field calculations
-exampleField <- sesTraitField(trait.distance=dists, tree=tree, picante.cdm=cdm,
-metric="naw.mpd", null="richness", randomizations=10, cores=2)
+#exampleField <- sesTraitField(trait.distance=dists, tree=tree, picante.cdm=cdm,
+	#metric="naw.mpd", null="richness", randomizations=10, cores=2)
 }
 \references{
 Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of

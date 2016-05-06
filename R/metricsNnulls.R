@@ -18,7 +18,8 @@
 #' @param randomizations The number of times the input CDM should be randomized and the
 #' metrics calculated across it.
 #' @param cores This function can run in parallel. In order to do so, the user must
-#' specify the desired number of cores to utilize.
+#' specify the desired number of cores to utilize. The default is "seq", which runs the
+#' calculations sequentially.
 #' @param nulls Optional list of named null model functions to use. If invoked, this 
 #' option will likely be used to run a subset of the defined null models.
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
@@ -47,12 +48,12 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,
+#' rawResults <- metricsNnulls(tree, cdm, randomizations=3,
 #'	nulls=list("richness"=metricTester:::my_richnessNull,
 #'	"frequency"=metricTester:::my_frequency))
 
 metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
-	 distances.among=NULL, randomizations=2, cores=1, nulls, metrics)
+	 distances.among=NULL, randomizations=2, cores="seq", nulls, metrics)
 {
 	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
 	#which case all metrics will be calculated
@@ -68,25 +69,50 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 		nulls <- NULL
 	}	
 
-	registerDoParallel(cores)
-
-	#prep the inputs for parallel randomizations
-	nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance, distances.among)
-	
-	#call the parallel for loop. each iteration, save a new list of lists, where each
-	#inner element are the metrics for a given null model
-	randomResults <- foreach(i = 1:randomizations) %dopar%
+	if(cores == "seq")
 	{
-		#run the nulls across the prepped data. this randomizes the CDMs all at once
-		randomMatrices <- runNulls(nullsPrepped, nulls)
-		#prep the randomized CDMs to calculate the metrics across them
-		randomPrepped <- lapply(randomMatrices, function(x) 
-			prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
-		#calculate the metrics
-		lapply(randomPrepped, calcMetrics, metrics)
+		#warn that the analysis is being run sequentially
+		warning("Not running analysis in parallel. See 'cores' argument.", call.=FALSE)
+
+		#prep the inputs for parallel randomizations
+		nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance, distances.among)
+	
+		#call the parallel for loop. each iteration, save a new list of lists, where each
+		#inner element are the metrics for a given null model
+		randomResults <- foreach(i = 1:randomizations) %do%
+		{
+			#run the nulls across the prepped data. this randomizes the CDMs all at once
+			randomMatrices <- runNulls(nullsPrepped, nulls)
+			#prep the randomized CDMs to calculate the metrics across them
+			randomPrepped <- lapply(randomMatrices, function(x) 
+				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
+			#calculate the metrics
+			lapply(randomPrepped, calcMetrics, metrics)
+		}
 	}
 
-	doParallel::stopImplicitCluster()
+	if(cores != "seq")
+	{
+		registerDoParallel(cores)
+
+		#prep the inputs for parallel randomizations
+		nullsPrepped <- prepNulls(tree, picante.cdm, regional.abundance, distances.among)
+	
+		#call the parallel for loop. each iteration, save a new list of lists, where each
+		#inner element are the metrics for a given null model
+		randomResults <- foreach(i = 1:randomizations) %dopar%
+		{
+			#run the nulls across the prepped data. this randomizes the CDMs all at once
+			randomMatrices <- runNulls(nullsPrepped, nulls)
+			#prep the randomized CDMs to calculate the metrics across them
+			randomPrepped <- lapply(randomMatrices, function(x) 
+				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
+			#calculate the metrics
+			lapply(randomPrepped, calcMetrics, metrics)
+		}
+
+		registerDoSEQ()
+	}
 
 	randomResults
 }

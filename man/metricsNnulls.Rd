@@ -6,7 +6,7 @@
 \usage{
 metricsNnulls(tree, picante.cdm, optional.dists = NULL,
   regional.abundance = NULL, distances.among = NULL, randomizations = 2,
-  cores = 1, nulls, metrics)
+  cores = "seq", nulls, metrics)
 }
 \arguments{
 \item{tree}{Phylo object}
@@ -29,7 +29,8 @@ plots from the cdm. Optional, only used by some null models.}
 metrics calculated across it.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
-specify the desired number of cores to utilize.}
+specify the desired number of cores to utilize. The default is "seq", which runs the
+calculations sequentially.}
 
 \item{nulls}{Optional list of named null model functions to use. If invoked, this
 option will likely be used to run a subset of the defined null models.}
@@ -61,7 +62,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-rawResults <- metricsNnulls(tree, cdm, randomizations=3, cores=1,
+rawResults <- metricsNnulls(tree, cdm, randomizations=3,
 	nulls=list("richness"=metricTester:::my_richnessNull,
 	"frequency"=metricTester:::my_frequency))
 }

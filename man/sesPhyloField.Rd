@@ -6,7 +6,7 @@
 \usage{
 sesPhyloField(tree, picante.cdm, metric, null, randomizations,
   distances.among = NULL, abundance.matters = TRUE,
-  abundance.assigned = "directly", cores = 2)
+  abundance.assigned = "directly", cores = "seq")
 }
 \arguments{
 \item{tree}{Phylo object.}
@@ -30,7 +30,8 @@ neighboring grid cells with equal probability. For use with the dispersal null.}
 \item{abundance.assigned}{For use with the dispersal null. See details there.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
-specify the desired number of cores to utilize.}
+specify the desired number of cores to utilize. The default is "seq", which runs the
+calculations sequentially.}
 }
 \value{
 Data frame of standardized effect sizes of species' phylogenetic fields. Table
@@ -61,7 +62,7 @@ cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
 #example trait field calculations
 exampleField <- sesPhyloField(tree=tree, picante.cdm=cdm,
-metric="naw.mpd", null="richness", randomizations=10, cores=2)
+	metric="naw.mpd", null="richness", randomizations=10)
 }
 \references{
 Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of

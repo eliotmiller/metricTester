@@ -71,7 +71,7 @@ with results saved into memory. To perform multiple complete tests, use the
 multiLinker function, which saves results to file.
 }
 \examples{
-#not run
+#below not run for timing issues on CRAN
 #system.time(test <- linker(no.taxa=50, arena.length=300, mean.log.individuals=2,
 	#length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2,
 	#competition.iterations=3, no.plots=15, plot.length=30, concat.by="richness",

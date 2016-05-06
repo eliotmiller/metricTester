@@ -8,7 +8,8 @@ set.seed(0)
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 abund <- abundanceVector(cdm)
 
-test_that("cdm has correct dimensions",{
+test_that("cdm has correct dimensions",
+{
 	expect_true(dim(cdm)[1] == 16)
 	expect_true(dim(cdm)[2] == 50)
 })

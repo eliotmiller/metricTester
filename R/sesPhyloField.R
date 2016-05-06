@@ -15,7 +15,8 @@
 #' neighboring grid cells with equal probability. For use with the dispersal null.
 #' @param abundance.assigned For use with the dispersal null. See details there. 
 #' @param cores This function can run in parallel. In order to do so, the user must
-#' specify the desired number of cores to utilize.
+#' specify the desired number of cores to utilize. The default is "seq", which runs the
+#' calculations sequentially.
 #' 
 #' @details The trait distance matrix should be symmetrical and "complete". See example.
 #' Currently only non-abundance-weighted mean pairwise and interspecific
@@ -50,10 +51,11 @@
 #'
 #' #example trait field calculations
 #' exampleField <- sesPhyloField(tree=tree, picante.cdm=cdm, 
-#' metric="naw.mpd", null="richness", randomizations=10, cores=2)
+#' 	metric="naw.mpd", null="richness", randomizations=10)
 
 sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
-	distances.among=NULL, abundance.matters=TRUE, abundance.assigned="directly", cores=2)
+	distances.among=NULL, abundance.matters=TRUE, abundance.assigned="directly",
+	cores="seq")
 {
 	#register parallel backend
 	registerDoParallel(cores)
@@ -101,7 +103,7 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	results <- data.frame(observed, metric.mean, metric.sd)
 	results$SES <- (results$observed-results$metric.mean)/results$metric.sd
 
-	doParallel::stopImplicitCluster()
+	registerDoSEQ()
 
 	results
 }

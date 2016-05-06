@@ -41,7 +41,9 @@ iterations, the result will be a list with 10 elements. Each of those 10 element
 be a list of two elements, each of which will be the calculated metrics for a given
 set of parameters (one for each abundance vector).}
 
-\item{cores}{Number of cores to be used for parallel processing. The iteration aspect
+\item{cores}{This function can run in parallel. In order to do so, the user must
+specify the desired number of cores to utilize. The default is "seq", which runs the
+calculations sequentially. The iteration aspect
 of the function is parallelized, so for efficiency purposes, it is best to run this
 over numerous iterations rather than repeating the same parameter numerous times (e.g.,
 rather than setting deltas to rep(1, 10), set delta to 1 and iterations to 10).}

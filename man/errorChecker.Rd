@@ -45,16 +45,17 @@ tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
 sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 #simulate a community of varying richness
-cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
+cdm <- simulateComm(tree, richness.vector=10:13, abundances=sim.abundances)
 
+#below not run for timing issues on CRAN
 #run the metrics and nulls combo function
-rawResults <- metricsNnulls(tree, cdm, randomizations=3)
+#rawResults <- metricsNnulls(tree, cdm, randomizations=3)
 
 #summarize the results
-results <- reduceRandomizations(rawResults)
+#results <- reduceRandomizations(rawResults)
 
 #calculate the observed metrics from the input CDM
-observed <- observedMetrics(tree, cdm)
+#observed <- observedMetrics(tree, cdm)
 
 #not run
 #test <- errorChecker(observed, results, "richness")

@@ -29,7 +29,9 @@
 #' iterations, the result will be a list with 10 elements. Each of those 10 elements will
 #' be a list of two elements, each of which will be the calculated metrics for a given
 #' set of parameters (one for each abundance vector).
-#' @param cores Number of cores to be used for parallel processing. The iteration aspect
+#' @param cores This function can run in parallel. In order to do so, the user must
+#' specify the desired number of cores to utilize. The default is "seq", which runs the
+#' calculations sequentially. The iteration aspect
 #' of the function is parallelized, so for efficiency purposes, it is best to run this
 #' over numerous iterations rather than repeating the same parameter numerous times (e.g.,
 #' rather than setting deltas to rep(1, 10), set delta to 1 and iterations to 10). 
@@ -45,7 +47,7 @@
 #'
 #' @export
 #'
-#' @importFrom foreach foreach %dopar%
+#' @importFrom foreach foreach %dopar% %do%
 #' @importFrom doParallel registerDoParallel
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
@@ -170,7 +172,7 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 
-	doParallel::stopCluster()
+	registerDoSEQ()
 	
 	results
 }
@@ -217,7 +219,7 @@ varyRichness <- function(alpha=TRUE, tree.size, richness.vectors, delta, abundan
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
-	doParallel::stopCluster()
+	registerDoSEQ()
 
 	results
 }
@@ -262,7 +264,7 @@ varyTreeShape <- function(alpha=TRUE, tree.size, richness.vector, deltas, abunda
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
-	doParallel::stopImplicitCluster()
+	registerDoSEQ()
 
 	results
 }
@@ -307,7 +309,7 @@ varyAbundance <- function(alpha=TRUE, tree.size, richness.vector, delta, multi.a
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
-	doParallel::stopImplicitCluster()
+	registerDoSEQ()
 
 	results
 }

@@ -27,9 +27,10 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' rawResults <- metricsNnulls(tree, cdm)
+#' #below not run for timing issues on CRAN
+#' #rawResults <- metricsNnulls(tree, cdm)
 #'
-#' results <- reduceRandomizations(rawResults)
+#' #results <- reduceRandomizations(rawResults)
 
 reduceRandomizations <- function(randomizations.list)
 {
