@@ -59,19 +59,19 @@
 #' #not run
 #' #system.time(temp <- varyX(alpha=TRUE, tree.size=c(59, 100),
 #'	#richness=40:59, delta=1,
-#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2))
 #'
 #' #example of how to vary richness
 #' #not run
 #' #system.time(temp <- varyX(alpha=TRUE, tree.size=59,
 #'	#richness=list(30:39, 40:49), delta=1,
-#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2))
 #'
 #' #example of how to vary tree shape
 #' #not run
 #' #system.time(temp <- varyX(alpha=TRUE, tree.size=59,
 #'	#richness=40:59, delta=c(0.1,10),
-#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+#'	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2))
 #'
 #' #example of how to vary abundance
 #' #not run
@@ -79,10 +79,10 @@
 #'	#(round(rlnorm(5000, meanlog=2, sdlog=1)) + 1))
 #'
 #' #system.time(temp <- varyX(alpha=TRUE, tree.size=59,
-#'	#richness=40:59, delta=1, abundances=inputAbunds, iterations=2, cores=1))
+#'	#richness=40:59, delta=1, abundances=inputAbunds, iterations=2))
 
 varyX <-  function(alpha=TRUE, tree.size, richness, delta, abundances,
-	beta.iterations, iterations, cores)
+	beta.iterations, iterations, cores="seq")
 {
 	#if the inputs match the expectations for varyTreeSize
 	if(class(tree.size) == "list" | length(tree.size) > 1
@@ -140,15 +140,31 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 		tree.sizes <- as.list(tree.sizes)
 	}
 	
-	registerDoParallel(cores)
-
 	if(alpha==TRUE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		if(cores == "seq")
 		{
-			lapply(seq_along(tree.sizes), function(x)
-				alphaMetricSims(tree.size=tree.sizes[[x]], 
-				richness.vector=richness.vector, delta=delta, abundances))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.", call.=FALSE)
+			
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(tree.sizes), function(x)
+					alphaMetricSims(tree.size=tree.sizes[[x]], 
+					richness.vector=richness.vector, delta=delta, abundances))
+			}
+		}
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)
+		
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(tree.sizes), function(x)
+					alphaMetricSims(tree.size=tree.sizes[[x]], 
+					richness.vector=richness.vector, delta=delta, abundances))
+			}	
+			registerDoSEQ()
 		}
 		for(i in 1:length(results))
 		{
@@ -157,12 +173,32 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 	}
 	else if(alpha==FALSE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		if(cores == "seq")
 		{
-			lapply(seq_along(tree.sizes), function(x)
-				betaMetricSims(tree.size=tree.sizes[[x]], 
-				richness.vector=richness.vector, delta=delta, abundances,
-				beta.iterations))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.", call.=FALSE)
+			
+			results <- foreach(i = 1:iterations) %dop%
+			{
+				lapply(seq_along(tree.sizes), function(x)
+					betaMetricSims(tree.size=tree.sizes[[x]], 
+					richness.vector=richness.vector, delta=delta, abundances,
+					beta.iterations))
+			}
+		}
+
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)	
+
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(tree.sizes), function(x)
+					betaMetricSims(tree.size=tree.sizes[[x]], 
+					richness.vector=richness.vector, delta=delta, abundances,
+					beta.iterations))
+			}
+			registerDoSEQ()
 		}
 		for(i in 1:length(results))
 		{
@@ -171,8 +207,6 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 	}
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
-
-	registerDoSEQ()
 	
 	results
 }

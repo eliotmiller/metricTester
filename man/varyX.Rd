@@ -5,7 +5,7 @@
 \title{Calculate alpha or beta metrics across a set of parameters}
 \usage{
 varyX(alpha = TRUE, tree.size, richness, delta, abundances, beta.iterations,
-  iterations, cores)
+  iterations, cores = "seq")
 }
 \arguments{
 \item{alpha}{Whether to calculate alpha or beta phylogenetic community structure
@@ -68,19 +68,19 @@ indefinite loop at delta values even lower than 0.1
 #not run
 #system.time(temp <- varyX(alpha=TRUE, tree.size=c(59, 100),
 	#richness=40:59, delta=1,
-	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2))
 
 #example of how to vary richness
 #not run
 #system.time(temp <- varyX(alpha=TRUE, tree.size=59,
 	#richness=list(30:39, 40:49), delta=1,
-	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2))
 
 #example of how to vary tree shape
 #not run
 #system.time(temp <- varyX(alpha=TRUE, tree.size=59,
 	#richness=40:59, delta=c(0.1,10),
-	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2, cores=1))
+	#abundances=round(rlnorm(5000, meanlog=2, sdlog=1)) + 1, iterations=2))
 
 #example of how to vary abundance
 #not run
@@ -88,7 +88,7 @@ indefinite loop at delta values even lower than 0.1
 	#(round(rlnorm(5000, meanlog=2, sdlog=1)) + 1))
 
 #system.time(temp <- varyX(alpha=TRUE, tree.size=59,
-	#richness=40:59, delta=1, abundances=inputAbunds, iterations=2, cores=1))
+	#richness=40:59, delta=1, abundances=inputAbunds, iterations=2))
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community

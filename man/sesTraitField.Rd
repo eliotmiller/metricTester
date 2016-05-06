@@ -6,7 +6,7 @@
 \usage{
 sesTraitField(trait.distance, tree, picante.cdm, metric, null, randomizations,
   distances.among = NULL, abundance.matters = TRUE,
-  abundance.assigned = "directly", cores = 2)
+  abundance.assigned = "directly", cores = "seq")
 }
 \arguments{
 \item{trait.distance}{Symmetrical matrix summarizing pairwise trait distances.}
@@ -69,10 +69,9 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #simulate a community data matrix with these inputs
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-#below not run for timing issues on CRAN
 #example trait field calculations
-#exampleField <- sesTraitField(trait.distance=dists, tree=tree, picante.cdm=cdm,
-	#metric="naw.mpd", null="richness", randomizations=10, cores=2)
+exampleField <- sesTraitField(trait.distance=dists, tree=tree, picante.cdm=cdm,
+	metric="naw.mpd", null="richness", randomizations=10)
 }
 \references{
 Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of

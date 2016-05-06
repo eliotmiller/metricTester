@@ -57,9 +57,6 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	distances.among=NULL, abundance.matters=TRUE, abundance.assigned="directly",
 	cores="seq")
 {
-	#register parallel backend
-	registerDoParallel(cores)
-	
 	#calculate the observed phylo field
 	observed <- phyloField(tree, picante.cdm, metric)
 	
@@ -72,22 +69,68 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	#save into the relevant row of the tempMatrix
 	if(null == "dispersal")
 	{
-		tempMatrix <-
-		foreach(i=1:randomizations, .combine='rbind') %dopar%
+		#if cores is set to sequential, don't run in parallel
+		if(cores == "seq")
 		{
-			tempCDM <- dispersalNull(picante.cdm=picante.cdm, tree=tree,
-				distances.among=distances.among, abundance.matters=abundance.matters,
-				abundance.assigned=abundance.assigned)
-			phyloField(tree, tempCDM, metric)
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",call.=FALSE)
+			tempMatrix <-
+			foreach(i=1:randomizations, .combine='rbind') %do%
+			{
+				tempCDM <- dispersalNull(picante.cdm=picante.cdm, tree=tree,
+					distances.among=distances.among, abundance.matters=abundance.matters,
+					abundance.assigned=abundance.assigned)
+				phyloField(tree, tempCDM, metric)
+			}
+		}
+
+		if(cores != "seq")
+		{
+			#register parallel backend
+			registerDoParallel(cores)
+	
+			tempMatrix <-
+			foreach(i=1:randomizations, .combine='rbind') %dopar%
+			{
+				tempCDM <- dispersalNull(picante.cdm=picante.cdm, tree=tree,
+					distances.among=distances.among, abundance.matters=abundance.matters,
+					abundance.assigned=abundance.assigned)
+				phyloField(tree, tempCDM, metric)
+			}
+			
+			#properly unregister parallel backend
+			registerDoSEQ()
 		}
 	}
 	else if(null == "richness")
 	{
-		tempMatrix <-
-		foreach(i=1:randomizations, .combine='rbind') %dopar%
+		if(cores == "seq")
 		{
-			tempCDM <- picante::randomizeMatrix(samp=picante.cdm, null.model="richness")
-			phyloField(tree, tempCDM, metric)
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",call.=FALSE)
+
+			tempMatrix <-
+			foreach(i=1:randomizations, .combine='rbind') %do%
+			{
+				tempCDM <- picante::randomizeMatrix(samp=picante.cdm, null.model="richness")
+				phyloField(tree, tempCDM, metric)
+			}
+		}
+
+		if(cores != "seq")
+		{
+			#register parallel backend
+			registerDoParallel(cores)
+	
+			tempMatrix <-
+			foreach(i=1:randomizations, .combine='rbind') %dopar%
+			{
+				tempCDM <- picante::randomizeMatrix(samp=picante.cdm, null.model="richness")
+				phyloField(tree, tempCDM, metric)
+			}
+			
+			#properly unregister parallel backend
+			registerDoSEQ()
 		}
 	}
 	else
@@ -102,8 +145,6 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	#bind these to the observed values, calculate SES values and return a data frame
 	results <- data.frame(observed, metric.mean, metric.sd)
 	results$SES <- (results$observed-results$metric.mean)/results$metric.sd
-
-	registerDoSEQ()
 
 	results
 }
