@@ -12,8 +12,8 @@ Depends:
     R (>= 3.1.1),
     ape
 Imports:
-	methods,
-	geiger,
+    methods,
+    geiger,
     spacodiR,
     dplyr,
     picante,
@@ -24,3 +24,4 @@ Suggests:
     testthat
 License: GPL-3
 LazyData: true
+RoxygenNote: 5.0.1
