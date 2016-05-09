@@ -53,7 +53,7 @@
 #'
 #' #below not run for timing issues on CRAN
 #' #test <- expectations(picante.cdm=cdm, tree=tree, optional.dists=NULL,
-#'	#regional.abundance=NULL, distances.among=NULL, randomizations=3, cores=1,
+#'	#regional.abundance=NULL, distances.among=NULL, randomizations=3, cores="seq",
 #'	#nulls=list("richness"=metricTester:::my_richnessNull), 
 #'	#metrics=list("richness"=metricTester:::my_richness, "NAW_MPD"=metricTester:::naw_mpd),
 #'	#concat.by="both", output.raw=FALSE)

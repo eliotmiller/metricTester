@@ -135,17 +135,22 @@ varyX <-  function(alpha=TRUE, tree.size, richness, delta, abundances,
 varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundances,
 	beta.iterations, iterations, cores)
 {
+	#this function is not exported. it is called by varyX.
+	#if the input is not a list, coerce to list
 	if(!is.list(tree.sizes))
 	{
 		tree.sizes <- as.list(tree.sizes)
 	}
-	
+
+	#if alpha is true, run the alpha diversity phylo metric pipeline	
 	if(alpha==TRUE)
 	{
+		#if cores is set to seq, do not register parallel cores
 		if(cores == "seq")
 		{
 			#warn that the analysis is being run sequentially
-			warning("Not running analysis in parallel. See 'cores' argument.", call.=FALSE)
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
 			
 			results <- foreach(i = 1:iterations) %do%
 			{
@@ -154,6 +159,8 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 					richness.vector=richness.vector, delta=delta, abundances))
 			}
 		}
+		#if cores is not set to seq, spawn the number of cores requested. note that there
+		#are currently no checks to ensure the input is a valid number of cores or "seq"
 		if(cores != "seq")
 		{
 			registerDoParallel(cores)
@@ -171,14 +178,17 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 			names(results[[i]]) <- paste("tree.size", 1:length(tree.sizes), sep="")
 		}
 	}
+
+	#if alpha is false, run the beta diversity metrics pipeline
 	else if(alpha==FALSE)
 	{
 		if(cores == "seq")
 		{
 			#warn that the analysis is being run sequentially
-			warning("Not running analysis in parallel. See 'cores' argument.", call.=FALSE)
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
 			
-			results <- foreach(i = 1:iterations) %dop%
+			results <- foreach(i = 1:iterations) %do%
 			{
 				lapply(seq_along(tree.sizes), function(x)
 					betaMetricSims(tree.size=tree.sizes[[x]], 
@@ -187,6 +197,8 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 			}
 		}
 
+		#if cores is not set to seq, spawn the number of cores requested. note that there
+		#are currently no checks to ensure the input is a valid number of cores or "seq"
 		if(cores != "seq")
 		{
 			registerDoParallel(cores)	
@@ -200,6 +212,7 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 			}
 			registerDoSEQ()
 		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("tree.size", 1:length(tree.sizes), sep="")
@@ -214,36 +227,86 @@ varyTreeSize <- function(alpha=TRUE, tree.sizes, richness.vector, delta, abundan
 varyRichness <- function(alpha=TRUE, tree.size, richness.vectors, delta, abundances,
 	beta.iterations, iterations, cores)
 {
+	#this function is not exported. it is called by varyX.
+	#if the input is not a list, coerce to list
 	if(!is.list(richness.vectors))
 	{
 		richness.vectors <- as.list(richness.vectors)
 	}
 
-	registerDoParallel(cores)
-
+	#if alpha is true, run the alpha diversity phylo metric pipeline	
 	if(alpha==TRUE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		#if cores is set to seq, do not register parallel cores
+		if(cores == "seq")
 		{
-			lapply(seq_along(richness.vectors), function(x)
-				alphaMetricSims(tree.size=tree.size, 
-				richness.vector=richness.vectors[[x]], delta=delta, abundances))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
+
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(richness.vectors), function(x)
+					alphaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vectors[[x]], delta=delta, abundances))
+			}
 		}
+		
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)
+
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(richness.vectors), function(x)
+					alphaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vectors[[x]], delta=delta, abundances))
+			}
+
+			registerDoSEQ()
+		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("richness.vector", 1:length(richness.vectors),
 				sep="")
 		}
 	}
+
+	#if alpha is false, run the beta diversity metrics pipeline
 	else if(alpha==FALSE)
-	{
-		results <- foreach(i = 1:iterations) %dopar%
+	{	
+		#if cores is set to seq, do not register parallel cores
+		if(cores == "seq")
 		{
-			lapply(seq_along(richness.vectors), function(x)
-				betaMetricSims(tree.size=tree.size, 
-				richness.vector=richness.vectors[[x]], delta=delta, abundances,
-				beta.iterations))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
+
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(richness.vectors), function(x)
+					betaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vectors[[x]], delta=delta, abundances,
+					beta.iterations))
+			}
 		}
+
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)
+			
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(richness.vectors), function(x)
+					betaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vectors[[x]], delta=delta, abundances,
+					beta.iterations))
+			}
+			
+			registerDoSEQ()
+		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("richness.vector", 1:length(richness.vectors),
@@ -253,43 +316,91 @@ varyRichness <- function(alpha=TRUE, tree.size, richness.vectors, delta, abundan
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
-	registerDoSEQ()
-
 	results
 }
 
 varyTreeShape <- function(alpha=TRUE, tree.size, richness.vector, deltas, abundances,
 	beta.iterations, iterations, cores)
 {
+	#this function is not exported. it is called by varyX.
+	#if the input is not a list, coerce to list
 	if(!is.list(deltas))
 	{
 		deltas <- as.list(deltas)
 	}
 
-	registerDoParallel(cores)
-
+	#if alpha is true, run the alpha diversity phylo metric pipeline	
 	if(alpha==TRUE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		#if cores is set to seq, do not register parallel cores
+		if(cores == "seq")
 		{
-			lapply(seq_along(deltas), function(x)
-				alphaMetricSims(tree.size=tree.size, 
-				richness.vector=richness.vector, delta=deltas[[x]], abundances))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
+
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(deltas), function(x)
+					alphaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=deltas[[x]], abundances))
+			}
 		}
+
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)
+			
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(deltas), function(x)
+					alphaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=deltas[[x]], abundances))
+			}
+
+			registerDoSEQ()
+		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("tree.shape", 1:length(deltas), sep="")
 		}
 	}
+
+	#if alpha is false, run the beta diversity metrics pipeline
 	else if(alpha==FALSE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		#if cores is set to seq, do not register parallel cores
+		if(cores == "seq")
 		{
-			lapply(seq_along(deltas), function(x)
-				betaMetricSims(tree.size=tree.size, 
-				richness.vector=richness.vector, delta=deltas[[x]], abundances,
-				beta.iterations))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
+
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(deltas), function(x)
+					betaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=deltas[[x]], abundances,
+					beta.iterations))
+			}
 		}
+
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)
+
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(deltas), function(x)
+					betaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=deltas[[x]], abundances,
+					beta.iterations))
+			}
+
+			registerDoSEQ()
+		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("tree.shape", 1:length(deltas), sep="")
@@ -298,43 +409,95 @@ varyTreeShape <- function(alpha=TRUE, tree.size, richness.vector, deltas, abunda
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
-	registerDoSEQ()
-
 	results
 }
 
 varyAbundance <- function(alpha=TRUE, tree.size, richness.vector, delta, multi.abundances,
 	beta.iterations, iterations, cores)
 {
+	#this function is not exported. it is called by varyX.
+	#if the input is not a list, coerce to list
 	if(!is.list(multi.abundances))
 	{
 		multi.abundances <- as.list(multi.abundances)
 	}
 
-	registerDoParallel(cores)
-
+	#if alpha is true, run the alpha diversity phylo metric pipeline	
 	if(alpha==TRUE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		#if cores is set to seq, do not register parallel cores
+		if(cores == "seq")
 		{
-			lapply(seq_along(multi.abundances), function(x)
-				alphaMetricSims(tree.size=tree.size, 
-				richness.vector=richness.vector, delta=delta, multi.abundances[[x]]))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
+
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(multi.abundances), function(x)
+					alphaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=delta, multi.abundances[[x]]))
+			}
 		}
+		
+		#if cores is not set to seq, spawn the number of cores requested. note that there
+		#are currently no checks to ensure the input is a valid number of cores or "seq"
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)	
+
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(multi.abundances), function(x)
+					alphaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=delta, multi.abundances[[x]]))
+			}
+			
+			registerDoSEQ()
+		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("abundance", 1:length(multi.abundances), sep="")
 		}
 	}
+
+	#if alpha is false, run the beta diversity metrics pipeline
 	else if(alpha==FALSE)
 	{
-		results <- foreach(i = 1:iterations) %dopar%
+		#if cores is set to seq, do not register parallel cores
+		if(cores == "seq")
 		{
-			lapply(seq_along(multi.abundances), function(x)
-				betaMetricSims(tree.size=tree.size, 
-				richness.vector=richness.vector, delta=delta, multi.abundances[[x]],
-				beta.iterations))
+			#warn that the analysis is being run sequentially
+			warning("Not running analysis in parallel. See 'cores' argument.",
+				call.=FALSE)
+
+			results <- foreach(i = 1:iterations) %do%
+			{
+				lapply(seq_along(multi.abundances), function(x)
+					betaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=delta, multi.abundances[[x]],
+					beta.iterations))
+			}
 		}
+
+		#if cores is not set to seq, spawn the number of cores requested. note that there
+		#are currently no checks to ensure the input is a valid number of cores or "seq"
+		if(cores != "seq")
+		{
+			registerDoParallel(cores)	
+
+			results <- foreach(i = 1:iterations) %dopar%
+			{
+				lapply(seq_along(multi.abundances), function(x)
+					betaMetricSims(tree.size=tree.size, 
+					richness.vector=richness.vector, delta=delta, multi.abundances[[x]],
+					beta.iterations))
+			}
+			
+			registerDoSEQ()
+		}
+
 		for(i in 1:length(results))
 		{
 			names(results[[i]]) <- paste("abundance", 1:length(multi.abundances), sep="")
@@ -343,7 +506,5 @@ varyAbundance <- function(alpha=TRUE, tree.size, richness.vector, delta, multi.a
 	
 	names(results) <- paste("iteration", 1:iterations, sep="")
 	
-	registerDoSEQ()
-
 	results
 }
