@@ -1,6 +1,6 @@
 # metricTester 1.0.1
 
-* I now explicitly stop all clusters that are started so that examples pass Windows checks.
+* Added code to run all parallel functions sequentially by default. User must now explicitly invoke parallel processing, to avoid issues on Windows machines.
 
 # metricTester 1.0.0
 
