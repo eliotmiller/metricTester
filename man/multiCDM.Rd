@@ -39,8 +39,11 @@ competition.iterations=5)
 #run the spatial simulations
 arenas <- runSimulations(prepped)
 
-#derive CDMs. plots are placed in the same places across all spatial simulations
-cdms <- multiCDM(arenas, no.plots=10, plot.length=20)
+#derive CDMs. plots are placed in the same places across all spatial simulations.
+#density of individuals per arena is low enough in this example that sometimes all
+#plots contain < 2 species, and are cut, causing an error. this not run so as not to
+#throw errors on CRAN
+#cdms <- multiCDM(arenas, no.plots=10, plot.length=20)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
