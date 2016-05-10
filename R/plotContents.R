@@ -81,12 +81,21 @@ plotContents <- function(arena, plotPlacer.results)
 	
 	#identify plots that have fewer than 2 species. pull their tempPlot ID.
 	toCut <- row.names(com.results)[apply(com.results, 1, lengthNonZeros) < 2]
+
+	#add a stop here that if the number of plots to cut is equal to the number of plots
+	#total, it stops and warns what happened
+	if(length(toCut) == dim(plotPlacer.results$plot.bounds)[1])
+	{
+		stop("No plots contained >2 spp. Try increasing density of individuals in arena.",
+			call.=FALSE)
+	}
 	
 	#pull these plots out of the CDM and out of the dists object
 	com.results <- com.results[!(row.names(com.results) %in% toCut),]
 	#first rows of distance object
 	plotPlacer.results$dists <-
 		plotPlacer.results$dists[!(row.names(plotPlacer.results$dists) %in% toCut),]
+
 	#now columns of distance object
 	plotPlacer.results$dists <-
 		plotPlacer.results$dists[,!(colnames(plotPlacer.results$dists) %in% toCut)]	
