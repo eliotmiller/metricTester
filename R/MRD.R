@@ -4,7 +4,7 @@
 #' and a phylogeny, calculate the mean root distance of the set of taxa in each site.
 #'
 #' @param samp A picante-style community data matrix with sites as rows, and
-#' species as columns
+#' species as columns.
 #' @param tree An ape-style phylogeny.
 #' 
 #' @details Mean root distance (MRD) as originally formulated by Kerr & Currie (1999)

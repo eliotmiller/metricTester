@@ -2,34 +2,50 @@
 % Please edit documentation in R/distMRCA.R
 \name{distMRCA}
 \alias{distMRCA}
-\title{Calculate distances to most recent common ancestors}
+\title{Calculate plot-level distances to most recent common ancestors}
 \usage{
-distMRCA(samp, tree)
+distMRCA(samp, tree, pairwise)
 }
 \arguments{
 \item{samp}{A picante-style community data matrix with sites as rows, and
-species as columns}
+species as columns.}
 
 \item{tree}{An ape-style phylogeny.}
+
+\item{pairwise}{}
 }
 \value{
-A vector of MRD values, calculated according to the method specified.
+A vector of distMRCA values.
 }
 \description{
 Given a picante-style community data matrix (sites are rows, species are columns), 
 and a phylogeny, calculate the distances of sets of taxa to their MRCA.
 }
 \details{
-A here define a new measure 
-the mean branch length between a set of taxa and their most recent common ancestor
-(MRCA). Large values of this new measure ("distMRCA") correspond to taxa with a
+Experimental metrics! This function calculates two simple but potentially
+useful measures. The first, accessed by setting pairwise to FALSE,
+is the mean branch length between a set of taxa and their most recent common ancestor
+(MRCA). I have not seen this used in the literature before, but it seems likely I'm
+wrong. This metric was not tested in our recent Ecography review, but given
+certain data structures, it seems potentially useful. In other cases, the MRCA will
+often simply be the root of the tree, and the metric will perhaps be of less use. 
+Large values of the version of distMRCA correspond to taxa with a
 distant MRCA, while small values correspond to taxa with a more recent MRCA.
-To calculate the original MRD, keep node.based as the default (TRUE). To access
-distMRCA, set node.based to FALSE. In an ultrametric tree, the mean distance
+Given an ultrametric tree, the mean distance
 between a set of taxa and a single ancestor is of course equal to the distance between
 one of those taxa and the ancestor. However, in case an ultrametric tree is passed
-to the function, I do indeed define it as the mean distance between all present taxa
-and their MRCA. It will throw a warning if a non-ultrametric tree is passed along.
+to the function, I do define it as the mean distance between all present taxa
+and their MRCA. It will throw a warning if a non-ultrametric tree is passed along. The
+second measure calculated by this function is accessed by setting pairwise to TRUE.
+Here, per plot, the metric finds the distance of the MRCA of each pairwise taxon
+comparison from the root. The value returned per plot is then the mean of these
+distances. In contrast to the first flavor of this metric, large values of this metric
+correspond to plots where the taxa present are more recently derived, while small
+values correspond to plots where the taxa are less recently derived (average common
+ancestor closer to the root). To make these measures more comparable, it may be better
+subtract the final values from the total tree height (with caveat about ultrametric
+tree above). It would also be easy to derive an abundance weighted version of this
+function.
 }
 \examples{
 #simulate tree with birth-death process
@@ -39,15 +55,9 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-dists <- ape::cophenetic.phylo(tree)
-
-results <- modifiedMPD(cdm, dists, abundance.weighted = "interspecific")
+results <- distMRCA(cdm, tree, pairwise=FALSE)
 }
 \references{
 Miller, E. T. 2016. Random thoughts.
-
-Kerr, J. T. and D. J. Currie. 1999. The relative importance of evolutionary and
-environmental controls on broad-scale patterns of species richness in North America.
-Ecoscience 6:329-337.
 }
 

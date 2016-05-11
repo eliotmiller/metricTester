@@ -8,7 +8,7 @@ MRD(samp, tree)
 }
 \arguments{
 \item{samp}{A picante-style community data matrix with sites as rows, and
-species as columns}
+species as columns.}
 
 \item{tree}{An ape-style phylogeny.}
 }
