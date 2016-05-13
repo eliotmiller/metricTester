@@ -4,6 +4,16 @@
 ################################## ALPHA METRICS #########################################
 ##########################################################################################
 
+#CRITICAL STEP RIGHT HERE. NOTE THAT YOU ARE REVERSING THE DIRECTIONALITY OF IAC FROM WHAT
+#IT IS DEFINED AS, AND ALSO DIFFERENTLY THAN YOUR ORIGINAL SUBMISSION. THIS MEANS YOU DONT
+#NEED TO DO ANY SWITCHING OF EXPECTATIONS DOWNSTREAM, BUT REMEMBER TO REMOVE PRE-EXISTING
+#CODE THAT ACCOUNTS FOR WHAT YOU FIXED HERE
+IAC <- function(metrics.input)
+{
+	iac <- iac(metrics.input$ecoPD.cdm) * -1
+	iac
+}
+
 my_richness <- function(metrics.input)
 	apply(metrics.input$picante.cdm, 1, lengthNonZeros)
 
@@ -67,8 +77,11 @@ my_QE <- function(metrics.input)
 	QE
 }
 
-my_MRD <- function(metrics.input)
+naw_mrd <- function(metrics.input)
 	MRD(metrics.input$picante.cdm, metrics.input$tree, abundance.weighted=FALSE)
+
+aw_mrd <- function(metrics.input)
+	MRD(metrics.input$picante.cdm, metrics.input$tree, abundance.weighted=TRUE)
 
 my_distMRCA1 <- function(metrics.input)
 	distMRCA(metrics.input$picante.cdm, metrics.input$tree, pairwise=FALSE)

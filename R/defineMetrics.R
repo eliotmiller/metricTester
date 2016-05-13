@@ -36,6 +36,9 @@ defineMetrics <- function()
 	"PSE"=my_pse,
 	"PD"=my_PD,
 	"PD_Cadotte"=my_PD_Cadotte,
-	"QE"=my_QE
+	"QE"=my_QE,
+	"IAC"=IAC,
+	"NAW_MRD"=naw_mrd,
+	"AW_MRD"=aw_mrd
 	)
 }

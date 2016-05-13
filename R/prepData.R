@@ -47,7 +47,7 @@ prepData <- function(tree, picante.cdm, optional.dists=NULL)
 	}
 	else
 	{
-		dists <- ape::cophenetic.phylo(tree)
+		dists <- cophenetic(tree)
 	}
 		
 	#you have a check in plotContents to exclude plots w < 2 spp, but after
@@ -55,7 +55,8 @@ prepData <- function(tree, picante.cdm, optional.dists=NULL)
 	#these. note that dplyr does not need even sample sizes or anything like that, so
 	#this should hopefully work
 	picante.cdm <- picante.cdm[apply(picante.cdm, 1, lengthNonZeros) >= 2,]
-	dat   <- list("tree"=tree, "dists"=dists, "picante.cdm"=picante.cdm)
+	ecoPD.cdm <- suppressWarnings(phylo4com(tree, t(picante.cdm)))
+	dat   <- list("tree"=tree, "dists"=dists, "picante.cdm"=picante.cdm, "ecoPD.cdm"=ecoPD.cdm)
 	class(dat) <- c("list", "metrics.input")
 	dat
 }
