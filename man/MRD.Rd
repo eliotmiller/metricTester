@@ -33,7 +33,10 @@ that "one" speciation event has occurred along that branch since the origin of t
 clade (all caveats about extinction and phylogenetic sampling aside). The
 abundance-weighted form of this calculation takes a row-wise (plot-wise) weighted-mean
 where the values are a species' node-distance to the root, and the
-weights are a species' abundance in the input community data matrix.
+weights are a species' abundance in the input community data matrix. I ran a quick test
+to see whether abundance-weighted MRD might be equal to IAC of Cadotte et al. (2010),
+and it does not seem to be. Therefore its utility is unknown (as is that of
+non-abundance weighted MRD).
 }
 \examples{
 #simulate tree with birth-death process
