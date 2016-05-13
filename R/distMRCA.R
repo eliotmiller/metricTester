@@ -22,17 +22,25 @@
 #' between a set of taxa and a single ancestor is of course equal to the distance between
 #' one of those taxa and the ancestor. However, in case an ultrametric tree is passed
 #' to the function, I do define it as the mean distance between all present taxa
-#' and their MRCA. It will throw a warning if a non-ultrametric tree is passed along. The
-#' second measure calculated by this function is accessed by setting pairwise to TRUE.
+#' and their MRCA. It will throw a warning if a non-ultrametric tree is passed along. 
+#'
+#' The second measure calculated by this function is accessed by setting pairwise to TRUE.
 #' Here, per plot, the metric finds the distance of the MRCA of each pairwise taxon
 #' comparison from the root. The value returned per plot is then the mean of these
-#' distances. In contrast to the first flavor of this metric, large values of this metric
+#' distances. DANGER. Because this second option calculates all
+#' pairwise comparisons, the time it takes to run grows exponentially with the size of the
+#' commuity data matrix. For instance, on my personal computer,
+#' pairwise distMRCA was calculated in 0.2 seconds
+#' for a CDM with 16 plots containing between 10 and 25 species each. However, for a CDM
+#' with 100 plots containing between 25 and 55 species, it took 42s.
+#' In contrast to the first flavor of this metric, large values of this metric
 #' correspond to plots where the taxa present are more recently derived, while small
 #' values correspond to plots where the taxa are less recently derived (average common
 #' ancestor closer to the root). To make these measures more comparable, it may be better
 #' subtract the final values from the total tree height (with caveat about ultrametric
 #' tree above). It would also be easy to derive an abundance weighted version of this
-#' function.
+#' function. UPDATE. It appears that this second form is yet another (slower) way of
+#' deriving the calculation of MPD/PSV.
 #'
 #' @return A vector of distMRCA values.
 #'

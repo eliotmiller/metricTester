@@ -6,6 +6,8 @@
 #' @param samp A picante-style community data matrix with sites as rows, and
 #' species as columns.
 #' @param tree An ape-style phylogeny.
+#' @param abundance.weighted Whether to weight the calculation by the abundance of a given
+#' species in a given plot.
 #' 
 #' @details Mean root distance (MRD) as originally formulated by Kerr & Currie (1999)
 #' defined MRD as the mean number of nodes between a set
@@ -14,8 +16,10 @@
 #' root of the tree be considered to be separated by zero or one nodes from the root? I
 #' have chosen to define it as one, but am open to changing it. This definition emphasizes
 #' that "one" speciation event has occurred along that branch since the origin of the
-#' clade (all caveats about extinction and phylogenetic sampling aside). If there is
-#' interest, I could easily write an abundance-weighted version of this.
+#' clade (all caveats about extinction and phylogenetic sampling aside). The
+#' abundance-weighted form of this calculation takes a row-wise (plot-wise) weighted-mean
+#' where the values are a species' node-distance to the root, and the
+#' weights are a species' abundance in the input community data matrix.
 #'
 #' @return A vector of MRD values.
 #'
@@ -36,9 +40,9 @@
 #'
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
-#' results <- MRD(cdm, tree)
+#' results <- MRD(cdm, tree, abundance.weighted=FALSE)
 
-MRD <- function(samp, tree)
+MRD <- function(samp, tree, abundance.weighted)
 {
 	#set all branches equal to length of 1, then compute distances between all nodes.
 	#because branches are set to 1, this is just the number of nodes between each node
@@ -60,9 +64,25 @@ MRD <- function(samp, tree)
 	temp <- data.frame(plot=temp$plot, abund=temp$nodes, id=temp$id)
 	cdm <- picante::sample2matrix(temp)
 
-	#set 0s to NA, then take the row-wise mean, excluding NAs
-	cdm[cdm==0] <- NA
-	results <- rowMeans(cdm, na.rm=TRUE)
+	if(abundance.weighted==FALSE)
+	{
+		#set 0s to NA, then take the row-wise mean, excluding NAs
+		cdm[cdm==0] <- NA
+		results <- rowMeans(cdm, na.rm=TRUE)
+	}
 	
+	if(abundance.weighted==TRUE)
+	{
+		#had trouble getting an apply function to work combining these two frames within
+		#the function, so combine them first
+		combined <- cbind(cdm, samp)
+		
+		#now take a weighted mean where the first half of each row of each data frame is
+		#the root distance matrix, and the second half are the weights, and run this kind
+		#of inelegant apply statement over it to take weighted means
+		results <- apply(combined, 1, function(y)
+			weighted.mean(x=y[1:(dim(combined)[2]/2)],
+			w=y[((dim(combined)[2]/2)+1):dim(combined)[2]]))
+	}
 	results
 }

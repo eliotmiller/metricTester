@@ -4,13 +4,16 @@
 \alias{MRD}
 \title{Calculate mean root distance}
 \usage{
-MRD(samp, tree)
+MRD(samp, tree, abundance.weighted)
 }
 \arguments{
 \item{samp}{A picante-style community data matrix with sites as rows, and
 species as columns.}
 
 \item{tree}{An ape-style phylogeny.}
+
+\item{abundance.weighted}{Whether to weight the calculation by the abundance of a given
+species in a given plot.}
 }
 \value{
 A vector of MRD values.
@@ -27,8 +30,10 @@ the tip itself. In other words, should a species connected directly to the
 root of the tree be considered to be separated by zero or one nodes from the root? I
 have chosen to define it as one, but am open to changing it. This definition emphasizes
 that "one" speciation event has occurred along that branch since the origin of the
-clade (all caveats about extinction and phylogenetic sampling aside). If there is
-interest, I could easily write an abundance-weighted version of this.
+clade (all caveats about extinction and phylogenetic sampling aside). The
+abundance-weighted form of this calculation takes a row-wise (plot-wise) weighted-mean
+where the values are a species' node-distance to the root, and the
+weights are a species' abundance in the input community data matrix.
 }
 \examples{
 #simulate tree with birth-death process
@@ -38,7 +43,7 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-results <- MRD(cdm, tree)
+results <- MRD(cdm, tree, abundance.weighted=FALSE)
 }
 \references{
 Kerr, J. T. and D. J. Currie. 1999. The relative importance of evolutionary

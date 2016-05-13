@@ -68,7 +68,13 @@ my_QE <- function(metrics.input)
 }
 
 my_MRD <- function(metrics.input)
-	MRD(metrics.input$picante.cdm, metrics.input$tree)
+	MRD(metrics.input$picante.cdm, metrics.input$tree, abundance.weighted=FALSE)
+
+my_distMRCA1 <- function(metrics.input)
+	distMRCA(metrics.input$picante.cdm, metrics.input$tree, pairwise=FALSE)
+
+my_distMRCA2 <- function(metrics.input)
+	distMRCA(metrics.input$picante.cdm, metrics.input$tree, pairwise=TRUE)
 
 ##########################################################################################
 ################################### BETA METRICS #########################################
