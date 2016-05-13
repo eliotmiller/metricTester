@@ -1,6 +1,10 @@
+# metricTester 1.0.3
+
+* Added mean root distance (MRD) and mean distance to the most recent common ancestor of a sample (distMRCA). For MRD, added both presence-absence and abundance-weighted forms, and for distMRCA, added ability to calculate both the distance to the overall MRCA of a sample, and the distance to the average of the pairwise MRCAs.
+
 # metricTester 1.0.2
 
-* In metricTester, any plot that contains fewer than 2 species is cut from analysis. In this update, I added a check to see whether all plots contain fewer than 2 species, and would cause the analysis to fail. Currently the function still just throws an error, with a more descriptive error message. Could easily change to resample new plots within the arena, but the truth is that if this happens once, it's likely that it will happen on another iteration. It's instead better to stop the simulation and restart with an increased density of individuals in the arena.
+* Added more informative error message for instances where the specified simulation parameters yield community data matrices with insufficient individuals/species.
 
 # metricTester 1.0.1
 
