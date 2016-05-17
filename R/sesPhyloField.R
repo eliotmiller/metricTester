@@ -18,7 +18,13 @@
 #' specify the desired number of cores to utilize. The default is "seq", which runs the
 #' calculations sequentially.
 #' 
-#' @details The trait distance matrix should be symmetrical and "complete". See example.
+#' @details This function is being deprecated. This and the rest of the first generation
+#' of field functions are being replaced by a two-step process akin to the calcMetrics
+#' set of functions. The user first preps the data with a prep function, then runs the
+#' desired metrics and nulls over the prepped object. This allows sets of metrics to be
+#' calculated over the same randomized matrix, rather than having to repeatedly generate
+#' the same random matrix for each metric.
+#' The trait distance matrix should be symmetrical and "complete". See example.
 #' Currently only non-abundance-weighted mean pairwise and interspecific
 #' abundance-weighted mean pairwise phylogenetic distances are implemented. The
 #' only null models that are currently implemented are the richness and dispersal nulls.
@@ -57,6 +63,10 @@ sesPhyloField <- function(tree, picante.cdm, metric, null, randomizations,
 	distances.among=NULL, abundance.matters=TRUE, abundance.assigned="directly",
 	cores="seq")
 {
+	#use the .deprecate function from geiger, in your utils.R file to warn this function
+	#will be deprecated soon
+	.deprecate("sesPhyloField", "sesField")
+
 	#calculate the observed phylo field
 	observed <- phyloField(tree, picante.cdm, metric)
 	

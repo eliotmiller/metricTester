@@ -67,7 +67,7 @@ calcField <- function(field.input, metrics)
 		#make a temporary vector of fields you will save the species' fields into
 		temp <- c()
 		
-		for(j in 1:length(tree$tip.label))
+		for(j in 1:length(field.input$tree$tip.label))
 		{
 			if(names(cellResults)[i] %in% c("NAW_MPD", "NAW_MNTD", "PSV", "PSC", "PD",
 				"PD_Cadotte"))

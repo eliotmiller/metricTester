@@ -21,7 +21,13 @@ Named vector of species' phylogenetic fields.
 Calculate the phylogenetic relatedness of a species to those it occurs with.
 }
 \details{
-Currently this is only programmed to use either non-abundance-weighted mean
+This function is being deprecated. This and the rest of the first generation
+of field functions are being replaced by a two-step process akin to the calcMetrics
+set of functions. The user first preps the data with a prep function, then runs the
+desired metrics and nulls over the prepped object. This allows sets of metrics to be
+calculated over the same randomized matrix, rather than having to repeatedly generate
+the same random matrix for each metric. Currently this is only programmed to use either
+non-abundance-weighted mean
 pairwise or interspecific abundance-weighted mean pairwise phylogenetic distance.
 Importantly, we are in the process of generalizing the phylo & trait
 field functions, so they operate more like the calcMetrics functions. In other words,

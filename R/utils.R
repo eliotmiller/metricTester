@@ -505,3 +505,12 @@ failed <- function(single.iteration, concat.by)
 	temp
 	
 }
+
+#this is a function borrowed from geiger to inform when a function is going to be
+#deprecated
+
+.deprecate <- function (prev, curr, ...) 
+{
+    warning(paste(sQuote(prev), "is being deprecated: use", paste(sQuote(curr), 
+        "instead", collapse = " or "), sep = " "), call.=FALSE, ...)
+}

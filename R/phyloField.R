@@ -7,7 +7,13 @@
 #' species as columns
 #' @param metric Phylogenetic metric of choice (see details)
 #' 
-#' @details Currently this is only programmed to use either non-abundance-weighted mean
+#' @details This function is being deprecated. This and the rest of the first generation
+#' of field functions are being replaced by a two-step process akin to the calcMetrics
+#' set of functions. The user first preps the data with a prep function, then runs the
+#' desired metrics and nulls over the prepped object. This allows sets of metrics to be
+#' calculated over the same randomized matrix, rather than having to repeatedly generate
+#' the same random matrix for each metric. Currently this is only programmed to use either
+#' non-abundance-weighted mean
 #' pairwise or interspecific abundance-weighted mean pairwise phylogenetic distance.
 #' Importantly, we are in the process of generalizing the phylo & trait
 #' field functions, so they operate more like the calcMetrics functions. In other words,
@@ -39,6 +45,10 @@
 
 phyloField <- function(tree, picante.cdm, metric)
 {
+	#use the .deprecate function from geiger, in your utils.R file to warn this function
+	#will be deprecated soon
+	.deprecate("phyloField", "calcField")
+
 	#if user passes a tree that contains species that are not in the cdm, prune the tree
 	#down to those species
 	if(length(setdiff(tree$tip.label, colnames(picante.cdm))) > 0)

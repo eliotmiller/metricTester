@@ -8,7 +8,13 @@
 #' species as columns
 #' @param metric Phylogenetic metric of choice (see details)
 #' 
-#' @details The trait distance matrix should be symmetrical and "complete". See example.
+#' @details This function is being deprecated. This and the rest of the first generation
+#' of field functions are being replaced by a two-step process akin to the calcMetrics
+#' set of functions. The user first preps the data with a prep function, then runs the
+#' desired metrics and nulls over the prepped object. This allows sets of metrics to be
+#' calculated over the same randomized matrix, rather than having to repeatedly generate
+#' the same random matrix for each metric.
+#' The trait distance matrix should be symmetrical and "complete". See example.
 #' Currently this is only programmed to use either non-abundance-weighted mean
 #' pairwise or interspecific abundance-weighted mean pairwise phylogenetic distance.
 #' Importantly, we are in the process of generalizing the phylo & trait
@@ -48,6 +54,10 @@
 
 traitField <- function(trait.distance, picante.cdm, metric)
 {
+	#use the .deprecate function from geiger, in your utils.R file to warn this function
+	#will be deprecated soon
+	.deprecate("traitField", "calcField")
+	
 	#if user passes a trait.distance matrix that contains species that are not in the cdm,
 	#prune the tree down to those species
 	if(length(setdiff(rownames(trait.distance), colnames(picante.cdm))) > 0)

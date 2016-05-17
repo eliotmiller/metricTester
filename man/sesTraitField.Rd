@@ -45,6 +45,12 @@ species-specific standarized effect size.
 Calculate the null-model standardized effect size of a species' trait field.
 }
 \details{
+This function is being deprecated. This and the rest of the first generation
+of field functions are being replaced by a two-step process akin to the calcMetrics
+set of functions. The user first preps the data with a prep function, then runs the
+desired metrics and nulls over the prepped object. This allows sets of metrics to be
+calculated over the same randomized matrix, rather than having to repeatedly generate
+the same random matrix for each metric.
 The trait distance matrix should be symmetrical and "complete". See example.
 Currently only non-abundance-weighted mean pairwise and interspecific
 abundance-weighted mean pairwise phylogenetic distances are implemented. The

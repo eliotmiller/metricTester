@@ -2,21 +2,20 @@
 #'
 #' Calculate the null-model standardized effect size of a species' trait field.
 #'
-#' @param trait.distance Symmetrical matrix summarizing pairwise trait distances.
-#' @param tree Phylo object.
-#' @param picante.cdm A picante-style community data matrix with sites as rows, and
-#' species as columns.
-#' @param metric Phylogenetic metric of choice (see details).
-#' @param null Null model of choice (see details).
+#' @param field.input Prepped field.input object.
+#' @param metrics Optional list of named metric functions to use. If invoked, this option
+#' will likely be used to run a subset of the defined metrics.
+#' @param nulls Optional list of named null model functions to use. If invoked, this 
+#' option will likely be used to run a subset of the defined null models.
 #' @param randomizations The number of times the input CDM should be randomized and the
 #' metrics calculated across it.
+#' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
+#' Optional, will be generated from the input CDM if not provided.
 #' @param distances.among A symmetric distance matrix, summarizing the distances among all
 #' quadrats from the cdm. For use with the dispersal null.
-#' @param abundance.matters Default is TRUE. If FALSE, species are sampled from
-#' neighboring grid cells with equal probability. For use with the dispersal null.
-#' @param abundance.assigned For use with the dispersal null. See details there. 
 #' @param cores This function can run in parallel. In order to do so, the user must
-#' specify the desired number of cores to utilize.
+#' specify the desired number of cores to utilize. The default is "seq", which runs the
+#' calculations sequentially.
 #' 
 #' @details The trait distance matrix should be symmetrical and "complete". See example.
 #' Currently only non-abundance-weighted mean pairwise and interspecific
@@ -48,11 +47,18 @@
 #'
 #' prepped <- prepFieldData(tree=tree, picante.cdm=cdm)
 #'
-#' results <- sesField(prepped, randomizations=3)
+#' results <- sesField(prepped, randomizations=3,
+#'	metrics=list("NAW_MPD"=metricTester:::naw_mpd),
+#'	nulls=list("richness"=metricTester:::my_richnessNull))
 
 sesField <- function(field.input, metrics, nulls, randomizations, regional.abundance,
 	distances.among, cores="seq")
 {
+	#dplyr will cause R CMD check to throw a note if you are summarizing based on
+	#variables it does not know about. here is a stupid hack to avoid that problem.
+	species <- "hack"
+	. <- "hack"
+
 	#set various things to NULL if they are missing
 	if(missing(metrics))
 	{

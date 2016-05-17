@@ -24,6 +24,7 @@
 #' @export
 #'
 #' @importFrom ape as.phylo
+#' @importFrom stats as.dist cophenetic hclust
 #'
 #' @references Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of
 #' character: closely related, morphologically similar, co-occurring honeyeaters have

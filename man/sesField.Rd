@@ -8,30 +8,26 @@ sesField(field.input, metrics, nulls, randomizations, regional.abundance,
   distances.among, cores = "seq")
 }
 \arguments{
+\item{field.input}{Prepped field.input object.}
+
+\item{metrics}{Optional list of named metric functions to use. If invoked, this option
+will likely be used to run a subset of the defined metrics.}
+
+\item{nulls}{Optional list of named null model functions to use. If invoked, this 
+option will likely be used to run a subset of the defined null models.}
+
 \item{randomizations}{The number of times the input CDM should be randomized and the
 metrics calculated across it.}
+
+\item{regional.abundance}{A character vector in the form "s1, s1, s1, s2, s2, s3, etc".
+Optional, will be generated from the input CDM if not provided.}
 
 \item{distances.among}{A symmetric distance matrix, summarizing the distances among all
 quadrats from the cdm. For use with the dispersal null.}
 
 \item{cores}{This function can run in parallel. In order to do so, the user must
-specify the desired number of cores to utilize.}
-
-\item{trait.distance}{Symmetrical matrix summarizing pairwise trait distances.}
-
-\item{tree}{Phylo object.}
-
-\item{picante.cdm}{A picante-style community data matrix with sites as rows, and
-species as columns.}
-
-\item{metric}{Phylogenetic metric of choice (see details).}
-
-\item{null}{Null model of choice (see details).}
-
-\item{abundance.matters}{Default is TRUE. If FALSE, species are sampled from
-neighboring grid cells with equal probability. For use with the dispersal null.}
-
-\item{abundance.assigned}{For use with the dispersal null. See details there.}
+specify the desired number of cores to utilize. The default is "seq", which runs the
+calculations sequentially.}
 }
 \value{
 Data frame of standardized effect sizes of species' trait fields. Table
@@ -60,7 +56,9 @@ cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
 prepped <- prepFieldData(tree=tree, picante.cdm=cdm)
 
-results <- sesField(prepped, randomizations=3)
+results <- sesField(prepped, randomizations=3,
+metrics=list("NAW_MPD"=metricTester:::naw_mpd),
+nulls=list("richness"=metricTester:::my_richnessNull))
 }
 \references{
 Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of
