@@ -68,13 +68,14 @@ for(i in 1:3)
 		location <- ord$x[names(focal)[j],]
 		points(x=location[1], y=location[2], col=pointColors[i], pch=20, cex=focal[j]/5)
 	}
-	points(x=exCenter[i,1], y=exCenter[i,2], pch=21, col="black", lwd=2, cex=2, bg=pointColors[i])
+	points(x=exCenter[i,1], y=exCenter[i,2], pch=21, col="black", lwd=2, cex=2,
+	bg=pointColors[i])
 }
 }
 \references{
 Miller, E. T. 2016. Random thoughts.
 
-Laliberté, E. & P. Legendre. 2010. A distance-based framework for measuring functional
+Laliberte, E. & P. Legendre. 2010. A distance-based framework for measuring functional
 diversity from multiple traits. Ecology 91:299-305.
 }
 

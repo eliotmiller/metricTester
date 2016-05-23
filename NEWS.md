@@ -1,3 +1,7 @@
+# metricTester 1.2.0
+
+* Functional dispersion functions, sensu Laliberte and Legendre (2010). The two new relevant functions are FDis and centers. They take similar inputs to dbFD from the FD package, but can be calculated across a variety of ordination spaces (PCA, PCoA, NMDS, etc), instead of only with a PCoA. These functions and the theoretical background are still experimental, and should be treated as such.
+
 # metricTester 1.1.0
 
 * Added prepFieldData, calcField, and sesField. Calculation of phylogenetic and trait fields is now a two-step process, where the data are prepped, then the metrics and nulls of interest are calculated over the prepped object. phyloField, traitField, sesPhyloField, and sesTraitField will be deprecated in future versions of the package.

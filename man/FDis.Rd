@@ -48,8 +48,11 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #simulate a community data matrix, with species as columns and sites as rows
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-#simulate two traits, combine into a matrix, then ordinate with a PCA
+#simulate two traits and combine into a matrix. because species are sometimes absent
+#from the cdm, also exclude any species from the trait data frame that are not in the
+#cdm (to avoid errors), then ordinate with a PCA
 traits <- evolveTraits(tree)[[2]]
+traits <- traits[row.names(traits) \%in\% colnames(cdm),]
 ord <- prcomp(traits)
 
 #the FDis of the species in each plot
@@ -75,12 +78,13 @@ cdm2[1,1:30] <- 1
 cdm2[2,31:90] <- 1
 cdm2[3,91:210] <- 1
 
+#the FDis of each species (i.e. niche breadth)
 FDis(ordination.results=ord2$x, road.map=cdm2)
 }
 \references{
 Miller, E. T. 2016. Random thoughts.
 
-Laliberté, E. & P. Legendre. 2010. A distance-based framework for measuring functional
+Laliberte, E. & P. Legendre. 2010. A distance-based framework for measuring functional
 diversity from multiple traits. Ecology 91:299-305.
 }
 
