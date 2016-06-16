@@ -7,12 +7,13 @@
 FDis(ordination.results, road.map)
 }
 \arguments{
-\item{ordination.results}{Data frame of ordination results, e.g. the $x element from a
-prcomp object, or the $points element from a metaMDS object in vegan.}
+\item{ordination.results}{Matrix of ordination results, e.g. the $x element from a
+prcomp object, or the $points element from a metaMDS object in vegan. Could also be
+raw trait values, but cannot currently handle categorical variables.}
 
 \item{road.map}{Identical to the input for the 'a' argument in the dbFD function of
 the FD package, and to the picante.cdm argument used elsewhere in this package.
-Thus, this is a matrix containing the abundance of each 'species' in
+Thus, this is a matrix or data frame containing the abundance of each 'species' in
 the ordination results. Rows are "sites" and columns are "species". Rather than
 abundances, the values can simply be presence/absences. Moreover, sites could be
 species and species could be individuals. See details.}
@@ -82,7 +83,8 @@ cdm2[3,91:210] <- 1
 FDis(ordination.results=ord2$x, road.map=cdm2)
 }
 \references{
-Miller, E. T. 2016. Random thoughts.
+Miller, E. T. 2016. Random thoughts, though please cite metricTester via
+our 2016 Ecography paper.
 
 Laliberte, E. & P. Legendre. 2010. A distance-based framework for measuring functional
 diversity from multiple traits. Ecology 91:299-305.

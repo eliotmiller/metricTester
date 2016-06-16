@@ -2,11 +2,12 @@
 #'
 #' Calculate the functional dispersion of clouds of multivariate points.
 #'
-#' @param ordination.results Data frame of ordination results, e.g. the $x element from a
-#' prcomp object, or the $points element from a metaMDS object in vegan. 
+#' @param ordination.results Matrix of ordination results, e.g. the $x element from a
+#' prcomp object, or the $points element from a metaMDS object in vegan. Could also be
+#' raw trait values, but cannot currently handle categorical variables.
 #' @param road.map Identical to the input for the 'a' argument in the dbFD function of
 #' the FD package, and to the picante.cdm argument used elsewhere in this package.
-#' Thus, this is a matrix containing the abundance of each 'species' in
+#' Thus, this is a matrix or data frame containing the abundance of each 'species' in
 #' the ordination results. Rows are "sites" and columns are "species". Rather than
 #' abundances, the values can simply be presence/absences. Moreover, sites could be
 #' species and species could be individuals. See details.
@@ -28,7 +29,8 @@
 #'
 #' @export
 #'
-#' @references Miller, E. T. 2016. Random thoughts.
+#' @references Miller, E. T. 2016. Random thoughts, though please cite metricTester via
+#' our 2016 Ecography paper.
 #'
 #' Laliberte, E. & P. Legendre. 2010. A distance-based framework for measuring functional
 #' diversity from multiple traits. Ecology 91:299-305.
@@ -79,6 +81,14 @@
 
 FDis <- function(ordination.results, road.map)
 {	
+	#the function expects ordination.results to be a matrix. if provided with a data.frame
+	#convert to matrix.
+	if(is.matrix(ordination.results) != TRUE)
+	{
+		warning("Converting ordination.results to matrix. Ensure this is ok for your data.")
+		ordination.results <- as.matrix(ordination.results)
+	}
+	
 	results <- c()
 
 	centerPoints <- centers(ordination.results, road.map)

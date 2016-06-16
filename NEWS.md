@@ -1,6 +1,10 @@
+# metricTester 1.2.1
+
+* Added a new null model, synthComm, that creates a synthetic community based on species attributes. It will create synthetic total community niche spaces based on the dispersion in trait space of the input communities. Particularly relevant to looking at niche overlap either between the species from multiple sites, or the individuals from multiple species. This is an experimental null model, so confirm it is working before using it extensively in your analyses. Report any issues on the GitHub site.
+
 # metricTester 1.2.0
 
-* Functional dispersion functions, sensu Laliberte and Legendre (2010). The two new relevant functions are FDis and centers. They take similar inputs to dbFD from the FD package, but can be calculated across a variety of ordination spaces (PCA, PCoA, NMDS, etc), instead of only with a PCoA. These functions and the theoretical background are still experimental, and should be treated as such.
+* Added functional dispersion functions, sensu Laliberte and Legendre (2010). The two new relevant functions are FDis and centers. They take similar inputs to dbFD from the FD package, but can be calculated across a variety of ordination spaces (PCA, PCoA, NMDS, etc), instead of only with a PCoA. These functions and the theoretical background are still experimental, and should be treated as such.
 
 # metricTester 1.1.0
 
