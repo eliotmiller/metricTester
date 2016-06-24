@@ -8,9 +8,10 @@
 #' @param abundances A vector of potential abundances, e.g. a log-normal distribution
 #' 
 #' @details There is currently no implementation to control the frequency with which a
-#' given species is selected.
+#' given species is selected. As of metricTester 1.2.2, this function no longer can
+#' occasionally return a CDM missing species that are in the input phylogeny.
 #'
-#' @return A community data matrix (a data frame) with species as columns and sites as
+#' @return A community data matrix (as a data frame) with species as columns and sites as
 #' rows.
 #'
 #' @export
@@ -31,39 +32,37 @@
 
 simulateComm <- function(tree, richness.vector, abundances)
 {
-	col.1 <- c()
-	col.2 <- c()
-	col.3 <- c()
-	for (i in 1:length(richness.vector))
+	#set up a quick check to confirm that you are not asking the function to sample more
+	#species than are in the tree
+	if(max(richness.vector) > length(tree$tip.label))
 	{
-		#this generates a vector of community names by repeating i times whatever the
-		#value of richness.vector[i] is
-		temp.name <- rep(i, richness.vector[i]) 
-		col.1 <- append(col.1, temp.name)
-		numbers <- sample(abundances, richness.vector[i])
-		#this assigns abundances to species
-		col.2 <- append(col.2, numbers)
-		#this assigns species names to those abundances
-		species <- sample(tree$tip.label, richness.vector[i])
-		col.3 <- append(col.3, species)
+		stop("Cannot create a CDM with more species than are in the input phylogeny")
 	}
-		cdm.fake <- data.frame(col.1, col.2, col.3)
-		cdm <- sample2matrix(cdm.fake)
 
-		#sort cdm into same order as phylogeny. seems to be necessary for pscCorr and 
-		#perhaps other functions
-		#need to fake prune the phylo here in case not all the species are in the cdm as 
-		#are in the phylo
+	#check that there are no values less than 1 in the abundances vector
+	if(min(abundances <= 0))
+	{
+		stop("simulateComm cannot handle abundances of less than or equal to 0")
+	}
 
-		dropped <- setdiff(tree$tip.label, colnames(cdm))
+	#set up a matrix of zeros of the correct dimensions for the output cdm
+	cdm <- matrix(nrow=length(richness.vector), ncol=length(tree$tip.label), 0)
+	
+	#give the cdm row and column names
+	colnames(cdm) <- tree$tip.label
+	row.names(cdm) <- paste("plot",1:dim(cdm)[1], sep="")
+	
+	#go into a for loop where each iteration you sample the number of species as are in
+	#that element of the richness vector, then assign abundances from that vector
+	for(i in 1:length(richness.vector))
+	{
+		#first select the species
+		species <- sample(colnames(cdm), richness.vector[i])
 		
-		drop.tree <- ape::drop.tip(tree, dropped)
+		#then correctly subset the cdm to just the elements that correspond to those spp,
+		#and replace the 0s with values from abundances. 
+		cdm[i,][names(cdm[i,]) %in% species] <- sample(abundances, richness.vector[i])
+	}
 
-		cdm <- cdm[drop.tree$tip.label]
-
-		plot <- paste("plot",1:dim(cdm)[1], sep="")
-
-		dimnames(cdm)[[1]] <- plot
-
-		return(cdm)
+	return(as.data.frame(cdm))
 }

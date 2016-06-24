@@ -14,7 +14,7 @@ simulateComm(tree, richness.vector, abundances)
 \item{abundances}{A vector of potential abundances, e.g. a log-normal distribution}
 }
 \value{
-A community data matrix (a data frame) with species as columns and sites as
+A community data matrix (as a data frame) with species as columns and sites as
 rows.
 }
 \description{
@@ -23,7 +23,8 @@ species abundances, will generate a community data matrix with these characteris
 }
 \details{
 There is currently no implementation to control the frequency with which a
-given species is selected.
+given species is selected. As of metricTester 1.2.2, this function no longer can
+occasionally return a CDM missing species that are in the input phylogeny.
 }
 \examples{
 #simulate tree with birth-death process

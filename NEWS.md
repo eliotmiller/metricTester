@@ -1,3 +1,7 @@
+# metricTester 1.2.2
+
+* Replaced the previous simulateComm function with a newer version that always returns a community data matrix with all species from the input tree. This should avoid any errors in the examples.
+
 # metricTester 1.2.1
 
 * Added a new null model, synthComm, that creates a synthetic community based on species attributes. It will create synthetic total community niche spaces based on the dispersion in trait space of the input communities. Particularly relevant to looking at niche overlap either between the species from multiple sites, or the individuals from multiple species. This is an experimental null model, so confirm it is working before using it extensively in your analyses. Report any issues on the GitHub site.
