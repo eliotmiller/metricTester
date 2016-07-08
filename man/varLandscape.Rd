@@ -36,10 +36,13 @@ This function will simulate 3-dimensional landscapes of varying complexity.
 This function forms the guts of a new habitat filtering spatial simulation.
 The output from the function is a square matrix with values corresponding, in my mind,
 to optimum trait values for a location in 2d space. Alternatively, this might be useful
-for simulations of elevational gradients.
+for simulations of elevational gradients. A good sequence to show how landscapes can be
+varied might be (all with cells = 100 and exponent = 1) to change seeds from 1 to 2 to
+10 while holding cutoff at 0. Then change cutoff from 0.01 to 0.1 to 0.9 while holding
+seeds at 10.
 }
 \examples{
-color2D.matplot(varLandscape(10, seeds=1, exponent=1, cutoff=0),
+plotrix::color2D.matplot(varLandscape(10, seeds=1, exponent=1, cutoff=0),
 cs1=c(0.2,0.4,0.8), cs2=c(0,0.5,0.8), cs3=c(1,0.5,0), border=NA)
 }
 \references{
