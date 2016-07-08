@@ -14,7 +14,6 @@
 #' @export
 #'
 #' @importFrom graphics plot polygon
-#' @importFrom colorRamps blue2green2red
 #'
 #' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
@@ -29,7 +28,8 @@
 #' phydistmatrix <- ape::cophenetic.phylo(temp[[1]])
 #'
 #' #define a color for each species
-#' cols <- colorRamps::blue2green2red(nrow(phydistmatrix))
+#' cols <- plotrix::color.scale(x=1:nrow(phydistmatrix),
+#'	cs1=c(0.2,0.4,0.8), cs2=c(0,0.5,0.8), cs3=c(1,0.5,0))
 #'
 #' #prep the data for the simulation
 #' prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2, 
@@ -39,7 +39,7 @@
 #' positions <- filteringArena(prepped)
 #'
 #' #plot the arena. don't close the window
-#' plot(positions$arena$X, positions$arena$Y, pch=20, cex=0.5, xlim=c(0,300), ylim=c(0,300), 
+#' plot(positions$arena$X, positions$arena$Y, pch=20, cex=1, xlim=c(0,300), ylim=c(0,300), 
 #' col=cols[positions$arena$individuals])
 #'
 #' bounds <- plotPlacer(no.plots=10, arena.length=300,

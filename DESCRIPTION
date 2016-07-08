@@ -19,8 +19,8 @@ Imports:
     picante,
     foreach,
     doParallel,
-    colorRamps,
-    MASS
+    MASS,
+    plotrix
 Suggests:
     testthat
 License: GPL-3
