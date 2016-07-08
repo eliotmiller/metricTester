@@ -1,3 +1,7 @@
+# metricTester 1.2.3
+
+* Adding varLandscape. Also changed color scaling functions for examples from those in colorRamps to those in plotrix.
+
 # metricTester 1.2.2
 
 * Replaced the previous simulateComm function with a newer version that always returns a community data matrix with all species from the input tree. This should avoid any errors in the examples.
