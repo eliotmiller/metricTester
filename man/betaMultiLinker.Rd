@@ -78,12 +78,11 @@ function, multiple tests can be run, with results saved as RDS files.
 	#length.parameter=5000, sd.parameter=50, max.distance=20, proportion.killed=0.3, 
 #competition.iterations=2, no.plots=20, plot.length=30,
 #randomizations=3, cores="seq", iterations=2, prefix="test",
-#nulls=list("richness"=metricTester:::my_richnessNull,
-#"frequency"=metricTester:::my_frequency)))
+#nulls=c("richness", "frequency")))
 }
 \references{
-Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 structure metrics and null models: a review with new methods and software.
-bioRxiv 025726.
+Ecography DOI: 10.1111/ecog.02070
 }
 

@@ -61,8 +61,8 @@ dim(positions$arena)
 dim(new.arena$arena)
 }
 \references{
-Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 structure metrics and null models: a review with new methods and software.
-bioRxiv 025726.
+Ecography DOI: 10.1111/ecog.02070
 }
 

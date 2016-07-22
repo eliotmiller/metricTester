@@ -10,8 +10,9 @@ sesField(field.input, metrics, nulls, randomizations, regional.abundance,
 \arguments{
 \item{field.input}{Prepped field.input object.}
 
-\item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
+\item{metrics}{Optional character vector of named metric functions to use. Used to run
+a subset of the pre-defined metrics. These can be determined by running
+names(defineMetrics()).}
 
 \item{nulls}{Optional list of named null model functions to use. If invoked, this 
 option will likely be used to run a subset of the defined null models.}
@@ -61,8 +62,7 @@ tree <- drop.tip(tree, setdiff(tree$tip.label, colnames(cdm)))
 prepped <- prepFieldData(tree=tree, picante.cdm=cdm)
 
 results <- sesField(prepped, randomizations=3,
-metrics=list("NAW_MPD"=metricTester:::naw_mpd),
-nulls=list("richness"=metricTester:::my_richnessNull))
+metrics="NAW_MPD", nulls="richness")
 }
 \references{
 Miller, Wagner, Harmon & Ricklefs. In review. Radiating despite a lack of

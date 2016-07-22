@@ -36,9 +36,9 @@
 #'
 #' @export
 #'
-#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
-#' bioRxiv 025726.
+#' Ecography DOI: 10.1111/ecog.02070
 #'
 #' @examples
 #' #simulate tree with birth-death process
@@ -49,8 +49,7 @@
 #' cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #'
 #' rawResults <- metricsNnulls(tree, cdm, randomizations=3,
-#'	nulls=list("richness"=metricTester:::my_richnessNull,
-#'	"frequency"=metricTester:::my_frequency))
+#'	nulls=c("richness", "frequency"))
 
 metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
 	 distances.among=NULL, randomizations=2, cores="seq", nulls, metrics)

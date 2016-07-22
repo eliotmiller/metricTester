@@ -18,11 +18,12 @@ Given a simulations.input object, will create an arena settled according to habi
 filtering rules (and parameters defined by prepSimulations).
 }
 \details{
-This simulation has been updated to avoid a previous consequence where
-individuals clumped near the center of the arena. Now, species' spatial preferences,
-which previously would have approximated a normal distribution around the center of the
-arena, are smoothed to a uniform distribution. Thus, individuals are more evenly
-distributed throughout the simulated arena.
+This is the habitat filtering simulation that was used in our paper
+(reference below). In short, species have phylogenetically conserved spatial
+preferences, and individuals of those species are settled near that preferred location
+with a controllable degree of variation. Species' spatial preferences are smoothed to a
+uniform distribution. Thus, individuals are fairly evenly distributed throughout the
+simulated arena.
 }
 \examples{
 tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
@@ -34,8 +35,8 @@ prepped <- prepSimulations(tree, arena.length=300, mean.log.individuals=2,
 test <- filteringArena(prepped)
 }
 \references{
-Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 structure metrics and null models: a review with new methods and software.
-bioRxiv 025726.
+Ecography DOI: 10.1111/ecog.02070
 }
 

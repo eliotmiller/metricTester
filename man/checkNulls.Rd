@@ -4,11 +4,15 @@
 \alias{checkNulls}
 \title{Confirm that the null model functions are in suitable format}
 \usage{
-checkNulls(x)
+checkNulls(x, new_ = FALSE)
 }
 \arguments{
-\item{x}{Optional named list of null models. Else, defines the nulls as those
-defined in defineNulls.}
+\item{x}{Optional. If not provided, defines the nulls as those in defineNulls. Else
+either a character vector or a named list of functions, depending on whether new_ is
+set to TRUE or FALSE. See runNulls.}
+
+\item{new_}{Whether or not new nulls are being defined on the fly. Default is FALSE.
+Set to TRUE if a new null is being used.}
 }
 \value{
 A list of functions.
@@ -22,11 +26,11 @@ A few quick checks to confirm the null model functions are input in suitable
 format.
 }
 \examples{
-checkNulls(defineNulls())
+checkNulls(names(defineNulls()))
 }
 \references{
-Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 structure metrics and null models: a review with new methods and software.
-bioRxiv 025726.
+Ecography DOI: 10.1111/ecog.02070
 }
 

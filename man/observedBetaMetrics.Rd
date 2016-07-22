@@ -45,12 +45,11 @@ results <- observedBetaMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm)
 #example of how to pass specific metrics to be calculated. not run
 
 #results <- observedBetaMetrics(tree=tree, picante.cdm=tempCDM$picante.cdm, 
-#metrics=list("richness"=metricTester:::my_betaRichness,
-#"Ist"=metricTester:::my_Ist))
+#metrics=c("richness", "Ist"))
 }
 \references{
-Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 structure metrics and null models: a review with new methods and software.
-bioRxiv 025726.
+Ecography DOI: 10.1111/ecog.02070
 }
 

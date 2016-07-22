@@ -39,14 +39,13 @@ CI, and 2 corresponds to greater than the CI.
 #length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
 #competition.iterations=3, no.plots=15, plot.length=30,
 #randomizations=3, cores="seq",
-#nulls=list("richness"=metricTester:::my_richnessNull,
-#"frequency"=metricTester:::my_frequency)))
+#nulls=c("richness", "frequency")))
 
 #test <- betaErrorChecker(ex)
 }
 \references{
-Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 structure metrics and null models: a review with new methods and software.
-bioRxiv 025726.
+Ecography DOI: 10.1111/ecog.02070
 }
 

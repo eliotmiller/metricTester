@@ -46,9 +46,9 @@
 #'
 #' @importFrom geiger sim.bdtree
 #'
-#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2015. Phylogenetic community
+#' @references Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community
 #' structure metrics and null models: a review with new methods and software.
-#' bioRxiv 025726.
+#' Ecography DOI: 10.1111/ecog.02070
 #'
 #' @examples
 #' #below not run for timing issues on CRAN
@@ -56,8 +56,7 @@
 #' 	#length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
 #'	#competition.iterations=3, no.plots=15, plot.length=30, concat.by="richness", 
 #'	#randomizations=3, cores="seq",
-#'	#nulls=list("richness"=metricTester:::my_richnessNull,
-#'	#"frequency"=metricTester:::my_frequency)))
+#'	#nulls=c("richness", "frequency")))
 
 linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.plots, 
