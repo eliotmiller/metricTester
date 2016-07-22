@@ -31,7 +31,7 @@ cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 tempMetric <- function(input.vector)
 {
 	nonZeros <- input.vector[input.vector != 0]
-	return(length(nonZeros))
+	return(sum(nonZeros))
 }
 
 #write a quick wrapper to apply the new metric over a community data matrix. note that the 
@@ -63,7 +63,7 @@ dummyNull <- function(nulls.input)
 #example wouldn't work if we did not include it as a metric.
 expectations(tree=tree, picante.cdm=cdm, nulls=list("fullShuffle"=dummyNull),
 metrics=list("richness"=metricTester:::my_richness, "totalAbund"=dummyMetric),
-randomizations=100, concat.by="plot")
+randomizations=100, concat.by="plot", cores=8)
 ```
 
 #### How do I get metricTester?

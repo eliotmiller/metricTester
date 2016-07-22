@@ -54,11 +54,26 @@
 metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abundance=NULL,
 	 distances.among=NULL, randomizations=2, cores="seq", nulls, metrics)
 {
-	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
+	#if a vector of named metric functions is not passed in, assign metrics to be NULL, in
 	#which case all metrics will be calculated
 	if(missing(metrics))
 	{
 		metrics <- NULL
+		new_metric <- FALSE
+	}
+	
+	#if a vector is passed in, and if the names do not perfectly match some or all of
+	#those in defineMetrics, then need to set this to TRUE
+	else
+	{
+		if(length(setdiff(metrics, names(defineMetrics()))) > 0)
+		{
+			new_metric <- TRUE
+		}
+		else
+		{
+			new_metric <- FALSE
+		}
 	}
 		
 	#if a list of named nulls functions is not passed in, assign nulls to be NULL, in
@@ -66,8 +81,23 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 	if(missing(nulls))
 	{
 		nulls <- NULL
+		new_null <- FALSE
 	}	
 
+	#if a vector is passed in, and if the names do not perfectly match some or all of
+	#those in defineNulls, then need to set this to TRUE
+	else
+	{
+		if(length(setdiff(nulls, names(defineNulls()))) > 0)
+		{
+			new_null <- TRUE
+		}
+		else
+		{
+			new_null <- FALSE
+		}
+	}
+		
 	if(cores == "seq")
 	{
 		#warn that the analysis is being run sequentially
@@ -81,12 +111,12 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 		randomResults <- foreach(i = 1:randomizations) %do%
 		{
 			#run the nulls across the prepped data. this randomizes the CDMs all at once
-			randomMatrices <- runNulls(nullsPrepped, nulls)
+			randomMatrices <- runNulls(nullsPrepped, nulls, new_=new_null)
 			#prep the randomized CDMs to calculate the metrics across them
 			randomPrepped <- lapply(randomMatrices, function(x) 
 				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
 			#calculate the metrics
-			lapply(randomPrepped, calcMetrics, metrics)
+			lapply(randomPrepped, calcMetrics, metrics, new_=new_metric)
 		}
 	}
 
@@ -102,12 +132,12 @@ metricsNnulls <- function(tree, picante.cdm, optional.dists=NULL, regional.abund
 		randomResults <- foreach(i = 1:randomizations) %dopar%
 		{
 			#run the nulls across the prepped data. this randomizes the CDMs all at once
-			randomMatrices <- runNulls(nullsPrepped, nulls)
+			randomMatrices <- runNulls(nullsPrepped, nulls, new_=new_null)
 			#prep the randomized CDMs to calculate the metrics across them
 			randomPrepped <- lapply(randomMatrices, function(x) 
 				prepData(tree=tree, picante.cdm=x, optional.dists=optional.dists))
 			#calculate the metrics
-			lapply(randomPrepped, calcMetrics, metrics)
+			lapply(randomPrepped, calcMetrics, metrics, new_=new_metric)
 		}
 
 		registerDoSEQ()
