@@ -5,6 +5,14 @@
 #'
 #' @param single.iteration The results of a single iteration from multiLinker.
 #' @param concat.by Whether randomizations were concatenated by richness, plot or both.
+#' @param direction Character vector that needs to be provided if spatial simulations
+#' beyond the standard "random", "filtering", and "competition" simulations are run.
+#' The character vector must be the same length as the number of spatial simulations that
+#' were run, and can take the possible values of "two.sided" (for a two-tailed test when
+#' the SES scores are expected to be centered around 0), "less" (for when the observed SES
+#' scores are expected to be less than 0), and "greater" (for when the observed SES scores
+#' are expected to be greater than 0). For instance, habitat filtering would be set to
+#' "less".
 #'
 #' @details This function uses a Wilcoxon signed rank test to determine whether the
 #' plots from a spatial simulation/null/metric from a SINGLE iteration differ from
@@ -31,7 +39,7 @@
 #' #results <- readIn()
 #' #summ <- sesSingle(results[[1]], "richness")
 
-sesSingle <- function(single.iteration, concat.by)
+sesSingle <- function(single.iteration, concat.by, direction)
 {
 	#dumb hack to pass R CMD check
 	simulation <- "hack"
@@ -72,22 +80,31 @@ sesSingle <- function(single.iteration, concat.by)
 	#into anonymous function below
 	if(setequal(names(single.iteration), c("random","filtering","competition")))
 	{
-		toFeed <- names(single.iteration)
-		toFeed[toFeed=="random"] <- "two.sided"
-		toFeed[toFeed=="filtering"] <- "less"
-		toFeed[toFeed=="competition"] <- "greater"
+		direction <- names(single.iteration)
+		direction[direction=="random"] <- "two.sided"
+		direction[direction=="filtering"] <- "less"
+		direction[direction=="competition"] <- "greater"
 	}
-		
+	
+	#if the names of the spatial simulations do not match the standard, direction needs to
+	#be supplied as a character vector of same length as single.iteration
 	else if(!setequal(names(single.iteration), c("random","filtering","competition")))
 	{
-		print("You included new spatial simulations. Modify expectations manually")
-		toFeed <- rep("two.sided", 3)
+		if(length(direction) != length(single.iteration))
+		{
+			stop("direction must be a character vector of same length as number of spatial simulations")
+		}
+		
+		if(length(setdiff(direction, c("two.sided", "less", "greater"))) > 0)
+		{
+			stop("possible directions are limited to two.sided, less, and greater")
+		}
 	}
 	
 	if(concat.by=="richness" | concat.by=="plot")
 	{
-		temp <- lapply(seq_along(toFeed), function(x)
-			wilcoWrapLApply(single.iteration[[x]]$ses, alternative=toFeed[x]))
+		temp <- lapply(seq_along(direction), function(x)
+			wilcoWrapLApply(single.iteration[[x]]$ses, alternative=direction[x]))
 
 		#reduce the output list into a single data frame
 		output <- Reduce(rbind, temp)
@@ -117,7 +134,7 @@ sesSingle <- function(single.iteration, concat.by)
 		tempAll <- list()
 		
 		#i refers to spatial simulations (you will only feed in $ses components)
-		for(i in 1:length(toFeed))
+		for(i in 1:length(direction))
 		{
 			#j refers to null models
 			tempNull <- list()
@@ -127,7 +144,7 @@ sesSingle <- function(single.iteration, concat.by)
 				for(k in 1:length(single.iteration[[1]]$ses[[1]]))
 				{
 					temp <- wilcoWrapLApply(single.iteration[[i]]$ses[[j]],
-						alternative=toFeed[i])
+						alternative=direction[i])
 					#this function was designed for use over a list of null models, so
 					#change name here to reflect what it is actually being used for
 					names(temp)[4] <- "concat.by"

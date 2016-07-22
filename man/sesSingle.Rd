@@ -4,12 +4,21 @@
 \alias{sesSingle}
 \title{Summary of results from a single iteration}
 \usage{
-sesSingle(single.iteration, concat.by)
+sesSingle(single.iteration, concat.by, direction)
 }
 \arguments{
 \item{single.iteration}{The results of a single iteration from multiLinker.}
 
 \item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
+
+\item{direction}{Character vector that needs to be provided if spatial simulations
+beyond the standard "random", "filtering", and "competition" simulations are run.
+The character vector must be the same length as the number of spatial simulations that
+were run, and can take the possible values of "two.sided" (for a two-tailed test when
+the SES scores are expected to be centered around 0), "less" (for when the observed SES
+scores are expected to be less than 0), and "greater" (for when the observed SES scores
+are expected to be greater than 0). For instance, habitat filtering would be set to
+"less".}
 }
 \value{
 A data frame summarizing the mean of standardized effect sizes and the
