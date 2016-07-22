@@ -4,11 +4,16 @@
 \alias{checkSimulations}
 \title{Confirm that the spatial simulation functions are in suitable format}
 \usage{
-checkSimulations(x)
+checkSimulations(x, new_ = FALSE)
 }
 \arguments{
-\item{x}{Optional named list of spatial simulation functions. Else, defines the
-spatial simulations as those in defineSimulations.}
+\item{x}{Optional. If not provided, defines the simulations as those in
+defineSimulations. Else
+either a character vector or a named list of functions, depending on whether new_ is
+set to TRUE or FALSE. See runSimulations.}
+
+\item{new_}{Whether or not new simulations are being defined on the fly. Default is
+FALSE. Set to TRUE if a new simulation is being used.}
 }
 \value{
 A list of functions.
@@ -21,7 +26,7 @@ defineSimulations or a named list of simulation functions.
 A few quick checks to confirm the spatial simulations are in suitable format.
 }
 \examples{
-checkSimulations(defineSimulations())
+checkSimulations(names(defineSimulations()))
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

@@ -4,13 +4,22 @@
 \alias{calcBetaMetrics}
 \title{Calculate phylogenetic community structure beta metrics}
 \usage{
-calcBetaMetrics(metrics.input, metrics)
+calcBetaMetrics(metrics.input, metrics, new_ = FALSE)
 }
 \arguments{
 \item{metrics.input}{Prepped metrics.input object}
 
-\item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
+\item{metrics}{Optional. If not provided, defines the metrics as all of those in
+defineBetaMetrics. If only a subset of those metrics is desired, then metrics should
+take form of a character vector corresponding to named functions from
+defineBetaMetrics. The available metrics can be determined by running
+names(defineBetaMetrics()). Otherwise,
+if the user would like to define a new metric on the fly, the argument metrics can take
+the form of a named list of new functions (metrics). If the
+latter, new_ must be set to TRUE.}
+
+\item{new_}{Whether or not new metrics are being defined on the fly. Default is FALSE.
+Set to TRUE if a new metric is being used.}
 }
 \value{
 A data frame with the calculated metrics and the associated species richness
@@ -45,7 +54,7 @@ output <- mean(apply(metrics.input$picante.cdm, 1, lengthNonZeros))
 output
 }
 
-calcBetaMetrics(prepped, metrics=list("example"=exampleMetric))
+calcBetaMetrics(prepped, metrics=list("example"=exampleMetric), new_=TRUE)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

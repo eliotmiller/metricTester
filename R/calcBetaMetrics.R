@@ -4,8 +4,16 @@
 #' metrics of interest.
 #'
 #' @param metrics.input Prepped metrics.input object
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
+#' @param metrics Optional. If not provided, defines the metrics as all of those in
+#' defineBetaMetrics. If only a subset of those metrics is desired, then metrics should
+#' take form of a character vector corresponding to named functions from
+#' defineBetaMetrics. The available metrics can be determined by running
+#' names(defineBetaMetrics()). Otherwise,
+#' if the user would like to define a new metric on the fly, the argument metrics can take
+#' the form of a named list of new functions (metrics). If the
+#' latter, new_ must be set to TRUE. 
+#' @param new_ Whether or not new metrics are being defined on the fly. Default is FALSE.
+#' Set to TRUE if a new metric is being used.
 #' 
 #' @details This function first confirms that the input is of class metrics.input and,
 #' if so, then confirms that the metrics to be calculated are in a named list (via
@@ -42,9 +50,9 @@
 #'	output
 #' }
 #'
-#' calcBetaMetrics(prepped, metrics=list("example"=exampleMetric))
+#' calcBetaMetrics(prepped, metrics=list("example"=exampleMetric), new_=TRUE)
 
-calcBetaMetrics <- function(metrics.input, metrics)
+calcBetaMetrics <- function(metrics.input, metrics, new_=FALSE)
 {
 	if(!inherits(metrics.input, "metrics.input"))
 	{
@@ -58,7 +66,7 @@ calcBetaMetrics <- function(metrics.input, metrics)
 		metrics <- NULL
 	}
 		
-	metrics <- checkBetaMetrics(metrics)
+	metrics <- checkBetaMetrics(metrics, new_=new_)
 	
 	tempResults <- lapply(metrics, function(x) x(metrics.input))
 	
