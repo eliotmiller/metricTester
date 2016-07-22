@@ -1,3 +1,7 @@
+# metricTester 1.2.4
+
+* Major improvements in the way metrics, null models and spatial simulations can be specified. If only a subset of pre-defined options are desired, rather than needing to pass a named list of functions, these functions now accept character vectors corresponding to the options as defined in defineMetrics(), defineNulls(), and defineSimulations(). Can still accommodate new metrics, nulls and simulations defined on the fly.
+
 # metricTester 1.2.3
 
 * Adding varLandscape. Also changed color scaling functions for examples from those in colorRamps to those in plotrix.
