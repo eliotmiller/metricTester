@@ -52,7 +52,8 @@ be used to run a subset of the defined spatial simulations.}
 option will likely be used to run a subset of the defined null models.}
 
 \item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
+will likely be used to run a subset of the defined metrics. Note that one of the
+metrics must always be set to "richness".}
 }
 \value{
 A list of lists of data frames. The first level of the output has one element 

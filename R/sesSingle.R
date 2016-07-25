@@ -18,7 +18,9 @@
 #' plots from a spatial simulation/null/metric from a SINGLE iteration differ from
 #' expectations. Assuming there are three spatial simulations named random, filtering, and
 #' competition, this function will use two.sided, lesser and greater Wilcoxon tests,
-#' respectively.
+#' respectively. If additional (or a limited set of)
+#' spatial simulations are included, requiring modified expectations, these can be passed
+#' along with the "direction" argument.
 #'
 #' @return A data frame summarizing the mean of standardized effect sizes and the
 #' significance of those devations from expectations for a given iteration (e.g. the 
@@ -88,7 +90,7 @@ sesSingle <- function(single.iteration, concat.by, direction)
 	
 	#if the names of the spatial simulations do not match the standard, direction needs to
 	#be supplied as a character vector of same length as single.iteration
-	else if(!setequal(names(single.iteration), c("random","filtering","competition")))
+	else
 	{
 		if(length(direction) != length(single.iteration))
 		{
@@ -100,7 +102,7 @@ sesSingle <- function(single.iteration, concat.by, direction)
 			stop("possible directions are limited to two.sided, less, and greater")
 		}
 	}
-	
+
 	if(concat.by=="richness" | concat.by=="plot")
 	{
 		temp <- lapply(seq_along(direction), function(x)

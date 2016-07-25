@@ -8,8 +8,6 @@
 #' @param reduced.randomizations List of random, reduced results, such as those from
 #' reduceRandomizations()
 #' @param concat.by Whether to concatenate the randomizations by richness, plot or both
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details This function wraps a number of smaller functions into a useful type I and II
 #' error checker. It takes a reduced list of randomizations such as those reduced from
@@ -40,28 +38,21 @@
 #' #simulate a community of varying richness
 #' cdm <- simulateComm(tree, richness.vector=10:13, abundances=sim.abundances)
 #'
-#' #below not run for timing issues on CRAN
 #' #run the metrics and nulls combo function
-#' #rawResults <- metricsNnulls(tree, cdm, randomizations=3)
+#' rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores="seq",
+#'	nulls=c("richness","frequency"), metrics=c("richness","NAW_MPD"))
 #'
 #' #summarize the results
-#' #results <- reduceRandomizations(rawResults)
+#' results <- reduceRandomizations(rawResults)
 #'
 #' #calculate the observed metrics from the input CDM
-#' #observed <- observedMetrics(tree, cdm)
+#' observed <- observedMetrics(tree, cdm, metrics=c("richness", "NAW_MPD"))
 #'
 #' #not run
-#' #test <- errorChecker(observed, results, "richness")
+#' test <- errorChecker(observed, results, "richness")
 
-errorChecker <- function(observed, reduced.randomizations, concat.by, metrics)
+errorChecker <- function(observed, reduced.randomizations, concat.by)
 {
-	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
-	#which case all length of all metrics will be used
-	if(missing(metrics))
-	{
-		metrics <- NULL
-	}
-
 	#lapply the summaries function over the reduced randomizations
 	summarized <- lapply(reduced.randomizations, summaries, concat.by)
 	
@@ -88,7 +79,7 @@ errorChecker <- function(observed, reduced.randomizations, concat.by, metrics)
 	if(concat.by == "richness" | concat.by== "plot")
 	{
 		sesResults <- lapply(1:length(merged), function(x) arenaTest(merged[[x]],
-			concat.by, metrics))
+			concat.by))
 	}
 	
 	#this will return a list of lists of data frames. each of first element of lists
@@ -97,9 +88,8 @@ errorChecker <- function(observed, reduced.randomizations, concat.by, metrics)
 	else if(concat.by == "both")
 	{
 		sesResults <- lapply(1:length(toFeed), function(x) 
-			list("richness"=arenaTest(merged[[x]]$richness, concat.by="richness",
-			metrics), "plot"=arenaTest(merged[[x]]$plot, concat.by="plot", 
-			metrics)))
+			list("richness"=arenaTest(merged[[x]]$richness, concat.by="richness"),
+			"plot"=arenaTest(merged[[x]]$plot, concat.by="plot")))
 	}
 	#set the names right (works for either both or rich/quad)
 	names(sesResults) <- names(merged)
@@ -110,16 +100,15 @@ errorChecker <- function(observed, reduced.randomizations, concat.by, metrics)
 	if(concat.by == "richness" | concat.by== "plot")
 	{
 		plotResults <- lapply(1:length(merged), function(x) plotTest(merged[[x]], 
-			concat.by, metrics))
+			concat.by))
 	}
 	
 	#structure follows sesResults with argument concat.by=both above
 	else if(concat.by == "both")
 	{
 		plotResults <- lapply(1:length(toFeed), function(x) 
-			list("richness"=plotTest(merged[[x]]$richness, concat.by="richness",
-			metrics), "plot"=plotTest(merged[[x]]$plot, concat.by="plot", 
-			metrics)))
+			list("richness"=plotTest(merged[[x]]$richness, concat.by="richness"),
+			"plot"=plotTest(merged[[x]]$plot, concat.by="plot")))
 	}
 
 	#set the names right (works for either both or rich/quad)

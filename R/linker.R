@@ -30,7 +30,8 @@
 #' @param nulls Optional list of named null model functions to use. If invoked, this 
 #' option will likely be used to run a subset of the defined null models.
 #' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
+#' will likely be used to run a subset of the defined metrics. Note that one of the
+#' metrics must always be set to "richness".
 #' 
 #' @details This function wraps a number of other wrapper functions into
 #' one big metric + null performance tester function. Only a single test is performed, 
@@ -108,7 +109,7 @@ linker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter
 	#significance results
 	results <- lapply(1:length(reduced), function(x) 
 		errorChecker(observed=observed[[x]], reduced.randomizations=reduced[[x]],
-		concat.by=concat.by, metrics))
+		concat.by=concat.by))
 	names(results) <- names(arenas)
 	results
 }

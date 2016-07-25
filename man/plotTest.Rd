@@ -4,7 +4,7 @@
 \alias{plotTest}
 \title{Calculate if single, observed metrics deviate beyond expectations}
 \usage{
-plotTest(results.table, concat.by, metrics)
+plotTest(results.table, concat.by)
 }
 \arguments{
 \item{results.table}{Data frame of observed metrics with expected mean, SD and CI bound
@@ -15,9 +15,6 @@ richness, observed scores are compared to all randomized scores where the plot h
 the corresponding richness. If plot, observed scores (e.g. those from plot 1)
 are compared to all randomized plot 1 scores. If both, both are run and each is
 saved as a separate data frame in a single list.}
-
-\item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A data frame of 0s, 1s, and 2s.
@@ -31,7 +28,9 @@ score is significantly less or ore than expected at that plot or richness.
 Given a table of results, where means, SDs, and CIs are bound to the observed
 scores at the corresponding richness or plot, this function returns 0, 1, or 2,
 corresponding to not significant, significantly clustered, and significantly
-overdispersed.
+overdispersed. Previously the metrics being passed to the function needed to be
+explicitly specified, but the function now attempts to determine the names of the
+metrics via the results.table input.
 }
 \examples{
 #simulate tree with birth-death process
@@ -46,24 +45,25 @@ cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 #below not run for example timing issues on CRAN
 
 #run the metrics and nulls combo function
-#rawResults <- metricsNnulls(tree, cdm)
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores="seq",
+nulls=c("richness","frequency"), metrics=c("richness","NAW_MPD"))
 
 #reduce the randomizations to a more manageable format
-#reduced <- reduceRandomizations(rawResults)
+reduced <- reduceRandomizations(rawResults)
 
 #calculate the observed metrics from the input CDM
-#observed <- observedMetrics(tree, cdm)
+observed <- observedMetrics(tree, cdm, metrics=c("richness","NAW_MPD"))
 
 #summarize the means, SD and CI of the randomizations
-#summarized <- lapply(reduced, summaries, concat.by="richness")
+summarized <- lapply(reduced, summaries, concat.by="richness")
 
 #merge the observations and the summarized randomizations to facilitate significance
 #testing
-#merged <- lapply(summarized, merge, observed)
+merged <- lapply(summarized, merge, observed)
 
 #calculate the standardized scores of each observed metric as compared to the richness
-#null model randomization
-#plotTest(merged$richness, "richness")
+#null model randomization.
+plotTest(merged$richness, "richness")
 
 #do the same as above but across all null models
 #temp <- lapply(1:length(merged), function(x) plotTest(merged[[x]], "richness"))

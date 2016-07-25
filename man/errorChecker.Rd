@@ -4,7 +4,7 @@
 \alias{errorChecker}
 \title{Wrapper for summarizing randomizations and testing significance of observed metrics}
 \usage{
-errorChecker(observed, reduced.randomizations, concat.by, metrics)
+errorChecker(observed, reduced.randomizations, concat.by)
 }
 \arguments{
 \item{observed}{Data frame of observed metric scores, such as from observedMetrics()}
@@ -13,9 +13,6 @@ errorChecker(observed, reduced.randomizations, concat.by, metrics)
 reduceRandomizations()}
 
 \item{concat.by}{Whether to concatenate the randomizations by richness, plot or both}
-
-\item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
 }
 \value{
 A list of lists of data frames.
@@ -47,18 +44,18 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 #simulate a community of varying richness
 cdm <- simulateComm(tree, richness.vector=10:13, abundances=sim.abundances)
 
-#below not run for timing issues on CRAN
 #run the metrics and nulls combo function
-#rawResults <- metricsNnulls(tree, cdm, randomizations=3)
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores="seq",
+nulls=c("richness","frequency"), metrics=c("richness","NAW_MPD"))
 
 #summarize the results
-#results <- reduceRandomizations(rawResults)
+results <- reduceRandomizations(rawResults)
 
 #calculate the observed metrics from the input CDM
-#observed <- observedMetrics(tree, cdm)
+observed <- observedMetrics(tree, cdm, metrics=c("richness", "NAW_MPD"))
 
 #not run
-#test <- errorChecker(observed, results, "richness")
+test <- errorChecker(observed, results, "richness")
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

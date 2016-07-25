@@ -13,12 +13,13 @@
 #' the corresponding richness. If plot, observed scores (e.g. those from plot 1)
 #' are compared to all randomized plot 1 scores. If both, both are run and each is
 #' saved as a separate data frame in a single list.
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
 #' 
 #' @details Given a table of results, where means, SDs, and CIs are bound to the observed
 #' scores at the corresponding richness or plot, this function calculates standardized
-#' effect scores for each observed metric + null model combination. 
+#' effect scores for each observed metric + null model combination.
+#' Previously the metrics being passed to the function needed to be
+#' explicitly specified, but the function now attempts to determine the names of the
+#' metrics via the results.table input.
 #'
 #' @return A data frame of standardized effect scores.
 #'
@@ -41,40 +42,45 @@
 #' #below not run for example timing issues on CRAN
 #'
 #' #run the metrics and nulls combo function
-#' #rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores="seq")
+#' rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores="seq",
+#'	nulls=c("richness","frequency"), metrics=c("richness","NAW_MPD"))
 #'
 #' #reduce the randomizations to a more manageable format
-#' #reduced <- reduceRandomizations(rawResults)
+#' reduced <- reduceRandomizations(rawResults)
 #'
 #' #calculate the observed metrics from the input CDM
-#' #observed <- observedMetrics(tree, cdm)
+#' observed <- observedMetrics(tree, cdm, metrics=c("richness","NAW_MPD"))
 #'
 #' #summarize the means, SD and CI of the randomizations
-#' #summarized <- lapply(reduced, summaries, concat.by="richness")
+#' summarized <- lapply(reduced, summaries, concat.by="richness")
 #'
 #' #merge the observations and the summarized randomizations to facilitate significance
 #' #testing
-#' #merged <- lapply(summarized, merge, observed)
+#' merged <- lapply(summarized, merge, observed)
 #'
 #' #calculate the standardized scores of each observed metric as compared to the richness
 #' #null model randomization.
-#' #arenaTest(merged$richness, "richness")
+#' arenaTest(merged$richness, "richness")
 #'
 #' #do the same as above but across all null models. not run
 #' #temp <- lapply(1:length(merged), function(x) arenaTest(merged[[x]], "richness"))
 
-arenaTest <- function(results.table, concat.by, metrics)
+arenaTest <- function(results.table, concat.by)
 {
-	#if a list of named metric functions is not passed in, assign metrics to be NULL, in
-	#which case all length of all metrics will be used
-	if(missing(metrics))
-	{
-		metrics <- NULL
-	}
-		
-	#take advantage of the checkMetrics function to find the name of all metrics
-	#get rid of the "richness" metric name
-	metricNames <- names(checkMetrics(x=metrics))[2:length(names(checkMetrics(x=metrics)))]
+	#determine the names of the metrics passed in results.table. exclude
+	#any .average, .sd, .lower, or .upper, find the unique remaining elements, then
+	#also exclude "richness" and plot. this should be robust to users including metrics
+	#that have a period in the name
+	tempMetrics <- names(results.table)
+	tempMetrics <- sub(pattern=".average", replacement="", x=tempMetrics)
+	tempMetrics <- sub(pattern=".sd", replacement="", x=tempMetrics)
+	tempMetrics <- sub(pattern=".lower", replacement="", x=tempMetrics)
+	tempMetrics <- sub(pattern=".upper", replacement="", x=tempMetrics)
+
+	tempMetrics <- unique(tempMetrics)
+	
+	metricNames <- tempMetrics[tempMetrics != "richness" & tempMetrics != "plot"]
+
 	ses <- list()
 	for(i in 1:length(metricNames))
 	{

@@ -8,6 +8,14 @@
 #' @param test Either "ttest" or "wilcotest", depending on whether the user wants to run
 #' a two-sided t-test or a Wilcoxon signed rank test.
 #' @param concat.by Whether randomizations were concatenated by richness, plot or both.
+#' @param direction Character vector that needs to be provided if spatial simulations
+#' beyond the standard "random", "filtering", and "competition" simulations are run.
+#' The character vector must be the same length as the number of spatial simulations that
+#' were run, and can take the possible values of "two.sided" (for a two-tailed test when
+#' the SES scores are expected to be centered around 0), "less" (for when the observed SES
+#' scores are expected to be less than 0), and "greater" (for when the observed SES scores
+#' are expected to be greater than 0). For instance, habitat filtering would be set to
+#' "less".
 #'
 #' @details This function provides one way of summarizing and considering simulation
 #' results. It takes as input a vector of all standardized effect sizes for all plots
@@ -15,7 +23,9 @@
 #' and whether it differs significantly from a mean of zero. It does this either with a
 #' simple two-sided t-test, or with a Wilcoxon signed rank test. If the latter, and if
 #' there are three different spatial simulations with names random, filtering and
-#' competition, the test is two-sided, less and greater, respectively. 
+#' competition, the test is two-sided, less and greater, respectively. If additional
+#' spatial simulations are included, requiring modified expectations, these can be passed
+#' along with the "direction" argument.
 #'
 #' @return A data frame summarizing the mean, overall standardized effect sizes and the
 #' significance of those devations from expectations for each simulation, null, metric
@@ -34,10 +44,10 @@
 #' @examples
 #' #not run
 #' #results <- readIn()
-#' #summ <- reduceResults(results)
-#' #examp <- sesOverall(summ$ses, "both")
+#' #summ <- reduceResults(results, "both")
+#' #examp <- sesOverall(summ$ses, test="wilcotest", concat.by="both")
 
-sesOverall <- function(simulation.list, test, concat.by)
+sesOverall <- function(simulation.list, test, concat.by, direction)
 {
 	#dumb hack to pass R CMD check
 	simulation <- "hack"
@@ -77,42 +87,60 @@ sesOverall <- function(simulation.list, test, concat.by)
 		#into anonymous function below
 		if(setequal(names(simulation.list), c("random","filtering","competition")))
 		{
-			toFeed <- names(simulation.list)
-			toFeed[toFeed=="random"] <- "two.sided"
-			toFeed[toFeed=="filtering"] <- "less"
-			toFeed[toFeed=="competition"] <- "greater"
+			direction <- names(simulation.list)
+			direction[direction=="random"] <- "two.sided"
+			direction[direction=="filtering"] <- "less"
+			direction[direction=="competition"] <- "greater"
 		}
 		
-		else if(!setequal(names(simulation.list), c("random","filtering","competition")))
+		#if the names of the spatial simulations do not match the standard, direction
+		#needs to be supplied as a character vector of same length as simulation.list
+		else
 		{
-			print("You included new spatial simulations. Modify expectations manually")
-			toFeed <- rep("two.sided", 3)
+			if(length(direction) != length(simulation.list))
+			{
+				stop("direction must be a character vector of same length as number of spatial simulations")
+			}
+		
+			if(length(setdiff(direction, c("two.sided", "less", "greater"))) > 0)
+			{
+				stop("possible directions are limited to two.sided, less, and greater")
+			}
 		}
 		
-		tempAll <- lapply(seq_along(toFeed), function(x)
-			wilcoWrapLApply(simulation.list[[x]], alternative=toFeed[x]))
+		tempAll <- lapply(seq_along(direction), function(x)
+			wilcoWrapLApply(simulation.list[[x]], alternative=direction[x]))
 	}
 	
 	else if(test=="wilcotest" & concat.by=="both")
 	{
 		if(setequal(names(simulation.list), c("random","filtering","competition")))
 		{
-			toFeed <- names(simulation.list)
-			toFeed[toFeed=="random"] <- "two.sided"
-			toFeed[toFeed=="filtering"] <- "less"
-			toFeed[toFeed=="competition"] <- "greater"
+			direction <- names(simulation.list)
+			direction[direction=="random"] <- "two.sided"
+			direction[direction=="filtering"] <- "less"
+			direction[direction=="competition"] <- "greater"
 		}
 		
-		else if(!setequal(names(simulation.list), c("random","filtering","competition")))
+		#if the names of the spatial simulations do not match the standard, direction
+		#needs to be supplied as a character vector of same length as simulation.list
+		else
 		{
-			print("You included new spatial simulations. Modify expectations manually")
-			toFeed <- rep("two.sided", 3)
+			if(length(direction) != length(simulation.list))
+			{
+				stop("direction must be a character vector of same length as number of spatial simulations")
+			}
+		
+			if(length(setdiff(direction, c("two.sided", "less", "greater"))) > 0)
+			{
+				stop("possible directions are limited to two.sided, less, and greater")
+			}
 		}
-
+		
 		tempAll <- list()
 		
 		#i refers to spatial simulation (you will only feed in $ses components)
-		for(i in 1:length(toFeed))
+		for(i in 1:length(direction))
 		{
 			#j refers to null models
 			tempNull <- list()
@@ -122,7 +150,7 @@ sesOverall <- function(simulation.list, test, concat.by)
 				for(k in 1:length(simulation.list[[1]][[1]]))
 				{
 					temp <- wilcoWrapLApply(simulation.list[[i]][[j]],
-						alternative=toFeed[i])
+						alternative=direction[i])
 					#this function was designed for use over a list of null models, so
 					#change name here to reflect what it is actually being used for
 					names(temp)[4] <- "concat.by"

@@ -23,7 +23,7 @@ names to summarize the results over.}
 A data frame of summarized results
 }
 \description{
-Flexible function that summarizes metric performance after reading in and testing
+Summarizes metric performance after reading in and testing
 simulation results with either sesIndiv or plotOverall.
 }
 \details{
@@ -37,7 +37,8 @@ then assumes that any clustered or overdispersed plots for the random simulation
 or any overdispersed or clustered for the filtering or competition simulations,
 respectively, count as typeI errors. It assumes that any plots that are not
 clustered or overdispersed for the filtering or competition simulations, respectively,
-count as typeII errors.
+count as typeII errors. THIS FUNCTION NEEDS TO BE UPDATED FOR WHEN INPUTS DO NOT
+CONTAIN THE THREE SPATIAL SIMULATIONS: RANDOM, FILTERING, COMPETITION.
 }
 \examples{
 #not run

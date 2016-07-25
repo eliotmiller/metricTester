@@ -36,7 +36,9 @@ This function uses a Wilcoxon signed rank test to determine whether the
 plots from a spatial simulation/null/metric from a SINGLE iteration differ from
 expectations. Assuming there are three spatial simulations named random, filtering, and
 competition, this function will use two.sided, lesser and greater Wilcoxon tests,
-respectively.
+respectively. If additional (or a limited set of)
+spatial simulations are included, requiring modified expectations, these can be passed
+along with the "direction" argument.
 }
 \examples{
 #not run

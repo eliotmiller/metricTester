@@ -1,6 +1,6 @@
 #' Summarize null model performance of a series of summarized simulation results
 #'
-#' Flexible function that summarizes null performance after reading in and testing
+#' Summarizes null performance after reading in and testing
 #' simulation results with either sesIndiv or plotOverall.
 #'
 #' @param summarized.results The results of a call to sesIndiv() or plotOverall()
@@ -21,7 +21,8 @@
 #' or any overdispersed or clustered for the filtering or competition simulations,
 #' respectively, count as typeI errors. It assumes that any plots that are not
 #' clustered or overdispersed for the filtering or competition simulations, respectively,
-#' count as typeII errors.
+#' count as typeII errors. THIS FUNCTION NEEDS TO BE UPDATED FOR WHEN INPUTS DO NOT
+#' CONTAIN THE THREE SPATIAL SIMULATIONS: RANDOM, FILTERING, COMPETITION.
 #'
 #' @return A data frame of summarized results
 #'

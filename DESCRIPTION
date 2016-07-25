@@ -2,8 +2,8 @@ Package: metricTester
 Title: Test Metric and Null Model Statistical Performance
 Description: Explore the behavior and performance of phylogenetic metrics and
     null models.
-Version: 1.2.4
-Date: 2016-7-22
+Version: 1.2.5
+Date: 2016-7-25
 Author: Eliot Miller, Chris Trisos & Damien Farine
 Maintainer: Eliot Miller <eliot.isaac@gmail.com>
 URL: https://github.com/eliotmiller/metricTester

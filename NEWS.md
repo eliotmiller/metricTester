@@ -1,3 +1,7 @@
+# metricTester 1.2.5
+
+* Continuing under the hood improvements: almost all downstream functions can now handle outputs from the simulation functions of variable length and dimensions with regards to which spatial simulations, null models and metrics were included. The functions metricPerformance and nullPerformance still need revision.
+
 # metricTester 1.2.4
 
 * Major improvements in the way metrics, null models and spatial simulations can be specified. If only a subset of pre-defined options are desired, rather than needing to pass a named list of functions, these functions now accept character vectors corresponding to the options as defined in defineMetrics(), defineNulls(), and defineSimulations(). Can still accommodate new metrics, nulls and simulations defined on the fly.

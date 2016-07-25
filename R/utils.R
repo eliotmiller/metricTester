@@ -181,6 +181,16 @@ wilcoWrapApply <- function(dataframe, alternative)
 	exclude <- c("richness", "plot")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
 
+	#if only a single metric, excluding plot and richness, is passed to this function,
+	#then temp will be a numeric vector instead of the expected data frame, causing the
+	#apply statement below to fail. so, force to a data frame and give the column the
+	#correct name
+	if(is.numeric(temp))
+	{
+		temp <- data.frame(temp)
+		names(temp) <- names(dataframe)[dim(dataframe)[2]]
+	}
+
 	#apply wilcoWrap over data frame of metric SES scores for a given null and spatial sim
 	output <- apply(temp, 2, wilcoWrap, mu=0, alternative)
 	
@@ -273,6 +283,16 @@ tWrapApply <- function(dataframe)
 	#exclude "richness" and "plot" columns
 	exclude <- c("richness", "plot")
 	temp <- dataframe[ ,!(names(dataframe) %in% exclude)]
+
+	#if only a single metric, excluding plot and richness, is passed to this function,
+	#then temp will be a numeric vector instead of the expected data frame, causing the
+	#apply statement below to fail. so, force to a data frame and give the column the
+	#correct name
+	if(is.numeric(temp))
+	{
+		temp <- data.frame(temp)
+		names(temp) <- names(dataframe)[dim(dataframe)[2]]
+	}
 
 	#apply tWrap over a data frame of metric SES scores for a given null and spatial sim
 	output <- apply(temp, 2, tWrap)
