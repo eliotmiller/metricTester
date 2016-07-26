@@ -4,13 +4,23 @@
 \alias{sesIndiv}
 \title{Summary statistics of SES results}
 \usage{
-sesIndiv(raw.results, concat.by)
+sesIndiv(raw.results, direction)
 }
 \arguments{
 \item{raw.results}{A list of lists of lists of dataframes; the results of a call to
 readIn.}
 
-\item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
+\item{direction}{Character vector that needs to be provided if spatial simulations
+beyond the standard "random", "filtering", and "competition" simulations are run.
+The character vector must be the same length as the number of spatial simulations that
+were run, and can take the possible values of "two.sided" (for a two-tailed test when
+the SES scores are expected to be centered around 0), "less" (for when the observed SES
+scores are expected to be less than 0), and "greater" (for when the observed SES scores
+are expected to be greater than 0). For instance, habitat filtering would be set to
+"less". The relevant simulation to which these directional tests will be applied can be
+determined by calling names(raw.results[[1]]). Note that currently, even if a direction
+vector is supplied, if the standard simulations were run then the supplied direction
+vector will be replaced with the standard expectations.}
 }
 \value{
 A data frame summarizing the total number of runs per spatial simulation, null,
@@ -19,24 +29,32 @@ unique combination.
 }
 \description{
 Summarizes individual iteration performance of each sim/null/metric combination across
-all iterations
+all iterations.
 }
 \details{
 This function takes a raw list of results from multiple iterations from
-multiLinker, and runs sesSingle across each one. It then summarizes the results of
-those single runs as the number of sim/null/metrics that deviated beyond expectations
-and the number that were within expectations. A single run from a given unique metric +
-null approach is considered as throwing a type I error only if p is less
-than or equal to 0.05 for the random spatial simulation. It would be possible to also
-assess whether such unique combinations throw the opposite signal than expected for
-habitat filtering and competitive exclusion. A unique combination iteration is
+multiLinker, and runs a non-exported function, sesSingle, over each element (iteration)
+in that list. This sesSingle function runs a Wilcoxon signed rank test over each
+iteration to determine whether the
+plots from a spatial simulation/null/metric differ from
+expectations. Assuming there are three spatial simulations named random, filtering, and
+competition, this function will use two.sided, lesser and greater Wilcoxon tests,
+respectively. If additional (or a limited set of)
+spatial simulations are included, requiring modified expectations, these can be passed
+along with the "direction" argument. It then summarizes the results of
+those single run tests as the number of sim/null/metrics that deviated beyond
+expectations and the number that were within expectations. A single run from a given
+unique metric + null approach is considered as throwing a type I error only if p is
+less than or equal to 0.05 for the random spatial simulation. It would be possible to
+also assess whether such unique combinations throw the opposite signal than expected
+for habitat filtering and competitive exclusion. A unique combination iteration is
 considered to throw a type II error if the p value from  either the filtering or the
 exclusion simulation is greater than 0.05.
 }
 \examples{
 #not run
 #results <- readIn()
-#summ <- sesIndiv(results, "both")
+#summ <- sesIndiv(results)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

@@ -5,7 +5,6 @@
 #'
 #' @param simulation.list A summarized results list such as one output from
 #' reduceResults(). See examples.
-#' @param concat.by Whether randomizations were concatenated by richness, plot or both.
 #'
 #' @details This function provides one way of summarizing and considering simulation
 #' results. It takes as input a vector of 0s, 1s and 2s (corresponding to within, less,
@@ -27,11 +26,36 @@
 #' @examples
 #' #not run
 #' #results <- readIn()
-#' #summ <- reduceResults(results, "both")
-#' #test <- plotOverall(summ$plot, "both")
+#' #summ <- reduceResults(results)
+#' #test <- plotOverall(summ$plot)
 
-plotOverall <- function(simulation.list, concat.by)
+plotOverall <- function(simulation.list)
 {
+	#determine whether the results were concatenated by plot, richness, or both. if by
+	#both, then this will return true
+	if(class(simulation.list[[1]][[1]])=="list")
+	{
+		concat.by <- "both"
+	}
+	
+	#this will be a data frame and the first column will be named "richness" if
+	#concatenated by that
+	else if(is.data.frame(simulation.list[[1]][[1]]))
+	{
+		if(names(simulation.list[[1]][[1]])[1]=="richness")
+		{
+			concat.by <- "richness"
+		}
+		else if(names(simulation.list[[1]][[1]])[1]=="plot")
+		{
+			concat.by <- "plot"
+		}
+	}
+	else
+	{
+		stop("Unexpected function input")
+	}
+
 	if(concat.by=="richness" | concat.by=="plot")
 	{
 		#lapply all ones, twos and length LApply functions over the entire simulation list

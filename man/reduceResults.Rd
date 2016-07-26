@@ -4,12 +4,10 @@
 \alias{reduceResults}
 \title{Reduce results from multiLinker into a manageable format}
 \usage{
-reduceResults(results.list, concat.by)
+reduceResults(results.list)
 }
 \arguments{
 \item{results.list}{The results of a call to readIn()}
-
-\item{concat.by}{Whether randomizations were concatenated by richness, plot or both}
 }
 \value{
 A list of data frames.
@@ -26,7 +24,7 @@ and sesOverall.
 \examples{
 #not run
 #results <- readIn()
-#summ <- reduceResults(results, "both")
+#summ <- reduceResults(results)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

@@ -36,13 +36,13 @@ fake.results1 <- list("random"=random1, "filtering"=random1, "competition"=rando
 results <- list("iteration1"=fake.results1, "iteration2"=fake.results1)
 
 #now summarize these results
-resultsSumm <- reduceResults(results, "richness")
+resultsSumm <- reduceResults(results)
 
 #generate some temporary results
 failedTemp <- failed(results[[1]], "richness")
-sesSingleTemp <- sesSingle(results[[1]], "richness")
-sesIndivTemp <- sesIndiv(results, "richness")
-sesOverallTemp <- sesOverall(resultsSumm$ses, test="wilcotest", concat.by="richness")
+sesSingleTemp <- sesSingle(results[[1]])
+sesIndivTemp <- sesIndiv(results)
+sesOverallTemp <- sesOverall(resultsSumm$ses, test="wilcotest")
 
 #confirm the failed function returns a data frame with no rows and four columns
 #when provided with results concatenated by richness

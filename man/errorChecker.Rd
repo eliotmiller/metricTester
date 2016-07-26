@@ -54,7 +54,6 @@ results <- reduceRandomizations(rawResults)
 #calculate the observed metrics from the input CDM
 observed <- observedMetrics(tree, cdm, metrics=c("richness", "NAW_MPD"))
 
-#not run
 test <- errorChecker(observed, results, "richness")
 }
 \references{

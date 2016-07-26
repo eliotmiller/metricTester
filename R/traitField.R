@@ -3,10 +3,10 @@
 #' Calculate the similarity in trait space of a species to those it occurs with.
 #'
 #' @param trait.distance Symmetrical matrix summarizing pairwise trait distances. If
-#' it contains 
+#' it contains.
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
-#' species as columns
-#' @param metric Phylogenetic metric of choice (see details)
+#' species as columns.
+#' @param metric Phylogenetic metric of choice (see details).
 #' 
 #' @details This function is being deprecated. This and the rest of the first generation
 #' of field functions are being replaced by a two-step process akin to the calcMetrics

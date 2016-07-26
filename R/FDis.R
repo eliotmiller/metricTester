@@ -25,7 +25,7 @@
 #' weighted centroid of each cloud of points and then determines the weighted mean
 #' absolute deviation from each centroid.
 #'
-#' @return Insert details
+#' @return Named numeric with FDis values.
 #'
 #' @export
 #'

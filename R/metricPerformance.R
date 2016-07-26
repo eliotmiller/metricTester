@@ -3,13 +3,17 @@
 #' Summarizes metric performance after reading in and testing
 #' simulation results with either sesIndiv or plotOverall.
 #'
-#' @param summarized.results The results of a call to sesIndiv() or plotOverall()
-#' @param simulations Default is "all". Alternatively, can supply a vector of simulation
+#' @param summarized.results The results of a call to sesIndiv() or plotOverall(). If from
+#' plotOverall, the results must include the standard three spatial simulations (random,
+#' filtering, competition), but must contain no other spatial simulations.
+#' @param nulls By default, this function summarizes metric performance over all tested
+#' null models. Alternatively, user can supply a vector of null model
 #' names to summarize the results over.
-#' @param nulls Default is "all". Alternatively, can supply a vector of null model
-#' names to summarize the results over.
-#' @param concat.by Default is "both". Alternatively, can supply either "plot" or
-#' "richness".
+#' @param concat.by Default is "both". Meaning that if both plot-level and richness-level
+#' summary statistics are available, then performance will be average over both types of
+#' results. Alternatively (and perhaps preferably), either "plot" or "richness" can be
+#' provided and, assuming that concatenation option was specified in the multiLinker runs,
+#' performance results will be summarized just over that specified option.
 #' 
 #' @details If an overall picture of metric performance is desired, this function can
 #' provide it. It can also be used to summarize metric performance over a specific subset
@@ -21,8 +25,7 @@
 #' or any overdispersed or clustered for the filtering or competition simulations,
 #' respectively, count as typeI errors. It assumes that any plots that are not
 #' clustered or overdispersed for the filtering or competition simulations, respectively,
-#' count as typeII errors. THIS FUNCTION NEEDS TO BE UPDATED FOR WHEN INPUTS DO NOT
-#' CONTAIN THE THREE SPATIAL SIMULATIONS: RANDOM, FILTERING, COMPETITION.
+#' count as typeII errors.
 #'
 #' @return A data frame of summarized results
 #'
@@ -38,59 +41,56 @@
 #' #summ <- sesIndiv(results)
 #' #examp <- metricPerformance(summ)
 
-metricPerformance <- function(summarized.results, simulations="all", nulls="all",
-	concat.by="both")
+metricPerformance <- function(summarized.results, nulls, concat.by="both")
 {
-	if(simulations=="all")
+	#detect the names of the simulations that were run
+	simulations <- unique(summarized.results$simulation)
+
+	#if simulations is not equal to the standard filtering, random, competition options,
+	#code is not currently able to accomodate results from plotOverall. throw an error.
+	#note the names(summarized.results)[5] is just a quick way to figure out whether
+	#the summarized.results object came from sesIndiv or plotOverall
+	if(!setequal(simulations, c("random","filtering","competition")) &
+		names(summarized.results)[5] == "clustered")
 	{
-		simulations <- unique(summarized.results$simulation)
-	}
-	#complicated if statement here. it says if the specified simulations do not contain
-	#an entry of character "all" and there is any difference between the specified sims
-	#and the unique simulations in the summarized.results table, throw an error
-	else if(all(!(simulations %in% "all")) &
-		length(setdiff(simulations, unique(summarized.results$simulation))) > 0)
-	{
-		stop("Specified simulations do not match those in the results table")
-	}
-	else
-	{
-		simulations <- simulations
+		stop("metricPerformance not currently able to accommodate results from plotOverall that contain non-standard spatial simulations")
 	}
 
+	#if no null models are specified, take the names of those to use from the results
+	if(missing(nulls))
+	{
+		nulls <- unique(summarized.results$null.model)
+	}
+
+	#confirm that concat.by is set to a valid type. if both, just convert concat.by to
+	#become c(richness, plot)
 	if(concat.by=="both")
 	{
 		concat.by <- unique(summarized.results$concat.by)
 	}
-	else if(all(!(concat.by %in% "both")) &
-		length(setdiff(concat.by, unique(summarized.results$concat.by))) > 0)
-	{
-		stop("concat.by must be set to plot, richness, or both")
-	}
-	else
+	#if set to richness, and if summarized.results contains a richness element, proceed
+	else if(concat.by=="richness" & sum(summarized.results$concat.by=="richness") > 0)
 	{
 		concat.by <- concat.by
 	}
-
-	if(nulls=="all")
+	else if(concat.by=="plot" & sum(summarized.results$concat.by=="plot") > 0)
 	{
-		nulls <- unique(summarized.results$null.model)
-	}
-	else if(all(!(nulls %in% "all")) &
-		length(setdiff(nulls, unique(summarized.results$null.model))) > 0)
-	{
-		stop("Specified nulls do not match those in the results table")
+		concat.by <- concat.by
 	}
 	else
 	{
-		nulls <- nulls
+		stop("concat.by must be set to plot, richness, or both, and summarized.results must contain the specified type of summary")
 	}
 
+	#determine the metrics that were calculated in summarized.results
 	metrics <- unique(summarized.results$metric)
+	
+	#set up blank type i and ii vectors to save info into
 	typeI <- c()
 	typeII <- c()
 
-	#use these for sesIndiv results	
+	#determine whether the results came from sesIndiv (quick way to figure it out in the
+	#if statement below), and, if so, calculate type I and II error rates in this way
 	if(names(summarized.results)[5] == "total.runs")
 	{
 		for(i in 1:length(metrics))
@@ -106,7 +106,8 @@ metricPerformance <- function(summarized.results, simulations="all", nulls="all"
 		}
 	}
 
-	#use this for plotOverall results
+	#determine whether the results came from plotOverall (quick way to figure it out in
+	#if statement below), and, if so, calculate type I and II error rates in this way
 	else if(names(summarized.results)[5] == "clustered")
 	{
 		#generate some simulation-specific data frames

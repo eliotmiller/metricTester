@@ -33,13 +33,14 @@ sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
 
 cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
 
-#below not run for example timing issues on CRAN
+#run the metrics and nulls combo function
+rawResults <- metricsNnulls(tree=tree, picante.cdm=cdm, randomizations=2, cores="seq",
+nulls=c("richness","frequency"), metrics=c("richness","NAW_MPD"))
 
-#rawResults <- metricsNnulls(tree, cdm)
+#summarize the results
+results <- reduceRandomizations(rawResults)
 
-#results <- reduceRandomizations(rawResults)
-
-#test <- summaries(results$frequency, concat.by="richness")
+test <- summaries(results$frequency, concat.by="richness")
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

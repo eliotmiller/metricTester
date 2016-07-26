@@ -3,8 +3,12 @@
 #' Given a prepped field.input object, calculate all fields of interest.
 #'
 #' @param field.input Prepped field.input object.
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
+#' @param metrics Optional. If not provided, defines the metrics as all of those in
+#' defineMetrics. If only a subset of those is desired, then metrics should take
+#' the form of a character vector corresponding to named functions from defineMetrics.
+#' The available metrics can be determined by running names(defineMetrics()). Otherwise,
+#' if the user would like to define a new metric on the fly, the argument can take
+#' the form of a named list of new functions (metrics).
 #' 
 #' @details Currently we are calculating 19 phylogenetic community structure metrics.
 #' This function first confirms that the input is of class metrics.input and, if so, then

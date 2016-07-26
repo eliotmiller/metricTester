@@ -6,9 +6,12 @@
 #' @param tree Phylo object
 #' @param picante.cdm A picante-style community data matrix with sites as rows, and
 #' species as columns
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics. Defaults to all metrics
-#' defined in defineMetrics()
+#' @param metrics Optional. If not provided, defines the metrics as all of those in
+#' defineMetrics. If only a subset of those is desired, then metrics should take
+#' the form of a character vector corresponding to named functions from defineMetrics.
+#' The available metrics can be determined by running names(defineMetrics()). Otherwise,
+#' if the user would like to define a new metric on the fly, the argument can take
+#' the form of a named list of new functions (metrics).
 #'
 #' @details A simple wrapper function to quickly prep data and calculate observed metrics.
 #'

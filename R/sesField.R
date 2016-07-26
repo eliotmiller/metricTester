@@ -3,11 +3,14 @@
 #' Calculate the null-model standardized effect size of a species' trait field.
 #'
 #' @param field.input Prepped field.input object.
-#' @param metrics Optional character vector of named metric functions to use. Used to run
-#' a subset of the pre-defined metrics. These can be determined by running
-#' names(defineMetrics()).
-#' @param nulls Optional list of named null model functions to use. If invoked, this 
-#' option will likely be used to run a subset of the defined null models.
+#' @param metrics Optional. If not provided, defines the metrics as all of those in
+#' defineMetrics. If only a subset of those metrics is desired, then metrics should take
+#' the form of a character vector corresponding to named functions from defineMetrics.
+#' The available metrics can be determined by running names(defineMetrics()). 
+#' @param nulls Optional. If not provided, defines the nulls as all of those in
+#' defineNulls. If only a subset of those is desired, then nulls should take
+#' the form of a character vector corresponding to named functions from defineNulls.
+#' The available nulls can be determined by running names(defineNulls()).
 #' @param randomizations The number of times the input CDM should be randomized and the
 #' metrics calculated across it.
 #' @param regional.abundance A character vector in the form "s1, s1, s1, s2, s2, s3, etc".

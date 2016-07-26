@@ -18,7 +18,7 @@ abundances, the values can simply be presence/absences. Moreover, sites could be
 species and species could be individuals. See details.}
 }
 \value{
-Insert details
+Matrix specifying the position of the centroids along each axis.
 }
 \description{
 Calculate the weighted centroids of clouds of multivariate points.

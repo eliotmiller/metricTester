@@ -5,12 +5,12 @@
 #'
 #' @param simulations.input Prepped simulations.input object
 #' @param simulations Optional. If not provided, defines the simulations as all of those
-#' in definesimulations. If only a subset of those simulations is desired, then
+#' in defineSimulations. If only a subset of those simulations is desired, then
 #' simulations should take the form of a character vector corresponding to named functions
-#' from definesimulations. The available simulations can be determined by running
-#' names(definesimulations()). Otherwise, if the user would like to define a new metric on
-#' the fly, the argument simulations can take the form of a named list of new functions
-#' (simulations). If the latter, new_ must be set to TRUE. 
+#' from defineSimulations. The available simulations can be determined by running
+#' names(defineSimulations()). Otherwise, if the user would like to define a new
+#' simulation on the fly, the argument simulations can take the form of a named list of
+#' new functions (simulations). In this case, new_ must be set to TRUE.
 #' @param new_ Whether or not new simulations are being defined on the fly. Default is
 #' FALSE. Set to TRUE if a new metric is being used.
 #' 

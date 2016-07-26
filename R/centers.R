@@ -21,7 +21,7 @@
 #' the matrix in this case would describe how much weight to assign to each individual
 #' observation.
 #'
-#' @return Insert details
+#' @return Matrix specifying the position of the centroids along each axis.
 #'
 #' @export
 #'

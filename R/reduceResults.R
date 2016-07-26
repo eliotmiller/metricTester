@@ -4,7 +4,6 @@
 #' combine these results into a more manageable format.
 #'
 #' @param results.list The results of a call to readIn()
-#' @param concat.by Whether randomizations were concatenated by richness, plot or both
 #'
 #' @details Given a list of results readIn() from multiLinker, this function will reduce
 #' those results into a manageable format like that expected for calls to plotOverall
@@ -21,13 +20,33 @@
 #' @examples
 #' #not run
 #' #results <- readIn()
-#' #summ <- reduceResults(results, "both")
+#' #summ <- reduceResults(results)
 
-reduceResults <- function(results.list, concat.by)
+reduceResults <- function(results.list)
 {
-	if(!(concat.by %in% c("both","plot","richness")))
+	#determine whether the results were concatenated by plot, richness, or both. if by
+	#both, then this will return true
+	if(class(results.list[[1]][[1]][[1]][[1]])=="list")
 	{
-		stop("concat.by must equal either both, richness, or plot")
+		concat.by <- "both"
+	}
+	
+	#this will be a data frame and the first column will be named "richness" if
+	#concatenated by that
+	else if(is.data.frame(results.list[[1]][[1]][[1]][[1]]))
+	{
+		if(names(results.list[[1]][[1]][[1]][[1]])[1]=="richness")
+		{
+			concat.by <- "richness"
+		}
+		else if(names(results.list[[1]][[1]][[1]][[1]])[1]=="plot")
+		{
+			concat.by <- "plot"
+		}
+	}
+	else
+	{
+		stop("Unexpected function input")
 	}
 
 	#assume that all iterations have same dimensions. should ultimately write a check here

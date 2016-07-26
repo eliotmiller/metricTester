@@ -8,12 +8,12 @@ traitField(trait.distance, picante.cdm, metric)
 }
 \arguments{
 \item{trait.distance}{Symmetrical matrix summarizing pairwise trait distances. If
-it contains}
+it contains.}
 
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and
-species as columns}
+species as columns.}
 
-\item{metric}{Phylogenetic metric of choice (see details)}
+\item{metric}{Phylogenetic metric of choice (see details).}
 }
 \value{
 Named vector of species' trait fields.

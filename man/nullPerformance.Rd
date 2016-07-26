@@ -4,20 +4,22 @@
 \alias{nullPerformance}
 \title{Summarize null model performance of a series of summarized simulation results}
 \usage{
-nullPerformance(summarized.results, simulations = "all", metrics = "all",
-  concat.by = "both")
+nullPerformance(summarized.results, metrics, concat.by = "both")
 }
 \arguments{
-\item{summarized.results}{The results of a call to sesIndiv() or plotOverall()}
+\item{summarized.results}{The results of a call to sesIndiv() or plotOverall(). If from
+plotOverall, the results must include the standard three spatial simulations (random,
+filtering, competition), but must contain no other spatial simulations.}
 
-\item{simulations}{Default is "all". Alternatively, can supply a vector of simulation
+\item{metrics}{By default, this function summarizes null performance over all tested
+metrics. Alternatively, user can supply a vector of metric
 names to summarize the results over.}
 
-\item{metrics}{Default is "all". Alternatively, can supply a vector of metric
-names to summarize the results over.}
-
-\item{concat.by}{Default is "both". Alternatively, can supply either "plot" or
-"richness".}
+\item{concat.by}{Default is "both". Meaning that if both plot-level and richness-level
+summary statistics are available, then performance will be average over both types of
+results. Alternatively (and perhaps preferably), either "plot" or "richness" can be
+provided and, assuming that concatenation option was specified in the multiLinker runs,
+performance results will be summarized just over that specified option.}
 }
 \value{
 A data frame of summarized results
@@ -37,8 +39,7 @@ then assumes that any clustered or overdispersed plots for the random simulation
 or any overdispersed or clustered for the filtering or competition simulations,
 respectively, count as typeI errors. It assumes that any plots that are not
 clustered or overdispersed for the filtering or competition simulations, respectively,
-count as typeII errors. THIS FUNCTION NEEDS TO BE UPDATED FOR WHEN INPUTS DO NOT
-CONTAIN THE THREE SPATIAL SIMULATIONS: RANDOM, FILTERING, COMPETITION.
+count as typeII errors.
 }
 \examples{
 #not run

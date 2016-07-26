@@ -4,13 +4,11 @@
 \alias{plotOverall}
 \title{Overall per simulation-null-metric plot test}
 \usage{
-plotOverall(simulation.list, concat.by)
+plotOverall(simulation.list)
 }
 \arguments{
 \item{simulation.list}{A summarized results list such as one output from
 reduceResults(). See examples.}
-
-\item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
 }
 \value{
 A data frame summarizing the total number of plots tested and how many of
@@ -32,8 +30,8 @@ are also defined but not exported in this function.
 \examples{
 #not run
 #results <- readIn()
-#summ <- reduceResults(results, "both")
-#test <- plotOverall(summ$plot, "both")
+#summ <- reduceResults(results)
+#test <- plotOverall(summ$plot)
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

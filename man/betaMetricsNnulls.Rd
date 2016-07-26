@@ -32,11 +32,19 @@ metrics calculated across it.}
 specify the desired number of cores to utilize. The default is "seq", which runs the
 calculations sequentially.}
 
-\item{nulls}{Optional list of named null model functions to use. If invoked, this 
-option will likely be used to run a subset of the defined null models.}
+\item{nulls}{Optional. If not provided, defines the nulls as all of those in
+defineNulls. If only a subset of those is desired, then nulls should take
+the form of a character vector corresponding to named functions from defineNulls.
+The available nulls can be determined by running names(defineNulls()). Otherwise,
+if the user would like to define a new null on the fly, the argument nulls can take
+the form of a named list of new functions (nulls).}
 
-\item{metrics}{Optional list of named metric functions to use. If invoked, this option
-will likely be used to run a subset of the defined metrics.}
+\item{metrics}{Optional. If not provided, defines the metrics as all of those in
+defineBetaMetrics. If only a subset of those is desired, then metrics should take
+the form of a character vector corresponding to named functions from defineBetaMetrics.
+The available metrics can be determined by running names(defineBetaMetrics()).
+If the user would like to define a new metric on the fly, the argument can take
+the form of a named list of new functions (metrics).}
 }
 \value{
 A list of lists of vectors. The first level has as many elements as there

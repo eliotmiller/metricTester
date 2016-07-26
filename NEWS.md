@@ -1,3 +1,7 @@
+# metricTester 1.3.0
+
+* Finished major revisions to internal package checks, inputs. Arguments are much easier to specify, and functions are better equipped to deal with outputs of varying sizes. Many functions were changed, and it is possible some things may have broken. Please report any issues on the GitHub site.
+
 # metricTester 1.2.5
 
 * Continuing under the hood improvements: almost all downstream functions can now handle outputs from the simulation functions of variable length and dimensions with regards to which spatial simulations, null models and metrics were included. The functions metricPerformance and nullPerformance still need revision.

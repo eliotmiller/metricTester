@@ -4,7 +4,7 @@
 \alias{sesOverall}
 \title{Overall per simulation-null-metric SES test}
 \usage{
-sesOverall(simulation.list, test, concat.by, direction)
+sesOverall(simulation.list, test, direction)
 }
 \arguments{
 \item{simulation.list}{A summarized results list such as one output from
@@ -13,8 +13,6 @@ reduceResults(). See examples.}
 \item{test}{Either "ttest" or "wilcotest", depending on whether the user wants to run
 a two-sided t-test or a Wilcoxon signed rank test.}
 
-\item{concat.by}{Whether randomizations were concatenated by richness, plot or both.}
-
 \item{direction}{Character vector that needs to be provided if spatial simulations
 beyond the standard "random", "filtering", and "competition" simulations are run.
 The character vector must be the same length as the number of spatial simulations that
@@ -22,7 +20,8 @@ were run, and can take the possible values of "two.sided" (for a two-tailed test
 the SES scores are expected to be centered around 0), "less" (for when the observed SES
 scores are expected to be less than 0), and "greater" (for when the observed SES scores
 are expected to be greater than 0). For instance, habitat filtering would be set to
-"less".}
+"less". The relevant simulation to which these directional tests will be applied can be
+determined by calling names(simulation.list).}
 }
 \value{
 A data frame summarizing the mean, overall standardized effect sizes and the
@@ -48,8 +47,8 @@ along with the "direction" argument.
 \examples{
 #not run
 #results <- readIn()
-#summ <- reduceResults(results, "both")
-#examp <- sesOverall(summ$ses, test="wilcotest", concat.by="both")
+#summ <- reduceResults(results)
+#examp <- sesOverall(summ$ses, test="wilcotest")
 }
 \references{
 Miller, E. T., D. R. Farine, and C. H. Trisos. 2016. Phylogenetic community

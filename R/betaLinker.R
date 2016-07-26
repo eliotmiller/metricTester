@@ -23,13 +23,25 @@
 #' @param randomizations The number of randomized CDMs, per null, to generate. These are
 #' used to compare the significance of the observed metric scores.
 #' @param cores The number of cores to be used for parallel processing.
-#' @param simulations Optional list of named spatial simulation functions to use. These
-#' must be defined in the defineSimulations function. If invoked, this option will likely
-#' be used to run a subset of the defined spatial simulations.
-#' @param nulls Optional list of named null model functions to use. If invoked, this 
-#' option will likely be used to run a subset of the defined null models.
-#' @param metrics Optional list of named metric functions to use. If invoked, this option
-#' will likely be used to run a subset of the defined metrics.
+#' @param simulations Optional. If not provided, defines the simulations as all of those
+#' in defineSimulations. If only a subset of those simulations is desired, then
+#' simulations should take the form of a character vector corresponding to named functions
+#' from defineSimulations. The available simulations can be determined by running
+#' names(defineSimulations()). Otherwise, if the user would like to define a new
+#' simulation on the fly, the argument simulations can take the form of a named list of
+#' new functions (simulations).
+#' @param nulls Optional. If not provided, defines the nulls as all of those in
+#' defineNulls. If only a subset of those is desired, then nulls should take
+#' the form of a character vector corresponding to named functions from defineNulls.
+#' The available nulls can be determined by running names(defineNulls()). Otherwise,
+#' if the user would like to define a new null on the fly, the argument nulls can take
+#' the form of a named list of new functions (nulls). 
+#' @param metrics Optional. If not provided, defines the metrics as all of those in
+#' defineBetaMetrics. If only a subset of those is desired, then metrics should take
+#' the form of a character vector corresponding to named functions from defineBetaMetrics.
+#' The available metrics can be determined by running names(defineBetaMetrics()).
+#' If the user would like to define a new metric on the fly, the argument can take
+#' the form of a named list of new functions (metrics).
 #' 
 #' @details This function wraps a number of other wrapper functions into
 #' one big beta metric + null performance tester function. Only a single test is run, 
@@ -54,12 +66,11 @@
 #' Ecography DOI: 10.1111/ecog.02070
 #'
 #' @examples
-#' #below not run for timing issues on CRAN
-#' #system.time(test <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
-#' 	#length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
-#'	#competition.iterations=3, no.plots=15, plot.length=30,
-#'	#randomizations=3, cores="seq",
-#'	#nulls=c("richness", "frequency")))
+#' system.time(test <- betaLinker(no.taxa=50, arena.length=300, mean.log.individuals=2, 
+#' 	length.parameter=5000, sd.parameter=50, max.distance=30, proportion.killed=0.2, 
+#'	competition.iterations=3, no.plots=15, plot.length=30,
+#'	randomizations=3, cores="seq", metrics=c("Pst", "Bst"),
+#'	nulls=c("richness", "frequency")))
 
 betaLinker <- function(no.taxa, arena.length, mean.log.individuals, length.parameter, 
 	sd.parameter, max.distance, proportion.killed, competition.iterations, no.plots, 

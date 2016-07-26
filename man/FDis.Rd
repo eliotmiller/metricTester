@@ -19,7 +19,7 @@ abundances, the values can simply be presence/absences. Moreover, sites could be
 species and species could be individuals. See details.}
 }
 \value{
-Insert details
+Named numeric with FDis values.
 }
 \description{
 Calculate the functional dispersion of clouds of multivariate points.
