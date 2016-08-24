@@ -24,6 +24,11 @@ Given a data frame of metric values, summarizes either by plot or richness.
 Outputs the mean, standard deviation and 95\% confidence intervals of each plot or
 observed richness. If provided with concat.by="both", outputs a list of two data
 frames, one for by richness and one for by plot. Otherwise, outputs a data frame.
+Importantly, note that this function assumes that the first metric is species richness.
+This applies even if the user does not wish to summarize by "richness" or by "both".
+This is a design flaw and will be rectified in future versions of the package. For now,
+see the examples for the correct way to specify that the first metric is indeed
+"richness".
 }
 \examples{
 #simulate tree with birth-death process

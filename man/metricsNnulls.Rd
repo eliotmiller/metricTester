@@ -44,7 +44,12 @@ defineMetrics. If only a subset of those is desired, then metrics should take
 the form of a character vector corresponding to named functions from defineMetrics.
 The available metrics can be determined by running names(defineMetrics()). Otherwise,
 if the user would like to define a new metric on the fly, the argument can take
-the form of a named list of new functions (metrics).}
+the form of a named list of new functions (metrics). Note that some functions,
+particularly the summaries, assume that the first metric calculated is species
+richness. This is a design flaw and will be fixed in the future, but for the
+time-being, we recommend always calculating "richness" as the first metric. This
+happens by default if all metrics are used, but if provided with a vector of metric
+names, richness should be the first element in that vector.}
 }
 \value{
 A list of lists of vectors. The first level has as many elements as there

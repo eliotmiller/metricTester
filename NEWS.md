@@ -1,3 +1,7 @@
+# metricTester 1.3.1
+
+* Minor update to documentation to make it clearer that the summaries function needs the first metric calculated to be "richness". This is a design flaw and will be fixed in future versions of the package.
+
 # metricTester 1.3.0
 
 * Finished major revisions to internal package checks, inputs. Arguments are much easier to specify, and functions are better equipped to deal with outputs of varying sizes. Many functions were changed, and it is possible some things may have broken. Please report any issues on the GitHub site.
