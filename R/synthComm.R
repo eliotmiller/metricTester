@@ -2,7 +2,7 @@
 #'
 #' Create niche spaces with similar characteristics to input.
 #'
-#' @param ordination.space Total niche space, e.g. the $x element of a PCA object. This
+#' @param ordination.results Total niche space, e.g. the $x element of a PCA object. This
 #' should be a matrix. If it is not, it will be converted to one. This means categorical
 #' variables will not be handled well.
 #' @param road.map Identical to the input for the 'a' argument in the dbFD function of
@@ -19,8 +19,8 @@
 #' map, optionally a cov.matrix, and will return a new total trait space with the
 #' same number of species (or sites) and observations per species (or community) as the
 #' input. It works by first simulating a multivariate normal distribution with
-#' centroids like those from ordination.space. It bases the positions of these centroids
-#' on the covariance matrix of the input ordination.space unless a different covariance
+#' centroids like those from ordination.results. It bases the positions of these centroids
+#' on the covariance matrix of the input ordination.results unless a different covariance
 #' matrix (e.g., from a larger trait space) is provided. Points (either akin to multiple
 #' individuals or species, depending on the level of analysis) are then distributed around
 #' those points with multivariate normal distributions like those in the input.
@@ -41,7 +41,7 @@
 #' centroids <- matrix(nrow=6, ncol=3, rep(seq(from = -2, to = 2, length.out=6), 3))
 #'
 #' #brute force the points into a list and reduce back into a large simulated
-#' #ordination.space object
+#' #ordination.results object
 #'
 #' output <- list()
 #'
@@ -88,11 +88,11 @@
 #' #plot the points to give some sense of what it looks like (not run, but works)
 #' #plot(temp[,3]~temp[,2], col=temp$species, pch=20)
 
-synthComm <- function(ordination.space, road.map, cov.matrix=NULL)
+synthComm <- function(ordination.results, road.map, cov.matrix=NULL)
 {
 	#calculate each species' centroid, and the means of these centroids
 	
-	calcCenters <- centers(ordination.space, road.map)
+	calcCenters <- centers(ordination.results, road.map)
 	meanCenters <- apply(calcCenters, 2, mean)
 	
 	#if cov.matrix is missing, calculate it based on the species' centroids. otherwise
@@ -117,7 +117,7 @@ synthComm <- function(ordination.space, road.map, cov.matrix=NULL)
 	for(i in 1:dim(road.map)[1])
 	{
 		indices <- names(road.map)[road.map[i,]!=0]
-		tempPoints <- ordination.space[indices,]
+		tempPoints <- ordination.results[indices,]
 		covList[[i]] <- stats::cov(tempPoints)
 	}
 	

@@ -1,3 +1,7 @@
+# metricTester 1.3.2
+
+* Added two new functions. A simple utility function to create the road map used for the FDis-related functions, and a new null model. The new null model is a modified version of the regional null model described in our 2016 Ecography paper. It samples from a regional abundance vector, but rather than maintaining the total number of individuals per plot (and summarizing by species richness later to maintain that), it only maintains the number of species per plot.
+
 # metricTester 1.3.1
 
 * Minor update to documentation to make it clearer that the summaries function needs the first metric calculated to be "richness". This is a design flaw and will be fixed in future versions of the package.

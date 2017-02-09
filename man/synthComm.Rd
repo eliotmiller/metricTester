@@ -4,10 +4,10 @@
 \alias{synthComm}
 \title{Create synthetic community niche space}
 \usage{
-synthComm(ordination.space, road.map, cov.matrix = NULL)
+synthComm(ordination.results, road.map, cov.matrix = NULL)
 }
 \arguments{
-\item{ordination.space}{Total niche space, e.g. the $x element of a PCA object. This
+\item{ordination.results}{Total niche space, e.g. the $x element of a PCA object. This
 should be a matrix. If it is not, it will be converted to one. This means categorical
 variables will not be handled well.}
 
@@ -33,8 +33,8 @@ community (or multiple communities, depending upon the analysis) and a community
 map, optionally a cov.matrix, and will return a new total trait space with the
 same number of species (or sites) and observations per species (or community) as the
 input. It works by first simulating a multivariate normal distribution with
-centroids like those from ordination.space. It bases the positions of these centroids
-on the covariance matrix of the input ordination.space unless a different covariance
+centroids like those from ordination.results. It bases the positions of these centroids
+on the covariance matrix of the input ordination.results unless a different covariance
 matrix (e.g., from a larger trait space) is provided. Points (either akin to multiple
 individuals or species, depending on the level of analysis) are then distributed around
 those points with multivariate normal distributions like those in the input.
@@ -45,7 +45,7 @@ those points with multivariate normal distributions like those in the input.
 centroids <- matrix(nrow=6, ncol=3, rep(seq(from = -2, to = 2, length.out=6), 3))
 
 #brute force the points into a list and reduce back into a large simulated
-#ordination.space object
+#ordination.results object
 
 output <- list()
 

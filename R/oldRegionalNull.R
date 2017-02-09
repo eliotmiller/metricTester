@@ -7,7 +7,9 @@
 #' communities/plots/plots/etc as rows and species as columns
 #' @param tree Ape-style phylogeny
 #' @param regional.abundance Vector of species names, where each species' name is repeated
-#' the number of times necessary to accomodate its abundance in the regional species pool
+#' the number of times necessary to accomodate its abundance in the regional species pool.
+#' Note that this can be created, if needed, from the observed picante.cdm with the
+#' abundanceVector() function.
 #' 
 #' @details Although nowhere near as fast as, e.g. randomizeMatrix, this function still
 #' runs fairly quickly (no for or while loops). It works by drawing the total number of
@@ -47,10 +49,10 @@
 #' #return a CDM in picante format
 #' cdmTemp <- plotContents(positions$arena, boundResults)
 #'
-#' test <- regionalNull(cdmTemp$picante.cdm, tree, 
+#' test <- oldRegionalNull(cdmTemp$picante.cdm, tree, 
 #'	regional.abundance=abundanceVector(cdmTemp$picante.cdm))
 
-regionalNull <- function(picante.cdm, tree, regional.abundance)
+oldRegionalNull <- function(picante.cdm, tree, regional.abundance)
 {
 	#find the total number of individuals in each plot
 	sums <- apply(picante.cdm, 1, sum)

@@ -29,7 +29,8 @@ defineNulls <- function()
 	"threeX"=my_3x,
 	"oneS"=my_1s,
 	"twoS"=my_2s,
-	"regional"=my_regional,
+	"old_regional"=my_oldRegional,
+	"new_regional"=my_newRegional,
 	"richness"=my_richnessNull,
 	"frequency"=my_frequency,
 	"independent_swap"=my_IS,
@@ -62,9 +63,15 @@ my_2s <- function(nulls.input)
 	new.matrix <- suppressMessages(as.picante(temp.matrix))
 }
 
-my_regional <- function(nulls.input)
+my_oldRegional <- function(nulls.input)
 {
-	new.matrix <- regionalNull(picante.cdm=nulls.input$picante.cdm, tree=nulls.input$tree, 
+	new.matrix <- oldRegionalNull(picante.cdm=nulls.input$picante.cdm, tree=nulls.input$tree, 
+		regional.abundance=nulls.input$regional.abundance)
+}
+
+my_newRegional <- function(nulls.input)
+{
+	new.matrix <- newRegionalNull(picante.cdm=nulls.input$picante.cdm,
 		regional.abundance=nulls.input$regional.abundance)
 }
 
