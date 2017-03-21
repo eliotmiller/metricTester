@@ -11,7 +11,7 @@ All exported functions are documented and illustrated with examples. To illustra
 
 ```
 library(devtools)
-install_github("metricTester/eliotmiller")
+install_github("eliotmiller/metricTester")
 library(metricTester)
 
 #simulate a phylogenetic tree with birth-death process. although not needed for this
