@@ -9,7 +9,7 @@ metricTester allows users to define their own spatial simulations, null models, 
 #### How do I use metricTester?
 All exported functions are documented and illustrated with examples. To illustrate some of the general functionality of metricTester, here's how you would install (from GitHub), generate a community data matrix (where plots are rows and species are columns), then calculate an arbitrary row-wise metric as the community data matrix is repeatedly randomized according to an arbitrary null model.
 
-```
+```r
 library(devtools)
 install_github("metricTester/eliotmiller")
 library(metricTester)
