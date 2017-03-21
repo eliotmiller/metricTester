@@ -11,59 +11,59 @@ All exported functions are documented and illustrated with examples. To illustra
 
 ```
 library(devtools)
-install_github("eliotmiller/metricTester")
+install_github("metricTester/eliotmiller")
 library(metricTester)
 
-#simulate a phylogenetic tree with birth-death process. although not needed for this
-#example per se, many metricTester functions anticipate a tree, and it's often easier to
-#just create one and pass it along
-tree <- geiger::sim.bdtree(b=0.1, d=0, stop="taxa", n=50)
+# simulate a phylogenetic tree with birth-death process. although not needed for this
+# example per se, many metricTester functions anticipate a tree, and it's often easier to
+# just create one and pass it along
+tree <- geiger::sim.bdtree(b = 0.1, d = 0, stop = "taxa", n = 50)
 
-#simulate a log-normal abundance distribution
-sim.abundances <- round(rlnorm(5000, meanlog=2, sdlog=1)) + 1
+# simulate a log-normal abundance distribution
+sim.abundances <- round(rlnorm(5000, meanlog = 2, sdlog = 1)) + 1
 
-#sample from that distribution to create a community data matrix of varying species 
-#richness
-cdm <- simulateComm(tree, richness.vector=10:25, abundances=sim.abundances)
+# sample from that distribution to create a community data matrix of varying species 
+# richness
+cdm <- simulateComm(tree, richness.vector = 10:25, abundances = sim.abundances)
 
-#define a new metric. here we will simply calculate the total abundance (i.e. the total
-#number of individuals of any species) per plot.
+# define a new metric. here we will simply calculate the total abundance (i.e. the total
+# number of individuals of any species) per plot.
 tempMetric <- function(input.vector)
 {
 	nonZeros <- input.vector[input.vector != 0]
 	return(sum(nonZeros))
 }
 
-#write a quick wrapper to apply the new metric over a community data matrix. note that the 
-#metrics in metricTester expect a prepped object of class metrics.input. downstream
-#functions are going to convert your inputs into a prepped metrics.input object, then the
-#function is going to run over the $picante.cdm element within the prepped metrics.input
-#object. ensure the metric is calculated over this $picante.cdm element
+# write a quick wrapper to apply the new metric over a community data matrix. note that the 
+# metrics in metricTester expect a prepped object of class metrics.input. downstream
+# functions are going to convert your inputs into a prepped metrics.input object, then the
+# function is going to run over the $picante.cdm element within the prepped metrics.input
+# object. ensure the metric is calculated over this $picante.cdm element
 dummyMetric <- function(metrics.input)
 {
 	results <- apply(metrics.input$picante.cdm, 1, tempMetric)
 	results
 }
 
-#define a new null model. here we will simply completely shuffle the contents of the
-#community data matrix. like the above, your inputs will be automatically converted into
-#a prepped object of nulls.input. so, make sure the null model runs over 
-#nulls.input$picante.cdm
+# define a new null model. here we will simply completely shuffle the contents of the
+# community data matrix. like the above, your inputs will be automatically converted into
+# a prepped object of nulls.input. so, make sure the null model runs over 
+# nulls.input$picante.cdm
 dummyNull <- function(nulls.input)
 {
-	results <- matrix(nrow=dim(nulls.input$picante.cdm)[1],
+	results <- matrix(nrow = dim(nulls.input$picante.cdm)[1],
 	ncol=dim(nulls.input$picante.cdm)[2], sample(unlist(nulls.input$picante.cdm)))
 	rownames(results) <- row.names(nulls.input$picante.cdm)
 	colnames(results) <- names(nulls.input$picante.cdm)
 	results
 }
 
-#see what we expect plot-level total abundance to be after repeatedly randomizing the
-#matrix 100 times. note that metricTester always expects richness to be included, so this
-#example wouldn't work if we did not include it as a metric.
-expectations(tree=tree, picante.cdm=cdm, nulls=list("fullShuffle"=dummyNull),
-metrics=list("richness"=metricTester:::my_richness, "totalAbund"=dummyMetric),
-randomizations=100, concat.by="plot", cores=8)
+# see what we expect plot-level total abundance to be after repeatedly randomizing the
+# matrix 100 times. note that metricTester always expects richness to be included, so this
+# example wouldn't work if we did not include it as a metric.
+expectations(tree = tree, picante.cdm = cdm, nulls = list("fullShuffle" = dummyNull),
+metrics = list("richness" = metricTester:::my_richness, "totalAbund" = dummyMetric),
+randomizations = 100, concat.by = "plot", cores = 8)
 ```
 
 #### How do I get metricTester?
