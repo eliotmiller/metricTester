@@ -1,3 +1,7 @@
+# metricTester 1.3.3
+
+* Minor update to maintain functionality with the new dplyr package, which will be released soon. The only meaningful edits were to the sesField function. Changed a call from summarise_each to summarise_all in that function. Ran some quick tests to see whether the output was still the same. The tests came back successful, but if you encounter an issue in the new sesField, please report it. 
+
 # metricTester 1.3.2
 
 * Added two new functions. A simple utility function to create the road map used for the FDis-related functions, and a new null model. The new null model is a modified version of the regional null model described in our 2016 Ecography paper. It samples from a regional abundance vector, but rather than maintaining the total number of individuals per plot (and summarizing by species richness later to maintain that), it only maintains the number of species per plot.
