@@ -69,4 +69,3 @@ results <- distMRCA(cdm, tree, pairwise=FALSE)
 \references{
 Miller, E. T. 2016. Random thoughts.
 }
-

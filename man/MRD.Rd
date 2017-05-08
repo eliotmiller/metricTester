@@ -53,4 +53,3 @@ Kerr, J. T. and D. J. Currie. 1999. The relative importance of evolutionary
 and environmental controls on broad-scale patterns of species richness in North
 America. Ecoscience 6:329-337.
 }
-

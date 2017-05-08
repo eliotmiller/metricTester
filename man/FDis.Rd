@@ -89,4 +89,3 @@ our 2016 Ecography paper.
 Laliberte, E. & P. Legendre. 2010. A distance-based framework for measuring functional
 diversity from multiple traits. Ecology 91:299-305.
 }
-

@@ -37,4 +37,3 @@ results <- pscCorr(samp=cdm, tree=tree)
 Helmus, M.R., T.J. Bland, C.K. Williams, & A.R. Ives. 2007. Phylogenetic
 measures of biodiversity. The American Naturalist. 169:E69-E83.
 }
-

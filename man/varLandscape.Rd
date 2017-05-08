@@ -49,4 +49,3 @@ cs1=c(0.2,0.4,0.8), cs2=c(0,0.5,0.8), cs3=c(1,0.5,0), border=NA)
 Miller, E. T. 2016. A new dispersal-informed null model for
 community ecology shows strong performance. biorxiv.
 }
-

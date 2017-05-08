@@ -164,9 +164,9 @@ sesField <- function(field.input, metrics, nulls, randomizations, regional.abund
 	
 	#then use the dplyr summarize each and funs functions to get the means and sds, and
 	#lapply this whole thing over the list of grouped data frames
-	means <- lapply(seq_along(grouped), function(x) dplyr::summarize_each(grouped[[x]],
+	means <- lapply(seq_along(grouped), function(x) dplyr::summarize_all(grouped[[x]],
 		dplyr::funs(mean(., na.rm=TRUE))))
-	sds <- lapply(seq_along(grouped), function(x) dplyr::summarize_each(grouped[[x]],
+	sds <- lapply(seq_along(grouped), function(x) dplyr::summarize_all(grouped[[x]],
 		dplyr::funs(sd(., na.rm=TRUE))))
 	
 	#now go into an ugly nested for loop that for each null model i will take all species

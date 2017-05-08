@@ -88,7 +88,7 @@ cdm4 <- simulateComm(tree, richness.vector=10:34, abundances=sim.abundances)
 
 cdmList <- list(cdm1, cdm2, cdm3, cdm4)
 
-cdm <- dplyr::rbind_all(cdmList)
+cdm <- dplyr::bind_rows(cdmList)
 
 cdm <- as.data.frame(cdm)
 
@@ -108,4 +108,3 @@ cdm[is.na(cdm)] <- 0
 Miller, E. T. 2016. A new dispersal-informed null model for
 community ecology shows strong performance. biorxiv.
 }
-

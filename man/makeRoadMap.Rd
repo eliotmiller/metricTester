@@ -50,4 +50,3 @@ test <- makeRoadMap(ex)
 Miller, E. T. 2016. Random thoughts, though please cite metricTester via
 our 2016 Ecography paper.
 }
-
