@@ -11,7 +11,7 @@ newRegionalNull(picante.cdm, regional.abundance)
 communities/plots/plots/etc as rows and species as columns}
 
 \item{regional.abundance}{Vector of species names, where each species' name is repeated
-the number of times necessary to accomodate its abundance in the regional species pool.
+the number of times necessary to accommodate its abundance in the regional species pool.
 Note that this can be created, if needed, from the observed picante.cdm with the
 abundanceVector() function.}
 }

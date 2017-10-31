@@ -14,7 +14,7 @@
 #' @param cutoff Values below which distances from the focal cell will be converted to
 #' zero. This operates after the exponent is applied to the distance matrix, and after the
 #' distances specific to a given focal cell have been scaled to min 0 max 1. The default
-#' cutoff is zero, meaning that all but the most distanct cells are still influenced by
+#' cutoff is zero, meaning that all but the most distinct cells are still influenced by
 #' the new optimum of the focal cell. Increasing this number towards 1 has the effect of
 #' minimizing the distance over which the focal cell influences neighboring cells.
 #' 

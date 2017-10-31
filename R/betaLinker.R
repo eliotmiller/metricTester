@@ -13,7 +13,7 @@
 #' @param sd.parameter Standard deviation of vector from which species' locations are 
 #' drawn
 #' @param max.distance The geographic distance within which neighboring
-#' indivduals should be considered to influence the individual in question
+#' individuals should be considered to influence the individual in question
 #' @param proportion.killed The percent of individuals in the total arena that should be
 #' considered (as a proportion, e.g. 0.5 = half)
 #' @param competition.iterations Number of generations over which to run competition 

@@ -5,7 +5,7 @@
 #'
 #' @param arena Data frame of three columns: "individuals", "X", and "Y"
 #' @param plotPlacer.results The results of a call to plotPlacer. A list with two
-#' elementers. The first is a matrix of X Y coordinates of plots. The second is a
+#' elements. The first is a matrix of X Y coordinates of plots. The second is a
 #' symmetrical distance matrix summarizing the distances among these plots.
 #' 
 #' @details Takes a data frame like that returned from filteringArena(), and a matrix

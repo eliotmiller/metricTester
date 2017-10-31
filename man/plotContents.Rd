@@ -10,7 +10,7 @@ plotContents(arena, plotPlacer.results)
 \item{arena}{Data frame of three columns: "individuals", "X", and "Y"}
 
 \item{plotPlacer.results}{The results of a call to plotPlacer. A list with two
-elementers. The first is a matrix of X Y coordinates of plots. The second is a
+elements. The first is a matrix of X Y coordinates of plots. The second is a
 symmetrical distance matrix summarizing the distances among these plots.}
 }
 \value{

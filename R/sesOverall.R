@@ -28,7 +28,7 @@
 #' along with the "direction" argument.
 #'
 #' @return A data frame summarizing the mean, overall standardized effect sizes and the
-#' significance of those devations from expectations for each simulation, null, metric
+#' significance of those deviations from expectations for each simulation, null, metric
 #' combination. This test works across all iterations, and looks for overall shifts in
 #' SES from expectations (see details for for expectations).
 #'

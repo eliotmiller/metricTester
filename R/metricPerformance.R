@@ -47,7 +47,7 @@ metricPerformance <- function(summarized.results, nulls, concat.by="both")
 	simulations <- unique(summarized.results$simulation)
 
 	#if simulations is not equal to the standard filtering, random, competition options,
-	#code is not currently able to accomodate results from plotOverall. throw an error.
+	#code is not currently able to accommodate results from plotOverall. throw an error.
 	#note the names(summarized.results)[5] is just a quick way to figure out whether
 	#the summarized.results object came from sesIndiv or plotOverall
 	if(!setequal(simulations, c("random","filtering","competition")) &

@@ -10,7 +10,7 @@
 #' arena.output actually needs a number of other elements in order for later functions to
 #' work properly, so any modifications to the code should take note of this.
 #' @param max.distance The geographic distance within which geographically neighboring
-#' indivduals should be considered to influence the individual in question.
+#' individuals should be considered to influence the individual in question.
 #' @param proportion.killed The percent of individuals in the total arena that should be
 #' considered (as a proportion, e.g. 0.5 = half).
 #' 

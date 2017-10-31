@@ -125,7 +125,7 @@ sesIndiv <- function(raw.results, direction)
 # along with the "direction" argument.
 #
 # @return A data frame summarizing the mean of standardized effect sizes and the
-# significance of those devations from expectations for a given iteration (e.g. the 
+# significance of those deviations from expectations for a given iteration (e.g. the 
 # plots from a given arena). It does consider all spatial simulations, nulls and 
 # metrics from that iteration. This test works across a single iteration, and will
 # generally not be used by itself; it is called by sesIndiv.

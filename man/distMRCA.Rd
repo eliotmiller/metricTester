@@ -43,7 +43,7 @@ Here, per plot, the metric finds the distance of the MRCA of each pairwise taxon
 comparison from the root. The value returned per plot is then the mean of these
 distances. DANGER. Because this second option calculates all
 pairwise comparisons, the time it takes to run grows exponentially with the size of the
-commuity data matrix. For instance, on my personal computer,
+community data matrix. For instance, on my personal computer,
 pairwise distMRCA was calculated in 0.2 seconds
 for a CDM with 16 plots containing between 10 and 25 species each. However, for a CDM
 with 100 plots containing between 25 and 55 species, it took 42s.

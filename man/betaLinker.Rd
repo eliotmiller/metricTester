@@ -24,7 +24,7 @@ nicer looking communities}
 drawn}
 
 \item{max.distance}{The geographic distance within which neighboring
-indivduals should be considered to influence the individual in question}
+individuals should be considered to influence the individual in question}
 
 \item{proportion.killed}{The percent of individuals in the total arena that should be
 considered (as a proportion, e.g. 0.5 = half)}

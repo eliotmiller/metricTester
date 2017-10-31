@@ -34,7 +34,7 @@
 #' @return Data frame of standardized effect sizes of species' phylogenetic fields. Table
 #' includes the observed phylogenetic field, the mean and standard deviation of the
 #' species' trait field after randomization with the chosen null model, and the resulting
-#' species-specific standarized effect size.
+#' species-specific standardized effect size.
 #'
 #' @export
 #'

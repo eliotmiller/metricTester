@@ -39,7 +39,7 @@ calculations sequentially.}
 Data frame of standardized effect sizes of species' trait fields. Table
 includes the observed trait field, the mean and standard deviation of the species'
 trait field after randomization with the chosen null model, and the resulting
-species-specific standarized effect size.
+species-specific standardized effect size.
 }
 \description{
 Calculate the null-model standardized effect size of a species' trait field.
