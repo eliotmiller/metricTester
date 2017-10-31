@@ -87,7 +87,7 @@ distMRCA <- function(samp, tree, pairwise)
 		{
 			#each plot, subset to those taxa present, then find the MRCA
 			taxa <- samp[i,][samp[i,]!=0]
-			MRCA <- getMRCA(tree, taxa)
+			MRCA <- getMRCA(tree, names(taxa))
 		
 			#subset allDists to those between the tips and the MRCA
 			mrcaDists <- allDists[MRCA, 1:length(tree$tip.label)]

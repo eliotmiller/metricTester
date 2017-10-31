@@ -1,3 +1,7 @@
+# metricTester 1.3.4
+
+* Very minor update to fix an issue with distMRCA that became apparent with the new version of ape. This issue affected the first flavor of that metric described in the documentation. The most recent common ancestor was being defined based on the tip numbers, not their names. If you used the first flavor of this metric, you may want to confirm your numbers come out the same now as they did before. Since this was an experimental metric to begin with, I suspect no one was using it.
+
 # metricTester 1.3.3
 
 * Minor update to maintain functionality with the new dplyr package, which will be released soon. The only meaningful edits were to the sesField function. Changed a call from summarise_each to summarise_all in that function. Ran some quick tests to see whether the output was still the same. The tests came back successful, but if you encounter an issue in the new sesField, please report it. 
