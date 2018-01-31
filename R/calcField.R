@@ -78,7 +78,7 @@ calcField <- function(field.input, metrics)
 		for(j in 1:length(field.input$tree$tip.label))
 		{
 			if(names(cellResults)[i] %in% c("NAW_MPD", "NAW_MNTD", "PSV", "PSC", "PD",
-				"PD_Cadotte"))
+				"PD_Cadotte", "VPD", "MRD"))
 			{
 				#derive a quick vector of presence-absence style weights so that if metric
 				#is not abundance-weighted it treats a presence as a 1, otherwise a 0.
@@ -97,7 +97,7 @@ calcField <- function(field.input, metrics)
 			{
 				temp[j] <- weighted.mean(x=cellResults[,i], 
 					w=field.input$picante.cdm[,j], na.rm=TRUE)
-			}
+			}		
 			else
 			{
 				stop("Cannot currently calculate field with new metrics")

@@ -18,7 +18,10 @@ function. To add additional functions, they can either be defined on the fly or,
 permanently include a new metric in all downstream simulations, it can be included
 here. The function needs to be included with a name, and it must accept a metrics.input
 as input. If the function needs additional elements not included in that input, then
-the prepData function must also be revised.
+the prepData function must also be revised. Currently MRD references the
+non-abundance-weighted version of the function. This is simply so calcField knows
+how to handle the results downstream. Reminder to modify that function if 
+abundance-weighted MRD is to be implemented here.
 }
 \examples{
 defineMetrics()

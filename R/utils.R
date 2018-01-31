@@ -76,6 +76,13 @@ my_distMRCA1 <- function(metrics.input)
 my_distMRCA2 <- function(metrics.input)
 	distMRCA(metrics.input$picante.cdm, metrics.input$tree, pairwise=TRUE)
 
+my_VPD <- function(metrics.input)
+{
+	vpd <- taxondive(metrics.input$picante.cdm, metrics.input$dists)
+	vpd <- vpd$Lambda
+	vpd
+}
+
 ##########################################################################################
 ################################### BETA METRICS #########################################
 ##########################################################################################
