@@ -1,3 +1,7 @@
+# metricTester 1.3.5
+
+* Minor update. Added variation in pairwise distances (lambda from vegan::taxondive), Clarke and Warwick (2001), which we unfortunately overlooked for our 2017 Ecography paper. Also made the non-abundance-weighted version of mean root distance a default metric to be calculated.
+
 # metricTester 1.3.4
 
 * Very minor update to fix an issue with distMRCA that became apparent with the new version of ape. This issue affected the first flavor of that metric described in the documentation. The most recent common ancestor was being defined based on the tip numbers, not their names. If you used the first flavor of this metric, you may want to confirm your numbers come out the same now as they did before. Since this was an experimental metric to begin with, I suspect no one was using it.
