@@ -1,3 +1,7 @@
+# metricTester 1.3.6
+
+* Very minor update. Fixed a unit test so it will not fail when R 4.0.0 is released. Going forward, class(matrix) will return matrix and array, and had to set the test to expect that.
+
 # metricTester 1.3.5
 
 * Minor update. Added variation in pairwise distances (lambda from vegan::taxondive), Clarke and Warwick (2001), which we unfortunately overlooked for our 2017 Ecography paper. Also made the non-abundance-weighted version of mean root distance a default metric to be calculated.
