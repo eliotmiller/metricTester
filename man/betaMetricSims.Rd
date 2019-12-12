@@ -4,7 +4,8 @@
 \alias{betaMetricSims}
 \title{Calculate beta metrics under specified tree and community parameters}
 \usage{
-betaMetricSims(tree.size, richness.vector, delta, abundances, beta.iterations)
+betaMetricSims(tree.size, richness.vector, delta, abundances,
+  beta.iterations)
 }
 \arguments{
 \item{tree.size}{Number of species desired in the total tree.}

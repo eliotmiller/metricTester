@@ -5,8 +5,8 @@
 \title{Generate expectations for null+metric combinations}
 \usage{
 expectations(picante.cdm, tree, optional.dists = NULL,
-  regional.abundance = NULL, distances.among = NULL, randomizations, cores,
-  metrics, nulls, concat.by, output.raw = FALSE)
+  regional.abundance = NULL, distances.among = NULL, randomizations,
+  cores, metrics, nulls, concat.by, output.raw = FALSE)
 }
 \arguments{
 \item{picante.cdm}{A picante-style community data matrix with sites as rows, and

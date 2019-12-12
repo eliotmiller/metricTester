@@ -4,8 +4,8 @@
 \alias{varyX}
 \title{Calculate alpha or beta metrics across a set of parameters}
 \usage{
-varyX(alpha = TRUE, tree.size, richness, delta, abundances, beta.iterations,
-  iterations, cores = "seq")
+varyX(alpha = TRUE, tree.size, richness, delta, abundances,
+  beta.iterations, iterations, cores = "seq")
 }
 \arguments{
 \item{alpha}{Whether to calculate alpha or beta phylogenetic community structure

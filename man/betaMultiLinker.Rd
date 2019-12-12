@@ -4,10 +4,10 @@
 \alias{betaMultiLinker}
 \title{Run multiple simulations and calculations to test beta metric + null performance}
 \usage{
-betaMultiLinker(no.taxa, arena.length, mean.log.individuals, length.parameter,
-  sd.parameter, max.distance, proportion.killed, competition.iterations,
-  no.plots, plot.length, randomizations, cores, iterations, prefix, simulations,
-  nulls, metrics)
+betaMultiLinker(no.taxa, arena.length, mean.log.individuals,
+  length.parameter, sd.parameter, max.distance, proportion.killed,
+  competition.iterations, no.plots, plot.length, randomizations, cores,
+  iterations, prefix, simulations, nulls, metrics)
 }
 \arguments{
 \item{no.taxa}{The desired number of species in the input phylogeny}

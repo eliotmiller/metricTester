@@ -4,8 +4,8 @@
 \alias{sesTraitField}
 \title{Calculate a species' standardized trait field}
 \usage{
-sesTraitField(trait.distance, tree, picante.cdm, metric, null, randomizations,
-  distances.among = NULL, abundance.matters = TRUE,
+sesTraitField(trait.distance, tree, picante.cdm, metric, null,
+  randomizations, distances.among = NULL, abundance.matters = TRUE,
   abundance.assigned = "directly", cores = "seq")
 }
 \arguments{

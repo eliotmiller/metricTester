@@ -5,8 +5,8 @@
 \title{Parallelized function that calculates beta metrics on randomized matrices}
 \usage{
 betaMetricsNnulls(tree, picante.cdm, optional.dists = NULL,
-  regional.abundance = NULL, distances.among = NULL, randomizations = 2,
-  cores = "seq", nulls, metrics)
+  regional.abundance = NULL, distances.among = NULL,
+  randomizations = 2, cores = "seq", nulls, metrics)
 }
 \arguments{
 \item{tree}{Phylo object}
