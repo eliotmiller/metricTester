@@ -45,7 +45,7 @@ test_that("null results list is same length as number of null models",
 
 test_that("each null result is a matrix of appropriate dimensions",
 {
-	expect_true(all(lapply(nullResults, class)=="matrix"))
+	expect_true(all(unlist(lapply(nullResults, inherits, "matrix"))))
 	expect_true(all(as.data.frame(lapply(nullResults, dim))[1,]==noPlots))
 	expect_true(all(as.data.frame(lapply(nullResults, dim))[2,]==noSp))
 })
